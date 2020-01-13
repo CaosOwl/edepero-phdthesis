@@ -1,0 +1,36 @@
+* Short description
+  This files describes the progress on PhD thesis of Emilio Depero. It was created on <2020-01-13 Mon>.
+* Structure
+** Declaration of Authorship
+** TODO Abstract
+** TODO Acknowledgements
+** TODO Chapter 1, Why Dark Matter?
+   - [[./thesis/chapters/chapter1/chapter1.tex]]
+** TODO Chapter 2, The NA64 experiment
+   - [[./thesis/chapters/chapter2/chapter2.tex]]
+** TODO Chapter 3,  Data Analysis
+   - [[./thesis/chapters/chapter3/chapter3.tex]]
+** TODO Chapter 4,  Results
+   - [[./thesis/chapters/chapter4/chapter4.tex]]
+** TODO Chapter 5, Future prospects
+   - [[./thesis/chapters/chapter5/chapter5.tex]]
+** TODO Chapter 6, Conclusion
+   - [[./thesis/chapters/chapter6/chapter6.tex]]
+** TODO Appendices
+*** TODO AppendixA, Dark matter formulas and calculations
+   - [[./thesis/chapters/appendices/appendixA.tex]]
+*** TODO AppendixB, Physics tool
+   - [[./thesis/chapters/appendices/appendixB.tex]]
+*** TODO AppendixC, Geant4 simulation
+   - [[./thesis/chapters/appendices/appendixC.tex]]
+*** TODO AppendixD, Particle tracking
+   - [[./thesis/chapters/appendices/appendixD.tex]]
+* Comments
+* Bibliography
+  - [[./thesis/utility/bibliography.bib]]
+** TODO Style
+  What style should be used? 
+*** TODO [/] Styles
+* Conversation
+* Diary
+
