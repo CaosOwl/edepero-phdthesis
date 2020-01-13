@@ -1,0 +1,14 @@
+*~
+*.aux
+*.el
+*.log
+*.bbl
+*.blg
+*.lof
+*.lot
+*.toc
+*.xml
+auto
+*.pdf
+*.out
+PhDthesis-blx.bib
