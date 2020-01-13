@@ -1,5 +1,17 @@
 * Short description
   This files describes the progress on PhD thesis of Emilio Depero. It was created on <2020-01-13 Mon>.
+* Instructions
+  To create the pdf, simply type in the command line:
+  make
+  To view the file type:
+  make view
+
+  *NOTE:* The Makefile uses latexmk to compile the .tex file and evince to visualize it. Be sure 
+  to install these two programs before using the respective comand. Alternatively, The main file PhDthesis.tex
+  in the folder *thesis/* can be compiled using any program of choice.
+* TODO [/]Issue to solve
+  - [ ] Currently the abstract command fails for unknow reason. But the text is visualized as intended.
+    Currently the Makefile is structured to ignore any error and produce the output anyway.
 * Structure
 ** Declaration of Authorship
 ** TODO Abstract
