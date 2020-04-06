@@ -66,11 +66,16 @@
      + Possible candidate for Dark Matter
      + Thermal dark matter
      + Dark Matter in colliders
-
+** TODO  [0/4] Discussion with Paolo <2020-04-06 Mon>
+   - [ ] Title to be changed to something more catchy and related to X17
+   - [ ] Add SRD paper, take most of the thing from the Master thesis plus some plot from the paper
+   - [ ] Add article for 2021 visible mode setup
+   - [ ] Add review about Beryllium Anomaly
 * TODO [0%]Diary
 ** TODO [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
 ** TODO <2020-03-27 Fri>
-   - [ ] check SNF prposal to collect some additional reviews https://www.overleaf.com/project/5e6643b0ffa1760001a48d08
-     
+   - [ ] check SNF proposal to collect some additional reviews https://www.overleaf.com/project/5e6643b0ffa1760001a48d08
+** TODO <2020-04-06 Mon>
+   - [ ] Check for additional review about X17
