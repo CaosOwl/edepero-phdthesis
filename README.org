@@ -79,3 +79,56 @@
    - [ ] check SNF proposal to collect some additional reviews https://www.overleaf.com/project/5e6643b0ffa1760001a48d08
 ** TODO <2020-04-06 Mon>
    - [ ] Check for additional review about X17
+* Presentation for X17
+  A small presentation to review the X17 anomaly.
+** Main points
+   - One need to use a nuclear transition with reasonable statistics, resonant transition particularly helpful  [[10.1103/PhysRevD.95.035017]]
+   - Best fit is 1.07 compatible with a particle being emitted [[10.1103/PhysRevD.95.035017]]
+   - With mild assumption Scalar and PseudoScalar are disfavored [[10.1103/PhysRevLett.117.071803]]
+   - pi0 decays prevent A' from being an explanation
+     + This can be circumvented if the new 1-vector boson couples vectorially to quark with a suppressed couplings to proton
+   - It mediates a weak force with range 12 fm
+   - Protophobic gauge bosons are not particularly unusual. The Z boson is protophobic at low energies, as is any new boson that couples to B − Q, the difference of the baryon-number and electric currents.
+   - *BOUND TO COUPLING*
+     + To produce the observed e þ e − events, the coupling to electrons must be nonzero. This coupling is bounded from above by the shift the new boson would induce on the electron magnetic dipole moment and from below by searches for dark photons at beam dump experiments.
+     + The neutrino coupling, in turn, is bounded by ν–e scattering experiments, as well as by the nonobservation of coherent neutrino-nucleus scattering.
+** Be- Nucleus
+
+   - Ground state is only 0.1 MeV
+   - our focus is on the transitions of the 1 þ isospin doublet to the ground state
+   - We refer to the ground state as simply 8 Be and to the 1 þ excited states with excitation energies 18.15 MeV and 17.64 MeV as 8 Be  and 8 Be 0 , respectively
+   - The properties of these states and their electromagnetic transitions have been analyzed using quan- tum Monte Carlo (QMC) techniques using realistic, micro-scopic Hamiltonians
+   - hese decays can be classified by their parity (electric, E, or magnetic, M) and partial wave l. A p-wave magnetic transition, for example, is labeled M1
+     + The spectra of electron- positron invariant masses and opening angles in these decays are known to be monotonically decreasing for each partial wave in the SM
+     + Spectra of electron and positron pair are known to be decreasing monotonically for each partial wave in the SM  https://journals.aps.org/pr/abstract/10.1103/PhysRev.78.184
+     + 8 Be  decays to 7 Li p most of the time, but its electromagnetic transitions have branching fractions Brð 8 Be  → 8 BeγÞ ≈ 1.4 × 10 −5 and Brð 8 Be  → 8 Bee þ e − Þ≈3.9×10 −3 Brð 8 Be  → 8 BeγÞ 
+** X17 possible properties
+   - We consider the cases in which it is a scalar or vector particle with positive or negative parity. In this reaction, its de Broglie wavelength is λ ∼ ð6 MeVÞ −1 , much longer than the characteristic size of the 8 Be nucleus, r ∼ ð100 MeVÞ −1 .
+     + In this regime, the nucleus looks effectively pointlike, and one can organize the corrections from the nuclear structure as a series in r=λ.
+     + The candidate spin/parity choices for X are as follows: a 0 − pseudoscalar a, a 1 þ axial vector A, and a 1 − vector V
+   - *CANDIDATES*
+     + Scalar candidate cannot mediate 8Be* decay. Angular momentum requires the final state to have angular momentum L=1 (final state of two 0+). This makes the final state odd while the initial state is even.
+     + Pseudo-scalar Axionlike particle,all photon coupling are excluded by experiments [[https://link.springer.com/article/10.1007/JHEP02(2016)018]]
+     + Axial vector candidate put strong restriction with neutral pion pi0 --> Xgamma
+       * Unfortunately, large uncertainties in the nuclear matrix element for axial vectors make it difficult to extract the required couplings for this scenario. To the best of our knowledge, there is no reliable ab initio calculation or measurement of the matrix element we would need in the 8Be system.
+     + 
+
+** Atomki Experiment
+   - A beam of protons with kinetic energies tuned to the resonance energy of 1.03 MeV collide with Li nuclei to form the resonant state 8 Be  , and a small fraction of these decay via 8 Be  → 8 Bee þ e − .
+   - The spectrometer is instrumented with plastic scintillators and multiwire pro- portional chambers in the plane perpendicular to the proton beam. These measure the electron and positron energies, as well as the opening angle of the e þ e − pairs that traverse the detector plane, to determine the distributions of opening angle θ and invariant mass m ee.
+   - The experiment does not observe the SM behavior where the θ and m ee distributions fall monotonically. Instead, the θ distribution exhibits a high-statistics bump that peaks at θ ≈ 140° before returning to near the SM predictionat θ ≈ 170°
+   - 
+
+*** systematic uncertainty
+    - particle pass a number of consistency check
+      + as it is highly non-relativistic (0.017c), pair products should have similar energy, one expects small jyj and m ee ≈ E sinðθ=2Þ
+      + An anomaly had previously been reported in 8 Be 0 decays [[10.1016/j.nima.2015.11.009]]. This anomaly was featureless and far easier to fit to background than the bumps discussed here, and it has now been excluded by the present Atomki collaboration.
+      + No pair creation is observed in the similar 8Be' channel, this strongly suggests that the particle decays is *kinematically and not dynamically* suppressed
+      + It also suggests that with more data, a similar, but more phase space-suppressed, excess may appear in the IPC decays of the 17.64 state.
+** resources 
+   - [[https://www.wikiwand.com/en/Beryllium][wikipedia page]]
+   - 
+** Extra reference
+   - A couple of outside articles critizing the anomaly
+     + https://www.forbes.com/sites/startswithabang/2019/11/26/this-is-why-the-x17-particle-and-a-new-fifth-force-probably-dont-exist/#7c58618f2e82
+     + https://www.quantamagazine.org/new-boson-claim-faces-scrutiny-20160607/
