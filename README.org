@@ -53,15 +53,15 @@
       + found some problems with Fedora29, update?
 * Discussions
 ** TODO [4/5] Discussion with Paolo <2020-01-15 Wed>
-   - [ ] *Referee:* Paolo will check with Dissertori if Sergey Gnieneko cna be the external 
+   + [ ] *Referee:* Paolo will check with Dissertori if Sergey Gnieneko cna be the external 
      presence at my defence
-   - *Title*
+   + *Title*
      + [X] Change beam colliders to fixed target
      + [ ] Maybe put CERN inside the title? to discuss...
-   - [X] Move motivations to chapter one, they are more connected to the U(1) model
-   - [X]  Add WCAL optimization to the new visible mode setup chapter
-   - [X] Remove subtitles to the other subsection of the future prospects
-   - [X] Eliminate Overview title and substitute it with *Evidence for dark matter*
+   + [X] Move motivations to chapter one, they are more connected to the U(1) model
+   + [X]  Add WCAL optimization to the new visible mode setup chapter
+   + [X] Remove subtitles to the other subsection of the future prospects
+   + [X] Eliminate Overview title and substitute it with *Evidence for dark matter*
      Also add subtitles:
      + Possible candidate for Dark Matter
      + Thermal dark matter
