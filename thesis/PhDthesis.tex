@@ -47,7 +47,7 @@ headsepline, % Uncomment to get a line under the header
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Search for a new Light Dark Boson using Fixed Target in the NA64 experiment.} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Hunting down the X17! \\Search for a new Light Dark Boson using a Fixed Target in the NA64 experiment.} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \supervisor{Prof. Andre \textsc{Rubbia} \\ Dr. Paolo \textsc{Crivelli}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 \degree{Doctor of Physics} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
@@ -154,12 +154,14 @@ headsepline, % Uncomment to get a line under the header
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE
-%----------------------------------------------------------------------------------------
-
+% ----------------------------------------------------------------------------------------
+\iffalse
 \begin{abstract}
-  %\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-  Light Dark Matter models are gaining a growing interest in the scientific community due to their ability of explaining nicely many different observation of the cosmos and at the same time different problems that are still present in out current understanding of particle physics, notably the (g-2)$_{\mu}$ anomalous magnetic moment of the muon. One simple model to probe this new class of dark matter predict the existence The NA64 experiment uses the high energy provided by the Super Proton Synchrotron at CERN to test these theories by producing L
+  % \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+  \input{chapters/abstract.tex}
 \end{abstract}
+\fi
+
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
