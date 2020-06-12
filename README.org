@@ -12,7 +12,7 @@
   *NOTE:* The Makefile uses latexmk to compile the .tex file and evince to visualize it. Be sure 
   to install these two programs before using the respective comand. Alternatively, The main file PhDthesis.tex
   in the folder *thesis/* can be compiled using any program of choice.
-* TODO [0/1]Issue to solve
+* TODO [#B] [0/1]Issue to solve
   - [ ] Currently the abstract command fails for unknow reason. But the text is visualized as intended.
     Currently the Makefile is structured to ignore any error and produce the output anyway. <2020-01-14 Tue>
 * Structure
@@ -52,9 +52,9 @@
     - JabRef https://www.jabref.org/
       + found some problems with Fedora29, update?
 * Discussions
-** TODO [4/5] Discussion with Paolo <2020-01-15 Wed>
-   + [ ] *Referee:* Paolo will check with Dissertori if Sergey Gnieneko cna be the external 
-     presence at my defence
+** TODO [5/5] Discussion with Paolo <2020-01-15 Wed>
+   + [X] *Referee:* Paolo will check with Dissertori if Sergey Gnieneko cna be the external 
+     presence at my defence *Sergei should be present*
    + *Title*
      + [X] Change beam colliders to fixed target
      + [ ] Maybe put CERN inside the title? to discuss...
@@ -66,19 +66,30 @@
      + Possible candidate for Dark Matter
      + Thermal dark matter
      + Dark Matter in colliders
-** TODO  [0/4] Discussion with Paolo <2020-04-06 Mon>
-   - [ ] Title to be changed to something more catchy and related to X17
+** TODO  [1/4] Discussion with Paolo <2020-04-06 Mon>
+   - [X] Title to be changed to something more catchy and related to X17
    - [ ] Add SRD paper, take most of the thing from the Master thesis plus some plot from the paper
    - [ ] Add article for 2021 visible mode setup
    - [ ] Add review about Beryllium Anomaly
-* TODO [0%]Diary
-** TODO [100%] <2020-01-15 Wed>
+** TODO [1/4] Discussion with Paolo <2020-06-11 Thu>
+   - [-] some changes proposed by Pol
+     - [X] Change a couple of position of the section
+     - [ ] Think about how to include ALPS results, just a mention in the Invisible mode results?
+     - [ ] Think if to extend the X17 chapter?
+     - [ ] Start inserting old notes in appropriate places
+   - [X] Change some detail to the outline
+   - [ ] See if Dissertori can be the external referee
+* TODO [25%]Diary
+** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
 ** TODO <2020-03-27 Fri>
    - [ ] check SNF proposal to collect some additional reviews https://www.overleaf.com/project/5e6643b0ffa1760001a48d08
 ** TODO <2020-04-06 Mon>
    - [ ] Check for additional review about X17
+** TODO Date for the thesis<2020-06-12 Fri>
+   - Preliminary it should be early November
+   - Thesis should be given early September 
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
@@ -111,7 +122,72 @@
      + Pseudo-scalar Axionlike particle,all photon coupling are excluded by experiments [[https://link.springer.com/article/10.1007/JHEP02(2016)018]]
      + Axial vector candidate put strong restriction with neutral pion pi0 --> Xgamma
        * Unfortunately, large uncertainties in the nuclear matrix element for axial vectors make it difficult to extract the required couplings for this scenario. To the best of our knowledge, there is no reliable ab initio calculation or measurement of the matrix element we would need in the 8Be system.
-     + 
+     + Vector candidate
+   - If the X boson couples only to the charged SM fermions required to explain the 8 Be anomaly, one has BrðX → e þ e − Þ ¼ 1. Note, however, that if ε ν ≠ 0 or if there exist light hidden-sector states with X charge, then there are generically other decay channels for X.
+   - The higher limit of epsilon is calculated by the number of observed events by the ATOMKI collaboration
+   - According to the [[https://arxiv.org/abs/2006.01151][last article of feng]]:
+     - Assuming parity conservation, scalar si excluded and pseudoscalar is highly disfavored
+     - Protophobic vector boson also explains the He4 within experimental uncertainty
+     - Finding this is two nuclei means that the particles must pass test for both kinematic and *dynamic* consistency.
+     - 
+*** Vector candidate
+    - A new fermionic couples to a current which is a linear combination of fermionic current
+    - i.e. $iX_u\sum_{i=u,d,l,\vu}\epsilon_i e J_i^{\mu}$
+    - coupling is differentiated to up-down quark, charged lepton and neutrinos
+    - Conservation of charge for X implies a matching between coupling of neutron and proton current
+    - The branching ratio is calculated by assuming isospin conservation in the nuclear transition.
+    - Possible model:
+      + This is related to the effective coupling in Eq. (7) by g V ¼ εe. Substituting this into Eq. (15) and comparing to the experimental result in Eq. (2), one finds that ε 2 ≈ 10 −4 , which is experimentally excluded by, for example, π 0 → A 0 γ searches at NA48/2 [44].
+      + A generalization of the dark photon idea is to consider also mixing between the new boson and the SM Z. Such a particle is spin-1 with no definite parity. Unfortunately, bounds from atomic parity violation are extremely stringent [45] and constrain the dark Z couplings to be too small to explain the 8 Be anomaly.
+      + Another type of spin-1 particle is a light baryon-minus- lepton number (B − L) boson [46–48]. This scenario is constrained by neutrino scattering off electrons and, assuming no kinetic mixing, provides the upper limit g B−L ≲ 2 × 10 −5 [49], which is again too small to account for the excess.
+      + 
+      +
+*** Signal dependence  on isospin mixing and breaking
+    - Previous discussion based on well defined state and isospin conservation
+    - Isospin breaking can be very relevant and must be used for the calculation of the full transition
+      + This is included using *spurion formalism* That is, we include isospin-breaking contributions through the intro-duction of a fictitious particle, the spurion, whose purpose is to allow the inclusion of isospin-breaking effects within an isospin-invariant framework.
+      + Full nuclear structure calculation
+      + meson exchange current
+      + Since the largest effects should stem from the neutron-proton mass difference, the spurion acts like a new ΔT ¼ 1 its size is controlled by ðM n − M p Þ=M N , where M N is the nucleon mass
+    - In the case of perfect isospin isoscalar transition dominate and the summ $\epsilon_p + \epsilon_n$ dominate the ratio
+    - in case of isospin breaking isovector dominates  $\epsilon_p - \epsilon_n$ dominates the transtion
+    - *in  case of X17 isospin breaking only amount to 20% of the branching ratio, large value of $\epsilon_p$ are already excluded by NA48/2*
+    - 
+*** Constraint from other experiment
+**** Quark coupling costraint
+***** $\pi^0 \rightarrow X \gamma$ 
+      bound scales like the anomaly scale factor. $N_{\pi} = (\epsilon_{\mu}q_{\mu} - \epsilon_d q_d)^2$ 
+      left hand site is small for protophobic value
+***** Neutron-lead scattering
+      Observation of the angular dependence constraint new, weakly coupled forces
+***** Proton fixed target experiment
+      The ν-Cal I experiment at the U70 accelerator at IHEP
+sets bounds from X-bremsstrahlung off the initial proton
+beam [61] and π 0 → Xγ decays [62].
+***** charge kaon and phi decays
+      similar to pi0 but smaller
+***** Other meson and baryion decays
+**** Electron coupling costraint
+     The X boson is required to couple to electrons to contribute to IPC events. In Eq. (31) we gave a lower limit on ε e in order for X to decay within 1 cm of its production in the Atomki apparatus. In this section we review other bounds on this coupling.
+***** Beam dump experiment
+      > 2 10^{-4}
+***** magnetic moment of electron
+      strongest bound comes from anomalous magnetic moment of electron which costraint new boson to be 
+      < 1.4 10^{-3}
+***** electron positron annihilation into X and into a photon, $e^+ e^- \rightarrow X\gamma$
+      from BABAR <2 10^{-3}
+***** Proton fixed target experiment
+      CHARM experiment costraint from below, since the decay has to be low enough not to be inside the constraint of CHARM. > 2 10^{-5}. wekaer than the analogous from beam dump
+***** charged kaon and phi
+***** W and Z decays
+**** neutrino coupling constraint
+***** neutrino nucleus scattering
+**** Summary of constraint
+     Assuming a complete SM branching ratio:
+     - $\epsilon_n = (2-10)\times10^{-3}$ 
+     - $\epsilon_p < 1.2\times10^{-3}$
+     - $\epsilon_e = (0.2-1.4)\times10^{-3}$     
+     - $\sqrt{\epsilon_e\epsilon_{vu}} < 3\times10^{-4}$     
 
 ** Atomki Experiment
    - A beam of protons with kinetic energies tuned to the resonance energy of 1.03 MeV collide with Li nuclei to form the resonant state 8 Be  , and a small fraction of these decay via 8 Be  → 8 Bee þ e − .
@@ -125,10 +201,46 @@
       + An anomaly had previously been reported in 8 Be 0 decays [[10.1016/j.nima.2015.11.009]]. This anomaly was featureless and far easier to fit to background than the bumps discussed here, and it has now been excluded by the present Atomki collaboration.
       + No pair creation is observed in the similar 8Be' channel, this strongly suggests that the particle decays is *kinematically and not dynamically* suppressed
       + It also suggests that with more data, a similar, but more phase space-suppressed, excess may appear in the IPC decays of the 17.64 state.
+
+** Critics
+   - enhancement could be created by gamma-gamma process in the nucleus enhanced by Modified Bethe Heitler process
+     1) Broad middle state for the peak
+     2) oerientation of the multiplecoefficient due to the emission of one of the gamma
+     3) Match qualitatively, but pair production is in the order of 1\%, where are all the extra photon?
+   - Forbes article
+     + they quote [[https://www.wikiwand.com/en/Oops-Leon][oops leon particle]]
+     + Forbes pointed out that calibration curve seems a bit problematic in the exact region where the anomaly lies
+   - Quantamagazine article
+     + already two past paper that suggest a boson anomaly disappeared later
+     + Apparentyl they express gratitude to Fokke De Boer, who allegedly has a big history in anomalies in nuclear transtions. But he died before this new work
+     + They are accused of cherry picking, meaning that they never publish work where no anomalies is found
 ** resources 
    - [[https://www.wikiwand.com/en/Beryllium][wikipedia page]]
    - 
+*** Article which cite Beryllium
+**** particle physics
+     - short distance structure of space time https://inspirehep.net/literature/1745934
+     - As explanation of the 511 keV line https://inspirehep.net/literature/1629933
+     - Hidden vector boson with primarly axial coupling https://inspirehep.net/literature/1501943
+     - both vector as axial coupling  https://inspirehep.net/literature/1498317
+     - Inside see-saw model as decay of the B-L gauge boson followed by nuclear decay https://inspirehep.net/literature/1494581
+     - looks similar to Feng https://inspirehep.net/literature/1470937
+     - Our own take on the anomaly with Axial boson https://inspirehep.net/literature/1773277
+     - Dynamical evince for Be anomaly, always by Feng https://arxiv.org/abs/2006.01151 <2020-06-03 Wed>
+**** nuclear physics
+     - improvement on nuclear treatment, but it can't explain the anomaly https://inspirehep.net/literature/1517506
 ** Extra reference
    - A couple of outside articles critizing the anomaly
      + https://www.forbes.com/sites/startswithabang/2019/11/26/this-is-why-the-x17-particle-and-a-new-fifth-force-probably-dont-exist/#7c58618f2e82
      + https://www.quantamagazine.org/new-boson-claim-faces-scrutiny-20160607/
+* Tools
+** Histfitter
+   - A useful tools for histogram fitting of complicate models
+     + can be found [[https://twiki.cern.ch/twiki/bin/view/Main/HistFitterTutorialOutsideAtlas][here]]
+     + Suggested by Mikhail in <2020-04-23 Thu>
+     + Still not tested
+** Web tool digitizer
+   - Useful tool to extract data points from any kind of plot
+     + can be found [[https://apps.automeris.io/wpd/][here]]
+     + Useful, free and has a desktop version for all OS
+     + extremely intuitive
