@@ -79,7 +79,7 @@
      - [ ] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [ ] See if Dissertori can be the external referee
-* TODO [25%]Diary
+* TODO [20%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
@@ -90,6 +90,8 @@
 ** TODO Date for the thesis<2020-06-12 Fri>
    - Preliminary it should be early November
    - Thesis should be given early September 
+** TODO [/] <2020-06-15 Mon>
+   - [ ] figure NA64Setup to be added
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points

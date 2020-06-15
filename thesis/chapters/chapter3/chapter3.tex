@@ -32,7 +32,7 @@
 Simulation of the expected SR signal was performed with the Geant 4 package\cite{ALLISON2016186,1610988,AGOSTINELLI2003250}.
 The geometry of the NA64 experiment was coded in Geant 4, including the 200 $\mu$m mylar vacuum windows, the detailed composition of the trackers, scintillators and the residual gas was set at a level of $10^{-3}$ mBar as in the measurements. Saturation of BGO was taken into account using Birks' law with the constants taken from \cite{AVDEICHIKOV2002251}.
 
-The expected SR spectra for pions and electrons with energies of 50 GeV and 100 GeV are shown in Fig. \ref{SRspectrum}. The plot shows the expected dependence on the incoming electron energy in the emission spectra for the realistic experimental conditions.
+The expected SR spectra for pions and electrons with energies of 50 GeV and 100 GeV are shown in Fig. \ref{fig:SRspectrum}. The plot shows the expected dependence on the incoming electron energy in the emission spectra for the realistic experimental conditions.
 Moreover, the comparison between the SR spectra of pions and electrons illustrates clearly the principle of this technique that allows to discriminate between them by requiring an energy threshold in the synchrotron detector. 
 For pions, one can see that the probability of detecting an event with energy above 1 MeV (the threshold in our detector) is about $\sim 10^{-3}-10^{-4}$.
 These SR-like signals originate from the interactions of the incoming pions with material which they ionise as predicted by Eq. \ref{eqn:knock-on}.
@@ -48,13 +48,13 @@ N_\gamma = \frac{5 \pi \alpha}{\sqrt{3}}\gamma
 \end{equation}
 where $\alpha$ is the fine structure constant. 
 By scaling this equation for the fraction of the circle where the particles are inside the magnetic field, one obtains a mean number of emitted photon of about 24.
-The SRD geometrical acceptance is about one third,  thus one can estimate that the sum of deposited energy is approximately 29.35 MeV in good agreement with the results of the simulation as shown in Fig. \ref{SRspectrum}. 
+The SRD geometrical acceptance is about one third,  thus one can estimate that the sum of deposited energy is approximately 29.35 MeV in good agreement with the results of the simulation as shown in Fig. \ref{fig:SRspectrum}. 
  
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=1.\textwidth]{\plotdir/comp_spectra.pdf}
 \caption{Result of the Geant 4 simulation for the energy detected by the SR detector for 50/100 GeV e$^-$(black dashed/solid line) and 50/100 GeV $\pi^-$ (red dashed/solid line).}
-\label{SRspectrum}
+\label{fig:SRspectrum}
 \end{figure}
 
 The SRD detector was tested during the NA64 test beam run in July 2016. The two BGO rows are parallel to the primary beam direction as shown in Fig.\ref{fig:newgeo}. The dipole magnets installed in series (see Fig. \ref{fig:NA64Setup}) produce a total integrated magnetic field of 7 T$\cdot$m \cite{Banerjee:2016tad} resulting in a nominal displacement for the incoming electrons at the SRD/ECAL positions of 31/34 cm from the undeflected beam axis. The SRD was placed between the undeflected and the deflected beam axis at a distance of approximately 9 cm from both (Fig.\ref{fig:newgeo}). This separation minimises the possibility for Bremsstrahlung photons and neutral particles produced by interactions of the beam particle with materials upstream (vacuum windows, collimators, trackers...) and for particles in the beam halo (most of the beam used in the experiment was constrained in a circular region with diameter 2 cm) to hit the SRD. In fact, such interactions result in the saturation of the SRD with a significant loss of efficiency due to the long decay time of the BGOs.
@@ -124,6 +124,415 @@ Electrons & $2.4\times10^{-1}$  & $2.60$ & $97.37$ \\
 
 \subsection{Hadron rejection using electromagnetic shower profile}
 \label{chapter3:sec:bkg-ecal-profile}
+
+The critical task of rejecting the hadron contamination in the H4 beam
+is currently performed by the SRD (synchrotron radiation detector) and
+the detectors placed behind the ECAL (namely the VETO and the HCAL
+modules). In the following note we present a method to exploit the
+information from the energy deposition in the ECAL cells to separate
+events that produce an electromagnetic shower from the one inducing an
+hadronic one to further increase the purity of our sample.
+\\
+\\
+The analysis is done by following the strategy proposed by Alexandre
+Toropin of using the extrapolated line obtained from the last two
+MicroMegas planes to extract the hit point of the particle on the
+ECAL. A shower profile database can be built by correlating the hit
+position (x,y) on the ECAL with the fraction of energy deposited in
+each ECAL cell. From this database a predicted value of energy
+deposition in each ECAL cell can be extracted and compared to the one
+of each single event. The compatibility between the predicted profile
+and the measured one can be tested using the
+$\chi^2$-distribution. Namely the following equation is used:
+
+\begin{equation}
+  \chi^2 = \sum^{9,36}_i \left(\frac{E_{pred}^i(x_{hit},y_{hit})-E_{mes}^i}{\sigma^{i}_{pred}(x_{hit},y_{hit})}\right)^2
+  \label{eqn:chi}
+\end{equation}
+
+
+\begin{description}
+\item[$E_{pred}^i$]: is the energy predicted by the profile of cell
+  $i$
+\item[$E_{mes}^i$]: is the energy measured in the cell $i$
+\item[$x_{hit},y_{hit}$]: coordinates of the hit position of the
+  particle in the ECAL plane
+\item [$\sigma^{i}_{pred}$]: error estimated for the predicted energy
+  in cell $i$
+\end{description}
+
+
+Two different summation indexes are used for the two different cases
+where only the cells surrounding the central one hit by the beam are
+used for the test (total of 9 cells) and the case where all the cells
+are used (total of 36, see Fig.\ref{fig:ecal_example}).
+\\
+\\
+As correctly stated by Alexandre Toropin, assuming axial symmetry for
+the shower can reduce the redundancy of the profiles by considering
+only the region ($0 \leq x_{hit} \leq d/2$ $\bigwedge$
+$0 \leq y_{hit} \leq d/2$) where $d$ is the dimension of one ECAL
+cell. Since however the time required to create the database and
+perform the analysis does not change significantly under this
+assumptions we choose to record the behaviour of the electromagnetic
+shower in the whole cell in order to reduce possible asymmetries
+produced by the inhomogeneities of the ECAL.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=0.47,page=4]{\plotdir/ecal_example.pdf}
+  \end{center}
+  \caption{sketch of the 36 cells of the ECAL. The central cell 3X3
+    were the beam is directed is plotted in red, while the cells
+    surrounding it are plotted in green. On the bottom-right an
+    example of how a profile for a cell looks like in the MC.}
+  \label{fig:ecal_example}
+\end{figure}
+
+
+ 
+\subsubsection{Construction of the profiles}
+\label{chapter3:sec:make_profile}
+
+A shower profile database can be understood as an $N\times N$ matrix
+where each entry represents a portion of the ECAL cell of dimension
+$d_x \times d_y$. Each entry of the matrix contains the mean value of
+energy deposited in the cell when the incoming particle hits the
+portion of the ECAL plane described by that entry. In order to also
+account for the deviation that such shower can have as function of the
+hitting point one would need a second matrix to encode such
+information. To build such database the root function was used
+TProfile2D, this object has the advantage to be highly flexible and
+allows compact codes due to its integrated function. The complete
+documentation of this object can be found in Ref.\cite{root-tprofile}.
+\\
+\\
+The main parameters that play a role in the construction of the shower
+profiles are the dimensions of the area that is covered by the
+TProfile2D, and the dimensions $d_x \times d_y$ that each bin has,
+which represents the minimal distance between two hit points that can
+be resolved by the database.  The total dimension that the profile
+should have can be trivially set to be equal to the ones of one ECAL
+cell (38.2$\times$38.2 mm, see \cite{na64-detectors}) since our cuts
+already requires the majority of the shower to be contained in the
+cell aligned with the beam spot. The problem of the bin dimension is
+more subtle: due to the shower symmetry there is no particular reason
+to set $d_x \neq d_y$ the precise dimensions of the bin must be a
+compromise between having a large bin that allows good statistic and a
+small bin that allows enough precision. The large sample of electrons
+collected in NA64 typically allows good statistic for each bin even
+when their dimension is below 1 mm, however defining a bin smaller
+than the accuracy that we are able to achieve in the extrapolation of
+the MicroMegas line to the ECAL should be avoided. This error can be
+derived analytically to be:
+\begin{equation}
+  \sigma_{ECALxy} = \sigma_{mm}\sqrt{1+2t^2}
+  \label{eqn:MMerror}
+\end{equation}
+
+\begin{equation}
+  t = \frac{Z_{ECAL}-Z_{MM4}}{Z_{MM4}-Z_{MM3}}
+  \label{eqn:T}
+\end{equation}
+
+where:
+\begin{description}
+\item[$\sigma_{ECALxy}$]: is the error of the hit position
+  extrapolated to the ECAL in the xy-plane
+\item[$\sigma_{mm}$]: is the resolution of the hit position in each
+  MicroMegas
+\item[$Z_{MMi}$]: is the position in the Z-axis of the MicroMegas
+  Nr. i
+\item[$Z_{ECAL}$]: is the position in the Z-axis of the ECAL plane
+\end{description}
+
+
+This results in a resolution of $\sim$130 $\mu$m for our setup. A more
+complicate expression was considered to take into account possible
+misinformation in the exact position of the detectors. While the exact
+entrance angle of the particle was checked to have small effects on
+$\sigma_{ECALxy}$, assuming some error on the exact position of the
+detectors increases the error by a factor 2-4 for values around 1-2
+cm. The work presented in this note was performed using a TProfile2D
+with bin size of 0.34 mm which accounts for such uncertainties.
+\\
+\\
+Only calibration runs without physical trigger were used to produce
+the profiles in order to have a sample of electrons, cuts were applied
+to
+reject the contamination caused by the hadrons in the beam and out-of-time energy events. \\
+The following criteria were applied for the profiles tested in this
+note:
+
+\begin{itemize}
+\item single cluster in each MicroMegas
+\item energy larger than 1 MeV and smaller than 70 MeV in each SRD
+  plane
+\item coincidence of $\sim$1 ns between timing in cell (3,3) of ECAL
+  and mastertime
+\item pedestal fluctuation less than 10 ADC in cell (3,3) and each of
+  the surrounding cells
+\end{itemize}
+
+The code used to produce the profiles
+has been integrated in the official reconstruction library of NA64 and can
+be easily customized to produce profiles with different cuts.
+\\
+\\
+The production of the database is done for the events
+selected by computing the hit point of the incoming particle in cell
+3x3 and updating the value of the corresponding bin in each of the 36
+TProfile2D representing each cell. The specific value filled is the
+percentage of energy deposited in the cell, i.e. $100 \times E^i/E^{tot}$.
+The error over this value is automatically computed by the TProfile2D.
+\section{$\chi^2$ computation}
+\label{chapter3:sec:chi2-comp}
+
+The algorithm for the $\chi^2$ computation works as follows:
+\begin{enumerate}
+\item The values of the xy coordinates of the hitting point of the
+  particle are computed by extrapolating to the ECAL position the line
+  passing through the hit point of the last two MicroMegas planes.
+\item The predicted values $E_{pred}^i$,$\sigma^{i}_{pred}$ are read from the TProfile2D in
+  the corresponding bin
+\item The values $E_{mes}^i$ are computed normalizing the energy $E^i$
+  of each cell to the total energy measured in the ECAL.
+\item The value of $\chi^2$ is calculated using Eq.\ref{eqn:chi} and is
+  normalized to the number of cells considered.
+\end{enumerate}
+
+\section{Results}
+\label{chapter3:sec:chi2-result}
+
+A database was produced using the method described in
+Sec.\ref{chapter3:sec:make_profile} and using the calibration runs 2363, 2182,
+2410, 2406, 2438. A complete description of such runs can be found in
+\cite{na64-runs}. To test the rejection power and the efficiency of the
+method the algorithm described above was used for 3 type of runs:
+\begin{enumerate}
+\item the calibration run 2363 to test the efficiency of the method
+\item the hadron run 2204 to test the suppression factor of the method
+\item the physical run 2441 to test the effect of the cut on the ECAL
+  vs HCAL plot on a run with physical trigger at high intensity.
+\end{enumerate}
+
+The comparison of the normalized $\chi^2$-distribution between
+electron calibration run and hadron run using information from all 36
+cells is shown in Fig.\ref{fig:chi2}. Note that electrons reproduce
+the expected shape of a $\chi^2$-distribution while for hadrons we
+observe a displaced one incompatible with the one produced by
+electrons.  The rejection and efficiency of a cut
+$\chi^2 < \chi^2_{cut}$ are shown in detail in Fig.\ref{fig:eff}. For
+a benchmark $\chi^2$-cut of 2 the efficiency calculated in run 2363
+was $\sim 0.94$ with a rejection factor of $1.2\times 10^{-3}$
+calculated from the hadron run 2204. These values as well as the ones
+presented in Fig.\ref{fig:eff} are computed by looking at the total
+number of events passing the cut and do not account for the impurities
+in the beam.
+\\
+\\
+Using information coming only from the 9 central
+cells (Fig.\ref{fig:ecal_example}) appears to shift the distribution
+to the left and reduce its spread ( Fig.\ref{fig:chi}) due to the
+smaller number of degrees of freedom, the two methods have overall
+comparable efficiency as can be seen in Fig.\ref{fig:eff} but smaller
+rejection power when a typical cut is applied.  For the considered
+benchmark cut of $\chi^2_{cut}=$2, the efficiency measured using only
+central cells was of $\sim 0.93$\ and a rejection factor of
+$3.1\times 10^{-3}$.
+
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/chi_comp.pdf}
+  \end{center}
+  \caption{comparison between $\chi^2$ distribution generated from the
+    calibration run 2363 and the hadron run 2204.}
+  \label{fig:chi2}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/plot_comp_cells.png}
+  \end{center}
+  \caption{comparison between $\chi^2$ distribution generated from run
+    2363 considering only central cells (black) and considering all 36
+    cells (red).}
+  \label{fig:chi}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\plotdir/eff.pdf}
+  \end{center}
+  \caption{fraction of events passing the cut $\chi^2 < \chi^2_{cut}$
+    for the calibration run 2363 (left plot) and for the hadron run
+    2204 (right plot).}
+  \label{fig:eff}
+\end{figure}
+
+\clearpage
+
+Different ECAL vs HCAL plots were produced to study the effect of a
+$\chi^2$-cut for the run mentioned above. The one produced with
+benchmark cut of $\chi^2 < 2$ are shown in
+Fig.\ref{fig:ehcal_test}. The cut is shown to clean the plot in the
+way expected from the hadronic activity in all selected runs. Also it
+can be seen from the run 2441 that the events involving the di-muon
+transition $e^- \to \mu^+\mu^-$ survive the cut for energies larger
+than 20 GeV.  This is expected since these events will still involve
+an electromagnetic shower truncated in the moment the transition
+happens. Since a possible signal from a Dark Photon would behave
+similarly this suggest that the cut won't reject the signal provided
+that the shower has enough energy. A similar study performed with the
+MC (see Sec.\ref{chapter3:sec:mc}) reached the same conclusion, however for
+very small energies the shower shape will slowly reach the energy
+resolution in each cell and the efficiency of the cut will drop
+substantially.  The efficiency for low energy improves if only central
+cells are selected for the $\chi^2$ calculation since this will reduce
+the fluctuation of the single cells not involved in the shower. This
+effect is shown in Fig.\ref{fig:ehcal_comp} for the physical run 2441
+for a cut of 2 on $\chi^2$.
+\\
+\\
+For low energy particles it is clear that all the shower will be
+contained in the cell 3x3. Below this threshold shower analysis can no
+longer resolve the type of shower of the event and instead the simple
+requirement of the full energy of the event to be detected by the
+central cell (3x3) should be used to avoid killing the
+signal. Applying a $\chi^2$-cut to a dark photon simulation (see
+Sec.\ref{chapter3:sec:mc}) suggested that this limit is roughly 5 GeV.  The
+left plot in Fig.\ref{fig:ehcal_comp} is compatible with this
+estimate.
+
+
+\newpage
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2336_chi.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2204_chi.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2441_chi.pdf}
+  \end{center}
+  \caption{ECAL vs HCAL energy deposit for the total sample (left
+    column) and after a cut $\chi^2<2$ (right column) for the
+    calibration run 2363 (top), the hadron 2204 run (middle) and the run
+    2441 with physical trigger(bottom).}
+  \label{fig:ehcal_test}
+\end{figure}
+\clearpage
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\plotdir/ehcal_2441_comp.pdf}
+  \end{center}
+  \caption{ECAL vs HCAL after a cut $\chi^2<2$ in the physical run
+    2441 with the $\chi^2$ calculated with the 9 central cells (left
+    plot) and for all cells (right plot).}
+  \label{fig:ehcal_comp}
+\end{figure}
+
+
+
+\section{Comparison with MC}
+\label{chapter3:sec:mc}
+The same profiles described in the section above can be produced using
+a 100 GeV electron simulation of the NA64 setup\cite{na64-simulation}. In
+this section we will present some preliminary results for the
+$\chi^2$-distribution produced using these profiles instead of the one
+produced using the calibration runs.
+\\
+\\
+The database produced using the MC simulation was applied both to the
+same 100 GeV $e^-$ electron simulation, a 100 GeV $\pi^-$ simulation
+and for the runs 2363 and 2204.  The first plot in
+Fig.\ref{fig:chi_mc} shows that using the MC-database on the
+simulation itself produces $\chi^{2}$-distributions consistent with
+the one obtained in the previous section. However when the MC-database
+is applied directly to the data an important shift is observed,
+showing some incosistency between the two profiles, possibly caused by
+the imperfect treatment of the pedestal and energy resolution and some
+small mis-calibration of the cells.
+
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/chi_comp_mc.pdf}
+  \end{center}
+  \caption{$\chi^2$-distribution using shower profile database from a
+    100 GeV electron MC-simulation over MC-simulation events (black)
+    and over the electron run 2363 (red). The $\chi^2$-distribution
+    was computed over all 36 ECAL cells.}
+  \label{fig:chi_mc}
+\end{figure}
+\clearpage
+
+
+More work is necessary to reach a good agreement between the
+$\chi^{2}$-distributions, however separation between electrons and
+hadrons is still achievable using the MC-database. 
+
+We tested qualitatively the effect of a $\chi^{2}$-cut over the
+ECAL vs HCAL plots produced for both the MC simulation
+and the test runs considered in the previous section. For the
+MC-simulation we used the same benchmark cut of the previous section
+$\chi^2_{cut}$=2 , while for the runs 2363 and 2204 a benchmark cut of
+$\chi^2_{cut}$=40 was used to take into account the shift in the
+distribution observed. An additional cut was applied to the data to
+remove the non-Gaussian tail of the beam since they were not covered
+by the simulation
+database, hence the statistic considered is a factor ~0.8 smaller.\\
+\\
+The bottom plot of Fig.\ref{fig:ehcal_elec} shows that the
+contamination of hadron is removed when MC-database is used, so
+the hadron shower still produces a significantly larger $\chi^{2}$
+compared to the one of an electron shower. The efficiency
+observed in the simulation is of ~0.98, slightly larger compared to the data. 
+In both simulation and data we can observe that the characteristic
+Di-muons events in the range [40,80] GeV in ECAL energy
+deposition are accepted.
+Fig.\ref{fig:ehcal_hadr} also shows the hadrons to be rejected in both
+cases, with a rejection power of $\sim 5\times 10^{-3}$ measured in the
+simulation. Also for both simulation and data we can observe that the
+events surviving lie mostly in the diagonal $E_{ECAL}$+$E_{HCAL}$= 100
+GeV (as could also be observed using a database built from calibration run like in Fig.\ref{fig:ehcal_comp}), while all the events where the shower has large angular spread are rejected.
+\\
+The main difference between the two plots concerns some events with very low energy deposited in the ECAL that are accepted in the data but not in the simulation. This would suggest that the ECAL cells are subject to some fluctuation that at low energy can sometime mimic the correct electromagnetic-shower signature. As stated in the previous section however for such low energy events the usage of the shower-profile algorithm should be avoided since all the shower will be completely contained in the cell 3x3.\\
+% Finally the MC-database was applied to the physical run 2441 always
+% with a benchmark cut $\chi^2_{cut}$=40.
+
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/ehcal_2363_chi_mc_2.pdf}
+  \end{center}
+  \caption{\textbf{Top}: ECAL vs HCAL before (left plot) and
+    after (right plot) a cut
+    $\chi^2<2$ in MC simulated 100 GeV electron events. \\
+    \textbf{Bottom}: ECAL vs HCAL before (left plot) and after (right
+    plot) a cut
+    $\chi^2<40$ in the electron run 2363.\\
+    The $\chi^2$ was computed using all ECAL cells with a shower
+    profile database obtained from a 100 GeV $e^-$ MC-simulation. }
+  \label{fig:ehcal_elec}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/ehcal_2204_chi_mc_2.pdf}
+  \end{center}
+  \caption{\textbf{Top}: ECAL vs HCAL before(left plot) and
+    after(right plot) a cut
+    $\chi^2<2$ in MC simulated 100 GeV $\pi^-$ events. \\
+    \textbf{Bottom}: ECAL vs HCAL before (left plot) and after (right
+    plot) a cut
+    $\chi^2<40$ in the hadron run 2204.\\
+    The $\chi^2$ was computed using all ECAL cells with a shower
+    profile database obtained from a 100 GeV $e^-$ MC-simulation. }
+  \label{fig:ehcal_hadr}
+\end{figure}
+
+\clearpage
+\newpage
 
 \subsection{Study of K$^0_S$ background in visible mode}
 \label{chapter3:sec:bkg-k0s}
