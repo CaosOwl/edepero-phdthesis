@@ -1,7 +1,7 @@
 % Chapter 1
 
 % variables
-\newcommand{\plotdir}{chapters/chapter3/plots}
+\newcommand{\pdirthree}{chapters/chapter3/plots}
 
 \chapter{Data analysis} % Main chapter title
 \label{chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
@@ -52,7 +52,7 @@ The SRD geometrical acceptance is about one third,  thus one can estimate that t
  
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=1.\textwidth]{\plotdir/comp_spectra.pdf}
+\includegraphics[width=1.\textwidth]{\pdirthree/comp_spectra.pdf}
 \caption[SR spectrum for different energy detected in the SRD]{Result of the Geant 4 simulation for the energy detected by the SR detector for 50/100 GeV e$^-$(black dashed/solid line) and 50/100 GeV $\pi^-$ (red dashed/solid line).}
 \label{fig:SRspectrum}
 \end{figure}
@@ -68,7 +68,7 @@ With the requirement of detecting in both SRD BGOs an energy deposition above a 
 
 \begin{figure}[htb!]
   \centering
-  \includegraphics[width=.9\textwidth]{\plotdir/sketch.pdf}
+  \includegraphics[width=.9\textwidth]{\pdirthree/sketch.pdf}
   \caption[Geometry of the BGO crystals]{Geometry of the BGO crystals. Crystals 7,3 (SRD BGO) collect most of the synchrotron radiation spectrum. Crystals 4,0 (VETO BGO) on the other hand are effected only in case of a high energy event and are thus used as a veto. The remaining crystals serve as a shield for the SRD from backscattering particles coming from the ECAL. Top: illustration of event leaving a SR signal in the SRD. Bottom: illustration of a SR- like signal in the SRD for a knock-on electron produced by pions.}
 \label{fig:newgeo}
 \end{figure}
@@ -87,14 +87,14 @@ The suppression of synchrotron radiation emission detected for pions compared to
 
 \begin{figure}[htb!]
   \centering
-  \includegraphics[width=1.\textwidth]{\plotdir/spectra_tot.pdf}
+  \includegraphics[width=1.\textwidth]{\pdirthree/spectra_tot.pdf}
   \caption[SRD comparison between data and MC]{Comparison between data and simulation (MC) of the synchrotron radiation spectrum detected for 100 GeV electrons (left) and pions (right). }
   \label{fig:comp_spectra}
 \end{figure} 
 
 \begin{figure}[htb!]
   \centering
-  \includegraphics[width=1.\textwidth]{\plotdir/sup_mult.pdf}
+  \includegraphics[width=1.\textwidth]{\pdirthree/sup_mult.pdf}
   \caption[efficiency and rejection power of the SRD cut]{Left: Comparison between data and simulation (MC) for electrons of the efficiency as a function of threshold set on the total energy deposited in the SRD BGO and for the requirement that this is deposited in each single crystal (multiplicity). Right: Comparison between data and simulation for pions and electrons of the suppression factor as a function of the threshold set on the total energy deposited in the SRD BGO and for the multiplicity requirement.}
   \label{fig:sup_mult}
 \end{figure}
@@ -180,7 +180,7 @@ produced by the inhomogeneities of the ECAL.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[scale=0.47,page=4]{\plotdir/ecal_example.pdf}
+    \includegraphics[scale=0.47,page=4]{\pdirthree/ecal_example.pdf}
   \end{center}
   \caption[ECAL sketch]{sketch of the 36 cells of the ECAL. The central cell 3X3
     were the beam is directed is plotted in red, while the cells
@@ -344,7 +344,7 @@ $3.1\times 10^{-3}$.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/chi_comp.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/chi_comp.pdf}
   \end{center}
   \caption[comparison between $\chi^2$ distribution, electron and hadron calibration run]{comparison between $\chi^2$ distribution generated from the
     calibration run 2363 and the hadron run 2204.}
@@ -353,7 +353,7 @@ $3.1\times 10^{-3}$.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/plot_comp_cells.png}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/plot_comp_cells.png}
   \end{center}
   \caption[comparison between $\chi^2$ distribution for different ECAL configurations]{comparison between $\chi^2$ distribution generated from run
     2363 considering only central cells (black) and considering all 36
@@ -363,7 +363,7 @@ $3.1\times 10^{-3}$.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\plotdir/eff.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\pdirthree/eff.pdf}
   \end{center}
   \caption[fraction of events passing the $\chi^2$ cut]{fraction of events passing the cut $\chi^2 < \chi^2_{cut}$
     for the calibration run 2363 (left plot) and for the hadron run
@@ -409,9 +409,9 @@ estimate.
 \newpage
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2336_chi.pdf}
-    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2204_chi.pdf}
-    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2441_chi.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\pdirthree/ehcal_2336_chi.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\pdirthree/ehcal_2204_chi.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\pdirthree/ehcal_2441_chi.pdf}
   \end{center}
   \caption[ECAL vs HCAL energy deposit after a cut $\chi^2$]{ECAL vs HCAL energy deposit for the total sample (left
     column) and after a cut $\chi^2<2$ (right column) for the
@@ -423,7 +423,7 @@ estimate.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\plotdir/ehcal_2441_comp.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\pdirthree/ehcal_2441_comp.pdf}
   \end{center}
   \caption[ECAL vs HCAL energy deposit after a cut $\chi^2$ for different ECAL configurations]{ECAL vs HCAL after a cut $\chi^2<2$ in the physical run
     2441 with the $\chi^2$ calculated with the 9 central cells (left
@@ -456,7 +456,7 @@ small mis-calibration of the cells.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/chi_comp_mc.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/chi_comp_mc.pdf}
   \end{center}
   \caption{$\chi^2$-distribution using shower profile database from a
     100 GeV electron MC-simulation over MC-simulation events (black)
@@ -503,7 +503,7 @@ The main difference between the two plots concerns some events with very low ene
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/ehcal_2363_chi_mc_2.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/ehcal_2363_chi_mc_2.pdf}
   \end{center}
   \caption{\textbf{Top}: ECAL vs HCAL before (left plot) and
     after (right plot) a cut
@@ -518,7 +518,7 @@ The main difference between the two plots concerns some events with very low ene
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/ehcal_2204_chi_mc_2.pdf}
+    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/ehcal_2204_chi_mc_2.pdf}
   \end{center}
   \caption{\textbf{Top}: ECAL vs HCAL before(left plot) and
     after(right plot) a cut
@@ -543,12 +543,85 @@ The main difference between the two plots concerns some events with very low ene
 \section{Study of $\gamma + Z \rightarrow \mu^+ \mu^-$ events }
 \label{chapter3:sec:dimuons}
 
+To validate the MC simulation and the tracking procedure required for this analysis, a pure sample of events containing the rare QED interaction $\emu$ has been studied. This class of events has many similarities to the $\DM$ ones, and they can be easily selected by requiring a double MIP signature in the HCAL modules. This procedure is described in detail in \cite{na64-prd}. The double tracks expected in the decay volume are then used to test the reliability of the tracking procedure in the setup.
 
-\subsection{Vertex and angle reconstruction}
-\label{chapter3:sec:dimuons-reco}
+To improve the quality of the MC, a realistic beam profile was extracted from the electron calibration runs. Hadrons in the sample were rejected by requiring an energy between 5 MeV and 100 MeV for both SRD counters. The beam profile is then recovered by fitting the XY position recorded by MM3,4 in Fig.\ref{fig:setup-2018} with a 2D Gaussian. The two fits agree within 100 $\mu$m precision for both $\sigma_x \approx 4.13$ mm and $\sigma_y \approx 1.40$ mm. Fig.\ref{fig:dimuon:gemspectra} shows a comparison of the reconstructed hit-position between data and MC in $\emu$ events after the extracted beam profile is used in the simulation.
+
+To further improve the agreement between data and MC several strategies were used. The limited spatial resolution of GEMs was taken into account by applying a smearing of 80 $\mu$m. This number was estimated by checking track residuals after selecting different GEMs triplets for the track reconstruction and comparing the reconstructed hit to the one predicted by the tracking procedure. To reproduce the single planes of the GEM, hits are separated in X-Y projections and knowledge on the original hit combination is no longer assumed. As the minimal hit separation between hits in GEM was conservatively estimated to be 1.75 mm, hits closer than this threshold were merged in the MC. This number was estimated using clusters recorded by the GEM detectors during electron run in 2017. The hits generated in this procedure are used as input for the same reconstruction algorithm used for the data.
+
+The reconstruction chain works as follows:
+\begin{enumerate}
+\item Track candidates are defined by grouping hits where the angle between first and second GEM pair is smaller than 9 mrad.
+\item Those candidates are reconstructed using a Kalman filter implemented with the Genfit library \cite{genfit}.
+\item Vertex candidates are generated by grouping tracks pair with no common hits.
+\item The exact position of the vertex is obtained by back-propagating the tracks at their point of minimum distance. Only vertices with a distance below 3 mm are considered for the analysis.
+\end{enumerate}
+
+\begin{figure}[tbh!]
+  \begin{center}
+    \includegraphics[scale=0.8]{\pdirthree/GEM4_rel.pdf}
+  \end{center}
+
+  \caption[Hit position of $\emu$ in GEM MC-DATA]{Hit position recorded in last GEM before ECAL for MC simulated (Red curve) and data (Blue dots) $\emu$ events.}
+  \label{fig:dimuon:gemspectra}
+\end{figure}
+  
+
+A dimuon sample was selected using all events collected during the visible mode 2018 run. The beam quality was improved by requiring a reconstructed momentum in the range between 140 and 160 GeV. The $\emu$ events leave a double-MIP signature in each HCAL module, thus a cut 2 GeV$<$ E$_{hcal} <$ 6.35 GeV is applied for the selection. Since an hardware trigger which selects only events with missing energy in the WCAL is used during the data taking, an additional cut $E_{WCAL} < 90$ GeV is applied to consider only such events in both simulation and data. This cut also selects a sample with kinematics closer to the one expected from a $\DM$ candidate. This makes the comparison with the MC more significant for our search. Scintillator counters also need to be compatible with a $\mu^+ \mu^-$ in the decay volume: an energy deposited of at least 1 MIP is required in the scintillator (S4) downstream the WCAL and at least 1.8 MIP in the Veto behind the ECAL. The less stringent cut on S4 is justified by its limited transverse dimension which makes it not suitable for a precise energy measurement.
+
+Although these cuts mainly select dimuon generated from $e^-$ primaries, a contribution is also expected from the hadron contamination. The physical trigger employed in the experiment further increases such contribution, as the requirement of low energy deposit in the WCAL bias the beam composition to particles with high penetration power. To solve this issue, a cut on the SRD detector and on the WCAL pre-shower are used. These cuts are expected to reject hadrons and muons at a level $<10^{-5}$.
+
+To cross-check that the contamination is correctly removed, an independent method based on the beam profile shape is used. The beam profile significantly differs between electrons and hadrons as the H4 beamline is tuned for selecting electrons in our search. Both profiles are recovered from the data using a calibration run of electron/hadron respectively. Using a  $\chi^2$-test the ratio between the two is estimated by mixing the two templates until the best agreement with the measured beam profile is reached. The result is summarized in Fig.\ref{fig:dimuon:profile}: the beam profile of dimuon-selection events is compared before and after the SRD criteria is applied. The fit shows a contamination of roughly 50\% in the original sample. After the cut the beam profile converges to the templates obtained in the $e^-$ calibration runs.
+
+\begin{figure}[tbh!]
+  \begin{center}
+    \includegraphics[scale=0.8]{\pdirthree/beamspot.pdf}
+  \end{center}
+  \caption[Beam profile with different cuts]{Beam profile recorded by the first Micromegas module upstream for hadron calibration run (blue dots), electron calibration run (red line), events selected with dimuons cuts from data collected with the physical trigger (black line) and those same events after SRD cut is applied (green square). Fits using the templates obtained from the calibration run show a level of contamination of $\sim$50\% in the dimuon sample. The contamination is completely removed after the SRD cut is applied.}
+  \label{fig:dimuon:profile}
+\end{figure}
+
+%\subsection{Vertex and angle reconstruction}
+%\label{chapter3:sec:dimuons-reco}
 
 \subsection{Signal yield correction}
 \label{chapter3:sec:dimuons-sig-corr}
+
+To show that there are no significant differences in the tracking procedure between simulation and data the energy deposited in the WCAL was used as a figure of merit. If the tracking procedure affects differently data and MC, one would expect the agreement between the two distributions to diverge after cuts based on vertex reconstruction. Following the procedure described above, a number of vertex candidates are selected for the comparison. As the interaction $\emu$ will have their vertex inside the WCAL, only vertices compatible with this assumption are selected for the comparison. In practice, a vertex is accepted if its position lies within 3$\sigma$ of the expected WCAL position, where $\sigma$ was fitted using a Gaussian from the distribution of $\mu^- \mu^+$ pairs selected from the simulation. After the selection criteria, the energy deposited in the WCAL is compared between simulation and data for each event left (see Fig.\ref{fig:dimuon_en}). The energy deposit for data and simulation is in excellent agreement, proving that the tracking cuts do not bias the original sample.
+
+\begin{figure}[tbh!]
+  \begin{center}
+    \includegraphics[scale=0.8]{\pdirthree/dimuon_en.pdf}    
+  \end{center}
+  \caption[$\emu$ MC-DATA comparison]{Energy deposit in the active dump (WCAL) after all selection criteria are applied in $\emu$ event. Data are drawn with blue dots, simulation is plotted with a red line. }
+  \label{fig:dimuon_en}
+\end{figure}
+
+A lower efficiency is observed in the data compared to the Monte Carlo after applying the selection. The reasons for this are inefficiency of the GEM modules, fail of clusterization in some events and differences in the tracking procedure due to the simplifications used in the MC. The cuts applied to the sample are divided into four steps. First, at least two hits per GEM are required in the decay volume as a minimal condition for tracking. After that, events with a GEM module recording more than 5 hits are rejected as incompatible with a single $\emu$ vertex. The MC predicts 68\% of $\mu^+ \mu^-$ pair after these two cuts. This low acceptance is caused by the GEMs position optimized to resolve very close hits coming from the decay of $\DM$. These selection criteria do not depend on the track-fitting procedure but instead rely on the clusterization performed and the efficiency of the trackers. Tracking procedure is then applied to the events that survived the two first requirements. The reconstructed vertex position is required to be compatible with a vertex inside the dump. The number of events surviving the last requirement  is slightly smaller in the data. The disagreement between the ratio of good vertices reconstructed inside the decay volume is $<$1\%. A total factor of 0.77 is estimated as ratio between data and MC. This factor is used to correct the 2018 signal yield. A summary of the efficiency can be found in Table \ref{tab:dimuon:efficiencies}.
+
+\begin{center}
+\begin{table}
+  %\centering
+  \begin{tabular}{|l|c|c|c|}
+    \hline
+    cut & efficiency MC & efficiency Data & MC / DATA \\
+    \hline
+    \textbf{Hit} & & &\\
+    \hline
+    hits per GEM $\geq$ 2 & 0.68$\pm$0.1 & 0.58$\pm$0.1 & 0.85$\pm$0.1 \\
+    hits per GEM $\leq$ 5 & 0.68$\pm$0.1 & 0.55$\pm$0.1 & 0.80$\pm$0.1 \\
+    \hline
+    \textbf{tracking} & & &\\
+    \hline
+    Vertex distance $\leq$ 3 mm & 0.63$\pm$0.1 & 0.49$\pm$0.1 & 0.77$\pm$0.1  \\
+    Vertex in decay volume & 0.62$\pm$0.1 & 0.48$\pm$0.1 & \textbf{0.77$\pm$0.1}\\
+    \hline
+    
+  \end{tabular}
+  \caption[MC/DATA for the tracking procedure and vertex reconstruction]{Efficiency of cuts based on tracking criteria for a clean sample of simulated $\emu$ and dimuon selected from 2018 data. The efficiency presented in the table are cumulative, with the first cut applied being the one in the first row. First two cuts are based exclusively on information coming from the single GEM modules. Last two cuts are based on the tracking procedure.}
+  \label{tab:dimuon:efficiencies}
+\end{table}
+\end{center}
 
 \section{Selection criteria}
 \label{chapter3:sec:selection-criteria}
@@ -564,6 +637,43 @@ The main difference between the two plots concerns some events with very low ene
 
 \subsubsection{Mixed approach using tracking and Veto}
 \label{chapter3:sec:vis-mode-tracking}
+
+
+The published analysis using the data collected in 2018 \cite{Banerjee:2019hmi} was based exclusively on the calorimeters and counters as described in Sec.\ref{chapter2:sec:vismode}. The trackers after the decay volume were not used for the signal discrimination. Here we present a novel method which exploits them providing a boost in the signal yields while maintaining the background under control. Even though this analysis is not sensitive when the decay length of the $\DM$ is significantly smaller than the dimension of the dump, it has the advantage of being complementary to the calorimeter analysis. Moreover, it is a very important proof of principle to demonstrate the power of our tracking procedure.
+
+While in a first approximation the $\DM$ is produced in the first few layers of the WCAL, it can also originate at a later stage of the em-shower. These events, which are typically rejected in the calorimeter analysis, are instead accepted in the new analysis presented here. First, an initial sample is selected in the same way described in Sec.\ref{chapter2:sec:vismode} and detailed in \cite{Banerjee:2019hmi}. The final discrimination in the calorimeter analysis is based on the counter W2 placed at the end of the dump to reject the charged punch-through from the em-shower. This last cut is efficient if the $\DM$ is produced in the first few layers of the WCAL, but typically reject the event if the $\DM$ is produced at a later stage of the em-shower. The reason is that these events are accompanied by a long longitudinal development of the em-shower that leaves an energy deposit larger than the typical energy cut accepted in the calorimeter analysis. On the other hand, the low energy of the produced $\DM$ implies a larger angle between the decay products that can be resolved by the trackers. Combining these two concepts, one can see that the signal yield is characterized by two different topologies that can be easily distinguished by looking at the energy deposited in the ECAL (see Fig.\ref{fig:setup-2018}).
+
+Using this distinction, we divide all events that passed the initial selection criteria in two topologies based on the total energy deposited in the ECAL. The exact value of this threshold was selected to maximize the signal yield. The optimal value has a small dependence on the $\DM$ mass and coupling. A simple threshold of 75 GeV amounting to half of the initial beam energy was found to be robust for most of the interesting signal scenario. After the topology is decided, a final set of cuts is applied to discriminate between signal and background. In the case of high energy $\DM$, trackers do not have the capability of discriminate between single hits. An energy deposit smaller than 0.8 MIP is required in W2, and the presence of a decay after the dump is assessed by asking S4 (see Fig.\ref{fig:setup-2018}) to have an energy deposited larger than 1.5 MIP. On the other hand, if the energy deposited in the ECAL is smaller than 75 GeV, trackers are used instead as final discriminator. Two tracks in the decay volume are required with a reconstructed vertex within 3$\sigma$ from the WCAL and an angle smaller than 3 mrad. This different treatment leads to an increased efficiency to $\DM$ produced at a late stage of the shower as shown in Fig.\ref{fig:combined-analysis}. However, the smaller energy of the $\DM$ produced in this way has the effect of reducing the probability of the particle escaping the dump. For large coupling $\epsilon$ this suppression can be more than 2 orders of magnitude, making the boost of signal yield negligible. A summary of this boost for various interesting $\DM$ and $A'$ scenario is illustrated in Table \ref{tab:dm:efftable}. The values reported consider also a conservative correction factor of 0.77$\pm$0.1 that takes into account inefficiencies of the detectors and the reconstruction algorithm. This factor was evaluated using a data-driven method precisely outlined in Sec.\ref{chapter3:sec:dimuons}. The conclusion of this study is that in the current setup trackers information do not improve the limit on the $\DM$ parameter space. This is because the boost in signal yield becomes negligible for $\epsilon \sim 6 \times 10^{-4}$, a value which is already excluded with 90\% confidence by our previous analysis.
+
+\begin{figure}[tbh!]
+  \centering
+  \includegraphics[scale=0.9]{\pdirthree/X17-separation-v2.png}
+  \caption[Comparison of selected $\DM$ between calorimeter and tracking analysis]{$\DM$ simulated in the visible mode 2018 setup. Two different cuts are used to discriminate between two $\DM$ topologies. The first one is based on angle cut and vertex position using information from the 4 GEM stations installed in the decay volume and is very efficient on the $\DM$ produced at low energy (red triangle). The second one relies on the Veto placed at the end of the dump and is more efficient for the high energy population (blue square).}
+  \label{fig:combined-analysis}
+\end{figure}
+
+\begin{center}
+\begin{table}
+  \centering
+  \begin{tabular}{llr}
+    \hline
+    M$_{A'}$ [GeV]& $\epsilon$ & N$^{new}_{A'}$ / N$^{old}_{A'}$ \\    
+    \hline
+    0.005  & 0.004    & 1   \\    
+    0.01   & 0.0015   & 1   \\    
+    0.01   & 0.003    & 1   \\    
+    0.0167 & 0.0001   & 1.22\\
+    0.0167 & 0.00018  & 1.2 \\    
+    0.0167 & 0.000316 & 1.2 \\
+    0.0167 & 0.0006   & 1.01\\
+    0.0167 & 0.0007   & 1   \\
+    0.022  & 0.000316 & 1.22\\
+    \hline    
+  \end{tabular}
+  \caption[ratio between signal events observed in tracker-analysis compared to calorimeter-only analysis]{N$^{new}_{A'}$ / N$^{old}_{A'}$ ratio between signal events observed in tracker-analysis compared to calorimeter-only analysis. The new analysis uses cuts based on GEM tracking detectors if the energy detected by the downstream ECAL is below 75 GeV.}
+  \label{tab:dm:efftable}
+\end{table}
+\end{center}
 
 %%% Local Variables:
 %%% mode: latex
