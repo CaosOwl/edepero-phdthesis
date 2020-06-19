@@ -20,7 +20,7 @@
 \subsection{WCAL optimization}
 \label{chapter5:sec:new-vismode-setup-wcal}
 
-To design the new calorimeter structure, the figure of merit is the signal efficiency, which is defined mostly by the number of $\dm$ that decay outside the WCAL. This was quantified by a detailed MC-simulation of the setup used to generate the energy spectrum and the decay kinematics of the $\dm$.
+To design the new calorimeter structure, the figure of merit is the signal efficiency, which is defined mostly by the number of $\DM$ that decay outside the WCAL. This was quantified by a detailed MC-simulation of the setup used to generate the energy spectrum and the decay kinematics of the $\DM$.
 
 %%% radiation length of tungsten collected at http://pdg.lbl.gov/2014/AtomicNuclearProperties/HTML/tungsten_W.html
 In the design used in previous searches, the WCAL had 34 layers in total, each of them consisting of a converter layer made of 3 mm of tungsten and an active part made of a 2 mm plastic scintillators. This sums to a total of $\sim$30X$_0$. Reducing the dimension of the WCAL would impact the radiation length used to contain the main shower and hence change the background conditions. To avoid this, the new design of the calorimeter was studied under the principle that the optimal radiation length should be approximately 30X$_0$. The three following design were considered:
@@ -33,38 +33,173 @@ In the design used in previous searches, the WCAL had 34 layers in total, each o
 
 In all designs, the initial 5 layers forming the pre-shower part are still used for efficient hadron rejection. Despite its longer length, the first design grants a good energy resolution and a good hermeticity. In the second and third case, the calorimeter is more compact but has a worse energy resolution due to the thicker converter. A sketch of the two last designs is shown in Fig.\ref{fig:wcal-design} and compared to the original one used in the previous searches.
 
-The third design was chosen to be the most suited for our search. The loss in energy resolution has almost no impact on the signal efficiency. The reason is that the short lifetime of the $\dm$ favors the detection of the ones produced at high energy that are able to escape the dump more efficiently. These $\dm$ carry most of the initial e$^-$ energy outside of the WCAL in the calorimeter placed downstream (ECAL). Hence, the energy is reconstructed with a precision of $<$1\% regardless of the WCAL structure. The second and third designs are compared to the original WCAL in Table \ref{tab:wcal-length-results}.
+The third design was chosen to be the most suited for our search. The loss in energy resolution has almost no impact on the signal efficiency. The reason is that the short lifetime of the $\DM$ favors the detection of the ones produced at high energy that are able to escape the dump more efficiently. These $\DM$ carry most of the initial e$^-$ energy outside of the WCAL in the calorimeter placed downstream (ECAL). Hence, the energy is reconstructed with a precision of $<$1\% regardless of the WCAL structure. The second and third designs are compared to the original WCAL in Table \ref{tab:wcal-length-results}.
 
-\iffalse
 \begin{center}
 \begin{table}[tbh!]
-\begin{tabular}{lccr}
-  WCAL structure [mm](layers) & WCAL length [mm] & $\epsilon$  & EOT to cover $\dm$ at 90\% confidence [$10^{10}$] \\
+\begin{tabular}{lcr}
+  WCAL structure [mm](layers)  & $\epsilon$  & EOT to cover $\DM$ at 90\% confidence [$10^{10}$] \\
   \hline
-  ECAL1:3+2(34)                & 178               & 0.001   & 17$\pm$3.4     \\ 
-  ECAL1:6+2(17)                & 148               & 0.001   & 7$\pm$0.9      \\
-  ECAL1:9+2(12)                & 138               & 0.001   & 6$\pm$0.7      \\
-  ECAL1:3+2(34)                & 178               & 0.0012  & 85$\pm$4.7     \\
-  ECAL1:6+2(17)                & 148               & 0.0012  & 24$\pm$6.9     \\  
-  ECAL1:9+2(12)                & 138               & 0.0012  & 19$\pm$5       \\  
+  ECAL1:3+2(34)                & 0.001   & 17$\pm$3.4                                            \\ 
+  ECAL1:6+2(17)                & 0.001   & 7$\pm$0.9                                             \\
+  ECAL1:9+2(12)                & 0.001   & 6$\pm$0.7                                             \\
+  ECAL1:3+2(34)                & 0.0012  & 85$\pm$4.7                                            \\
+  ECAL1:6+2(17)                & 0.0012  & 24$\pm$6.9                                            \\  
+  ECAL1:9+2(12)                & 0.0012  & 19$\pm$5                                              \\  
   \hline
 \end{tabular}
 \label{tab:wcal-length-results}
-\caption{Number EOT required to cover $\dm$ at 90\% confidence using different WCAL designs in the visible mode setup proposed for 2021. The first entry describes the structure using the convention:
+\caption[Possible WCAL design and with their possible experimental reach]{Number EOT required to cover $\DM$ at 90\% confidence using different WCAL designs in the visible mode setup proposed for 2021. The first entry describes the structure using the convention:
   ECALconverter-depth+counter-depth(number-of-layers).}
 \end{table}
 \end{center}
-\fi
 
 \begin{figure}[tbh!]
   \centering
   \includegraphics[scale=0.5]{\pdirfive/WCAL_design.pdf}
-  \caption{Possible designs of the WCAL re-arranging the available tiles of 3 mm of Tungsten (W) and 2 mm of scintillator material. All designs posses the same radiation length of 30$X_0$.}
+  \caption[New WCAL design for 2021]{Possible designs of the WCAL re-arranging the available tiles of 3 mm of Tungsten (W) and 2 mm of scintillator material. All designs posses the same radiation length of 30$X_0$.}
   \label{fig:wcal-design}
 \end{figure}
 
 \subsection{Invariant mass reconstruction}
 \label{chapter5:sec:new-vismode-setup-invmass}
 
+The novel setup proposed for 2021 aims to further improve the background suppression and add the full invariant mass reconstruction for the decay of a very short lived particle generated at the beginning of the dump. In this section, the reconstruction technique is illustrated and the main challenges are outlined. A study based on a full MC simulation of the setup is used to demonstrate the power of the method and its capability of probing the parameter space left to justify the $\DM$ anomaly.
+
+The remained unconstrained parameter space for the coupling $\epsilon$  corresponds to a extremely short-lived $\DM$ with the lifetime $\tau_{\DM} \lesssim 10^{-13}$ s. If we compute the decay length of the $\DM$ we find 
+\begin{equation}
+L_{\DM} = 28.3 ~{\rm mm}  \Bigl[\frac{E_{\DM}}{100~ \text{GeV}}\Bigr] \Bigl[\frac{17~ \text{MeV}}{m_{\DM}}\Bigr]^2 \Bigl[\frac{10^{-3}}{\epsilon}\Bigr]^2
+\label{eqn:length}
+\end{equation}
+Hence, the energy of the produced $\DM$ has to be $\gtrsim$100 GeV to have the decay length 30 mm comparable to the dump.
+Additionally, as $E_{\DM} \gg \mee$, the minimal $\ee$ opening angle and the invariant mass are given by
+\begin{equation} 
+\angee^{min} \simeq  \frac{2\mee}{E_{\DM}},
+\label{eqn:angle}
+\end{equation}
+\begin{equation}
+\mee = [E_{e^+} E_{e^-}]^{1/2} \angee
+\label{eqn:imass}
+\end{equation}
+
+For an energy $\sim$100 GeV, the average angle is $\sim$0.34 mrad, which is challenging to be measured with precision $\lesssim 10\%$. Instead, we use the short decay length to fix the vertex position of the $\xdecay$ decay and we reconstruct $\angee$ from the separation of the $\ee$ pair in the trackers placed downstream. As the $\DM$ is a short-lived particle, its decay vertex $Z_{\DM}$ is located at the vicinity of the WCAL $Z_{WC}$. This means that $Z_{\DM} \simeq Z_{WC} \ll L_D$ where $L_D=Z_{T1}-Z_{\DM}$ is the distance from the decay vertex and the first tracking detector (see Fig.\ref{fig:imass_sketch}). Since $L_D \simeq Z_{T1} - Z_{WC}$, the opening angle $\angee$ can be evaluated as 
+\begin{equation}
+\angee \simeq \arctan{\frac{ L_{\ee}}{L_D}}
+\label{angle-est}
+\end{equation}
+where $L_{\ee}$ is the distance of the $\ee$ pair in the T1 plane. Using error propagation, we can estimate the uncertainty on the angle:
+
+\begin{equation}
+  \sigma^2_{\angee} \simeq (\sigma_{L_{\ee}}  / L_D)^2 + (\sigma_{L_D} / L_D)^2(L_{\ee} / L_D)^2,
+  \label{eqn:thetaerr}
+\end{equation}
+
+where $\sigma_{L_{\ee}}$ is the hit resolution of the tracker and $\sigma_{L_D}$ is the error of the decay base. In our conditions, the second term is negligible due to the high precision of our tracking detectors and the large distance between them and the target. The formula above shows that a tube of $\sim$10 m is sufficient to reconstruct the invariant mass with a precision $\lesssim$10\%. However, this estimate is flawed by the fact that hit resolution worsens as the two hits are closer.
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirfive/imass_sketch.png}
+  \caption[Invariant mass reconstruction sketch]{Sketch of the $\DM$ decay in the proposed setup along the beam axis.}
+  \label{fig:imass_sketch}
+\end{figure}
+
+
+This problem has been studied using both fitting procedures and neural networks to reconstruct the original hit position from two overlapped clusters. The data recorded with a gas detector during past NA64 runs were used to build a set of different possible topologies. A new set to test different algorithms was then created by mixing these clusters randomly. An example of such a study, where the two clusters are separated using a global fit of two Gaussian is presented in Sec.\ref{chapter5:sec:separ-hit-micr}. Both procedures agree that the hit resolution worsens to a maximum of 200 $\mu$m when the separation is lower than 1.5 mm. No significant worsening in the resolution is observed when the distance between hits exceeds $\sim$2 mm. In the proposed setup, a distance of 18 m is used between the dump and the first tracker, getting an average separation of 5.5 mm (Fig.\ref{fig:dm_dist1}). As our data-driven studies have shown, the hits should be well separated in each signal event, granting a hit resolution of 80 $\mu m$ for the $\ee$ pair.
+
+\begin{figure}[tbh!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirfive/DM-dist.png}
+  \caption[Distance of the decay products of X17 in the 2021 setup]{Distance between decay products of an $\DM$ decay outside the dump at a distance of 18 m from the decay vertex.}
+  \label{fig:dm_dist1}
+\end{figure}
+
+To complete the invariant mass reconstruction one needs to know with high precision the momentum of the decay products in a signal-like event. Two independent measurements are used for this purpose. The first one is the momentum reconstruction of the two tracks after passing through a magnetic field. The second one is the measurement of the same two tracks energy in two well-separated em-showers in the ECAL downstream. A dipole magnet bends the two tracks and separate them to reconstruct their energy with a precision of 10\%$/\sqrt{GeV}$ in the ECAL. To achieve this purpose a separation of at least two ECAL cells ($\sim 8$ cm) is needed.
+
+The setup proposed uses an 18 m vacuum tube kept at a pressure of 8$\times 10^{-4}$ mbar. Two GEM trackers \cite{gem} are placed at a distance of 0.1 m and 2.1 m respectively from the end of the tube. A magnet is placed immediately after the second GEM to separate the two tracks that are detected by a set of GEM trackers placed at 0.3 m and 1.3 m from the end of the magnet. Finally at a 3.4 m distance from the end of the magnet the ECAL is used to measure the energy of the incoming particles. A sketch of the setup can be seen in Fig.\ref{fig:setup-2021}.
+
+\begin{figure}[tbh!]
+  \centering
+  \includegraphics[scale=0.33]{\pdirfive/setup-2021.pdf}
+  \caption[2021 setup]{Sketch of the setup proposed for the 2021 visible mode of NA64. Top view and side view are shown in the top and bottom pictures respectively.}
+  \label{fig:setup-2021}
+\end{figure}
+
+The invariant mass is reconstructed with a precision of $\sim$2\% (Fig.\ref{fig:imassreco}). The fit is performed using the sum of two Gaussian functions with a shared mean corresponding to the best estimate of the invariant mass. Furthermore, 90\% of all events are reconstructed with an error smaller than 10\%. This reconstruction was performed using a MC simulation where all detectors budget was reproduced precisely to estimate the impact of the multiple scattering. This is detailed in Sec.\ref{chapter5:sec:mm-scattering}.
+
+
+\begin{figure}[tbh!]
+  \centering
+  \includegraphics[scale=.8]{\pdirfive/invariant-mass-reco-allcuts.pdf}
+  \caption[Invariant mass reconstruction in 2021 setup]{Reconstructed invariant mass of $\DM$ in 2021 setup after weighting each event by its possibility to decay outside the dump. 90\% of all events considered are reconstructed with 10\% precision. A fit performed with the sum of two Gaussian with same mean is shown as a blue line. The simulation was performed using a $\DM$ with a mass of 16.7 MeV and $\epsilon = 1.4\times10^{-3}$.}
+    \label{fig:imassreco}
+  \end{figure}
+
+\subsubsection{Multiple scattering effects on invariant mass reconstruction}
+\label{chapter5:sec:mm-scattering}
+
+An additional source of error is caused by the multiple scattering experienced by the $\ee$ pair produced from the $\DM$ decay. As the decay takes place immediately after the dump, the multiple scattering experienced originates from:
+
+\begin{itemize}
+\item The air pocket between the end of the WCAL and the beginning of the vacuum tube.
+\item The two Mylar windows used to seal the vacuum tube.
+\item 18 m of low pressure air inside the tube.
+\item The air pocket between the tube and the trackers used to measure the distance of the two decay products.
+\end{itemize}
+
+Additionally, one has to consider that the thickness of W2 placed after the WCAL can also have an impact on the multiple scattering. This effect is however suppressed since most of the $\DM$ where the decay vertex is inside the W2 are normally removed from the analysis by the requirement of small energy deposit in this active area. The thickness of this counter was minimized to 3 mm from the 6 mm used previously. This reduces the contribution of multiple scattering and at the same time increase the $\DM$ detection efficiency since the dump length is further reduced.
+
+Therefore to ensure a small impact on the invariant mass reconstruction. The vacuum tube is placed attached to the WCAL aluminium box to minimize the air pocket down to $\sim$1 mm. Moreover a thin 175 $\mu$m Mylar window is used to seal the vacuum tube which is then kept at a pressure of 8$\times 10^{-4}$ mbar. The first detector is placed immediately attached to the vacuum tube to reduce the air interaction to a minimum. The second Micromegas tracker is placed at 2 m distance from the first one to compromise between angle and momentum resolution. All the materials were added in the MC simulation of the setup and their effects were studied in detail. The conclusion of this study is that the multiple scattering has a small impact on the precision of the reconstructed invariant mass, the degradation observed compared to a scenario where only perfect vacuum is present between the end of the WCAL and the first tracker is $\sim$0.1\%. The contributions on the invariant mass width, including limited position resolution and momentum reconstruction, are summarized in Tab.\ref{tab:imass-width}.
+
+\begin{center}
+  \begin{table}[bth!]
+    \centering
+    \begin{tabular}{|l|r|}
+      \hline
+      Error source & Mass width [MeV]\\
+      \hline
+      setup in vacuum & 0.11\\
+      trackers hit resolution & 0.29\\
+      vacuum window + air & 0.31\\
+      momentum reconstruction & 0.33\\
+      \hline
+    \end{tabular}
+    \label{tab:imass-width}
+    \caption[Error budget for the invariant mass in 2021 setup]{Width of the invariant mass after different error contributions are added cumulatively. In the first entry, all the space in the decay volume is substituted by perfect vacuum, the only material left is the one of the trackers and the W2. In the second entry, a 80 $\mu$m hit resolution is added to the trackers. In the third entry, the vacuum is substituted by the realistic setup shown in Fig.\ref{fig:setup-2021}. Finally, the last entry add the effect of the momentum reconstruction. The invariant mass distribution with all effects considered is presented in Fig.\ref{fig:imassreco}.}
+  \end{table}
+\end{center}
+
+\subsubsection{Hit separation in gas tracking detectors}
+\label{chapter5:sec:separ-hit-micr}
+
+The NA64 experiment uses gas tracking detectors to reconstruct the incoming momentum of the electrons and reconstruct tracks in the decay volume. A set of 8 XY-multiplexed Micromegas and 4 GEM modules were employed in the invisible and visible mode setup for this purpose. As introduced in Sec.\ref{chapter2:sec:vismode}, one of the main challenges of the novel setup design will be to separate two tracks at low distance in order to reconstruct the angle of the two-body decay.
+
+A set of clusters was extracted from the calibration data at low intensity to ensure that only single-hit clusters were present in the sample considered. The true position of these particles were saved before randomly mixing the clusters in a new set mimicking events where two particles are hitting the trackers simultaneously. After this, a double gaussian fit was used to extract the position of the two initial clusters, and the results of such procedure were compared to the known initial positions. The fit was performed using the Minuit2 minimizer implemented in the ROOT framework \cite{root}.
+
+The results of this study are summarized in Fig.\ref{fig:res-hit} where the hit resolution, defined as the mean difference between reconstructed hit and the true one, is shown as function of the hit separation. The results here are presented in strip size to present the problem in a general way. The part of the curve where the distance between the two clusters is between 2 and 8 strips shows a reduced hit resolution. The reason is that in this region the resulting cluster shape is significantly distorted and the fit accuracy decreases. For very close distances on the other hand, the cluster shape converges again to the one of a single gaussian, improving the fit result. In the specific situation of the NA64 experiment, Micromegas have a strip size of 256 $\mu$m, which make the two clusters separated at 9 strips ($\sim$2.3 mm). Some events with reconstructed hits exceeding a residual of 1 mm can be found for a separation smaller than 10 strips. These hits are typically caused by some abnormal cluster topology that break the gaussian assumption used by the fit. For hits with separation larger than 2 mm no such events are observed anymore. In the setup proposed, the minimum distance between the decay products is 3 mm as shown in Fig.\ref{fig:dm_dist1}. As the separation of the decay products is predicted to be much larger than the distance where the two clusters are completely separated, the $\DM$ decay products will be resolved with an efficiency close to 100\%.
+
+\begin{figure}[tbh!]
+  \centering
+  %%%
+  \includegraphics[width=\textwidth]{\pdirfive/res.pdf}
+  \caption[hit resolution as function of the two cluster distance]{Hit resolution of two separate clusters in a same plane as function of the distance between the two. The unit are given in strips size, where a single strip has a size of 256 $\mu$m for the Micromegas used in the NA64 experiment.}
+  \label{fig:res-hit}
+\end{figure}
+
+\subsubsection{Background and sensitivity}
+\label{chapter5:sec:background-sensitivity}
+
+A preliminary study of background was performed in this novel setup. As discussed in Sec.\ref{chapter3:sec:bkg} the main source of background is coming from the production of $\ks$ in the WCAL escaping the dump and decaying in the vacuum tube as the $\DM$. The decay products can potentially mimic the signal either in the chain K$^0_S \rightarrow \pi^0 \pi^0$ where $\ee$ pair are produced in the $\gamma$ conversion of the photon pair into an $\ee$ or in the rare decays $\pi^0 \rightarrow \gamma e^- e^+$. To estimate the impact of such background a simulation of 5$\times 10^6$ $\ks$ was performed using the energy spectrum expected from the production of this particle via electro-nuclear interactions.
+The conservative assumption of the simulation is that the $K^0_S$ is produced in an inelastic scattering in the WCAL where all the energy is deposited inside the dump without leaving a significant signature in W2. It was found that only 3\% of the events left a shower separation in the ECAL similar to the one expected from $\DM$. Less than 1\% of the events are within the acceptance of the trackers. In the majority ($>$90\%) of the surviving events the $\ks$ has an energy $<$60 GeV. This spectrum is significantly different from the one predicted for the $\DM$, where 95\% of the spectrum is above 100 GeV with a sharp peak at 150 GeV (the nominal beam energy). Finally, no event in the sample was reconstructed with an invariant mass compatible with the $\DM$, the closest one being reconstructed at 280 MeV. This is well above any $A'$ scenario in the reach of the NA64 experiment \cite{Banerjee:2019hmi}. As the new WCAL design conserves the hermeticity of 30$X_0$, the background coming from $\gamma$-punchtrough (see Sec.\ref{chapter3:sec:bkg}) is not expected to increase in the new setup. This contribution is hard to study in detail using MC simulation, it was however demonstrated in our previous measurements \cite{Banerjee:2019hmi} that longer setup adds a suppression to this background which is therefore expected to decrease due to the longer decay volume. As both neutral-punchtrough and $\ks$ are not expected to increase, one can conservatively put the background at a level of $0.01<$ (see Tab.\ref{tab:dm:background}).
+
+An analysis based on the simulated data was conducted to estimate the reach of the experiment using the proposed setup. Most of the selection criteria already applied in our previous searches were used for this study. Additionally, a good separation of at least 8 cm is required between the two electromagnetic showers and the reconstructed invariant mass is selected to be within 10\% of the expected $\DM$ mass. The expected signal yield was computed after all the cuts were applied and used to calculate the 90\% exclusion of different $\DM$ scenarios. The results of the computation are presented in Fig.\ref{fig:exclusion-x17} that shows the number of EOT necessary to probe a specific $\DM$ scenario. Assuming a trigger-rate similar to the one observed during 2018 visible-mode data taking, a projection of the days needed is also shown. As expected, the EOTs required to probe a specific $\DM$ model increases exponentially with the coupling strength $\epsilon$, since the signal yield is dominated by the probability of $\DM$ to exit the dump. The conclusion is that the complete range $\epsilon < 1.4 \times 10^{-3}$ of $\DM$ parameter space proposed in \cite{PhysRevD.95.035017} can be covered in approximately 3 months of beam time by accumulating $\sim 7 \times 10^{11}$ EOTs. Models with V$\pm$A coupling mentioned in Sec.\ref{chapter1:sec:dm-candidates} on the other hand can be covered faster ($<$10 days) due to the smaller allowed coupling. 
+
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirfive/exclusion_167_exclusion.png}
+  \includegraphics[width=\textwidth]{\pdirfive/exclusion_170_exclusion.png}
+  \caption[EOT to X17 exclusion]{Number of EOTs needed to probe the $\DM$ with an exclusion limit of 90\% assuming negligible background as function of $\epsilon$ on the left y-axis, while the number of days required to accumulate the correspondent number of EOTs is shown in the right y-axis and is based on the trigger-rate measured during the 2018 visible mode data taking \cite{Banerjee:2019hmi}. A green dashed line shows the maximum $\epsilon$ permitted if $\DM$ is interpreted as protophobic gauge boson \cite{PhysRevD.95.035017}. The detection efficiency for high $\epsilon$ is dominated by the probability of $\DM$ to exit the dump as it is shown by the exponential fit (red line). The plot is shown for the two most relevant mass scenarios suggested by the two experiments conducted by the ATOMKI group, i.e. 16.7 MeV (top) and 17.0 MeV (bottom) \cite{Krasznahorkay:2015iga,Krasznahorkay:2019lyl}.}
+  \label{fig:exclusion-x17}
+\end{figure}
+  
 \section{A new approach: Muon mode setup}
 \label{chapter5:sec:muon-mode-setup}

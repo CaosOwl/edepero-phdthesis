@@ -53,7 +53,7 @@ The SRD geometrical acceptance is about one third,  thus one can estimate that t
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=1.\textwidth]{\plotdir/comp_spectra.pdf}
-\caption{Result of the Geant 4 simulation for the energy detected by the SR detector for 50/100 GeV e$^-$(black dashed/solid line) and 50/100 GeV $\pi^-$ (red dashed/solid line).}
+\caption[SR spectrum for different energy detected in the SRD]{Result of the Geant 4 simulation for the energy detected by the SR detector for 50/100 GeV e$^-$(black dashed/solid line) and 50/100 GeV $\pi^-$ (red dashed/solid line).}
 \label{fig:SRspectrum}
 \end{figure}
 
@@ -69,7 +69,7 @@ With the requirement of detecting in both SRD BGOs an energy deposition above a 
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=.9\textwidth]{\plotdir/sketch.pdf}
-  \caption{Geometry of the BGO crystals. Crystals 7,3 (SRD BGO) collect most of the synchrotron radiation spectrum. Crystals 4,0 (VETO BGO) on the other hand are effected only in case of a high energy event and are thus used as a veto. The remaining crystals serve as a shield for the SRD from backscattering particles coming from the ECAL. Top: illustration of event leaving a SR signal in the SRD. Bottom: illustration of a SR- like signal in the SRD for a knock-on electron produced by pions.}
+  \caption[Geometry of the BGO crystals]{Geometry of the BGO crystals. Crystals 7,3 (SRD BGO) collect most of the synchrotron radiation spectrum. Crystals 4,0 (VETO BGO) on the other hand are effected only in case of a high energy event and are thus used as a veto. The remaining crystals serve as a shield for the SRD from backscattering particles coming from the ECAL. Top: illustration of event leaving a SR signal in the SRD. Bottom: illustration of a SR- like signal in the SRD for a knock-on electron produced by pions.}
 \label{fig:newgeo}
 \end{figure}
 
@@ -88,14 +88,14 @@ The suppression of synchrotron radiation emission detected for pions compared to
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=1.\textwidth]{\plotdir/spectra_tot.pdf}
-  \caption{Comparison between data and simulation (MC) of the synchrotron radiation spectrum detected for 100 GeV electrons (left) and pions (right). }
+  \caption[SRD comparison between data and MC]{Comparison between data and simulation (MC) of the synchrotron radiation spectrum detected for 100 GeV electrons (left) and pions (right). }
   \label{fig:comp_spectra}
 \end{figure} 
 
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=1.\textwidth]{\plotdir/sup_mult.pdf}
-  \caption{Left: Comparison between data and simulation (MC) for electrons of the efficiency as a function of threshold set on the total energy deposited in the SRD BGO and for the requirement that this is deposited in each single crystal (multiplicity). Right: Comparison between data and simulation for pions and electrons of the suppression factor as a function of the threshold set on the total energy deposited in the SRD BGO and for the multiplicity requirement.}
+  \caption[efficiency and rejection power of the SRD cut]{Left: Comparison between data and simulation (MC) for electrons of the efficiency as a function of threshold set on the total energy deposited in the SRD BGO and for the requirement that this is deposited in each single crystal (multiplicity). Right: Comparison between data and simulation for pions and electrons of the suppression factor as a function of the threshold set on the total energy deposited in the SRD BGO and for the multiplicity requirement.}
   \label{fig:sup_mult}
 \end{figure}
 
@@ -117,7 +117,7 @@ Pions & $98.77$ & $1.21$ & $1.4\times10^{-3}$  \\
 Electrons & $2.4\times10^{-1}$  & $2.60$ & $97.37$ \\
 \end{tabular}
 \end{center}
-\caption{Fraction of pion and electron events for different hit multiplicity in the SRD from the data.}
+\caption[Fraction of pion and electron events for different hit multiplicity in the SRD from the data]{Fraction of pion and electron events for different hit multiplicity in the SRD from the data.}
 \label{tab:hits}
 
 \end{table}
@@ -182,7 +182,7 @@ produced by the inhomogeneities of the ECAL.
   \begin{center}
     \includegraphics[scale=0.47,page=4]{\plotdir/ecal_example.pdf}
   \end{center}
-  \caption{sketch of the 36 cells of the ECAL. The central cell 3X3
+  \caption[ECAL sketch]{sketch of the 36 cells of the ECAL. The central cell 3X3
     were the beam is directed is plotted in red, while the cells
     surrounding it are plotted in green. On the bottom-right an
     example of how a profile for a cell looks like in the MC.}
@@ -346,7 +346,7 @@ $3.1\times 10^{-3}$.
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/chi_comp.pdf}
   \end{center}
-  \caption{comparison between $\chi^2$ distribution generated from the
+  \caption[comparison between $\chi^2$ distribution, electron and hadron calibration run]{comparison between $\chi^2$ distribution generated from the
     calibration run 2363 and the hadron run 2204.}
   \label{fig:chi2}
 \end{figure}
@@ -355,7 +355,7 @@ $3.1\times 10^{-3}$.
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\plotdir/plot_comp_cells.png}
   \end{center}
-  \caption{comparison between $\chi^2$ distribution generated from run
+  \caption[comparison between $\chi^2$ distribution for different ECAL configurations]{comparison between $\chi^2$ distribution generated from run
     2363 considering only central cells (black) and considering all 36
     cells (red).}
   \label{fig:chi}
@@ -365,7 +365,7 @@ $3.1\times 10^{-3}$.
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\plotdir/eff.pdf}
   \end{center}
-  \caption{fraction of events passing the cut $\chi^2 < \chi^2_{cut}$
+  \caption[fraction of events passing the $\chi^2$ cut]{fraction of events passing the cut $\chi^2 < \chi^2_{cut}$
     for the calibration run 2363 (left plot) and for the hadron run
     2204 (right plot).}
   \label{fig:eff}
@@ -413,7 +413,7 @@ estimate.
     \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2204_chi.pdf}
     \includegraphics[width=0.95\textwidth,height=0.45\textwidth]{\plotdir/ehcal_2441_chi.pdf}
   \end{center}
-  \caption{ECAL vs HCAL energy deposit for the total sample (left
+  \caption[ECAL vs HCAL energy deposit after a cut $\chi^2$]{ECAL vs HCAL energy deposit for the total sample (left
     column) and after a cut $\chi^2<2$ (right column) for the
     calibration run 2363 (top), the hadron 2204 run (middle) and the run
     2441 with physical trigger(bottom).}
@@ -425,7 +425,7 @@ estimate.
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\plotdir/ehcal_2441_comp.pdf}
   \end{center}
-  \caption{ECAL vs HCAL after a cut $\chi^2<2$ in the physical run
+  \caption[ECAL vs HCAL energy deposit after a cut $\chi^2$ for different ECAL configurations]{ECAL vs HCAL after a cut $\chi^2<2$ in the physical run
     2441 with the $\chi^2$ calculated with the 9 central cells (left
     plot) and for all cells (right plot).}
   \label{fig:ehcal_comp}
