@@ -9,6 +9,50 @@
 
 % ----------------------------------------------------------------------------------------
 
+The second step of any physics experiment, after a clear goal is set, is the design of the setup to perform the test. As we decided to perform an experiment to probe the $\umodel$, the first thing we need to realize is how to produce such type of dark matter in colliders. A the new symmetry theorized is mixed with the well studied symmetry $U(1)$ of the standard model, the channels that allow the production of this new boson $\DM$ are similar to the one that can be used for $\gamma$. The channels that contributes in first order are the following:
+
+\begin{itemize}
+\item \textit{Dark Bremsstrahlung}: The reaction $\darkbrem$ where $\DM$ is emitted after a virtual photon is exchanged with a target nucleus.
+\item \textit{Dark Compton}: The reaction $\darkcompton$, where $\DM$ is produced as consequence of the interaction of a photon and an electron.
+\item \textit{Dark Resonance}: The reaction $\darkresonance$ where two leptons annihilated and produce a $\DM$ as a consequence of a resonance.
+\end{itemize}
+
+The Feynman diagrams of all processes mentioned above is depicted in Fig.\ref{fig:dm-production-mechanism}.
+
+% INSER HERE A PICTURE WITH ALL FEYNMAN DIAGRAM OF THE CORRESPONDING CHANNELS
+\begin{figure}
+  \centering
+
+  \caption{blabla}
+  \label{fig:dm-production-mechanism}
+\end{figure}
+
+One has to be careful and consider the list above a simple guideline that is in no way exhaustive. Other channels might be possible with minimal extension of the model, or one could find a significant yield of production not only in the scattering of an electron but also in more exotic physic. An example would be using the electromagnetic portion of large hadron shower to compute the yield of $\DM$. This was for example claimed to be a useful method to search for low mass $\DM$ in \cite{Celentano:2020vtu}.
+
+A careful reader might object that the particles needed for each production channel are different. Indeed while a nuclei Z is always present in matter, the presence of a $\gamma$ or a $e^+$ might not be as straightforward. We remind here however, that in an electromagnetic shower originated by an high energetic lepton all three particles will be produced in large quantity due to the subsequent process of pair-production and Bremsstrahlung that are the most relevant for high energetic $\gamma$ and high energetic $\ee$ respectively. A complete review of electromagnetic and hadronic shower can be found here \cite{Bichsel:2002cf} for the interested. Indeed the production mechanism will be more relevant later when the analysis is performed, in normal circumstances when an high energetic particle hit a thick target all of the mentioned mechanism will be relevant to some degree. In our case, the Dark Bremsstrahlung $\darkbrem$ is used "Golden Channel" for the production. The reason is that it is relatively easy to compute using analytical formulas in good approximation (see Appendix\ref{appendixA:sec:cross-section} for more details) and has a very good yield compared to the other channels. This is not to say that the other channel do not matter, but at this stage where the experiment is being design we will consider them as minor corrections to a production rate mostly dominated by the Dark Bremsstrahlung. To avoid confusion in the reader, we also admit here that an appropriate analysis might make such contribution very relevant. An example can be found in \cite{Marsicano_2018} where the non-resonant and resonant production are used to improve significantly the signal yield for specific mass range.
+
+After the production mechanism is chosen, some first estimate on the signal yield can be performed. However successfully producing the particle is not by itself sufficient without a mechanism device to detect it. The question that becomes interesting here is: what happens to $\DM$ after it is produced inside a target? We remind the reader here that since a coupling between standard matter and dark matter was theorized in the $\umodel$ model, the $\DM$ will be able to decay in a $\ee$ pair (or in more massive leptons) provided that its mass is sufficiently large, but it could also decay in particles of the dark sector, the one called $\dmchi$ introduced in Sec.\ref{chapter1:sec:dm-u1model}. The exact branching ratio can be calculated to be:
+
+\begin{equation}
+  \label{chapter1:eq:dm-bratio}
+  \Gamma(A'\rightarrow\dmchi) = \frac{\alpha_D}{3}m_{A'}(1 + \frac{2m^2_{\chi}}{M^2_{A'}})\sqrt{1 - \frac{4m^2_{\chi}}{M^2_{A'}}} \\
+
+  
+  \Gamma(A'\rightarrow\dmchi) = \frac{\alpha \epsilon^2}{3}m_{A'}(1 + \frac{2m^2_{e}}{M^2_{A'}}\sqrt{1 - \frac{4m^2_{e}}{M^2_{A'}}} \\
+\end{equation}
+
+To simplify, we consider the two cases where the branching ratio is dominated by one single decay
+
+\begin{itemize}
+\item \textbf{Invisible decay:} If $\alpha_D / (\alpha \epsilon^2) \gg 1$ the A' will decay mainly in $\dmchi$. This decay is called invisible, as the decay products interact very weakly with standard matter
+\item \textbf{Visible decay:} If $\alpha_D / (\alpha \epsilon^2) \ll 1$ the A' will decay mainly in $\ee$. This decay is called visible, as the decay products can be easily detected since they posses an electromagnetic charge. 
+\end{itemize}
+
+As always we need to admit that the physics always offer a plethora of possibilities that are not always easy to summarize in a thesis. There is no meaningful constraint that prevent both branching ratio to be on a similar footing. Likewise models with more complicate decay are possible. An example is the one illustrated in \cite{Mohlabeng_2019}, where the decay chain $\dmsemivis$ dominates. It is of course possible to adjust the setup to be more sensitive to specific model that turn out to be interesting, but in the interest of time we will focus on the two channel explained above that outside of being interesting are the main interest of the NA64 experiment.
+
+The technique used in NA64 to detect this two channels will be explored in Sec.\ref{chapter2:sec:experimental-technique}. After that, the two setup designed for each of the specific two cases will be described in Sec.\ref{chapter2:sec:experimental-setup}. Finally, a detailed description of each detectors involved and their purpose will be outlined in Sec.\ref{chapter2:sec:detectors}.
+
+
 \section{Experimental Technique}
 \label{chapter2:sec:experimental-technique}
 

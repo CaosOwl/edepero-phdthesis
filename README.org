@@ -31,7 +31,7 @@
    - [[./thesis/chapters/chapter5/chapter5.tex]]
 ** TODO Chapter 6, Conclusion
    - [[./thesis/chapters/chapter6/chapter6.tex]]
-** TODO Appendices
+** Appendices
 *** TODO AppendixA, Dark matter formulas and calculations
    - [[./thesis/chapters/appendices/appendixA.tex]]
 *** TODO AppendixB, Physics tool
