@@ -22,8 +22,11 @@ The Feynman diagrams of all processes mentioned above is depicted in Fig.\ref{fi
 % INSER HERE A PICTURE WITH ALL FEYNMAN DIAGRAM OF THE CORRESPONDING CHANNELS
 \begin{figure}
   \centering
-
-  \caption{blabla}
+  \includegraphics[width=.45\textwidth]{\pdirtwo/DarkBremstrahlung.png}
+  \includegraphics[width=.45\textwidth]{\pdirtwo/DarkCompton.png}
+  \includegraphics[width=.45\textwidth]{\pdirtwo/DarkResonance.png}
+  \includegraphics[width=.45\textwidth]{\pdirtwo/DarkAresonance.png}
+  \caption{Possible production mechanism for $\DM$: Dark Bremsstrahlung a), Dark Compton b), resonance production c) and A-resonant production d).}
   \label{fig:dm-production-mechanism}
 \end{figure}
 
@@ -35,10 +38,8 @@ After the production mechanism is chosen, some first estimate on the signal yiel
 
 \begin{equation}
   \label{chapter1:eq:dm-bratio}
-  \Gamma(A'\rightarrow\dmchi) = \frac{\alpha_D}{3}m_{A'}(1 + \frac{2m^2_{\chi}}{M^2_{A'}})\sqrt{1 - \frac{4m^2_{\chi}}{M^2_{A'}}} \\
-
-  
-  \Gamma(A'\rightarrow\dmchi) = \frac{\alpha \epsilon^2}{3}m_{A'}(1 + \frac{2m^2_{e}}{M^2_{A'}}\sqrt{1 - \frac{4m^2_{e}}{M^2_{A'}}} \\
+  \Gamma(A'\rightarrow\dmchi) = \frac{\alpha_D}{3}m_{A'}(1 + \frac{2m^2_{\chi}}{M^2_{A'}})\sqrt{1 - \frac{4m^2_{\chi}}{M^2_{A'}}}   
+  \Gamma(A'\rightarrow\dmchi) = \frac{\alpha \epsilon^2}{3}m_{A'}(1 + \frac{2m^2_{e}}{M^2_{A'}}\sqrt{1 - \frac{4m^2_{e}}{M^2_{A'}}} 
 \end{equation}
 
 To simplify, we consider the two cases where the branching ratio is dominated by one single decay
@@ -55,6 +56,18 @@ The technique used in NA64 to detect this two channels will be explored in Sec.\
 
 \section{Experimental Technique}
 \label{chapter2:sec:experimental-technique}
+
+The detection of the $\DM$ needs to follow different strategies depending on what decay channel it is favored by it. If $\DM$ decays mainly into $\dmchi$, one could try to detect one of the two particles using a very thick detector. Indeed this is possible since by definition in the $\umodel$ a portal exist that connects dark matter to the classical one. However such an experiment will have a very limited reach, not only a factor $\alpha \epsilon^2$ needs to be "paid" to produced $\DM$ but an additional $\alpha \epsilon^2$ is also needed in order to detect its decay product. It is clear that especially for low coupling $\epsilon$ the probability to detect a single $\DM$ becomes  vanishingly  small. The second possibility is to make the disappearance of energy the signal of the experiment, i.e. assuming that the energy of $\DM$ is completely lost in the event. Such an experiment needs only to produce $\DM$ and does not need to worry about what happen to the particle after. To design a setup able to characterize this type of signature properly, we need to worry about the following items:
+
+\begin{itemize}
+\item The initial momentum of the particle needs to be well known
+\item The setup needs to be completely hermetic, i.e. no energy can escape detection without using the channel under study
+\item The initial particle ID needs to be well known
+\end{itemize}
+
+While the two first item are fairly trivial, one could wonder why the last one is necessary. Clearly if we need to apply any kind of statistical analysis to our data one has to know the total number of the electron that impact our target, the so called Electron On Target (EOT), so in this sense to understand the sensitivity of the experiment suck knowledge is necessary. On top of this however, the particle ID is necessary also to distinguish events that are in our signal box even if no $\DM$ is being produced. A precise background discussion is left for Chapter \ref{chapter3}, here we just provide the example of the decay chain $K^- \to e^- \nu_e$ \cite{review-particle-physics}: if a $K^-$ hits the target without being properly distinguished, it is possible for it to leave an electromagnetic signature and at the same time transport some energy out of the setup via $\nu_e$. This is exactly the signature we would expect for $\DM$! Hence the necessity of some system able to distinguish between particle of different species.
+
+What about the visible mode? If we assume the decay $\aee$ is prominent, it is clear that missing energy can no longer be considered a signature. One should search for a $\ee$ pair in the final state, these particles are however very common in particle physics experiment, so one has to think how to characterize the event more. The property that mostly characterize dark matter is its inability to interact with ordinary matter, and hence travel freely inside very dense material. Since $\DM$ travels for a finite distance before decaying, if the target is thick enough, the only way to see an $\ee$ emerging from the target will be that a $\DM$ is being produced. A simple $e^-$ will be stopped by the thick target and nothing will emerge on the other side of the wall. If on the other hand we measure an high-energetic $\ee$ pair emerging on the other side of the wall and the energy of this pair matches exactly the one that is missing from the target, we conclude that the energy was transported outside the volume using a neutral boson. Assuming that no such channel exist in the standard model (which is to be demonstrated with a detailed background study) we can claim the observation of an event compatible with our hypothesis! Noticed in this case as well the three properties listed above are necessary, indeed one needs to know with good precision the initial momentum of the particle hitting the target and be sure that the particle is an electron. In this case however, the signal is not missing energy but instead energy conservation between a detector placed upstream and the one placed downstream. If we assume the energy of the primary electron to be $E_0$ and we plot the energy recorded in the two calorimeter, we can conceptualize the difference between the two signature in Fig.\ref{fig:two-signature}. As one can see, we are assuming here that the first calorimeter is able to stop the incoming particle with 100\% efficiency, and that therefore the only way to reach the downstream calorimeter is via the production of dark matter.
 
 \subsection{invisible decay mode}
 \label{chapter2:sec:experimental-technique-invis}
