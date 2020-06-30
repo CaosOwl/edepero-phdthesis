@@ -79,7 +79,7 @@
      - [ ] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [ ] See if Dissertori can be the external referee
-* TODO [20%]Diary
+* TODO [16%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
@@ -92,6 +92,12 @@
    - Thesis should be given early September 
 ** TODO [/] <2020-06-15 Mon>
    - [ ] figure NA64Setup to be added
+** TODO <2020-06-30 Tue>
+*** TODO Find out how to cite patent properly for shashlik
+    Poljakov, V.A., et al., Calorimetre module. Patent RU, no. 2338016 C1, 2008.
+*** TODO Find how to properly cite the thesis of the master student
+    Is it possible to offer a reliable link to access this information?
+*** TODO Produce an image of the Micromegas design
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
