@@ -25,6 +25,21 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{amsmath,amssymb} %all maths symbols
 
+\usepackage{xr} %for cross references
+% cross reference
+\externaldocument{chapters/chapter1}
+\externaldocument{chapters/chapter2}
+\externaldocument{chapters/chapter3}
+\externaldocument{chapters/chapter4}
+\externaldocument{chapters/chapter6}
+\externaldocument{chapters/chapter6}
+\externaldocument{appendices/appendixA}
+\externaldocument{appendices/appendixB}
+\externaldocument{appendices/appendixC}
+\externaldocument{appendices/appendixD}
+\externaldocument{appendices/appendixE}
+\externaldocument{appendices/appendixF}
+
 \usepackage[backend=bibtex
 % ,style=authoryear
 ,style=numeric-comp
@@ -53,8 +68,9 @@ headsepline, % Uncomment to get a line under the header
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Hunting down the X17! \\Search for a new Light Dark Boson using a Fixed Target in the NA64 experiment.} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{Prof. Andre \textsc{Rubbia} \\ Dr. Paolo \textsc{Crivelli}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+%\thesistitle{Hunting down the X17! \\Search for a new Light Dark Boson using a Fixed Target in the NA64 experiment.} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Search for a new Light Dark Boson using a Fixed Target in the NA64 experiment.} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\supervisor{Prof. Paolo \textsc{Crivelli}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 \degree{Doctor of Physics} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \author{Emilio \textsc{Depero}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
@@ -64,7 +80,7 @@ headsepline, % Uncomment to get a line under the header
 \keywords{dark matter, particle, physics, NA64, beam, dump, experiment} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{\href{https://ethz.ch/en.html}{Eidgenössische Technische Hochschule Zürich}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
 \department{\href{https://ipa.phys.ethz.ch/}{Institute of Particle Physics and Astrophysics}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
-\group{\href{https://ppp.phys.ethz.ch/}{Group Rubbia}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\group{\href{https://ppp.phys.ethz.ch/}{ETH}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
 %\faculty{\href{http://faculty.university.com}{Faculty Name}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 
 \AtBeginDocument{
@@ -222,12 +238,12 @@ headsepline, % Uncomment to get a line under the header
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-\include{chapters/chapter1/chapter1}
-\include{chapters/chapter2/chapter2} 
-\include{chapters/chapter3/chapter3}
-\include{chapters/chapter4/chapter4} 
-\include{chapters/chapter5/chapter5}
-\include{chapters/chapter6/chapter6} 
+\include{chapters/chapter1}
+\include{chapters/chapter2} 
+\include{chapters/chapter3}
+\include{chapters/chapter4} 
+\include{chapters/chapter5}
+\include{chapters/chapter6} 
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES

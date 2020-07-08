@@ -79,7 +79,7 @@
      - [ ] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [ ] See if Dissertori can be the external referee
-* TODO [16%]Diary
+* TODO [14%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
@@ -98,6 +98,10 @@
 *** TODO Find how to properly cite the thesis of the master student
     Is it possible to offer a reliable link to access this information?
 *** TODO Produce an image of the Micromegas design
+** TODO <2020-07-08 Wed>
+*** TODO [/] Find pictures for BGO and Shashlik Type SRD
+    - [ ] BGO
+    - [ ] SRD
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
