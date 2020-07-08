@@ -9,16 +9,16 @@
 %----------------------------------------------------------------------------------------
 
 \section{Micromegas upgrade}
-\label{chapter5:sec:mm-upgrades}
+\label{ch5:sec:mm-upgrades}
 
 \section{Calorimeter upgrade}
-\label{chapter5:sec:cal-upgrades}
+\label{ch5:sec:cal-upgrades}
 
 \section{Improvement to visible mode setup}
-\label{chapter5:sec:new-vismode-setup}
+\label{ch5:sec:new-vismode-setup}
 
 \subsection{WCAL optimization}
-\label{chapter5:sec:new-vismode-setup-wcal}
+\label{ch5:sec:new-vismode-setup-wcal}
 
 To design the new calorimeter structure, the figure of merit is the signal efficiency, which is defined mostly by the number of $\DM$ that decay outside the WCAL. This was quantified by a detailed MC-simulation of the setup used to generate the energy spectrum and the decay kinematics of the $\DM$.
 
@@ -62,7 +62,7 @@ The third design was chosen to be the most suited for our search. The loss in en
 \end{figure}
 
 \subsection{Invariant mass reconstruction}
-\label{chapter5:sec:new-vismode-setup-invmass}
+\label{ch5:sec:new-vismode-setup-invmass}
 
 The novel setup proposed for 2021 aims to further improve the background suppression and add the full invariant mass reconstruction for the decay of a very short lived particle generated at the beginning of the dump. In this section, the reconstruction technique is illustrated and the main challenges are outlined. A study based on a full MC simulation of the setup is used to demonstrate the power of the method and its capability of probing the parameter space left to justify the $\DM$ anomaly.
 
@@ -104,7 +104,7 @@ where $\sigma_{L_{\ee}}$ is the hit resolution of the tracker and $\sigma_{L_D}$
 \end{figure}
 
 
-This problem has been studied using both fitting procedures and neural networks to reconstruct the original hit position from two overlapped clusters. The data recorded with a gas detector during past NA64 runs were used to build a set of different possible topologies. A new set to test different algorithms was then created by mixing these clusters randomly. An example of such a study, where the two clusters are separated using a global fit of two Gaussian is presented in Sec.\ref{chapter5:sec:separ-hit-micr}. Both procedures agree that the hit resolution worsens to a maximum of 200 $\mu$m when the separation is lower than 1.5 mm. No significant worsening in the resolution is observed when the distance between hits exceeds $\sim$2 mm. In the proposed setup, a distance of 18 m is used between the dump and the first tracker, getting an average separation of 5.5 mm (Fig.\ref{fig:dm_dist1}). As our data-driven studies have shown, the hits should be well separated in each signal event, granting a hit resolution of 80 $\mu m$ for the $\ee$ pair.
+This problem has been studied using both fitting procedures and neural networks to reconstruct the original hit position from two overlapped clusters. The data recorded with a gas detector during past NA64 runs were used to build a set of different possible topologies. A new set to test different algorithms was then created by mixing these clusters randomly. An example of such a study, where the two clusters are separated using a global fit of two Gaussian is presented in Sec.\ref{ch5:sec:separ-hit-micr}. Both procedures agree that the hit resolution worsens to a maximum of 200 $\mu$m when the separation is lower than 1.5 mm. No significant worsening in the resolution is observed when the distance between hits exceeds $\sim$2 mm. In the proposed setup, a distance of 18 m is used between the dump and the first tracker, getting an average separation of 5.5 mm (Fig.\ref{fig:dm_dist1}). As our data-driven studies have shown, the hits should be well separated in each signal event, granting a hit resolution of 80 $\mu m$ for the $\ee$ pair.
 
 \begin{figure}[tbh!]
   \centering
@@ -124,7 +124,7 @@ The setup proposed uses an 18 m vacuum tube kept at a pressure of 8$\times 10^{-
   \label{fig:setup-2021}
 \end{figure}
 
-The invariant mass is reconstructed with a precision of $\sim$2\% (Fig.\ref{fig:imassreco}). The fit is performed using the sum of two Gaussian functions with a shared mean corresponding to the best estimate of the invariant mass. Furthermore, 90\% of all events are reconstructed with an error smaller than 10\%. This reconstruction was performed using a MC simulation where all detectors budget was reproduced precisely to estimate the impact of the multiple scattering. This is detailed in Sec.\ref{chapter5:sec:mm-scattering}.
+The invariant mass is reconstructed with a precision of $\sim$2\% (Fig.\ref{fig:imassreco}). The fit is performed using the sum of two Gaussian functions with a shared mean corresponding to the best estimate of the invariant mass. Furthermore, 90\% of all events are reconstructed with an error smaller than 10\%. This reconstruction was performed using a MC simulation where all detectors budget was reproduced precisely to estimate the impact of the multiple scattering. This is detailed in Sec.\ref{ch5:sec:mm-scattering}.
 
 
 \begin{figure}[tbh!]
@@ -135,7 +135,7 @@ The invariant mass is reconstructed with a precision of $\sim$2\% (Fig.\ref{fig:
   \end{figure}
 
 \subsubsection{Multiple scattering effects on invariant mass reconstruction}
-\label{chapter5:sec:mm-scattering}
+\label{ch5:sec:mm-scattering}
 
 An additional source of error is caused by the multiple scattering experienced by the $\ee$ pair produced from the $\DM$ decay. As the decay takes place immediately after the dump, the multiple scattering experienced originates from:
 
@@ -169,9 +169,9 @@ Therefore to ensure a small impact on the invariant mass reconstruction. The vac
 \end{center}
 
 \subsubsection{Hit separation in gas tracking detectors}
-\label{chapter5:sec:separ-hit-micr}
+\label{ch5:sec:separ-hit-micr}
 
-The NA64 experiment uses gas tracking detectors to reconstruct the incoming momentum of the electrons and reconstruct tracks in the decay volume. A set of 8 XY-multiplexed Micromegas and 4 GEM modules were employed in the invisible and visible mode setup for this purpose. As introduced in Sec.\ref{chapter2:sec:vismode}, one of the main challenges of the novel setup design will be to separate two tracks at low distance in order to reconstruct the angle of the two-body decay.
+The NA64 experiment uses gas tracking detectors to reconstruct the incoming momentum of the electrons and reconstruct tracks in the decay volume. A set of 8 XY-multiplexed Micromegas and 4 GEM modules were employed in the invisible and visible mode setup for this purpose. As introduced in Sec.\ref{ch2:sec:vismode}, one of the main challenges of the novel setup design will be to separate two tracks at low distance in order to reconstruct the angle of the two-body decay.
 
 A set of clusters was extracted from the calibration data at low intensity to ensure that only single-hit clusters were present in the sample considered. The true position of these particles were saved before randomly mixing the clusters in a new set mimicking events where two particles are hitting the trackers simultaneously. After this, a double gaussian fit was used to extract the position of the two initial clusters, and the results of such procedure were compared to the known initial positions. The fit was performed using the Minuit2 minimizer implemented in the ROOT framework \cite{root}.
 
@@ -186,12 +186,12 @@ The results of this study are summarized in Fig.\ref{fig:res-hit} where the hit 
 \end{figure}
 
 \subsubsection{Background and sensitivity}
-\label{chapter5:sec:background-sensitivity}
+\label{ch5:sec:background-sensitivity}
 
-A preliminary study of background was performed in this novel setup. As discussed in Sec.\ref{chapter3:sec:bkg} the main source of background is coming from the production of $\ks$ in the WCAL escaping the dump and decaying in the vacuum tube as the $\DM$. The decay products can potentially mimic the signal either in the chain K$^0_S \rightarrow \pi^0 \pi^0$ where $\ee$ pair are produced in the $\gamma$ conversion of the photon pair into an $\ee$ or in the rare decays $\pi^0 \rightarrow \gamma e^- e^+$. To estimate the impact of such background a simulation of 5$\times 10^6$ $\ks$ was performed using the energy spectrum expected from the production of this particle via electro-nuclear interactions.
-The conservative assumption of the simulation is that the $K^0_S$ is produced in an inelastic scattering in the WCAL where all the energy is deposited inside the dump without leaving a significant signature in W2. It was found that only 3\% of the events left a shower separation in the ECAL similar to the one expected from $\DM$. Less than 1\% of the events are within the acceptance of the trackers. In the majority ($>$90\%) of the surviving events the $\ks$ has an energy $<$60 GeV. This spectrum is significantly different from the one predicted for the $\DM$, where 95\% of the spectrum is above 100 GeV with a sharp peak at 150 GeV (the nominal beam energy). Finally, no event in the sample was reconstructed with an invariant mass compatible with the $\DM$, the closest one being reconstructed at 280 MeV. This is well above any $A'$ scenario in the reach of the NA64 experiment \cite{Banerjee:2019hmi}. As the new WCAL design conserves the hermeticity of 30$X_0$, the background coming from $\gamma$-punchtrough (see Sec.\ref{chapter3:sec:bkg}) is not expected to increase in the new setup. This contribution is hard to study in detail using MC simulation, it was however demonstrated in our previous measurements \cite{Banerjee:2019hmi} that longer setup adds a suppression to this background which is therefore expected to decrease due to the longer decay volume. As both neutral-punchtrough and $\ks$ are not expected to increase, one can conservatively put the background at a level of $0.01<$ (see Tab.\ref{tab:dm:background}).
+A preliminary study of background was performed in this novel setup. As discussed in Sec.\ref{ch3:sec:bkg} the main source of background is coming from the production of $\ks$ in the WCAL escaping the dump and decaying in the vacuum tube as the $\DM$. The decay products can potentially mimic the signal either in the chain K$^0_S \rightarrow \pi^0 \pi^0$ where $\ee$ pair are produced in the $\gamma$ conversion of the photon pair into an $\ee$ or in the rare decays $\pi^0 \rightarrow \gamma e^- e^+$. To estimate the impact of such background a simulation of 5$\times 10^6$ $\ks$ was performed using the energy spectrum expected from the production of this particle via electro-nuclear interactions.
+The conservative assumption of the simulation is that the $K^0_S$ is produced in an inelastic scattering in the WCAL where all the energy is deposited inside the dump without leaving a significant signature in W2. It was found that only 3\% of the events left a shower separation in the ECAL similar to the one expected from $\DM$. Less than 1\% of the events are within the acceptance of the trackers. In the majority ($>$90\%) of the surviving events the $\ks$ has an energy $<$60 GeV. This spectrum is significantly different from the one predicted for the $\DM$, where 95\% of the spectrum is above 100 GeV with a sharp peak at 150 GeV (the nominal beam energy). Finally, no event in the sample was reconstructed with an invariant mass compatible with the $\DM$, the closest one being reconstructed at 280 MeV. This is well above any $A'$ scenario in the reach of the NA64 experiment \cite{Banerjee:2019hmi}. As the new WCAL design conserves the hermeticity of 30$X_0$, the background coming from $\gamma$-punchtrough (see Sec.\ref{ch3:sec:bkg}) is not expected to increase in the new setup. This contribution is hard to study in detail using MC simulation, it was however demonstrated in our previous measurements \cite{Banerjee:2019hmi} that longer setup adds a suppression to this background which is therefore expected to decrease due to the longer decay volume. As both neutral-punchtrough and $\ks$ are not expected to increase, one can conservatively put the background at a level of $0.01<$ (see Tab.\ref{tab:dm:background}).
 
-An analysis based on the simulated data was conducted to estimate the reach of the experiment using the proposed setup. Most of the selection criteria already applied in our previous searches were used for this study. Additionally, a good separation of at least 8 cm is required between the two electromagnetic showers and the reconstructed invariant mass is selected to be within 10\% of the expected $\DM$ mass. The expected signal yield was computed after all the cuts were applied and used to calculate the 90\% exclusion of different $\DM$ scenarios. The results of the computation are presented in Fig.\ref{fig:exclusion-x17} that shows the number of EOT necessary to probe a specific $\DM$ scenario. Assuming a trigger-rate similar to the one observed during 2018 visible-mode data taking, a projection of the days needed is also shown. As expected, the EOTs required to probe a specific $\DM$ model increases exponentially with the coupling strength $\epsilon$, since the signal yield is dominated by the probability of $\DM$ to exit the dump. The conclusion is that the complete range $\epsilon < 1.4 \times 10^{-3}$ of $\DM$ parameter space proposed in \cite{PhysRevD.95.035017} can be covered in approximately 3 months of beam time by accumulating $\sim 7 \times 10^{11}$ EOTs. Models with V$\pm$A coupling mentioned in Sec.\ref{chapter1:sec:dm-candidates} on the other hand can be covered faster ($<$10 days) due to the smaller allowed coupling. 
+An analysis based on the simulated data was conducted to estimate the reach of the experiment using the proposed setup. Most of the selection criteria already applied in our previous searches were used for this study. Additionally, a good separation of at least 8 cm is required between the two electromagnetic showers and the reconstructed invariant mass is selected to be within 10\% of the expected $\DM$ mass. The expected signal yield was computed after all the cuts were applied and used to calculate the 90\% exclusion of different $\DM$ scenarios. The results of the computation are presented in Fig.\ref{fig:exclusion-x17} that shows the number of EOT necessary to probe a specific $\DM$ scenario. Assuming a trigger-rate similar to the one observed during 2018 visible-mode data taking, a projection of the days needed is also shown. As expected, the EOTs required to probe a specific $\DM$ model increases exponentially with the coupling strength $\epsilon$, since the signal yield is dominated by the probability of $\DM$ to exit the dump. The conclusion is that the complete range $\epsilon < 1.4 \times 10^{-3}$ of $\DM$ parameter space proposed in \cite{PhysRevD.95.035017} can be covered in approximately 3 months of beam time by accumulating $\sim 7 \times 10^{11}$ EOTs. Models with V$\pm$A coupling mentioned in Sec.\ref{ch1:sec:dm-candidates} on the other hand can be covered faster ($<$10 days) due to the smaller allowed coupling. 
 
 \begin{figure}[htb!]
   \centering
@@ -202,7 +202,7 @@ An analysis based on the simulated data was conducted to estimate the reach of t
 \end{figure}
   
 \section{A new approach: Muon mode setup}
-\label{chapter5:sec:muon-mode-setup}
+\label{ch5:sec:muon-mode-setup}
 
 %%% Local Variables:
 %%% mode: latex

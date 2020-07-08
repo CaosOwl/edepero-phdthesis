@@ -9,25 +9,25 @@
 % ----------------------------------------------------------------------------------------
 
 \section{General Analysis approach}
-\label{chapter3:sec:analysis-approach}
+\label{ch3:sec:analysis-approach}
 
 \section{Geant4 simulation of the experiment}
-\label{chapter3:sec:geant4}
+\label{ch3:sec:geant4}
 
 \subsection{Correction of longitudinal shower profile in the Hadronic calorimeter}
-\label{chapter3:sec:geant4-hcal-corr}
+\label{ch3:sec:geant4-hcal-corr}
 
 \subsection{Output digitization}
-\label{chapter3:sec:geant4-digitization}
+\label{ch3:sec:geant4-digitization}
 
 \subsection{Signal simulation}
-\label{chapter3:sec:geant4-signal}
+\label{ch3:sec:geant4-signal}
 
 \section{Background}
-\label{chapter3:sec:bkg}
+\label{ch3:sec:bkg}
 
 \subsection{Heavy charged particle rejection using synchrotron radiation}
-\label{chapter3:sec:bkg-srd}
+\label{ch3:sec:bkg-srd}
 
 Simulation of the expected SR signal was performed with the Geant 4 package\cite{ALLISON2016186,1610988,AGOSTINELLI2003250}.
 The geometry of the NA64 experiment was coded in Geant 4, including the 200 $\mu$m mylar vacuum windows, the detailed composition of the trackers, scintillators and the residual gas was set at a level of $10^{-3}$ mBar as in the measurements. Saturation of BGO was taken into account using Birks' law with the constants taken from \cite{AVDEICHIKOV2002251}.
@@ -123,7 +123,7 @@ Electrons & $2.4\times10^{-1}$  & $2.60$ & $97.37$ \\
 \end{table}
 
 \subsection{Hadron rejection using electromagnetic shower profile}
-\label{chapter3:sec:bkg-ecal-profile}
+\label{ch3:sec:bkg-ecal-profile}
 
 The critical task of rejecting the hadron contamination in the H4 beam
 is currently performed by the SRD (synchrotron radiation detector) and
@@ -192,7 +192,7 @@ produced by the inhomogeneities of the ECAL.
 
  
 \subsubsection{Construction of the profiles}
-\label{chapter3:sec:make_profile}
+\label{ch3:sec:make_profile}
 
 A shower profile database can be understood as an $N\times N$ matrix
 where each entry represents a portion of the ECAL cell of dimension
@@ -286,7 +286,7 @@ TProfile2D representing each cell. The specific value filled is the
 percentage of energy deposited in the cell, i.e. $100 \times E^i/E^{tot}$.
 The error over this value is automatically computed by the TProfile2D.
 \section{$\chi^2$ computation}
-\label{chapter3:sec:chi2-comp}
+\label{ch3:sec:chi2-comp}
 
 The algorithm for the $\chi^2$ computation works as follows:
 \begin{enumerate}
@@ -302,10 +302,10 @@ The algorithm for the $\chi^2$ computation works as follows:
 \end{enumerate}
 
 \section{Results}
-\label{chapter3:sec:chi2-result}
+\label{ch3:sec:chi2-result}
 
 A database was produced using the method described in
-Sec.\ref{chapter3:sec:make_profile} and using the calibration runs 2363, 2182,
+Sec.\ref{ch3:sec:make_profile} and using the calibration runs 2363, 2182,
 2410, 2406, 2438. A complete description of such runs can be found in
 \cite{na64-runs}. To test the rejection power and the efficiency of the
 method the algorithm described above was used for 3 type of runs:
@@ -385,7 +385,7 @@ an electromagnetic shower truncated in the moment the transition
 happens. Since a possible signal from a Dark Photon would behave
 similarly this suggest that the cut won't reject the signal provided
 that the shower has enough energy. A similar study performed with the
-MC (see Sec.\ref{chapter3:sec:mc}) reached the same conclusion, however for
+MC (see Sec.\ref{ch3:sec:mc}) reached the same conclusion, however for
 very small energies the shower shape will slowly reach the energy
 resolution in each cell and the efficiency of the cut will drop
 substantially.  The efficiency for low energy improves if only central
@@ -401,7 +401,7 @@ longer resolve the type of shower of the event and instead the simple
 requirement of the full energy of the event to be detected by the
 central cell (3x3) should be used to avoid killing the
 signal. Applying a $\chi^2$-cut to a dark photon simulation (see
-Sec.\ref{chapter3:sec:mc}) suggested that this limit is roughly 5 GeV.  The
+Sec.\ref{ch3:sec:mc}) suggested that this limit is roughly 5 GeV.  The
 left plot in Fig.\ref{fig:ehcal_comp} is compatible with this
 estimate.
 
@@ -434,7 +434,7 @@ estimate.
 
 
 \section{Comparison with MC}
-\label{chapter3:sec:mc}
+\label{ch3:sec:mc}
 The same profiles described in the section above can be produced using
 a 100 GeV electron simulation of the NA64 setup\cite{na64-simulation}. In
 this section we will present some preliminary results for the
@@ -535,13 +535,13 @@ The main difference between the two plots concerns some events with very low ene
 \newpage
 
 \subsection{Study of K$^0_S$ background in visible mode}
-\label{chapter3:sec:bkg-k0s}
+\label{ch3:sec:bkg-k0s}
 
 \subsection{Study of neutral punch-through in the Calorimeters}
-\label{chapter3:sec:bkg-neutrals}
+\label{ch3:sec:bkg-neutrals}
 
 \section{Study of $\gamma + Z \rightarrow \mu^+ \mu^-$ events }
-\label{chapter3:sec:dimuons}
+\label{ch3:sec:dimuons}
 
 To validate the MC simulation and the tracking procedure required for this analysis, a pure sample of events containing the rare QED interaction $\emu$ has been studied. This class of events has many similarities to the $\DM$ ones, and they can be easily selected by requiring a double MIP signature in the HCAL modules. This procedure is described in detail in \cite{na64-prd}. The double tracks expected in the decay volume are then used to test the reliability of the tracking procedure in the setup.
 
@@ -582,10 +582,10 @@ To cross-check that the contamination is correctly removed, an independent metho
 \end{figure}
 
 %\subsection{Vertex and angle reconstruction}
-%\label{chapter3:sec:dimuons-reco}
+%\label{ch3:sec:dimuons-reco}
 
 \subsection{Signal yield correction}
-\label{chapter3:sec:dimuons-sig-corr}
+\label{ch3:sec:dimuons-sig-corr}
 
 To show that there are no significant differences in the tracking procedure between simulation and data the energy deposited in the WCAL was used as a figure of merit. If the tracking procedure affects differently data and MC, one would expect the agreement between the two distributions to diverge after cuts based on vertex reconstruction. Following the procedure described above, a number of vertex candidates are selected for the comparison. As the interaction $\emu$ will have their vertex inside the WCAL, only vertices compatible with this assumption are selected for the comparison. In practice, a vertex is accepted if its position lies within 3$\sigma$ of the expected WCAL position, where $\sigma$ was fitted using a Gaussian from the distribution of $\mu^- \mu^+$ pairs selected from the simulation. After the selection criteria, the energy deposited in the WCAL is compared between simulation and data for each event left (see Fig.\ref{fig:dimuon_en}). The energy deposit for data and simulation is in excellent agreement, proving that the tracking cuts do not bias the original sample.
 
@@ -624,26 +624,26 @@ A lower efficiency is observed in the data compared to the Monte Carlo after app
 \end{center}
 
 \section{Selection criteria}
-\label{chapter3:sec:selection-criteria}
+\label{ch3:sec:selection-criteria}
 
 \subsection{Invisible mode}
-\label{chapter3:sec:selection-criteria-invis}
+\label{ch3:sec:selection-criteria-invis}
 
 \subsection{Visible mode}
-\label{chapter3:sec:selection-criteria-vis}
+\label{ch3:sec:selection-criteria-vis}
 
 \subsubsection{Analysis using Veto at the end of the dump}
-\label{chapter3:sec:vis-mode-veto}
+\label{ch3:sec:vis-mode-veto}
 
 \subsubsection{Mixed approach using tracking and Veto}
-\label{chapter3:sec:vis-mode-tracking}
+\label{ch3:sec:vis-mode-tracking}
 
 
-The published analysis using the data collected in 2018 \cite{Banerjee:2019hmi} was based exclusively on the calorimeters and counters as described in Sec.\ref{chapter2:sec:vismode}. The trackers after the decay volume were not used for the signal discrimination. Here we present a novel method which exploits them providing a boost in the signal yields while maintaining the background under control. Even though this analysis is not sensitive when the decay length of the $\DM$ is significantly smaller than the dimension of the dump, it has the advantage of being complementary to the calorimeter analysis. Moreover, it is a very important proof of principle to demonstrate the power of our tracking procedure.
+The published analysis using the data collected in 2018 \cite{Banerjee:2019hmi} was based exclusively on the calorimeters and counters as described in Sec.\ref{ch2:sec:vismode}. The trackers after the decay volume were not used for the signal discrimination. Here we present a novel method which exploits them providing a boost in the signal yields while maintaining the background under control. Even though this analysis is not sensitive when the decay length of the $\DM$ is significantly smaller than the dimension of the dump, it has the advantage of being complementary to the calorimeter analysis. Moreover, it is a very important proof of principle to demonstrate the power of our tracking procedure.
 
-While in a first approximation the $\DM$ is produced in the first few layers of the WCAL, it can also originate at a later stage of the em-shower. These events, which are typically rejected in the calorimeter analysis, are instead accepted in the new analysis presented here. First, an initial sample is selected in the same way described in Sec.\ref{chapter2:sec:vismode} and detailed in \cite{Banerjee:2019hmi}. The final discrimination in the calorimeter analysis is based on the counter W2 placed at the end of the dump to reject the charged punch-through from the em-shower. This last cut is efficient if the $\DM$ is produced in the first few layers of the WCAL, but typically reject the event if the $\DM$ is produced at a later stage of the em-shower. The reason is that these events are accompanied by a long longitudinal development of the em-shower that leaves an energy deposit larger than the typical energy cut accepted in the calorimeter analysis. On the other hand, the low energy of the produced $\DM$ implies a larger angle between the decay products that can be resolved by the trackers. Combining these two concepts, one can see that the signal yield is characterized by two different topologies that can be easily distinguished by looking at the energy deposited in the ECAL (see Fig.\ref{fig:combined-analysis}).
+While in a first approximation the $\DM$ is produced in the first few layers of the WCAL, it can also originate at a later stage of the em-shower. These events, which are typically rejected in the calorimeter analysis, are instead accepted in the new analysis presented here. First, an initial sample is selected in the same way described in Sec.\ref{ch2:sec:vismode} and detailed in \cite{Banerjee:2019hmi}. The final discrimination in the calorimeter analysis is based on the counter W2 placed at the end of the dump to reject the charged punch-through from the em-shower. This last cut is efficient if the $\DM$ is produced in the first few layers of the WCAL, but typically reject the event if the $\DM$ is produced at a later stage of the em-shower. The reason is that these events are accompanied by a long longitudinal development of the em-shower that leaves an energy deposit larger than the typical energy cut accepted in the calorimeter analysis. On the other hand, the low energy of the produced $\DM$ implies a larger angle between the decay products that can be resolved by the trackers. Combining these two concepts, one can see that the signal yield is characterized by two different topologies that can be easily distinguished by looking at the energy deposited in the ECAL (see Fig.\ref{fig:combined-analysis}).
 
-Using this distinction, we divide all events that passed the initial selection criteria in two topologies based on the total energy deposited in the ECAL. The exact value of this threshold was selected to maximize the signal yield. The optimal value has a small dependence on the $\DM$ mass and coupling. A simple threshold of 75 GeV amounting to half of the initial beam energy was found to be robust for most of the interesting signal scenario. After the topology is decided, a final set of cuts is applied to discriminate between signal and background. In the case of high energy $\DM$, trackers do not have the capability of discriminate between single hits. An energy deposit smaller than 0.8 MIP is required in W2, and the presence of a decay after the dump is assessed by asking S4 to have an energy deposited larger than 1.5 MIP. On the other hand, if the energy deposited in the ECAL is smaller than 75 GeV, trackers are used instead as final discriminator. Two tracks in the decay volume are required with a reconstructed vertex within 3$\sigma$ from the WCAL and an angle smaller than 3 mrad. This different treatment leads to an increased efficiency to $\DM$ produced at a late stage of the shower as shown in Fig.\ref{fig:combined-analysis}. However, the smaller energy of the $\DM$ produced in this way has the effect of reducing the probability of the particle escaping the dump. For large coupling $\epsilon$ this suppression can be more than 2 orders of magnitude, making the boost of signal yield negligible. A summary of this boost for various interesting $\DM$ and $A'$ scenario is illustrated in Table \ref{tab:dm:efftable}. The values reported consider also a conservative correction factor of 0.77$\pm$0.1 that takes into account inefficiencies of the detectors and the reconstruction algorithm. This factor was evaluated using a data-driven method precisely outlined in Sec.\ref{chapter3:sec:dimuons}. The conclusion of this study is that in the current setup trackers information do not improve the limit on the $\DM$ parameter space. This is because the boost in signal yield becomes negligible for $\epsilon \sim 6 \times 10^{-4}$, a value which is already excluded with 90\% confidence by our previous analysis.
+Using this distinction, we divide all events that passed the initial selection criteria in two topologies based on the total energy deposited in the ECAL. The exact value of this threshold was selected to maximize the signal yield. The optimal value has a small dependence on the $\DM$ mass and coupling. A simple threshold of 75 GeV amounting to half of the initial beam energy was found to be robust for most of the interesting signal scenario. After the topology is decided, a final set of cuts is applied to discriminate between signal and background. In the case of high energy $\DM$, trackers do not have the capability of discriminate between single hits. An energy deposit smaller than 0.8 MIP is required in W2, and the presence of a decay after the dump is assessed by asking S4 to have an energy deposited larger than 1.5 MIP. On the other hand, if the energy deposited in the ECAL is smaller than 75 GeV, trackers are used instead as final discriminator. Two tracks in the decay volume are required with a reconstructed vertex within 3$\sigma$ from the WCAL and an angle smaller than 3 mrad. This different treatment leads to an increased efficiency to $\DM$ produced at a late stage of the shower as shown in Fig.\ref{fig:combined-analysis}. However, the smaller energy of the $\DM$ produced in this way has the effect of reducing the probability of the particle escaping the dump. For large coupling $\epsilon$ this suppression can be more than 2 orders of magnitude, making the boost of signal yield negligible. A summary of this boost for various interesting $\DM$ and $A'$ scenario is illustrated in Table \ref{tab:dm:efftable}. The values reported consider also a conservative correction factor of 0.77$\pm$0.1 that takes into account inefficiencies of the detectors and the reconstruction algorithm. This factor was evaluated using a data-driven method precisely outlined in Sec.\ref{ch3:sec:dimuons}. The conclusion of this study is that in the current setup trackers information do not improve the limit on the $\DM$ parameter space. This is because the boost in signal yield becomes negligible for $\epsilon \sim 6 \times 10^{-4}$, a value which is already excluded with 90\% confidence by our previous analysis.
 
 \begin{figure}[tbh!]
   \centering
