@@ -310,7 +310,7 @@ The total material budget for the two Micromegas, listed in Tab.\ref{tab:mm-mbud
 \subsection{The data Acquisition system (DAQ)}
 \label{ch2:sec:daq}
 
-The DAQ used for NA64 is a downscaled version of the COMPASS DAQ system \cite{Bodlak_2013,COMPASS-daq}. The detectors frontends are connected to the readout modules that with a processing speed up to 160 MB/s organize the digital information received by the frontends electronic into preliminary event-like structure (sub-event building) (see Fig.\ref{fig:daq}. Two type of readout modules are used in NA64: the CATCH (Compass Accumulate Transfer and Cache Hardware), a general readout module that supports a wide range of frontend electronics, and the  GeSiCa (Gem Silicon Control and Acquisition), which is optimized for the readout of the APV25 frontend chip that is used by both Micromegas and GEM detectors.
+The DAQ used for NA64 is a downscaled version of the COMPASS DAQ system \cite{Bodlak_2013,COMPASS-daq}. The detectors frontends are connected to the readout modules that with a processing speed up to 160 MB/s organize the digital information received by the frontends electronic into preliminary event-like structure (sub-event building) (see Fig.\ref{fig:daq}. Triggers and control information are passed to these modules via the Trigger Control System (TCS), which work synchronously with the SPS duty cycle and creates the header and distributes the header containing the spill number, event number and trigger type later used by the event builder PC. Two types of readout modules are used in NA64: the CATCH (Compass Accumulate Transfer and Cache Hardware), a general readout module that supports a wide range of frontend electronics, and the  GeSiCa (Gem Silicon Control and Acquisition), which is optimized for the readout of the APV25 frontend chip that is used by both Micromegas and GEM detectors.
 
 The APV25 is an ASIC that combines analog signals with a digital control \cite{Bodlak_2013} originally developed for the readout of the CMS silicon trackers \cite{article,inproceedings,apv-useguide}. Each of the 128 channel of the chip are made by an 60 \nas CR-CR shaping amplifier and a 192 samples deep analog pipelines. The amplifier integrates the current pulse from the input and output a well defined voltage pulse. A 192 samples deep analog pipeline is used to store the amplifier output to wait for the external trigger decision. This pipeline is made of switched capacitor elements. 160 of the 192 memory cells are organized in a ring buffer with a write and trigger pointer. The distance between the two defines the trigger latency which is a configurable parameter. When one of the pipeline columns is flagged for readout, it is copied into one of the remaining 32 memory elements, organized like a FIFO \footnote[]{\textbf{F}irst \textbf{I}n \textbf{F}irst \textbf{O}ut is a form of data buffer that conserves the order of the incoming data.}. The data are stored here until are sent out by the multiplexer. From here, the data is sent to an ADC\footnote{\textbf{A}nalog to \textbf{Digital} \textbf{C}onverter} modules (which can accomodate up to 4 APV chip) that digitizes the pulse before sending it to the GeSiCa. The ADC has two possible mode of operation, the latch-all mode and the sparse mode. When using the latch-all mode, the signal amplitudes of all channels is sampled three times with a clock cycle of 25 \nas and transmitted to the GeSiCa. In this mode the trigger rate cannot be higher than $\sim$1 \si{\kilo\hertz} due to the large amount of data received by the APV25. To reach higher trigger rates, the sparse mode is used instead. When in sparse mode, only channels with amplitudes above a certain threshold are sent to the GeSica by the ADC module. This allow to increase the manageable trigger rate to $\sim$10 \si{\kilo\hertz}. In NA64, latch-all mode is used to record the data coming by the APV25 connected to the trackers but in absence of the beam. This procedure is repeated every $\sim$10-15 run approximately to record the pedestal of each channel. The pedestal recorded are then used to set the threshold (2$\sigma$ for MM and 3$\sigma$ for GEMs) for the sparse mode, which is used during data taking to maximize the trigger rate.
 
@@ -321,7 +321,29 @@ The APV25 is an ASIC that combines analog signals with a digital control \cite{B
   \label{fig:daq}
 \end{figure}
 
-During the calibration procedure, the three sample received by each channel of the APV25 are also used to set the latency of the trigger. The latency of the trigger is optimal when it covers precisely the rising edge of the pulse received by each channel of the APV25. If we define a$_0$, a$_1$ and a$_2$ as the three sample recorded in consecutive order by a single APV25 pipeline, the latency is to be set such that the second sample a$_1$ is larger than the other two amplitudes. This can be best summarized in the so called "banana plot" of Fig.\ref{fig:banana-plots}, which is an heat map plotting the frequency of events with certain pulse structure.
+During the calibration procedure, the three sample received by each channel of the APV25 are also used to set the latency of the trigger. The latency of the trigger is optimal when it covers precisely the rising edge of the pulse received by each channel of the APV25. If we define a$_0$, a$_1$ and a$_2$ as the three sample recorded in consecutive order by a single APV25 pipeline, the latency is to be set such that the second sample a$_1$ is larger than the other two amplitudes. This can be best summarized in the so called "banana plot" of Fig.\ref{fig:banana-plots}, which is an heat map plotting the frequency of events with certain pulse structure. The sampling of the pulse shape also provides additional information about the time of arrival of the primary electron. By reconstructing the pulse shape rise time one can improve the time estimate by the usual 25 \nas (limited by the clock frequency of the APV) down to $\sim$15 \nas \cite{Banerjee:2017mdu}. To achieve this, the pulse is described by the following function:
+
+\begin{equation}
+  \label{eq:apv-pulse}
+  r(t) = \frac{r_0}{(1 + \exp{\frac{t-t_0}{\tau}})}
+\end{equation}
+
+Where the parameters $r_0$, $t_0$ and $\tau$ are fitted using the same data measured at different values of the latency. The time of arrival is then extracted by reversing the function and solving for $t$ as a function of the ratio between pulses (Fig.\ref{fig:apv-signal-shape}):
+
+\begin{equation}
+  \label{eq:2}
+  t(r) = t_0 + \tau \times \ln{\frac{r_0}{r} - 1}
+\end{equation}
+
+A complete description of the method that takes into account the errors of the ratio and the parameters is described in \cite{dbanerjee-thesis}.
+
+
+\begin{figure}[bth!]
+  \centering
+  
+  \caption[apv signal shape]{Shape of the signal of the APV chip and sampling performed.}
+  \label{fig:apv-signal-shape}
+\end{figure}
 
 \begin{figure}[!bth]
   \centering
@@ -330,10 +352,7 @@ During the calibration procedure, the three sample received by each channel of t
   \label{fig:banana-plot}
 \end{figure}
 
-After passing through the ADC, the data is sent to the GeSica using an high speed optical cable. The Gesica can accomodate up to 4 ADC (for a total of 16 APV chips) and has the purpose of multiplexing the incoming data stream, merging the header information from the TCS with the corresponding data coming from the APV, and finally putting the event data block into the S-link format. Finally, the information are transferred to an high performance readout buffer
-
-
-
+After passing through the ADC, the data is sent to the GeSica using an high speed optical cable. The Gesica can accomodate up to 4 ADC (for a total of 16 APV chips) and has the purpose of multiplexing the incoming data stream, merging the header information from the TCS\footnote{Trigger Control System} with the corresponding data coming from the APV, and finally putting the event data block into the S-link format. Finally, the information are transferred to an high performance readout buffer PCs (ROB) via the S-link protocol \footnote{The S-link is a protocol developed at CERN for fast point to point connections, typically between fron-end electronics and the readout electronics \cite{s-link}.}. In the NA64 case, to accomodate the many GeSica and CATCH module used, and S-link multiplexer is used to combine multiple modules before sending the data to the ROB. As seen in Fig.\ref{fig:daq}, the Readout buffer PCs receive the information from the multiplexer and stores them in four different spill buffer \footnote{A spill is a 512 MB SDRAM module which can store the data of at least one spill \cite{COMPASS-daq}}. A Gigabit Ethernet\footnote{Gigabit Ethernet is a standard developed by the Institute of Electrical and Electronics Engineers(IEEE) and Local Area Networks (LANs).} switch connects the ROB with the event builders PC. Here the data of each single event and merges them into a single event data block using the event identifier provided by the TCS receiver. After this process, the event is ready to be recorded to the long term storage, in this case of 5 TB SATA Hard Disk with a speed of 40 MB/s. Thanks to this design the DAQ takes advantage of the beam structure of the H4, characterized by an high intensity for 4.8 \si{\second} where the spill buffer are filled by the information coming from the readout modules followed by a long recovery time of $\sim$20 \si{\second} that are used for the event building and to write all the information to the tape.
 
 %%% Local Variables:
 %%% mode: latex
