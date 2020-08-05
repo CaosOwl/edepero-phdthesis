@@ -89,19 +89,79 @@ As stressed above, the first ingredient for our analysis is Monte Carlo simulati
 
 \begin{enumerate}
 \item A code to simulate particle interaction inside the NA64 setup.
+\item A code to reproduce the detector response in our setup.  
 \item A code that describes in detail the properties of $A'$.
-\item A code to reproduce the detector response in our setup.
 \end{enumerate}
 
 The first task is handled by the Geant4 library\cite{AGOSTINELLI2003250}. Geant4 software includes facilities to handle the geometry description, particle tracking and run management. To produce a simulation, the end user must provide an accurate description of the setup, a list of the interactions that need to be simulated, and the phase-space of the primary particle, in terms of particle type\footnote{}, initial particle momentum and initial particle position.
 
 The setup is described using different C++ classes to detail the precise geometry of each detector (See Tab....). To each geometry, a logical volume is assigned, which details the property of the geometrical object. In most of the cases, this means the Z,A number of the nuclei and the density. These property were taken from the NIST database\cite{nist-database}, unless more reliable information (coming from example from the manufacturer of the detector) were found. In some cases, for example to describe the vacuum and the gas detectors, pressure and temperature are also described using in-situ measurements. Finally, detectors are placed in the simulation following the measurement made with a tape (with precision of approximately 1-2 mm). For the trackers, which are particularly sensitive to their exact positioning, an additional measurement was performed by the H4 team with a precision of 0.5 \mmi\cite{meterology-measurements} and later corrected with an alignment procedure performed by the CORAL software\cite{ABBON2007455}.
 
+A physics list is then provided to simulate the relevant physics in the virtual setup. The physics list used in the simulation is the \textit{FTFP BERT} modular physics list, which is recommended for high energy physics experiment \cite{ALLISON2016186}. This physics list combines an excellent description of electromagnetic physics and a description of the inelastic hadron-nucleus processes based on the Fritiof Parton Model (FTF) \cite{Uzhinsky:2013hea}, Bertini intranuclear cascade \cite{Heikkinen:2003sc} and Precompound models \cite{Apostolakis:2009zz}. Because of the complexity of these models and the absence of a solid theory of QCD at low energy, the description of the inelastic scattering for hadrons can still be problematic and a cause of systematic in the experiment. As we will see in Sec.\ref{ch3:sec:geant4-hcal-corr} this problem is addressed by correcting the model using data from calibration run. Following the prescription at the beginning of this chapter.
+
+The last problem is too add the $\DM$ physics description to Geant4. This is currently done by an additional code that describes Dark Matter in a modular way following Object Oriented style of C++. This allows for the description of many Dark Matter candidates inside the same framework. The code has the following functions:
+
+\begin{enumerate}
+\item Compute the total cross section of $\DM$ emission as function of the properties of the target nucleus (namely Z, A and density $\rho$) and the primary energy.
+\item Decide if the emission of $\DM$ is happening inside a specific Geant4 step by throwing a random number.
+\item Sample the final state energy and angle based on the information of the primaries.
+\item Compute the decay time in the laboratory system if the model predicts a visible decay and pass the information to Geant4.
+\end{enumerate}
+
+An instance of the Dark Matter class is called at the start of each run performed by Geant4, initialized with specific parameters of $\epsilon$ and $m_{\DM}$. The method of the class are then called at each step involving an $e^-$/$e^+$ (or an $\mu^-$/$\mu^+$ for the muon mode) to calculate the total cross section and to decide if an emission is performed. After that, energy and angle are sampled using a distribution $E_{\DM}(E_{e^-}, \theta_{\DM})$. In the case of the invisible mode, the energy of $\DM$ is subtracted to the particle who emitted it and its momentum recalculated. No new particle is created inside the simulation, as the NA64 experiment assumes no further interaction of the decay product $\dmchi$. In the case of the visible mode, the decay length of $\DM$ is computed as function of its energy and parameter, and an $\ee$ pair is created inside the decay volume by sampling the corresponding decay distribution in that region. A weight corresponding to the probability of $\DM$ to decay inside the decay volume (which is simply the normalized integral of the decay distribution along the decay volume) is saved as meta-information of the event, and later used to correct the signal yield.
+The initial differential cross-section and precise energy spectrum of $\DM$ was initially calculated using the IWW-approximation. Currently this estimate was improved using a complete tree-level calculation of the cross section \cite{DMsimulation}. This correction decreased the expected signal yield for mass larger than 10 MeV, but decreased it for mass smaller than 5 MeV significantly. Finally, a biasing system was added to the code to increase the cross section artificially. This is required to simulate efficiently the signal without the need of extremely large simulations. A correction factor $N_{norm}(\epsilon_{bias},m_{\DM})$ is calculated by the code and saved as metadata in the output of the simulation. The number of $\DM$ simulated scales linearly with $N_{norm}$, allowing a quick correction for the signal yield in the simulation. The most relevant number for this is the expected number of $\DM$ produced normalized for the total EOT, which we will call $\dmpereot$. This can be calculated simply from the output of the simulation using the following equation:
+
+\begin{equation}
+  \label{eq:1}
+  \dmpereot = \frac{N_{norm}}{N^{tot}_{sim}} \times \sum^{n=N}_{i=0} \omega_i
+\end{equation}
+
+Where $N^{tot}_{sim}$ are the total number of events simulated, and $\omega_i$ is the weight associated to an event. For an event without $\DM$ production or that did not passed the selection criteria, this is weight is zero. Else, this weight can assume a value between 0 and 1, which is corresponding to the probability of $\DM$ to decay in the fiducial volume. Obviously in the case of an invisible decay, the number is always 1, since a missing energy will always be visible if the events pass all selection criteria. For the case of the visible mode on the other, the number to the probability of $\DM$ to decay inside the fiducial volume mentioned above.
+
+The output of the simulation is a text file containing all relevant information that can be used for later analysis. This will be explored more in detail in Sec.\ref{ch3:sec:geant4-digitization}.
+
+The final ingredient to start the simulation is an input particle to trigger the whole machinery. This is done using electron and hadron calibration run to extract a reliable beam profile. As mentioned, the hadron and electron beam are quite different from each other (as it turns out, this feature can also be used to cross check the contamination of each of them). For the case of hadrons, the beam is parametrized as an ellipse, with total width in X direction of 14.5 \mmi and 6 \mmi. In the case of electrons, the parameterization use a 2D Gaussian distribution with $\sigma_x$=4.13 \mmi and $\sigma_y$=1.4 \mmi. In both cases, the entrance angle of the particle is assumed to be uncorrelated from its initial position, as is parametrized with a Gaussian of width $\sigma_r$=0.4 \mrad. These parameters were obtained by fitting the core of the distribution with a Gaussian in both these projections. The fit was performed using two different Micromegas and agreed within 5\% error. 
+
 \subsection{Correction of longitudinal shower profile in the Hadronic calorimeter}
 \label{ch3:sec:geant4-hcal-corr}
 
+One instance of the effect that must be corrected inside the MC simulation is the precise energy deposited inside a calorimeter as a consequence of a intranuclear inelastic scattering in the converter. Since we know the majority of particles inside the calibration beam are $\pi^-$, we can do a first degree comparison by simulating a suitable sample of this particle and compare the distribution with what we measure in a calibration beam. The results of this first comparison is shown in Fig.\ref{fig:ecal-comp}. In the first plot we see the comparison of energy deposited in the WCAL for electrons measured in the calibration run compared to what measured in the simulation. As expected because of the QED nature of the process, the two distribution agrees quite well in the core, with some minor disagreement in the tail mostly due to pileup. Here we notice as well that the width of the distribution is roughly. On the other hand, even account for detector correction, we can see that there is a fundamental disagreement at the end of the spectrum when the comparison is performed with pions, specifically in the region relevant for deep inelastic scattering. One could of course suspect some electron contamination given the position of the tail, however the data are first filter by requiring at least 5 MeV energy deposited in both SRD counters facing the beam inlet. This reduces the contamination conservatively at a level $<$0.1\%, which is far below the disagreement observed. A faulty calibration is also unrealistic, since the agreement with electrons is excellent in that energy range. It would look like the simulation systematically overestimate the number of events in that region, where most of the energy released in the inelastic scattering is emitted in the form of $\pi^0$, hence producing a large energy deposit.
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[scale=0.6]{\pdirthree/wcal_elec_comp.pdf}
+  \includegraphics[scale=0.6]{\pdirthree/wcal_pion_comp.pdf}
+  \includegraphics[scale=0.6]{\pdirthree/ecal_pion_comp.pdf}
+  \caption[MC/DATA Comparison of $\pi^-$ in ECAL and WCAL]{Comparison between MC and data for different detectors and different runs. Top: WCAL energy deposited for electrons, Middle: WCAL energy deposited for hadrons, Bottom: ECAL energy deposited for hadrons.}
+  \label{fig:ecal-comp}
+\end{figure}
+
+The same comparison was also repeated for different particle species to cross check the divergency in the beam.
+
 \subsection{Output digitization}
 \label{ch3:sec:geant4-digitization}
+
+The output of Geant4 can be divided in three different categories:
+
+\begin{itemize}
+\item Energy deposited in the active area of a detector readout by the DAQ.
+\item Hit information of a particle passing through the active area of a tracking chamber.
+\item MC truth information regarding the event, including all the kinematics of the $\DM$ in the case it was emitted.
+\end{itemize}
+
+The first type is straight forward. Each time a step happens inside a sensitive detector, the energy deposited in the volume is added to some specific counters which are in the end outputted into the end file. At this point the energy is mostly computed starting from physical effect, but some detector effected are already accounted for. Most notably, only the energy in the active part of each calorimeters (ECAL, WCAL and HCAL) is recorded, and the total sum of the energy deposited is corrected using a calibration constant which corrects the energy output to reflect the initial particle energy. Additionally, Birks law \cite{NYIBULE2014141} is implemented in the HCAL to correct for the propagation of optical photon in the WLS until the PMTs. This effects correct for the different light yield between $\pi^-$ and $\mu^-$, since in the case of $\mu^-$ the energy is deposited the full length of the detector evenly.
+
+To reproduce tracking detectors, every time a particle cross the gas volume of a gas chamber, multiple information are saved:
+
+\begin{itemize}
+\item x-y-z position of the particle at the beginning of the step.
+\item The energy of the particle responsible for the hit.  
+\item The energy deposited in the gas during the step.
+\item The PDG number of the particle \cite{particle-numbering-scheme}.
+\end{itemize}
+
+These data define a structure called MChit, which is later used by the reconstruction algorithm to reproduces hit in the same format of the data. The algorithm for the reconstruction works as follow: first, only hits with a minimal energy deposit in the volume are considered, since a minimum amount of energy need to be deposited to start the ionization inside the volumes. After that, multiple MChit are merged if they are found to be closer than a certain distance. This distance is conservatively set to be 2 mm (see Sec.\ref{ch5:sec:separ-hit-micr}). Hit closer than distance are merged in a single one and the new x-y position are computed by weighting each position by its energy deposit in the gas.
+
 
 \subsection{Signal simulation}
 \label{ch3:sec:geant4-signal}
