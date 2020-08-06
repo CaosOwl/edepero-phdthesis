@@ -149,7 +149,7 @@ The output of Geant4 can be divided in three different categories:
 \item MC truth information regarding the event, including all the kinematics of the $\DM$ in the case it was emitted.
 \end{itemize}
 
-The first type is straight forward. Each time a step happens inside a sensitive detector, the energy deposited in the volume is added to some specific counters which are in the end outputted into the end file. At this point the energy is mostly computed starting from physical effect, but some detector effected are already accounted for. Most notably, only the energy in the active part of each calorimeters (ECAL, WCAL and HCAL) is recorded, and the total sum of the energy deposited is corrected using a calibration constant which corrects the energy output to reflect the initial particle energy. Additionally, Birks law \cite{NYIBULE2014141} is implemented in the HCAL to correct for the propagation of optical photon in the WLS until the PMTs. This effects correct for the different light yield between $\pi^-$ and $\mu^-$, since in the case of $\mu^-$ the energy is deposited the full length of the detector evenly.
+The first type is straight forward. Each time a step happens inside a sensitive detector, the energy deposited in the volume is added to some specific counters which are in the end outputted into the end file. At this point the energy is mostly computed starting from physical effect, but some detector effected are already accounted for. Most notably, only the energy in the active part of each calorimeters (ECAL, WCAL and HCAL) is recorded, and the total sum of the energy deposited is corrected using a calibration constant which corrects the energy output to reflect the initial particle energy. Additionally, Birks law \cite{NYIBULE2014141} is implemented in the HCAL to correct for the propagation of optical photon in the WLS until the PMTs, using an attenuation length of 30 \si{\centi\meter}. This effects correct for the different light yield between $\pi^-$ and $\mu^-$, since in the case of $\mu^-$ the energy is deposited the full length of the detector evenly.
 
 To reproduce tracking detectors, every time a particle cross the gas volume of a gas chamber, multiple information are saved:
 
@@ -160,14 +160,77 @@ To reproduce tracking detectors, every time a particle cross the gas volume of a
 \item The PDG number of the particle \cite{particle-numbering-scheme}.
 \end{itemize}
 
-These data define a structure called MChit, which is later used by the reconstruction algorithm to reproduces hit in the same format of the data. The algorithm for the reconstruction works as follow: first, only hits with a minimal energy deposit in the volume are considered, since a minimum amount of energy need to be deposited to start the ionization inside the volumes. After that, multiple MChit are merged if they are found to be closer than a certain distance. This distance is conservatively set to be 2 mm (see Sec.\ref{ch5:sec:separ-hit-micr}). Hit closer than distance are merged in a single one and the new x-y position are computed by weighting each position by its energy deposit in the gas.
+These data define a structure called MChit, which is later used by the reconstruction algorithm to reproduces hit in the same format of the data. The algorithm for the reconstruction works as follow: first, only hits with a minimal energy deposit in the volume are considered, since a minimum amount of energy need to be deposited to start the ionization inside the volumes. Practically, the minimum threshold was assumed to be 2 keV based on previous studies performed for MM \cite{IGUAZ20121079}. A similar value is assumed for GEM detector as well. After that, multiple MChit are merged if they are found to be closer than a certain distance. This distance is conservatively set to be 2 \mmi for MM and 1.75 mm \mmi for GEM (see Sec.\ref{ch5:sec:separ-hit-micr}). Hit closer than distance are merged in a single one and the new x-y position are computed by weighting each position by its energy deposit in the gas. Starting from here, the xy coordinates of the hits are transformed into the plane of the detectors using a simple matrix multiplication $u_{hit} = M_{uv}(\theta_{uv}) \cdot v_{hit}$ where $u_{hit}$ is the hit position in the detector coordinate system and $v_{hit}$ is the same vector expressed in the laboratory system. The Matrix $M_{uv}(\theta_{uv}$ is the rotation matrix of the $O(2)$ group where $\theta_{uv}$ is the angle between the two axis of the detector and the axis of the laboratory system. From here, knowledge of the original hit is no longer assumed, and each coordinate on the detector plane is treated separately. This is necessary to reproduce faithfully the detector condition, indeed the experimentalist get this information from each plane separately, hence in the end it will end up with a set $X_n$ and $Y_n$ of XY position that he will need to combine to create the hit candidates\footnote{In the most common case of just a single primary present upstream the ECAL, of course this association is trivial. Since only one hit per plane is present}. In the MM detector, the clusterization is fully reproduced, the physical cluster is parametrized by a simple Gaussian, and charge is distributed on the phjysical strips starting from the center of the hit (computed in the step before). Each charge is then smeared with a Poisson distribution to reproduce charge fluctuation in each channel. The total charge of the cluster is decided starting from the total energy deposit in the gas volume and converting it into charge based on a simple calibration procedure using the data of the electron calibration runs. Since MM is a multiplexed detector, no direct information of the strip is directly accessible. The physical strip are now mapped to the corresponding channel, and a 64-dimension vector is obtained as output. Noise is also added to each channel using the same pedestal measured in the sparse mode of the APV chips. Now that each channel charge is defined, the vector is used as input for the same clusterization procedure used for the data, which ultimately returns each cluster candidates and calculates the most probable position as the weighted average of all the strips in each cluster. The procedure for the GEM is more direct and only involves the smearing of the initial true hit position using a Gaussian distribution with width corresponding to the hit resolution of the GEM detectors, estimated from calibration data using the Three Layer Method \cite{Bortfeldt:2014vvt}. This determined a resolution of $\sigma_{GEM} \approx 80$\mum. Either way, after the set $X_n$ and $Y_n$ is computed, the new set of hit candidate $hit_n$ is formed with all possible combination of each set. Thankfully a hit number per plane larger than five, other than being very rare ($\lesssim$1\%), is not relevant for $\DM$ searches and hence rejected during the analysis. The hits candidates are then used as input of the tracking or vertexing procedure. The tracking procedure is straight forward and described in detail in \cite{dbanerjee-thesis}, the total momentum of a track is calculated from the displacement after passing through the magnetic field of the MBPL.
 
+
+
+The vertex reconstruction is more involved but starts from the same input above. The procedure will be described more in detail in Sec.\ref{ch3:sec:vis-mode-tracking}.
 
 \subsection{Signal simulation}
 \label{ch3:sec:geant4-signal}
 
 \section{Background}
 \label{ch3:sec:bkg}
+
+In this section, we will try to go more in detail of what constitutes background in the NA64 experiment. First of all, with background we mean obviously an event that is detected is the signal region without involving the emission of $\DM$, and that was able to pass all our selection criteria. Because of the different physics involving them, it is instructive to divide the background by the primary particle considered. This gives us three category:
+
+\begin{itemize}
+\item[\textbf{Hadronic background}] Background coming from hadronic primary, in NA64 these are mostly $\pi^-$, and $K^-$/$p^-$ in some rare cases.
+\item[\textbf{Muonic background}] Background coming from a $\mu^-$ primary.
+\item[\textbf{electron/gamma background}] Background coming from a $e^-$ primary.
+\end{itemize}
+
+This classification is convenient, especially if one wants to study the background using MC-simulation (as what will be relevant for the simulation is the primary particle). However, there is some overlap in the physics of these three scenario, and we need to remind ourselves that sometimes the same type of background can arise from different sources. A trivial example would be the decay $\pi^- \rightarrow \mu^-\nu$, where an initial $\pi^-$ produces a $\mu^-$ in our setup. A more relevant but involved example is an $e^-$ or a $\gamma$ which trigger an hadronic shower after an inelastic scattering with a nucleus. This can potentially cause energy escaping in the form of hadron, and since the initial particle is an electron, such background is also accepted by the SRD criteria. The main advantage of this classification is that it let us calculated the suppression factor for the background with simple argument without necessarily using the MC-simulation. For example, for both hadronic and muonic background, we can conservatively assume a factor $10^{-5}$/EOT\footnote{As seen in Sec.\ref{ch3:sec:bkg-srd} the suppression is typically larger,} of suppression due to both their low concentration in the beam and the SRD selection applied upstream, which is almost always independent from the precise physics of the background studied.
+
+\subsection{Invisible mode background}
+
+In the case of invisible mode, the \textbf{Hadronic background} can arise simply from a $\pi^-$ that after leaving a minimal energy in the ECAL punch-through the HCAL undetected. In first approximation using an interaction length of 21 $\lambda_{int}$ this can be calculated to be $\lesssim 10^{-9}$. This without accounting for the high efficiency VETO after the ECAL, SRD rejection, and the fact that the HCAL is able to detected a MIP interaction even without an inelastic interaction happening. Each of this factor push the background well below $<10^{-13}$ as pointed out in the NA64 first proposal \cite{Andreas:2013lya}. A more relevant background would be an hadron scatter inelastically inside the ECAL in a process:
+
+\begin{equation}
+  \label{eq:pion-nucleus-scattering}
+  h + Z \longrightarrow h + Z + hadrons)
+\end{equation}
+
+In this process, part of the energy can evaporate as consequence of some particles emitted at large angle and thus escaping the setup in the direction transverse to the beam. This reaction is typically suppressed by shower profile analysis, energy deposited in the pre-shower, and the presence of a VETO at the end of the ECAL. The phase space of this process is however very complicate, and a lot of possible phenomenology can arise from it. For example, large energy deposited in the pre-shower can be a simple consequence of some $\pi^0$ backscattering after the hadronization, while the shower profile can mimic the one of the electron if a large fraction of energy in the inelastic scattering is carried away by $\pi^0$. Also, if particles are emitted in the form of neutrons or other neutrals (for example ...), the VETO would be ineffective to reject them. To have a crude estimate, we can take the process \ref{eq:pion-nucleus-scattering} and assume $\geq$2 neutrals particles are produced as consequence of the hadronization. This gives us a probability equal to \cite{gkkk1}:
+
+\begin{equation}
+  \label{eq:transverse-leak-estimate}
+  P \simeq P_n \cdot P_{la} \cdot P_{leak}
+\end{equation}
+
+Where we define $P_n$ the probability of such interaction to occur, $P_{la}$ the probability to produce particles at large angle of scattering, and $P_{leak}$ the probability to escape HCAL without interactions. Here we stress again that this formula hides a large number of topologies that such event could have, however plus in some number can be instructive to get an intuition for these processes. Since the ECAL has $\lambda_{int} \simeq 0.5$, the probability of interaction for an hadron is fairly high (roughly 50\% of the time such interaction will happen). We need at least 50 \gev of energy leaking to produce a signal event, if we assume two neutrals to be produced at $\Theta_{n} \simeq 30$\si{\degree} this would mean crossing at least 4$\lambda_{int}$ each, for a $P_{leak} \lesssim 3 \cdot 10^{-4}$. We can take the measured values of the NOMAD to estimate the value of the cross section in this range \cite{AUTIERO1998285,GNINENKO1998583}. The probability of separating a cluster with energy $>$0.1E$_{\pi}$ at an angle $\Theta_{n} \gtrsim 30$\si{\degree} was measured to be P$_{la} \simeq 10^{-5}$ and drops very quickly wit the beam energy, as shows the fact that a factor 20 difference was found between 15 \gev and 6 \gev $\pi^-$. Even taking the value this (very) conservative value as $P_{la}$, we see that the probability of the energy escape is already $P\simeq 10^{-9}$, which multiplied to the hadron contamination and SRD suppression leads to an estimate of $P<10^{-14}$ for this background. Another possible background is the decay of hadron inside the setup in neutrinos, which would ultimately lead to evaporated energy. The high energy of the primary suppress this background, since at 100 GeV the chance for a $\pi^-/K^-$ to decay is $P^{decay}_{\pi} \simeq  10^{-2}$\footnote{calculated for a total length of 20 m assuming light-speed.}. There are multiple possible decay that are accompanied by a neutrino emission, the most likely one being the $\pi^-$ decay $\pi^- \rightarrow mu^- \nu_{\mu}$. The emission of the muon makes such decay very easy to spot, since it will an energy deposit both in the VETO and the HCAL, for a total probability similar to the one of a punchthrough $\pi^-$ ($P < 10^{-14}$). One could argue that the $\mu^-$ could decay: $\mu^- \rightarrow e^- + \nu_{mu}+ \hbar{\nu_{e}}$, producing an electronmagnetic shower with missing energy. The long decay time of the $\mu^-$ adds however an additional suppression factor of $P\simeq 10^{-5}$, which together with the upstream selection criteria put the background conservatively at $P \lesssim 10^{-13}$. Interesting is the case of $K^-$, which posses a pure electromagnetic channel of decay with missing energy in the form of an emitted neutrinos: $K^- \rightarrow \pi^0 + e^- + \hbar{\nu_e}$, commonly called $K^-_{3e}$, with a branching ratio of $\Gamma_i/\Gamma_{tot} \approx$0.05 \cite{particle-strange-mesons}. The total probability of background for an incoming $K^-$ is around $P\simeq 10^{-3}$ accounting for both probability of decay and branching ratio. A MC-simulation of $K^-$ confirm this simple estimate as shown in Fig.\ref{fig:kaonbkg-sim}, where the fraction of event in the signal region correspond to the probability calculated. Multiplying this probability for the SRD selection criteria and the suppression from the beam returns a probability of $P_{K_{3e}} < 10^{-12}$\footnote{Here a suppression from the beam of 10$^{-3}$ is used, since the the $K^-$ is a smaller fraction than the contamination \cite{h4-beamline}}. This start to be significant and worth of precise study. It turns out that there are additional factor of rejection for this background, coming mostly from a more precise account of SRD in this scenario and some small effect from other cuts (tracking, shower profile, etc...) the expected background is $P_{K_{3e}} \simeq 10^{-13}$.
+
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=0.9\textwidth]{\pdirthree/kaonbkg.pdf}
+  \caption[$K^-$ simulation ]{Energy deposited in the ECAL vs energy deposited in the HCAL after simulating $K^-$ as primary particle in the NA64 setup. The number of event inside the signal box}
+  \label{fig:kaonbkg-sim}
+\end{figure}
+
+The second type of background is the background coming from a muon primary. This type of background is also largely suppressed by both beam composition and SRD selection criteria, to a level of approximately $10^{-7}/EOT$\footnote{Also here the suppression from the beam composition is larger \cite{h4-beamline} and SRD selection criteria are more stringent.}. As in the case of $\pi^-$, we can convince ourselves that a complete punchthrough of the setup without being detected is negligible. Indeed the muon need to travel through both the VETO and 3HCAL without leaving any detectable energy deposit. Using $\lesssim 10^{-3}$ for leaving an undetectable energy in the VETO and $\lesssim 10^{-4}$ to deposit less energy than the threshold in all modules, we see that the background is conservatively $< 10^{-14}$. In the case of muons, the nuclear interaction are largely suppressed, hence there is no chance for a large amount of energy to escape transversely. What remains is the decay $\mu^- \rightarrow e\nu\nu$, which could create neutrinos. We remind ourselves here that the large decay time of $\mu^-$ add an additional suppression of $\lesssim 10^{-5}$
+
+
+
+\begin{table}[bth!]
+  \centering
+  \begin{tabular}{|r|l|}
+    \hline \\
+    \hline
+    Background source & Background, $n_b$ \\
+    \hline
+    $\pi^-$,$\mu^-$ punchthrough & $<10^{-14}$ \\
+    hadron-nuclear interaction in target & $<10^{-14}$ \\
+    $\pi^-$,$K_{3e}$ decay & 0.02 $\pm$ 0.01 \\
+    \hline
+    Total (conservatively) & 0.53 $\pm$ 0.17
+
+                        
+  \end{tabular}
+  \caption[invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected in the time this thesis is written }
+  \label{tab:inv-bkg}
+\end{table}
+
 
 \subsection{Heavy charged particle rejection using synchrotron radiation}
 \label{ch3:sec:bkg-srd}
@@ -444,7 +507,7 @@ The algorithm for the $\chi^2$ computation works as follows:
   normalized to the number of cells considered.
 \end{enumerate}
 
-\section{Results}
+\subsubsection{Results}
 \label{ch3:sec:chi2-result}
 
 A database was produced using the method described in
