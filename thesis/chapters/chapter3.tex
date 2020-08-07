@@ -183,6 +183,10 @@ In this section, we will try to go more in detail of what constitutes background
 This classification is convenient, especially if one wants to study the background using MC-simulation (as what will be relevant for the simulation is the primary particle). However, there is some overlap in the physics of these three scenario, and we need to remind ourselves that sometimes the same type of background can arise from different sources. A trivial example would be the decay $\pi^- \rightarrow \mu^-\nu$, where an initial $\pi^-$ produces a $\mu^-$ in our setup. A more relevant but involved example is an $e^-$ or a $\gamma$ which trigger an hadronic shower after an inelastic scattering with a nucleus. This can potentially cause energy escaping in the form of hadron, and since the initial particle is an electron, such background is also accepted by the SRD criteria. The main advantage of this classification is that it let us calculated the suppression factor for the background with simple argument without necessarily using the MC-simulation. For example, for both hadronic and muonic background, we can conservatively assume a factor $10^{-5}$/EOT\footnote{As seen in Sec.\ref{ch3:sec:bkg-srd} the suppression is typically larger,} of suppression due to both their low concentration in the beam and the SRD selection applied upstream, which is almost always independent from the precise physics of the background studied.
 
 \subsection{Invisible mode background}
+\label{ch3:sec:bkg:inv}
+
+\subsubsection{Hadronic background}
+\label{ch3:sec:bkg:inv:hadr}
 
 In the case of invisible mode, the \textbf{Hadronic background} can arise simply from a $\pi^-$ that after leaving a minimal energy in the ECAL punch-through the HCAL undetected. In first approximation using an interaction length of 21 $\lambda_{int}$ this can be calculated to be $\lesssim 10^{-9}$. This without accounting for the high efficiency VETO after the ECAL, SRD rejection, and the fact that the HCAL is able to detected a MIP interaction even without an inelastic interaction happening. Each of this factor push the background well below $<10^{-13}$ as pointed out in the NA64 first proposal \cite{Andreas:2013lya}. A more relevant background would be an hadron scatter inelastically inside the ECAL in a process:
 
@@ -203,34 +207,129 @@ Where we define $P_n$ the probability of such interaction to occur, $P_{la}$ the
 
 \begin{figure}[bth!]
   \centering
-  \includegraphics[width=0.9\textwidth]{\pdirthree/kaonbkg.pdf}
+  \includegraphics[width=\textwidth]{\pdirthree/kaonbkg.pdf}
   \caption[$K^-$ simulation ]{Energy deposited in the ECAL vs energy deposited in the HCAL after simulating $K^-$ as primary particle in the NA64 setup. The number of event inside the signal box}
   \label{fig:kaonbkg-sim}
 \end{figure}
 
-The second type of background is the background coming from a muon primary. This type of background is also largely suppressed by both beam composition and SRD selection criteria, to a level of approximately $10^{-7}/EOT$\footnote{Also here the suppression from the beam composition is larger \cite{h4-beamline} and SRD selection criteria are more stringent.}. As in the case of $\pi^-$, we can convince ourselves that a complete punchthrough of the setup without being detected is negligible. Indeed the muon need to travel through both the VETO and 3HCAL without leaving any detectable energy deposit. Using $\lesssim 10^{-3}$ for leaving an undetectable energy in the VETO and $\lesssim 10^{-4}$ to deposit less energy than the threshold in all modules, we see that the background is conservatively $< 10^{-14}$. In the case of muons, the nuclear interaction are largely suppressed, hence there is no chance for a large amount of energy to escape transversely. What remains is the decay $\mu^- \rightarrow e\nu\nu$, which could create neutrinos. We remind ourselves here that the large decay time of $\mu^-$ add an additional suppression of $\lesssim 10^{-5}$
+\subsubsection{Muonic background}
+\label{ch3:sec:bkg:inv:muon}
+
+The second type of background is the background coming from a muon primary. This type of background is also largely suppressed by both beam composition and SRD selection criteria, to a level of approximately $10^{-7}/EOT$\footnote{Also here the suppression from the beam composition is larger \cite{h4-beamline} and SRD selection criteria are more stringent.}. As in the case of $\pi^-$, we can convince ourselves that a complete punchthrough of the setup without being detected is negligible. Indeed the muon need to travel through both the VETO and 3HCAL without leaving any detectable energy deposit. Using $\lesssim 10^{-3}$ for leaving an undetectable energy in the VETO and $\lesssim 10^{-4}$ to deposit less energy than the threshold in all modules, we see that the background is conservatively $< 10^{-14}$. In the case of muons, the nuclear interaction are largely suppressed, hence there is no chance for a large amount of energy to escape transversely. What remains is the decay $\mu^- \rightarrow e\nu\nu$, which could create neutrinos. We remind ourselves here that the large decay time of $\mu^-$ add an additional suppression of $\lesssim 10^{-5}$. Here again proper accounting of SRD and misalignment of the $e^-$ accounting for an additional $P\sim 10^{-1}$ factor, putting this background at a level of $P_{\mu} \lesssim 10^{-13}$.
+
+\subsubsection{Electronic background}
+\label{ch3:sec:bkg:inv:elec}
+
+The last type of background is originating from electron primary. This is more tricky, since the beam is primary made of electrons, and SRD are tuned to select them, no upstream suppression factor can be achieved. Simple punchthrough of electron through the whole setup is not possible, since the path is blocked by 3 HCAL modules. Other similar event, with energy losses due to non uniformity and cracks in the ECAL/HCAL were as well studied and found unrealistic \cite{Andreas:2013lya}. Low energy electron are also a potential background, if a primary electron with $E_0 < E_{th}$ arrives to the ECAL it will leave an energy deposit compatible with the signal. Such background is also extremely unlikely. The amount of electron $N(E_e<E_{th})$ in the beam with energy lower than the energy threshold for the signal amounts conservatively to $<10^{-2}$. Such particles are normally deflected by the two MBPL magnet outside the acceptance of the ECAL\footnote{A quick calculation shows that for $E_0$=50 \gev the difference in deviation is about 0.4 \si{\meter}}. The tracking system install in NA64 makes sure that the energy of the incoming particle is always measured with a resolution of $\delta p/p \approx 1\%$, particle with large entrance angle in the magnet can in principle enter in the acceptance of the magnet, but their momentum is reconstructed by observing their displacement in the Micromegas. A dedicated simulation of $10^{10}$ EOT was performed by simulating electron with energy compatible with the signal region. No event was found in the signal region after requiring a reconstructed momentum within 3$\sigma$. This allow us to put this background conservatively at a level of $< 10^{-12}$.
+An important source of background to be considered is the dimuon production inside the target. As mentioned, these events are very useful to check for sistematics and validated the MC. However, fluctuation in the energy deposited in the HCAL might reach the signal region when significant. The background was estimated by exponential extrapolation of the control sample inside the signal region considering the side band I shown in the Fig.\ref{fig:ehcal-bkg-bands}. This estimate was performed using the control sample without applying the VETO cut, to make the extrapolation meaningful. The cut effect is then taken into account as a factor $\sim 10^{-6}$ as probability of the energy deposited by two MIP two be smaller than $E<E^{min}_{th}$.
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=0.45\textwidth]{\pdirthree/EHCAL_lastpub_left.png}
+  \includegraphics[width=0.45\textwidth]{\pdirthree/EHCAL_lastpub_right.png}
+  \caption[ECAL vs HCAL events band]{Distribution of events in the $\ehcalplane$ plane for the control sample of the data. The right panel shows the sample with all the selection criteria. Left panel shows the same sample without the VETO cut. The shaded area is the signal box. The size of the signal box is increased by a factor 5 in the Y-axis direction for illustration purposes. The region labeled I contains event caused by dimuon production, while region II contains mostly event leaking from the ECAL into the HCAL. the side bands A and C are used to estimate the background inside the signal region \cite{NA64:2019imj}.}
+  \label{fig:ehcal-bkg-bands}
+\end{figure}
+
+The most important background is finally the electro-nuclear and photo-nuclear production of neutral hadrons at large angle. This case is similar to the one discussed for hadrons, in this case however suppression due to beam composition and SRD selection criteria are not present. In first approximation, the rarity of such interaction compensate the suppression factor, and account for $P_n \simeq 10^{-6}$ (see Eq.\ref{eq:transverse-leak-estimate}). In practice, the background was extrapolated using an exponential distribution of the type:
+
+\begin{equation}
+  \label{eq:bkg-extrapolation}
+  \exp{a \cdot E_{ECAL} + b}
+\end{equation}
+
+The parameters $a$ and $b$ are fitted using the data in the side band C of the control sample, i.e. events with E$_{HCAL}<1$\gev and $E_{ECAL}>E_{th}$, and then integrated over the signal region. The results of this estimate was then accounted for conservatively in Tab.\ref{tab:inv-bkg}.
+The largest source of background however comes from electro-nuclear production happening upstream the target. As Fig.\ref{fig:eh-prod-sketch} shows, if this interaction happen in a detector with a large distance from the ECAL, the displacement of the particle can be large enough to exit the setup transversely. 
 
 
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[scale=0.4]{\pdirthree/hcal-leak.pdf}
+  \caption[upstream electro-hadron production upstream]{Sketch of electro-nuclear interaction happening upstream the ECAL leading to a possible background \cite{pdegen-thesis}.}
+  \label{fig:eh-prod-sketch}
+\end{figure}
+
+This background can be estimated by looking at the periphery region of the HCAL. Since the angular distribution is sharply suppressed for large angle \cite{AUTIERO1998285,GNINENKO1998583}, if we assume a distribution coming from large scattering neutral can be a source of background we must see a significant amount of event with low energy deposit in the ECAL and large energy deposit in the periphery of the first HCAL. For this purpose, we define the variable R, defined as ratio between energy deposited in all cell excluded the central one and the total energy deposited in the modules:
+
+\begin{equation}
+  \label{eq:R-factor}
+  R = \frac{E^{all}_{HCAL} - E^{center}_{HCAL}}{ECAL^{all}_{HCAL}}
+\end{equation}
+
+In a normal event with particles leaking the ECAL, we typically observe $R<0.5$, as the HCAL module center is aligned with the beam direction, thus the dominating energy deposit will be in the central cell. If an electro-nuclear production happens upstream however, some distortion of this variable will be visible. In the most extreme scenario when the particle is missing the ECAL completely, the R value can be equal 1, since the central cell of the HCAL will be shielded by the ECAL while the periphery will be directly hit. We can observe such behaviour in Fig.\ref{fig:r-value-csample}: most of the event considered have an R peaked at 0.35. Events where the primary electron loose a large portion of its energy due to bremsstrahlung are shown in region III and are responsable for events with large R value. In this topology of events, the electron completely misses the ECAL after being deflected by the magnetic field, while the hard-$\gamma$ produced in the interaction propagate without deflection and hit the HCAL in the periphery. Such event are also easily identifiable by looking at the HCAL placed in from the original beam direction. In the event of region III, this detector measure energy deposit $E>60$\gev.
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/pp30-calsr-uncut-may2.pdf}
+  \caption[R value for control sample]{Energy distribution in the $\ehcalplane$ (left) and corresponding distribution of the R value for different interesting regions. Region I is populated by the dimuon production inside the ECAL. Region II are event leaking in the HCAL characterized by energy conservation. Region III are event with hard bremstrahlung of the $e^-$ upstream, where the primary completely miss the ECAL and the $\gamma$ energy is deposited in the HCAL perifery. Region IV is characterized by pileup events \cite{pdegen-thesis}.}
+  \label{fig:r-value-csample}
+\end{figure}
+
+Event with electro-nuclear scattering upstream are characterized by a distribution equivalent to the one of region III. In Fig.\ref{fig:enucl-position} we see the frequency of nuclear interaction for different position along the beamline after the particle exit the vacuum pipe as predicted from a dedicated MC-simulation. Micromegas are the leading contribution to this background, as result of their large budget material, which in terms of interaction length is approximately $\lambda_{int} \simeq 1.9 \times 10^{-3}$. It is noticeable however that a factor $\sim 2$ less electronuclear interaction are happening in the first Micromegas of the beamline. This is the results of the smaller material budget of this module, that uses a mylar windows instead of a cooper top to close the gas box. Reduction of the material budget of the rest of the module will be an important improvement to suppress this background. As the displacement of the hadrons scales with the distance between the interaction and the target, reducing the distance between tracker chamber and the ECAL is also something that will be used for future runs.
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/enucl-position.pdf}
+  \caption[electronuclear interaction position]{Z position of electronuclear interactions between the end of the vacuum tube and the start of the first HCAL. A total of 2.5$\times 10^6$ EOT were simulated for this distribution.}
+  \label{fig:enucl-position}
+\end{figure}
+
+To properly account for this background, we follow the procedure described in \cite{na64-neutrals-study,pdegen-thesis}, which is reviewed briefly here.
+
+
+First, we divide the $\ehcalplane$ in 10 different zones as depicted in Fig.\ref{fig:enucl-bkg-estimation}. The zones divide the distribution of observed event in several tile at different distances from the signal region. All the region labeled with even number are events where the energy is conserved and the R value is closer to the one plotted for region II. In the even within zones labeled with odd number on the other hand, some energy is missing from the initial primary electron. The two most relevant are region 7) and 9), that include a portion of the signal region. These events have an R distribution closer to the one depicted in region III, with a sharp peak at 1. To further classify the events in these two regions, we can construct a new category based on the value of the R distribution. We define $n_i(r)$ as the number of events in the region $i$ with distance $r$ from the center of the HCAL. This definition let us build a classification of event useful for the background:
+
+\begin{itemize}
+\item $n_{5,7}(r=0)$ is the number of events with any energy deposited in the HCAL.
+\item $n_{5,7}(r=r_{cell})$ is the number of events with $R=1$, i.e. no energy is deposited in the central cell of the HCAL.
+\item $n_{5,7}(r=3r_{cell})$ are the event with no energy deposited in the HCAL, where R is not defined.
+\end{itemize}
+
+The final goal is to calculate the probability of an incoming electron primary to produce an event that fall in one of these categories. Which means computing:
+
+\begin{equation}
+  \label{eq:enucl-prob}
+  p_i = \frac{n_i(r)}{n_{EOT}}
+\end{equation}
+
+In practice, the distribution of $n_{i}(r)$ is fitted using an exponential distribution and then integrated in the region $n_i(r>3r_{cell})$ relevant for the background. This background can be however suppressed by two additional tools:
+
+\begin{itemize}
+\item The strawtube in the beamline, as shown in Fig.\ref{fig:eh-prod-sketch} are in the way of the hadrons and are able to detect them in the periphery of their active area. A simple constraint that requires all hit to be within 3$\sigma_{beam}$ can reject this background effectively. A cut based on the multiplicity of the hit is usually as powerful, since electronuclear interaction tent to produce a large shower of particles \cite{pdegen-thesis}.
+\item Since electronuclear interactions produce a large number of particles, this interaction saturates the MM detector strip output. A cut based on the total charge deposited in each plane is also effective to suppress the background \cite{na64-invisible-cuts}.
+\end{itemize}
+
+These cuts successfully removed the contamination in the control sample, and where accounted for in the final background extrapolation as an extra factor.
+
+
+\begin{figure}[tbh!]
+  \centering
+  \includegraphics[width=0.45\textwidth]{\pdirthree/zones-no-veto.png}
+  \includegraphics[width=0.45\textwidth]{\pdirthree/zones-veto.png}
+  \caption[electronuclear background estimation]{Partioning of the $\ehcalplane$ into ten zones for the background estimation of electronuclear event leaking in the signal box. The left panel shows the control sample of event after clean electron are selected using SRD, tracking, pileup-removal and a hit in the central cell of the ECAL. The right panel shows the same sample after the event with signal in the VETO counter are removed. Adapted from \cite{na64-neutrals-study}.}
+  \label{fig:enucl-bkg-estimation}
+\end{figure}
 
 \begin{table}[bth!]
   \centering
-  \begin{tabular}{|r|l|}
-    \hline \\
-    \hline
+  \caption[invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected at the time this thesis was written \cite{NA64:2019imj}}
+  \begin{tabular}{lr}
+    \hline \hline
     Background source & Background, $n_b$ \\
     \hline
-    $\pi^-$,$\mu^-$ punchthrough & $<10^{-14}$ \\
-    hadron-nuclear interaction in target & $<10^{-14}$ \\
-    $\pi^-$,$K_{3e}$ decay & 0.02 $\pm$ 0.01 \\
+    $\pi^-$,$\mu^-$ punchthrough                      & $<10^{-14}$ \\
+    low energy $e^-$                                  & $<10^{-12}$?? \\
+    $e^-$/hadron nuclear interaction in target        & $<0.044$ \\
+    $\pi^-$,$\mu^-$, $K_{3e}$ decay                    & 0.02 $\pm$ 0.01 \\
+    $e^-$ nuclear interaction in the  beam line       & 0.43 $\pm$ 0.16 \\
     \hline
-    Total (conservatively) & 0.53 $\pm$ 0.17
-
-                        
+    Total (conservatively)                            & 0.53 $\pm$ 0.17 \\
+    \hline \hline                       
   \end{tabular}
-  \caption[invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected in the time this thesis is written }
   \label{tab:inv-bkg}
 \end{table}
 
+\subsection{Visible mode background}
 
 \subsection{Heavy charged particle rejection using synchrotron radiation}
 \label{ch3:sec:bkg-srd}
@@ -491,7 +590,7 @@ selected by computing the hit point of the incoming particle in cell
 TProfile2D representing each cell. The specific value filled is the
 percentage of energy deposited in the cell, i.e. $100 \times E^i/E^{tot}$.
 The error over this value is automatically computed by the TProfile2D.
-\section{$\chi^2$ computation}
+\subsubsection{$\chi^2$ computation}
 \label{ch3:sec:chi2-comp}
 
 The algorithm for the $\chi^2$ computation works as follows:

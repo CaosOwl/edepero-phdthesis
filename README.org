@@ -79,7 +79,7 @@
      - [ ] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [ ] See if Dissertori can be the external referee
-* TODO [12%]Diary
+* TODO [11%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
@@ -104,6 +104,10 @@
     - [ ] SRD
 ** TODO [/] <2020-07-16 Thu>
    - [ ] Produce plot of signal shape of APV
+** TODO <2020-08-07 Fri>
+*** TODO Check background
+    - [ ] estimate of mu-->enunu decay, currentyl I estimated 1e-5 for decay prob and 1e-7 for beam composition and SRD, more?
+    - [ ] Estimate for momentum reconstruction, 1e-12 cited in Dipa thesis is not too clear, and also not sufficient at out current levels.
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
