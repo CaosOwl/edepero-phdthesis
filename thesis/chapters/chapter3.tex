@@ -174,11 +174,11 @@ The vertex reconstruction is more involved but starts from the same input above.
 
 In this section, we will try to go more in detail of what constitutes background in the NA64 experiment. First of all, with background we mean obviously an event that is detected is the signal region without involving the emission of $\DM$, and that was able to pass all our selection criteria. Because of the different physics involving them, it is instructive to divide the background by the primary particle considered. This gives us three category:
 
-\begin{itemize}
-\item[\textbf{Hadronic background}] Background coming from hadronic primary, in NA64 these are mostly $\pi^-$, and $K^-$/$p^-$ in some rare cases.
-\item[\textbf{Muonic background}] Background coming from a $\mu^-$ primary.
-\item[\textbf{electron/gamma background}] Background coming from a $e^-$ primary.
-\end{itemize}
+\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Electronic background}]
+\item[Hadronic background] Background coming from an hadronic primary.
+\item[Muonic background] Background coming from a $\mu^-$ primary.
+\item[Electronic background] Background coming from a $e^-$ primary.
+\end{description}
 
 This classification is convenient, especially if one wants to study the background using MC-simulation (as what will be relevant for the simulation is the primary particle). However, there is some overlap in the physics of these three scenario, and we need to remind ourselves that sometimes the same type of background can arise from different sources. A trivial example would be the decay $\pi^- \rightarrow \mu^-\nu$, where an initial $\pi^-$ produces a $\mu^-$ in our setup. A more relevant but involved example is an $e^-$ or a $\gamma$ which trigger an hadronic shower after an inelastic scattering with a nucleus. This can potentially cause energy escaping in the form of hadron, and since the initial particle is an electron, such background is also accepted by the SRD criteria. The main advantage of this classification is that it let us calculated the suppression factor for the background with simple argument without necessarily using the MC-simulation. For example, for both hadronic and muonic background, we can conservatively assume a factor $10^{-5}$/EOT\footnote{As seen in Sec.\ref{ch3:sec:bkg-srd} the suppression is typically larger,} of suppression due to both their low concentration in the beam and the SRD selection applied upstream, which is almost always independent from the precise physics of the background studied.
 
@@ -312,7 +312,7 @@ These cuts successfully removed the contamination in the control sample, and whe
 
 \begin{table}[bth!]
   \centering
-  \caption[invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected at the time this thesis was written \cite{NA64:2019imj}}
+  \caption[Invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected at the time this thesis was written \cite{NA64:2019imj}}
   \begin{tabular}{lr}
     \hline \hline
     Background source & Background, $n_b$ \\
@@ -331,16 +331,101 @@ These cuts successfully removed the contamination in the control sample, and whe
 
 \subsection{Visible mode background}
 
+It is straight forward to understand that the background signature differs significantly in the visible mode setup. Since now the signal requires the sum of the two calorimeters (WCAL and ECAL) energy deposited to be equal to the incoming primary energy, we no longer have the problem of some particle escaping the setup in the transverse direction. Because of the large distance between the WCAL and ECAL\footnote{7.5 \si{\meter} in the 2018 setup, 4.2 \si{\meter} in the 2017 setup}, such event is actually very likely. The background in this case can be caused by particles able to punch-through the first target without leaving any energy deposit in the W2 counter placed immediately after and then leave a pure electromagnetic signature in the ECAL downstream. Because of the different length of the setup and the addition of a vacuum tube (see Fig.\ref{fig:setup-vis-2018}), the background calculated for 2017 and 2018 differs significantly. The exact suppression depends on the exact source of background considered, but it can amount up to one order of magnitude \cite{Banerjee:2019hmi}. Alternatively to the method used in \cite{Banerjee:2019hmi}, this thesis presented an alternative approach that relies on the GEM trackers to boost the signal yield. The method is detailed in Sec.\ref{ch3:sec:vis-mode-tracking}, and consist in applying a final discrimination to the event based on a tracking procedure instead of the W2 counter when the energy detected in the ECAL is smaller than 75 \gev. The background condition do not differ significantly, and are reported in Tab.\ref{tab:vis-bkg}
+
+
+\subsubsection{Hadronic background}
+\label{ch3:sec:bkg:vis:hadr}
+
+Starting from the most simple scenario, punch-through of $\pi^-$ can be a background if the leave no energy in the W2 counter, an energy $> 2\emip$ in S4, and then deposit the rest of their energy in the ECAL. The product of these probabilities was conservatively estimated to be $< 10^{-12}$ when factoring SRD and HCAL suppression. Inelastic scattering in the WCAL, for example in the form of $\pi^- + p \rightarrow (\geq 1)\pi^0 + (neutrals)$ can be a source of background as they can punch-through the W2. This background was estimated using the extrapolation of the charge-exchange cross section, measured on different nuclei, after taking into account SRD rejection. In the tracking-analysis, inelastic scattering in the WCAL produces a large occupancy in the decay volume that can potentially create vertex candidates. Such events are expected to be suppressed by the selection criteria applied downstream for hadron rejection outlined in Sec.\ref{ch3:sec:selection-criteria-vis}. Furthermore, events able to mimic the pure electromagnetic signal of the decay $\DM \rightarrow e^+ e^-$ are often accompanied by a large transversal spread and are thus rejected by the requirement of energy conservation at a level of $< 10^{-5}$. This estimate was obtained by integrating the events in the signal region with two tracks in the decay volume without applying any rejection criteria for hadrons in a $\pi^-$ simulation. Such an event should also pass the independent selection criteria applied upstream, namely large energy deposited in the SRD and WCAL pre-shower. In a sample up to $10^7$ EOT, it was not possible to find an event with such signature even after removing the HCAL and VETO from the selection criteria.
+
+To estimate the background for a larger number of EOT, the $\ks$ decay was used as a benchmark process, as its short decay length is expected to be compatible with the ones of the $\DM$. The energy spectrum of $\ks$ was simulated using an exponential distribution with an energy cut-off of 18 GeV, as $\ks$ below this energy have a negligible probability to decay outside the dump. To estimate the number of $\ks$ in the sample, neutrals event were selected by applying all selection criteria to the control sample but changing the requirement for $S4$ to $E_{S4} < 0.5 \emip$. The distribution of these events is shown in Fig.\ref{fig:w-e-vis}, here we label signal-like the events that passed all selection criteria in the control sample. One such events was recorded in 2017, well outside of the signal region. In 2018 the number of neutral was reduced by a factor 2-3, and no signal-like events was observed. These data were used to estimate the ratio between neutral and signal-like event using the MC-simulation of $\ks$. This resulted in an estimate of 0.06 events for the 2017 data and 0.005 events for 2018 data. Statistical fluctuation of the data dominates the error for this estimate.
+
+To estimate the background for the tracking analysis, tracking-criteria were applied over the $\ks$ MC-sample. It was estimated that a rejection of $10^{-2}$ can be conservatively achieved for this background using the opening angle of the reconstructed vertex as discriminator. This estimate however mostly depends on the main hadronic decay channel $\ks \rightarrow \pi^- + \pi^+$ which is further suppressed downstream by the hadron suppression cuts such as no energy deposited in the HCAL and in the VETO. The decay channel $K^0_S \rightarrow \pi^0 + \pi^0$ has on the other hand a small chance to leave any signature in the GEM modules as no charged particle is typically emitted. Signal-like events can be produced either by the conversion of a photon from the $\pi^0 \rightarrow \gamma \gamma$ decay into a $\pair$ pair or in the decay chain $\ks \rightarrow \pi^0 + \pi^0, \pi^0 \rightarrow \gamma + e^- + e^+$. This last channel is however suppressed by its low branching ratio $\Gamma_i$/$\Gamma \approx $1\% \cite{review-particle-physics}. A dedicated simulation performed with biased branching ratio shows that the rejection for this channel is further improved to $< 10^{-3}$ since the large emission angle of a three-body decay is significantly different from the one expected in the $\xdecay$ decay. A conservative rejection of $\sim 10^{-5}$ is reached accounting both suppression factors. If we add the suppression factor coming from the angle using the trackers to what was computed for the calorimeter-analysis, one can conservatively estimate the background contribution from $\ks$ to be at a level of $<0.001$.
+
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/w-e-neutrals.pdf}
+  \caption[neutral events in visible mode]{Distribution of selected signal-like events in the $\ehcalplane$ plane for 2017 and 2018 data. Neutral events are shown as hollow (2017) and full (2018) triangles. The two shadowed bands represent the signal box region for the two different runs. A single signal-like event detected during the 2017 run not falling into the signal region is shown with a red triangle.}
+  \label{fig:w-e-vis}
+\end{figure}
+
+Possible background 
+
+\subsubsection{Muonic background}
+\label{ch3:sec:bkg:vis:muon}
+
+Background coming from $\mu^-$ primaries is very suppressed for the visible mode, and is in dominated by the probability of punch-through $\mu^-$ that leaves most of its energy inside the ECAL. This is similar to a $\pi^-$ punch-through, with the difference that the probability of it happening is lower due to both beam suppression and the absence of strong interaction for this particle. The background can be conservatively estimated to be $<10^{-14}$.
+
+\subsubsection{Electronic background}
+\label{ch3:sec:bkg:vis:elec}
+
+The main contribution of the background from $e^-$ primary is the punch-through of high-energetic $\gamma$ that converts on the last tile of the WCAL or some material downstream and produce an $\ee$ pair. Since this background depends on large longitudinal fluctuation of the em-shower, it is hard to predicted using MC-simulations. To estimate such contribution for $\sim10^{11}$ EOTs a data-driven method is used. A sample of 3$\cdot 10^9$ EOT was considered, roughly corresponding to $\sim$10\% of the data collected in 2018. Events in the signal region with $E_{ECAL} < 105$ GeV were selected with the requirement of at least two hits in each GEM module. Only one event with such property was found. Assuming a suppression due to the angle and minimal vertex requirement of $10^{-3}$ or $S4$ selection criteria this would push our background down conservatively to a level $<10^{-3}$. The analysis of the full 2018 data is compatible with this estimate: a total of three events were found with 2 two hits in the GEM modules. For none of these events it was possible to reconstruct a physical vertex, suggesting that these particles experienced large multiple-scattering inside the WCAL before reaching the GEMs.
+
+
+
+\begin{table}[bth!]
+  \centering
+  \caption[Visible mode background]{Expected background for 5.5$\times$ $10^{10}$ EOT collected in 2017 \cite{Banerjee:2018vgk} and the 3.3$\times$ $10^{10}$ EOT collected in 2018 \cite{Banerjee:2019hmi}. The third column shows background for 2018 including the GEM trackers in the analysis.}
+  \begin{tabular}{lrrr}
+    \hline \hline
+    Background source                           & $n_b$ (2017)      &  $n_b$ (2018)   & $n_b$ (2018, new analysis)\\
+    \hline
+    $\pi^-$ punch-through                        & 0.0015$\pm$0.0008 &  0.0007$\pm$0.0004      \\    
+    $\ks \rightarrow \pi^0 \pi^0$                     & 0.06$\pm$0.034    & 0.005$\pm$0.003 &     0.001$<$\\
+    $e^-$/hadron nuclear interaction  & 0.01$\pm$0.004    & 0.01$\pm$0.004  & \\    
+    $\mu^-$ punch-through                        & $<0.001$ & $<0.001$ & $<0.001$       \\            
+    $\pi^-$,$K^- \rightarrow e\nu$ $K_{4e}$              & $<$0.001 & $<0.001$ & $<0.001$\\
+    $eZ \rightarrow e Z \mu^+\mu^-;\mu^{\pm}\rightarrow e^{\pm}\nu\bar{\nu}$ & $<$0.001 & $<0.001$ & $<0.001$\\
+    punch-through $\gamma$ & $<$0.001 & $<$0.0005 & $<$0.001 \\
+    \hline
+    Total (conservatively)                      & 0.07 $\pm$ 0.035   & 0.006 $\pm$ 0.003  & 0.006 $\pm$ 0.003\\
+    \hline \hline                       
+  \end{tabular}
+  \label{tab:vis-bkg}
+\end{table}
+
+
+
 \subsection{Heavy charged particle rejection using synchrotron radiation}
 \label{ch3:sec:bkg-srd}
+
+The rejection of heavy charged particle is one of the main tool to reject the contamination of $\pi^-$,$K^-$ and $\mu^-$ present in the beam. The working principle of this method is simple in its approach. Particle traveling through a magnetic field will emitted synchrotron radiation. With minimal assumptions, the total power after a full cycle can be calculated is the useful formula :
+
+\begin{equation}
+  \label{eq:srd-power}
+  P = \frac{q^2 c}{6 \pi R^2}\frac{E^4}{m^4}
+\end{equation}
+
+Here R is the bending radius experienced from the particle when inside a magnetic field B perpendicular to its velocity. From this equation, we see that the total power scales to $P\sim E^4/m^4$. This both means that the technique is suitable for high-energy particle, as the signal will be boosted, and is useful to separate particles with large differences in the mass spectrum. The difference in mass between the electron and all other particles is so large in fact that effectively no radiation is emitted at the energy of the H4 beam line. 
 
 Simulation of the expected SR signal was performed with the Geant 4 package\cite{ALLISON2016186,1610988,AGOSTINELLI2003250}.
 The geometry of the NA64 experiment was coded in Geant 4, including the 200 $\mu$m mylar vacuum windows, the detailed composition of the trackers, scintillators and the residual gas was set at a level of $10^{-3}$ mBar as in the measurements. Saturation of BGO was taken into account using Birks' law with the constants taken from \cite{AVDEICHIKOV2002251}.
 
-The expected SR spectra for pions and electrons with energies of 50 GeV and 100 GeV are shown in Fig. \ref{fig:SRspectrum}. The plot shows the expected dependence on the incoming electron energy in the emission spectra for the realistic experimental conditions.
-Moreover, the comparison between the SR spectra of pions and electrons illustrates clearly the principle of this technique that allows to discriminate between them by requiring an energy threshold in the synchrotron detector. 
-For pions, one can see that the probability of detecting an event with energy above 1 MeV (the threshold in our detector) is about $\sim 10^{-3}-10^{-4}$.
-These SR-like signals originate from the interactions of the incoming pions with material which they ionise as predicted by Eq. \ref{eqn:knock-on}.
+The expected SR spectra for pions and electrons with energies of 50 GeV and 100 GeV are shown in Fig. \ref{fig:SRspectrum}. The plot shows the expected dependence on the incoming electron energy in the emission spectra for the realistic experimental conditions. Moreover, the comparison between the SR spectra of pions and electrons illustrates clearly the principle of this technique that allows to discriminate between them by requiring an energy threshold in the synchrotron detector.  For pions, one can see that the probability of detecting an event with energy above 1 MeV is about $\sim 10^{-3}-10^{-4}$.
+These SR-like signals originate from the interactions of the incoming pions with materials placed along the beamline. Although in first approximation the energy transfer due to ionization is in the order of few \si{\kilo\electronvolt}, rare high energy transfer is also possible. The distribution of such secondary electrons with
+kinetic energy $T\gg I$, where $I$ is the mean excitation energy of the
+atom/molecule, for a particle with velocity $\beta=v/c$ and charge $z$
+passing through a material with atomic number $Z$, mass number $A$ and
+thickness $dx$ is described by \cite{review-particle-physics}:
+\begin{equation}
+\frac{d^2N}{dTdx} = \frac{1}{2}K z^2 \frac{Z}{A}
+\frac{1}{\beta^2}\frac{F(T)}{T^2}
+\label{eqn:knock-on}
+\end{equation}
+The constant $K$ is defined as $K=4\pi N_A r_e^2 m_e c^2$ where N$_A$ is
+the Avogadro's number, $r_e$ is the classical electron radius and $m_e$
+the electron mass.
+$F(T)$ is a spin-dependent factor, which in our case for $T \ll W_{max}$
+is very close to unity. W$_{max}$ is the maximal energy transfer in a single collision to the
+electron:
+\begin{equation}
+W_{max} = \frac{2m_e c^2 \beta^2 \gamma^2}{1+ 2\gamma m_e/M+(m_e/M)^2}
+\end{equation}
+For a $\pi^-$ at 100 GeV, $W_{max}$ is roughly 1 GeV which
+covers completely the energy range where synchrotron radiation is
+emitted. Eq.\ref{eqn:knock-on} is valid in the range $I\ll T \leq W_{max}$.
  \par 
 Furthermore, Geant 4 reproduces the critical energy $E_c$ which divides the spectrum into two parts of equal power is:
 \begin{equation}
@@ -362,7 +447,7 @@ The SRD geometrical acceptance is about one third,  thus one can estimate that t
 \label{fig:SRspectrum}
 \end{figure}
 
-The SRD detector was tested during the NA64 test beam run in July 2016. The two BGO rows are parallel to the primary beam direction as shown in Fig.\ref{fig:newgeo}. The dipole magnets installed in series produce a total integrated magnetic field of 7 T$\cdot$m \cite{Banerjee:2016tad} resulting in a nominal displacement for the incoming electrons at the SRD/ECAL positions of 31/34 cm from the undeflected beam axis. The SRD was placed between the undeflected and the deflected beam axis at a distance of approximately 9 cm from both (Fig.\ref{fig:newgeo}). This separation minimises the possibility for Bremsstrahlung photons and neutral particles produced by interactions of the beam particle with materials upstream (vacuum windows, collimators, trackers...) and for particles in the beam halo (most of the beam used in the experiment was constrained in a circular region with diameter 2 cm) to hit the SRD. In fact, such interactions result in the saturation of the SRD with a significant loss of efficiency due to the long decay time of the BGOs.
+The SRD detector was tested during the NA64 test beam run in July 2016. The two BGO rows are parallel to the primary beam direction as shown in Fig.\ref{fig:newgeo}. The dipole magnets installed in series produce a total integrated magnetic field of 7 T$\cdot$m \cite{Banerjee:2016tad} resulting in a nominal displacement for the incoming electrons at the SRD/ECAL positions of 31/34 cm from the undeflected beam axis. The SRD was placed between the undeflected and the deflected beam axis at a distance of approximately 9 cm from both (Fig.\ref{fig:newgeo}). This separation minimises the possibility for Bremsstrahlung photons and neutral particles produced by interactions of the beam particle with materials upstream and for particles in the beam halo to hit the SRD. In fact, such interactions result in the saturation of the SRD with a significant loss of efficiency due to the long decay time of the BGOs.
 
 %The expected Landau distribution of energy deposits was fit to the data to find the mean peak position to extract the calibration constant. 
 
@@ -378,7 +463,7 @@ With the requirement of detecting in both SRD BGOs an energy deposition above a 
 \label{fig:newgeo}
 \end{figure}
 
-Data with a 100 GeV $\pi^-$ beam were taken to have a direct measurement of the suppression factor achievable through synchrotron radiation measurements. The beam intensity was 5.3$\times 10^4$ particles per spill. The trigger was given by the coincidence of the three plastic scintillator counters (S1, S2 and S3 shown in Fig.\ref{fig:setup-invis-2018}). The additional requirement of an energy deposition below 60 GeV in the ECAL was applied in order to select an almost pure $\pi^-$ sample of $\sim 10^5$ collected events. The probability for electrons to punch through the 40 radiation lengths of the ECAL was estimated to be at a level of $10^{-12}$ \cite{Banerjee:2016tad}. 
+Data with a 100 GeV $\pi^-$ beam were taken to have a direct measurement of the suppression factor achievable through synchrotron radiation measurements. The beam intensity was 5.3$\times 10^4$ particles per spill. The trigger was given by the coincidence of the three plastic scintillator counters (S1, S2 and S3 shown in Fig.\ref{fig:setup-invis-2018}). The additional requirement of an energy deposition below 60 GeV in the ECAL was applied in order to completely reject electrons from the $\pi^-$ sample of $\sim 10^5$ collected events.
 
 For the 100 GeV electron beam run, a total of 220 spills were recorded with an intensity of 3.4$\times 10^5$/spill. 
 The same trigger used in the pion run was used for the electron data.
@@ -411,7 +496,7 @@ The efficiency for the electrons and the suppression factor for the pions are pl
 \end{enumerate}
 One can see that applying the criterion 2) the efficiency only decreases slightly compared to 1), while the suppression factor for pions is dramatically increased (by two orders of magnitude) with the requirement of having the two BGOs in coincidence.
 This can be understood because the SR-like signal generated from secondary electron will leave a signal only in one of the two BGOs while the SR from electrons is spread out uniformly as explained above. 
-This is also nicely evidenced by Tab. \ref{tab:hits} where the fraction of events with different hit multiplicity in the SRD BGO for both pion and electron runs are reported.
+This is also underlined by Tab. \ref{tab:hits} where the fraction of events with different hit multiplicity in the SRD BGO for both pion and electron runs are reported.
 
 \begin{table}[hbt!]
 \begin{center}
@@ -430,25 +515,7 @@ Electrons & $2.4\times10^{-1}$  & $2.60$ & $97.37$ \\
 \subsection{Hadron rejection using electromagnetic shower profile}
 \label{ch3:sec:bkg-ecal-profile}
 
-The critical task of rejecting the hadron contamination in the H4 beam
-is currently performed by the SRD (synchrotron radiation detector) and
-the detectors placed behind the ECAL (namely the VETO and the HCAL
-modules). In the following note we present a method to exploit the
-information from the energy deposition in the ECAL cells to separate
-events that produce an electromagnetic shower from the one inducing an
-hadronic one to further increase the purity of our sample.
-\\
-\\
-The analysis is done by following the strategy proposed by Alexandre
-Toropin of using the extrapolated line obtained from the last two
-MicroMegas planes to extract the hit point of the particle on the
-ECAL. A shower profile database can be built by correlating the hit
-position (x,y) on the ECAL with the fraction of energy deposited in
-each ECAL cell. From this database a predicted value of energy
-deposition in each ECAL cell can be extracted and compared to the one
-of each single event. The compatibility between the predicted profile
-and the measured one can be tested using the
-$\chi^2$-distribution. Namely the following equation is used:
+On the top of rejection using SRD, the transversal segmentation of the ECAL offers another tools for hadron rejection. The idea is to discriminate between a classical em-shower profile to a more complex hadronic shower using a $\chi^2$-test. A shower profile database can be built by correlating the hit position (x,y) on the ECAL with the fraction of energy deposited in each ECAL cell. From this database a predicted value of energy deposited in each ECAL cell can be extracted and compared to the one of the single event. The compatibility between the predicted profile and the measured one can be tested using the $\chi^2$-distribution:
 
 \begin{equation}
   \chi^2 = \sum^{9,36}_i \left(\frac{E_{pred}^i(x_{hit},y_{hit})-E_{mes}^i}{\sigma^{i}_{pred}(x_{hit},y_{hit})}\right)^2
@@ -471,17 +538,6 @@ Two different summation indexes are used for the two different cases
 where only the cells surrounding the central one hit by the beam are
 used for the test (total of 9 cells) and the case where all the cells
 are used (total of 36, see Fig.\ref{fig:ecal_example}).
-\\
-\\
-As correctly stated by Alexandre Toropin, assuming axial symmetry for
-the shower can reduce the redundancy of the profiles by considering
-only the region ($0 \leq x_{hit} \leq d/2$ $\bigwedge$
-$0 \leq y_{hit} \leq d/2$) where $d$ is the dimension of one ECAL
-cell. Since however the time required to create the database and
-perform the analysis does not change significantly under this
-assumptions we choose to record the behaviour of the electromagnetic
-shower in the whole cell in order to reduce possible asymmetries
-produced by the inhomogeneities of the ECAL.
 
 \begin{figure}[h!]
   \begin{center}
@@ -506,12 +562,8 @@ energy deposited in the cell when the incoming particle hits the
 portion of the ECAL plane described by that entry. In order to also
 account for the deviation that such shower can have as function of the
 hitting point one would need a second matrix to encode such
-information. To build such database the root function was used
-TProfile2D, this object has the advantage to be highly flexible and
-allows compact codes due to its integrated function. The complete
-documentation of this object can be found in Ref.\cite{root-tprofile}.
-\\
-\\
+information. To build such database the root class TProfile2D was used \cite{root-tprofile}.
+
 The main parameters that play a role in the construction of the shower
 profiles are the dimensions of the area that is covered by the
 TProfile2D, and the dimensions $d_x \times d_y$ that each bin has,
@@ -526,7 +578,7 @@ to set $d_x \neq d_y$ the precise dimensions of the bin must be a
 compromise between having a large bin that allows good statistic and a
 small bin that allows enough precision. The large sample of electrons
 collected in NA64 typically allows good statistic for each bin even
-when their dimension is below 1 mm, however defining a bin smaller
+when their dimension is below 1 mm. However, defining a bin smaller
 than the accuracy that we are able to achieve in the extrapolation of
 the MicroMegas line to the ECAL should be avoided. This error can be
 derived analytically to be:
@@ -543,12 +595,11 @@ derived analytically to be:
 where:
 \begin{description}
 \item[$\sigma_{ECALxy}$]: is the error of the hit position
-  extrapolated to the ECAL in the xy-plane
+  extrapolated to the ECAL in the xy-plane.
 \item[$\sigma_{mm}$]: is the resolution of the hit position in each
-  MicroMegas
-\item[$Z_{MMi}$]: is the position in the Z-axis of the MicroMegas
-  Nr. i
-\item[$Z_{ECAL}$]: is the position in the Z-axis of the ECAL plane
+  MicroMegas.
+\item[$Z_{MM}$]: is the position in the Z-axis of the MicroMegas.
+\item[$Z_{ECAL}$]: is the position in the Z-axis of the ECAL plane.
 \end{description}
 
 
@@ -558,68 +609,49 @@ misinformation in the exact position of the detectors. While the exact
 entrance angle of the particle was checked to have small effects on
 $\sigma_{ECALxy}$, assuming some error on the exact position of the
 detectors increases the error by a factor 2-4 for values around 1-2
-cm. The work presented in this note was performed using a TProfile2D
+cm. The work presented here was performed using a TProfile2D
 with bin size of 0.34 mm which accounts for such uncertainties.
-\\
-\\
-Only calibration runs without physical trigger were used to produce
-the profiles in order to have a sample of electrons, cuts were applied
-to
-reject the contamination caused by the hadrons in the beam and out-of-time energy events. \\
+
+Electron calibration runs were used to produce the profiles in order to have a sample of electrons, cuts were applied to reject the contamination caused by the hadrons in the beam and out-of-time energy events. \\
 The following criteria were applied for the profiles tested in this
 note:
 
 \begin{itemize}
-\item single cluster in each MicroMegas
-\item energy larger than 1 MeV and smaller than 70 MeV in each SRD
+\item Single cluster in each MicroMegas
+\item Energy larger than 1 MeV and smaller than 70 MeV in each SRD
   plane
-\item coincidence of $\sim$1 ns between timing in cell (3,3) of ECAL
-  and mastertime
-\item pedestal fluctuation less than 10 ADC in cell (3,3) and each of
-  the surrounding cells
+\item Coincidence of $\sim$1 ns between timing in cell (3,3) of ECAL
+  and $S_0$ time.
+\item Pedestal fluctuation less than 10 ADC in cell (3,3) and each of
+  the surrounding cells.
 \end{itemize}
 
-The code used to produce the profiles
-has been integrated in the official reconstruction library of NA64 and can
-be easily customized to produce profiles with different cuts.
-\\
-\\
 The production of the database is done for the events
 selected by computing the hit point of the incoming particle in cell
 3x3 and updating the value of the corresponding bin in each of the 36
 TProfile2D representing each cell. The specific value filled is the
 percentage of energy deposited in the cell, i.e. $100 \times E^i/E^{tot}$.
-The error over this value is automatically computed by the TProfile2D.
-\subsubsection{$\chi^2$ computation}
-\label{ch3:sec:chi2-comp}
 
-The algorithm for the $\chi^2$ computation works as follows:
+After the profile are constructed, they can be used to calculated the compatibility of a single event with an em-shower. The algorithm for the $\chi^2$ computation works as follows:
 \begin{enumerate}
 \item The values of the xy coordinates of the hitting point of the
   particle are computed by extrapolating to the ECAL position the line
   passing through the hit point of the last two MicroMegas planes.
-\item The predicted values $E_{pred}^i$,$\sigma^{i}_{pred}$ are read from the TProfile2D in
-  the corresponding bin
-\item The values $E_{mes}^i$ are computed normalizing the energy $E^i$
-  of each cell to the total energy measured in the ECAL.
-\item The value of $\chi^2$ is calculated using Eq.\ref{eqn:chi} and is
-  normalized to the number of cells considered.
+\item The predicted values $E_{pred}^i$,$\sigma^{i}_{pred}$ are read from the database in the corresponding bin
+\item The values $E_{mes}^i$ are computed normalizing the energy $E^i$ of each cell to the total energy measured in the ECAL.
+\item The value of $\chi^2$ is calculated using Eq.\ref{eqn:chi} and is normalized to the number of cells considered.
 \end{enumerate}
 
 \subsubsection{Results}
 \label{ch3:sec:chi2-result}
 
-A database was produced using the method described in
-Sec.\ref{ch3:sec:make_profile} and using the calibration runs 2363, 2182,
-2410, 2406, 2438. A complete description of such runs can be found in
-\cite{na64-runs}. To test the rejection power and the efficiency of the
-method the algorithm described above was used for 3 type of runs:
-\begin{enumerate}
-\item the calibration run 2363 to test the efficiency of the method
-\item the hadron run 2204 to test the suppression factor of the method
-\item the physical run 2441 to test the effect of the cut on the ECAL
-  vs HCAL plot on a run with physical trigger at high intensity.
-\end{enumerate}
+To test the rejection power and the efficiency of the
+method the algorithm described above was used for 3 type of samples\footnote{The database was generated using the electron  calibration runs 2363, 2182, 2410, 2406, 2438. A complete description of such runs can be found in \cite{na64-runs}. }:
+\begin{itemize}
+\item $\simeq$1.2$\times 10^{6}$ events acquired with an electron calibration run\footnote{run 2363}.
+\item $\simeq$5$\times 10^{5}$ events acquired with an hadron calibration run\footnote{run 2204}.
+\item $\simeq$8$\times 10^{5}$ events acquired using physical trigger at maximum H4 beam intensity.\footnote{run 2241, corresponding EOT before trigger suppression $\simeq 4 \times 10^{8}$}
+\end{itemize}
 
 The comparison of the normalized $\chi^2$-distribution between
 electron calibration run and hadron run using information from all 36
@@ -630,12 +662,11 @@ electrons.  The rejection and efficiency of a cut
 $\chi^2 < \chi^2_{cut}$ are shown in detail in Fig.\ref{fig:eff}. For
 a benchmark $\chi^2$-cut of 2 the efficiency calculated in run 2363
 was $\sim 0.94$ with a rejection factor of $1.2\times 10^{-3}$
-calculated from the hadron run 2204. These values as well as the ones
+extracted from the hadron run 2204. These values as well as the ones
 presented in Fig.\ref{fig:eff} are computed by looking at the total
 number of events passing the cut and do not account for the impurities
 in the beam.
-\\
-\\
+
 Using information coming only from the 9 central
 cells (Fig.\ref{fig:ecal_example}) appears to shift the distribution
 to the left and reduce its spread ( Fig.\ref{fig:chi}) due to the
@@ -651,8 +682,7 @@ $3.1\times 10^{-3}$.
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/chi_comp.pdf}
   \end{center}
-  \caption[comparison between $\chi^2$ distribution, electron and hadron calibration run]{comparison between $\chi^2$ distribution generated from the
-    calibration run 2363 and the hadron run 2204.}
+  \caption[comparison between $\chi^2$ distribution, electron and hadron calibration run]{comparison between $\chi^2$ distribution generated from an electron calibration run (black) and hadron calibration run (red).}
   \label{fig:chi2}
 \end{figure}
 
@@ -660,9 +690,7 @@ $3.1\times 10^{-3}$.
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/plot_comp_cells.png}
   \end{center}
-  \caption[comparison between $\chi^2$ distribution for different ECAL configurations]{comparison between $\chi^2$ distribution generated from run
-    2363 considering only central cells (black) and considering all 36
-    cells (red).}
+  \caption[comparison between $\chi^2$ distribution for different ECAL configurations]{comparison between $\chi^2$ distribution generated from an electron calibration run considering only central cells (black) and considering all 36 cells (red).}
   \label{fig:chi}
 \end{figure}
 
@@ -671,8 +699,7 @@ $3.1\times 10^{-3}$.
     \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\pdirthree/eff.pdf}
   \end{center}
   \caption[fraction of events passing the $\chi^2$ cut]{fraction of events passing the cut $\chi^2 < \chi^2_{cut}$
-    for the calibration run 2363 (left plot) and for the hadron run
-    2204 (right plot).}
+    for the electron calibration run (left) and for the hadron calibration run (right).}
   \label{fig:eff}
 \end{figure}
 
@@ -682,9 +709,9 @@ Different ECAL vs HCAL plots were produced to study the effect of a
 $\chi^2$-cut for the run mentioned above. The one produced with
 benchmark cut of $\chi^2 < 2$ are shown in
 Fig.\ref{fig:ehcal_test}. The cut is shown to clean the plot in the
-way expected from the hadronic activity in all selected runs. Also it
-can be seen from the run 2441 that the events involving the di-muon
-transition $e^- \to \mu^+\mu^-$ survive the cut for energies larger
+way expected from the hadronic activity in all selected runs. It can also
+can be seen from the run recorded with physical trigger that events involving the dimuon
+production $e^- \to \mu^+\mu^-$ survive the cut for energies larger
 than 20 GeV.  This is expected since these events will still involve
 an electromagnetic shower truncated in the moment the transition
 happens. Since a possible signal from a Dark Photon would behave
@@ -696,8 +723,7 @@ resolution in each cell and the efficiency of the cut will drop
 substantially.  The efficiency for low energy improves if only central
 cells are selected for the $\chi^2$ calculation since this will reduce
 the fluctuation of the single cells not involved in the shower. This
-effect is shown in Fig.\ref{fig:ehcal_comp} for the physical run 2441
-for a cut of 2 on $\chi^2$.
+effect is shown in Fig.\ref{fig:ehcal_comp} for a cut of 2 on $\chi^2$.
 \\
 \\
 For low energy particles it is clear that all the shower will be
@@ -720,8 +746,7 @@ estimate.
   \end{center}
   \caption[ECAL vs HCAL energy deposit after a cut $\chi^2$]{ECAL vs HCAL energy deposit for the total sample (left
     column) and after a cut $\chi^2<2$ (right column) for the
-    calibration run 2363 (top), the hadron 2204 run (middle) and the run
-    2441 with physical trigger(bottom).}
+    electron calibration run (top), the hadron calibration run (middle) and the run recorded with physical trigger(bottom).}
   \label{fig:ehcal_test}
 \end{figure}
 \clearpage
@@ -730,63 +755,25 @@ estimate.
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.6\textwidth]{\pdirthree/ehcal_2441_comp.pdf}
   \end{center}
-  \caption[ECAL vs HCAL energy deposit after a cut $\chi^2$ for different ECAL configurations]{ECAL vs HCAL after a cut $\chi^2<2$ in the physical run
-    2441 with the $\chi^2$ calculated with the 9 central cells (left
-    plot) and for all cells (right plot).}
+  \caption[ECAL vs HCAL energy deposit after a cut $\chi^2$ for different ECAL configurations]{ECAL vs HCAL after a cut $\chi^2<2$ is applied with the $\chi^2$ calculated with the 9 central cells (left) and for all cells (right).}
   \label{fig:ehcal_comp}
 \end{figure}
 
-
+\iffalse
 
 \section{Comparison with MC}
 \label{ch3:sec:mc}
 The same profiles described in the section above can be produced using
-a 100 GeV electron simulation of the NA64 setup\cite{na64-simulation}. In
-this section we will present some preliminary results for the
-$\chi^2$-distribution produced using these profiles instead of the one
-produced using the calibration runs.
-\\
-\\
-The database produced using the MC simulation was applied both to the
-same 100 GeV $e^-$ electron simulation, a 100 GeV $\pi^-$ simulation
-and for the runs 2363 and 2204.  The first plot in
-Fig.\ref{fig:chi_mc} shows that using the MC-database on the
-simulation itself produces $\chi^{2}$-distributions consistent with
-the one obtained in the previous section. However when the MC-database
-is applied directly to the data an important shift is observed,
-showing some incosistency between the two profiles, possibly caused by
-the imperfect treatment of the pedestal and energy resolution and some
-small mis-calibration of the cells.
-
-
-\begin{figure}[h!]
-  \begin{center}
-    \includegraphics[width=0.95\textwidth,height=0.8\textwidth]{\pdirthree/chi_comp_mc.pdf}
-  \end{center}
-  \caption{$\chi^2$-distribution using shower profile database from a
-    100 GeV electron MC-simulation over MC-simulation events (black)
-    and over the electron run 2363 (red). The $\chi^2$-distribution
-    was computed over all 36 ECAL cells.}
-  \label{fig:chi_mc}
-\end{figure}
-\clearpage
-
-
-More work is necessary to reach a good agreement between the
-$\chi^{2}$-distributions, however separation between electrons and
-hadrons is still achievable using the MC-database. 
+a 100 GeV electron simulation of the NA64 setup\cite{na64-simulation} and be tested using simulation of $\pi^-$.
 
 We tested qualitatively the effect of a $\chi^{2}$-cut over the
 ECAL vs HCAL plots produced for both the MC simulation
 and the test runs considered in the previous section. For the
 MC-simulation we used the same benchmark cut of the previous section
-$\chi^2_{cut}$=2 , while for the runs 2363 and 2204 a benchmark cut of
+$\chi^2_{cut}$=2 , while for the data a benchmark cut of
 $\chi^2_{cut}$=40 was used to take into account the shift in the
-distribution observed. An additional cut was applied to the data to
-remove the non-Gaussian tail of the beam since they were not covered
-by the simulation
-database, hence the statistic considered is a factor ~0.8 smaller.\\
-\\
+distribution observed.
+
 The bottom plot of Fig.\ref{fig:ehcal_elec} shows that the
 contamination of hadron is removed when MC-database is used, so
 the hadron shower still produces a significantly larger $\chi^{2}$
@@ -804,6 +791,8 @@ GeV (as could also be observed using a database built from calibration run like 
 The main difference between the two plots concerns some events with very low energy deposited in the ECAL that are accepted in the data but not in the simulation. This would suggest that the ECAL cells are subject to some fluctuation that at low energy can sometime mimic the correct electromagnetic-shower signature. As stated in the previous section however for such low energy events the usage of the shower-profile algorithm should be avoided since all the shower will be completely contained in the cell 3x3.\\
 % Finally the MC-database was applied to the physical run 2441 always
 % with a benchmark cut $\chi^2_{cut}$=40.
+
+\fi
 
 
 \begin{figure}[h!]
