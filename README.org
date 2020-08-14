@@ -66,19 +66,19 @@
      + Possible candidate for Dark Matter
      + Thermal dark matter
      + Dark Matter in colliders
-** TODO  [1/4] Discussion with Paolo <2020-04-06 Mon>
+** TODO  [3/4] Discussion with Paolo <2020-04-06 Mon>
    - [X] Title to be changed to something more catchy and related to X17
-   - [ ] Add SRD paper, take most of the thing from the Master thesis plus some plot from the paper
-   - [ ] Add article for 2021 visible mode setup
+   - [X] Add SRD paper, take most of the thing from the Master thesis plus some plot from the paper
+   - [X] Add article for 2021 visible mode setup
    - [ ] Add review about Beryllium Anomaly
-** TODO [1/4] Discussion with Paolo <2020-06-11 Thu>
+** TODO [2/3] Discussion with Paolo <2020-06-11 Thu>
    - [-] some changes proposed by Pol
      - [X] Change a couple of position of the section
      - [ ] Think about how to include ALPS results, just a mention in the Invisible mode results?
      - [ ] Think if to extend the X17 chapter?
-     - [ ] Start inserting old notes in appropriate places
+     - [X] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
-   - [ ] See if Dissertori can be the external referee
+   - [X] See if Dissertori can be the external referee
 * TODO [11%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
@@ -108,6 +108,8 @@
 *** TODO Check background
     - [ ] estimate of mu-->enunu decay, currentyl I estimated 1e-5 for decay prob and 1e-7 for beam composition and SRD, more?
     - [ ] Estimate for momentum reconstruction, 1e-12 cited in Dipa thesis is not too clear, and also not sufficient at out current levels.
+** <2020-08-14 Fri>
+   - Added invisible mode cut list [[./inv-cuts.org][here]]
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
