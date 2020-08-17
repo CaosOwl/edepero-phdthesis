@@ -79,7 +79,7 @@
      - [X] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [X] See if Dissertori can be the external referee
-* TODO [11%]Diary
+* TODO [10%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
@@ -110,6 +110,9 @@
     - [ ] Estimate for momentum reconstruction, 1e-12 cited in Dipa thesis is not too clear, and also not sufficient at out current levels.
 ** <2020-08-14 Fri>
    - Added invisible mode cut list [[./inv-cuts.org][here]]
+** TODO [#C] <2020-08-17 Mon>
+   - starting with the exclusion plot, are new one needed?
+   - Permission obtained from *Peter Degen* to use part of his thesis [[https://ethzgrouprubbia.slack.com/archives/CPCQXU5SP/p1597676249001700]]
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
@@ -253,6 +256,26 @@ beam [61] and π 0 → Xγ decays [62].
    - A couple of outside articles critizing the anomaly
      + https://www.forbes.com/sites/startswithabang/2019/11/26/this-is-why-the-x17-particle-and-a-new-fifth-force-probably-dont-exist/#7c58618f2e82
      + https://www.quantamagazine.org/new-boson-claim-faces-scrutiny-20160607/
+* Code repository
+** Simulation
+   All relevant code for the simulation can be found in https://gitlab.cern.ch/P348/na64-tools
+   Relevant branches are:
+   - [[https://gitlab.cern.ch/P348/na64-tools/-/tree/eth-visiblemode-2021][eth-visiblemode-2021]] used for feasibility studies for 2021 visible mode setup
+   - [[https://gitlab.cern.ch/P348/na64-tools/-/tree/eth-semivisible][eth-semivisible]] all relevant code for the semivisible mode analysis developed together with *Cesare Cazzaniga*
+   - [[https://gitlab.cern.ch/P348/na64-tools/-/tree/eth-muonmode-2021][eth-muonmode-2021]] used for feasbility studies for the muon setup, developed mostly by *Laura Molina Bueno* and *Henri Sieber*
+** Reconstruction 
+   The relevant software to reconstruct the data in the standard NA64 format can be found here: https://gitlab.cern.ch/P348/p348-daq
+   Relevant branches to this project includes:
+   - [[https://gitlab.cern.ch/P348/p348-daq/-/tree/eth-reco][eth-reco]] to reconstruct the data for visible/invisible mode
+   - [[https://gitlab.cern.ch/P348/p348-daq/-/tree/eth-reco-muonmode][eth-reco-muonmode]] to reconstruct data for the muon mode to be used in 2021, mostly used for feasibility studies
+   - [[https://gitlab.cern.ch/P348/p348-daq/-/tree/eth-reco-semivisible][eth-reco-semivisible]] create for *Cesare Cazzaniga* to save all reconstruction code for the semivisible mode. Used mostly for feasibility studies
+   - [[https://gitlab.cern.ch/P348/p348-daq/-/tree/eth-straw][eth-straw]] Create for *Peter Degen* to reconstruct straw hits.
+** Analysis
+   Tools used for the analysis on the reconstructed data can be found in my own ETH repository at 
+** Plotting the exclusion plot
+   data and code for the exclusion plot mostly used some gnu plot provided in the form of some text file.
+   The git repository with the relevant information can be retrieved here: [[https://gitlab.cern.ch/P348/NA64-exclusion-plot]]
+   To compute the exclusion limit in the full frequentist approach a sample can be found here: https://gitlab.cern.ch/P348/na64limits
 * Tools
 ** Histfitter
    - A useful tools for histogram fitting of complicate models
