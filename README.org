@@ -113,6 +113,14 @@
 ** TODO [#C] <2020-08-17 Mon>
    - starting with the exclusion plot, are new one needed?
    - Permission obtained from *Peter Degen* to use part of his thesis [[https://ethzgrouprubbia.slack.com/archives/CPCQXU5SP/p1597676249001700]]
+* TODO Additional tasks
+** TODO [/] Substitution to a common standard
+   - [ ] Tab. --> Table
+   - [ ] chapter
+   - [ ] Fig.
+   - [ ] Dark Matter
+** TODO Standard for tables
+   - currently <2020-08-18 Tue> no vertical line, double line if table shows a result, to generalize
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
