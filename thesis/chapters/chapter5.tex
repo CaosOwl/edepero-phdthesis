@@ -4,8 +4,22 @@
 \newcommand{\pdirfive}{chapters/plots/chapter5}
 
 \chapter{Future prospects} % Main chapter title
-\label{chapter5} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\label{chapter5} % For referencing the chapter elsewhere, use \ref{Chapter1}
 
+The results obtained by the NA64 experiment were already significant to probe a significant fraction of the parameter space of the $\umodel$ model, and as shown in the previous chapter many other interesting models, including ALPS, light scalar, and protophobic vector boson are within the reach of this experiment. With the current data, it is already possible to exclude that the dark photon is a viable explanation of the muon anomalous magnetic moment $\ammu$. Most of the parameter space justifying the protophobic vector boson $\DMX$ theorized to justify the anomaly observed in the nuclear spectrum of $^8$Be and $^4$He was also covered by the data collected in the visible mode.
+
+In this chapter, we will explore the future prospects of the NA64 experiment, by outlining the main goals remained for the collaboration and by detailing the upgrades that will be performed on the setups. We can summarize the main goals remaining for the NA64 experiment in three items:
+
+\begin{itemize}
+\item Cover the region of parameters in the $\dmyplane$ plane most compatible with the relic abundance assuming a freeze-out mechanism taking place in the early universe.
+\item Cover the region of parameter space that justify the $\DM$-anomaly with the existence of a protophobic gauge boson.  
+\item Confirm the results of the invisible mode using a $\mu$-beam to probe again the parameter space favoring the currently measured $\ammu$ value.
+\end{itemize}
+
+To improve our results, it is straight-forward that more data needs to be collected. For the case of the invisible mode, where we are mostly limited by the cross-section of production, improvement in the setup are marginal to increase our signal yield, and we are mostly limited by the number of EOT accumulated. A value of $5 \times 10^{12}$ was estimated to be a feasible goal to explore the remainder of the parameter space illustrated in Fig.\ref{fig:dm-alpha-excl}. The upgrades of the setup need to address the background that will be encountered for such a large number of EOT, especially the dominant background of electron-hadron interaction upstream the ECAL.
+For the case of the visible mode on the other hand, the signal yield is dominated bu detector efficiency. This means that an improved setup can significantly boost the signal yield, letting us access region of parameter space characterized by a large coupling $\epsilon > 1 \times 10^{-3}$ to finally probe completely the $\DMX$ parameter space.
+
+In Sec.\ref{ch5:sec:mm-upgrades}-\ref{ch5:sec:cal-upgrades} we will present the upgrade for Micromegas detectors and the new ECAL that will be used for the NA64 setup. These upgrades will benefit all setups with a decrease of material budget and larger transverse acceptance. In Sec.\ref{ch5:sec:new-invismode-setup}, we will cover the main upgrades for the invisible mode setup, and give a background estimate for the large data collection expected. In Sec.\ref{ch5:sec:new-vismode-setup}, we will present a new setup optimized to cover the remaining region of $\DMX$ parameter space by taking into consideration the lesson learned by performing a tracker analysis on the 2018 data set. The new setup will also be capable of reconstructing the invariant mass of a particle decaying after the dump, which will permit the measurement of the $\DMX$ to be matched with the one already performed in \cite{Krasznahorkay:2015iga,Krasznahorkay:2019lyl}. Finally, in Sec.\ref{ch5:sec:muon-mode-setup}, we will briefly describe a new concept to use an high intensity muon beam to probe a novel region of parameter space.
 %----------------------------------------------------------------------------------------
 
 \section{Micromegas upgrade}
@@ -14,52 +28,103 @@
 \section{Calorimeter upgrade}
 \label{ch5:sec:cal-upgrades}
 
-\section{Improvement to visible mode setup}
-\label{ch5:sec:new-vismode-setup}
+\section{Improvement to the invisible mode setup}
+\label{ch5:sec:new-invismode-setup}
 
-\subsection{WCAL optimization}
-\label{ch5:sec:new-vismode-setup-wcal}
+The next goal for the NA64 setup is to increase the statistics of the data collected from the current $2.8 \times 10^{11}$ EOT to a total of $5 \times 10^{12}$. This amount will make the experiment sensitive to interesting region of parameter space compatible with the relic density observed today in the freeze-our scenario and cover a large  fraction of the parameter space of pseudo-Dirac and Majorana Dark Matter. Fig.\ref{fig:dm-sens-proj}
 
-To design the new calorimeter structure, the figure of merit is the signal efficiency, which is defined mostly by the number of $\DM$ that decay outside the WCAL. This was quantified by a detailed MC-simulation of the setup used to generate the energy spectrum and the decay kinematics of the $\DM$.
+\begin{figure}[bht!]
+  \centering
+  \includegraphics[width=0.45\textwidth]{\pdirfive/tldra-19-2-alpha_0_5.pdf}
+  \includegraphics[width=0.45\textwidth]{\pdirfive/tldra-19-2-alpha_0_1.pdf}
+  \caption[sensitivity projection for invisible mode 2021]{Limits on the $\dmplane$ plane assuming a number of EOT collected of 5$\times 10^{12}$ by extrapolation of the results obtained using 2016-2018 data set. The parameters are the same used for the calculation presented in Fig.\ref{fig:dm-alpha-excl}. The favored parameters to account for the observed relic DM density for the scalar, pseudo-Dirac and Majorana type of light DM are shown as the lowest solid line.}
+  \label{fig:dm-sens-proj}
+\end{figure}
 
-%%% radiation length of tungsten collected at http://pdg.lbl.gov/2014/AtomicNuclearProperties/HTML/tungsten_W.html
-In the design used in previous searches, the WCAL had 34 layers in total, each of them consisting of a converter layer made of 3 mm of tungsten and an active part made of a 2 mm plastic scintillators. This sums to a total of $\sim$30X$_0$. Reducing the dimension of the WCAL would impact the radiation length used to contain the main shower and hence change the background conditions. To avoid this, the new design of the calorimeter was studied under the principle that the optimal radiation length should be approximately 30X$_0$. The three following design were considered:
+Since our signal yield depends exclusively from the cross-section of $\DM$ production, the rate of the signal is expected to be the same. We need to take care of the background expected at this large statistics. We saw in chapter \ref{chapter3} that the dominant contribution comes from electro-nuclear scattering in the beamline before the target. In this section we will try to study them more in detail and estimate their contribution to a larger sample.
+
+In Fig.\ref{fig:enucl-position} we see the frequency of nuclear interaction for different position along the beamline after the particle exit the vacuum pipe as predicted from a dedicated MC-simulation. Micromegas are the leading contribution to this background, as result of their large budget material, which in terms of interaction length is approximately $\lambda_{int} \simeq 1.9 \times 10^{-3}$. It is noticeable however that a factor $\sim 2$ less electronuclear interaction are happening in the first Micromegas of the beamline. This is the results of the smaller material budget of this module, that uses a mylar windows instead of a cooper top to close the gas box. Reduction of the material budget of the rest of the module will be an important improvement to suppress this background, and has been discussed already in Sec.\ref{ch5:sec:mm-upgrades}. To cover this background, we need to increase the transverse coverage of particles. Naively this can be done by increasing the size of the HCAL, but this solution is rather expensive and would require very large HCAL. Instead, a new detector called VHCAL\footnote{Veto Hadronic Calorimeter} is used for the same purpose. This detector posses the same sandwich structure used for both HCAL and ECAL with a hole in the middle without any material to be aligned with the beam axis. This detector posses lateral size of $50\times50$ \si{\centi\meter\squared}, and is placed upstream the ECAL in front of the vacuum tube exist just after the first tracking detectors as shown in Fig.\ref{fig:vhcal}
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirfive/enucl-position.pdf}
+  \caption[electronuclear interaction position]{Z position of electronuclear interactions between the end of the vacuum tube and the start of the first HCAL. A total of 2.5$\times 10^6$ EOT were simulated for this distribution.}
+  \label{fig:enucl-position}
+\end{figure}
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirfive/VHCAL.pdf}
+  \caption[Sketch of VHCAL in invisible mode setup 2021]{Sketch of the VHCAL in the 2021 invisible mode setup. Coverage of large angle particle scattering is shown, together with the equivalent size of the HCAL in this arrangement.}
+  \label{fig:vhcal}
+\end{figure}
+
+To properly account for this background, we follow the procedure described in \cite{na64-neutrals-study,pdegen-thesis}, which is reviewed briefly here.
+
+First, we divide the $\ehcalplane$ in 10 different zones as depicted in Fig.\ref{fig:enucl-bkg-estimation}. The zones divide the distribution of observed event in several tile at different distances from the signal region. All the region labeled with even number are events where the energy is conserved and the R value is closer to the one plotted for region II. In the even within zones labeled with odd number on the other hand, some energy is missing from the initial primary electron. The two most relevant are region 7) and 9), that include a portion of the signal region. These events have an R distribution closer to the one depicted in region III, with a sharp peak at 1. To further classify the events in these two regions, we can construct a new category based on the value of the R distribution. We define $n_i(r)$ as the number of events in the region $i$ with distance $r$ from the center of the HCAL. This definition let us build a classification of event useful for the background:
 
 \begin{itemize}
-\item An initial part of 9 layers using the original layer structure followed by an additional 25 layers of only tungsten.
-\item A calorimeter consisting of 17 layers with layer-structure: 6mm tungsten + 2mm plastic scintillator.
-\item A calorimeter consisting of 12 layers with a different structure: 9mm tungsten + 2mm plastic scintillator.
+\item $n_{5,7}(r=0)$ is the number of events with any energy deposited in the HCAL.
+\item $n_{5,7}(r=r_{cell})$ is the number of events with $R=1$, i.e. no energy is deposited in the central cell of the HCAL.
+\item $n_{5,7}(r=3r_{cell})$ are the event with no energy deposited in the HCAL, where R is not defined.
 \end{itemize}
 
-In all designs, the initial 5 layers forming the pre-shower part are still used for efficient hadron rejection. Despite its longer length, the first design grants a good energy resolution and a good hermeticity. In the second and third case, the calorimeter is more compact but has a worse energy resolution due to the thicker converter. A sketch of the two last designs is shown in Fig.\ref{fig:wcal-design} and compared to the original one used in the previous searches.
+The final goal is to calculate the probability of an incoming electron primary to produce an event that fall in one of these categories. Which means computing:
 
-The third design was chosen to be the most suited for our search. The loss in energy resolution has almost no impact on the signal efficiency. The reason is that the short lifetime of the $\DM$ favors the detection of the ones produced at high energy that are able to escape the dump more efficiently. These $\DM$ carry most of the initial e$^-$ energy outside of the WCAL in the calorimeter placed downstream (ECAL). Hence, the energy is reconstructed with a precision of $<$1\% regardless of the WCAL structure. The second and third designs are compared to the original WCAL in Table \ref{tab:wcal-length-results}.
+\begin{equation}
+  \label{eq:enucl-prob}
+  p_i = \frac{n_i(r)}{n_{EOT}}
+\end{equation}
 
-\begin{center}
-\begin{table}[tbh!]
-\begin{tabular}{lcr}
-  WCAL structure [mm](layers)  & $\epsilon$  & EOT to cover $\DM$ at 90\% confidence [$10^{10}$] \\
-  \hline
-  ECAL1:3+2(34)                & 0.001   & 17$\pm$3.4                                            \\ 
-  ECAL1:6+2(17)                & 0.001   & 7$\pm$0.9                                             \\
-  ECAL1:9+2(12)                & 0.001   & 6$\pm$0.7                                             \\
-  ECAL1:3+2(34)                & 0.0012  & 85$\pm$4.7                                            \\
-  ECAL1:6+2(17)                & 0.0012  & 24$\pm$6.9                                            \\  
-  ECAL1:9+2(12)                & 0.0012  & 19$\pm$5                                              \\  
-  \hline
-\end{tabular}
-\label{tab:wcal-length-results}
-\caption[Possible WCAL design and with their possible experimental reach]{Number EOT required to cover $\DM$ at 90\% confidence using different WCAL designs in the visible mode setup proposed for 2021. The first entry describes the structure using the convention:
-  ECALconverter-depth+counter-depth(number-of-layers).}
-\end{table}
-\end{center}
+In practice, the distribution of $n_{i}(r)$ is fitted using an exponential distribution and then integrated in the region $n_i(r>3r_{cell})$ relevant for the background. We are finally ready to estimate the number of events expected for an arbitrary statistic:
+
+\begin{equation}
+  \label{eq:exp-bkg-inv-2021}
+  n^{bkg}_i \simeq n_{EOT} \times p_i(\lambda \times r)
+\end{equation}
+
+In our case, $n_{EOT} = 5 \times 10^{12}$, and $\lambda = r'_{cell}/r_{cell}$ is a scale factor, we define here $r_{cell}$ as the total radius covered in 2018 and $r'_{cell}$ as the equivalent cell radius that will be covered in 2021. Assuming a VHCAL placed at 3 \si{\meter} distance from the ECAL, the coverage would roughly amount to an HCAL with two times its current transverse size, thus $\lambda = 2$. By using our fit for $p_i(r)$ and evaluate it for the zone 7 and 9 relevant for our signal region and $r = 3\lambda = 6$ the maximum region covered by the VHCAL. Our current best estimate for this background is 5$\pm$3 events after taking into account the reduced material budget of the Micromegas \cite{pdegen-thesis}. 
+
 
 \begin{figure}[tbh!]
   \centering
-  \includegraphics[scale=0.5]{\pdirfive/WCAL_design.pdf}
-  \caption[New WCAL design for 2021]{Possible designs of the WCAL re-arranging the available tiles of 3 mm of Tungsten (W) and 2 mm of scintillator material. All designs posses the same radiation length of 30$X_0$.}
-  \label{fig:wcal-design}
+  \includegraphics[width=0.45\textwidth]{\pdirthree/zones-no-veto.png}
+  \includegraphics[width=0.45\textwidth]{\pdirthree/zones-veto.png}
+  \caption[electronuclear background estimation]{Partioning of the $\ehcalplane$ into ten zones for the background estimation of electronuclear event leaking in the signal box. The left panel shows the control sample of event after clean electron are selected using SRD, tracking, pileup-removal and a hit in the central cell of the ECAL. The right panel shows the same sample after the event with signal in the VETO counter are removed. Adapted from \cite{na64-neutrals-study}.}
+  \label{fig:enucl-bkg-estimation}
 \end{figure}
+
+\begin{table}[bth!]
+  \centering
+  \caption[Invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected at the time this thesis was written \cite{NA64:2019imj}}
+  \begin{tabular}{lr}
+    \hline \hline
+    Background source & Background, $n_b$ \\
+    \hline
+    $\pi^-$,$\mu^-$ punchthrough                      & $<10^{-14}$ \\
+    low energy $e^-$                                  & $<10^{-12}$?? \\
+    $e^-$/hadron nuclear interaction in target        & $<0.044$ \\
+    $\pi^-$,$\mu^-$, $K_{3e}$ decay                    & 0.02 $\pm$ 0.01 \\
+    $e^-$ nuclear interaction in the  beam line       & 0.43 $\pm$ 0.16 \\
+    \hline
+    Total (conservatively)                            & 0.53 $\pm$ 0.17 \\
+    \hline \hline                       
+  \end{tabular}
+  \label{tab:inv-bkg}
+\end{table}
+
+\section{Improvement to visible mode setup}
+\label{ch5:sec:new-vismode-setup}
+
+The main goal of the visible mode data taking in 2021 will be to probe the remaining parameter space that justify the $\DMX$-anomaly. chapter \ref{chapter1} gives a good description of this model, here we remind that the region in the $\dmplane$ compatible with both the anomaly and the data currently collected by NA64 requires $6.8 \times 10^{-4} < \epsilon < 1.4 \times 10^{-3}$. The mass of $\DMX$ can also be calculated with high precision by fitting the bump in the nuclear spectrum of the anomaly. This procedure currently gives compatible results for the two atom studied, claiming as most probable a mass of 16.70$\pm$0.85 \mev for Beryllium and a mass 16.84$\pm$0.36 \mev for helium. The current setup is unable to probe this particle, as the analysis on the visible mode data has shown. Currently, the main limitation comes the short decay length of the $\DMX$ and the inability to separate the $\ee$ using trackers. A sufficient setup will need to boost the signal detection efficiency to a level where the $\DMX$ can be probed with a realistic number of EOTs and add a spectrometer able to measure precisely the invariant mass of the $\xdecay$ decay. In summary:
+
+\begin{itemize}
+\item Increase the probability of the $\DMX$ to exit the dump up to at least 20\%.
+\item Increase the distance between the trackers and the decay base of the $\DMX$ to allow the separation of the $\ee$ pair by at least a few mm.
+\item Allow the momentum reconstruction of the $\ee$ pair in the $\xdecay$ decay with an accuracy of $\sim$1\%.
+\end{itemize}
+
+In the sections that follow, we will explore each of this issue, and give an explanation on they will be solved in the new design of the setup for the 2021 data taking.  Finally, we provide a projection of the EOT and time needed to cover the anomaly completely.
 
 \subsection{Invariant mass reconstruction}
 \label{ch5:sec:new-vismode-setup-invmass}
@@ -184,6 +249,53 @@ The results of this study are summarized in Fig.\ref{fig:res-hit} where the hit 
   \caption[hit resolution as function of the two cluster distance]{Hit resolution of two separate clusters in a same plane as function of the distance between the two. The unit are given in strips size, where a single strip has a size of 256 $\mu$m for the Micromegas used in the NA64 experiment.}
   \label{fig:res-hit}
 \end{figure}
+
+\subsection{WCAL optimization}
+\label{ch5:sec:new-vismode-setup-wcal}
+
+The most important change in design to boost the signal yield is the increase of the probability of decay outside the target-dump for the $\DMX$. We see from Eq.\ref{eqn:length} that this number scales linearly on both the nominal energy of the beam the dimension of the dump. In 2018, the energy was already increased to 150 \gev to boost this probability. Additional increase in energy will have several demerit, amounting to a larger background in the sample due to the production mechanism of the beam and a shorter bending that would reduce the rejection power of the SRD. Instead, a new design of the WCAL with short longitudinal dimension can achieve the same purpose while keeping the background under check.
+
+To design the new calorimeter structure, the figure of merit is the signal efficiency, which is defined mostly by the number of $\DM$ that decay outside the WCAL. This was quantified by a detailed MC-simulation of the setup used to generate the energy spectrum and the decay kinematics of the $\DM$.
+
+%%% radiation length of tungsten collected at http://pdg.lbl.gov/2014/AtomicNuclearProperties/HTML/tungsten_W.html
+In the design used in previous searches, the WCAL had 34 layers in total, each of them consisting of a converter layer made of 3 mm of tungsten and an active part made of a 2 mm plastic scintillators. This sums to a total of $\sim$30X$_0$. Reducing the dimension of the WCAL would impact the radiation length used to contain the main shower and hence change the background conditions. To avoid this, the new design of the calorimeter was studied under the principle that the optimal radiation length should be approximately 30X$_0$. The three following design were considered:
+
+\begin{itemize}
+\item An initial part of 9 layers using the original layer structure followed by an additional 25 layers of only tungsten.
+\item A calorimeter consisting of 17 layers with layer-structure: 6mm tungsten + 2mm plastic scintillator.
+\item A calorimeter consisting of 12 layers with a different structure: 9mm tungsten + 2mm plastic scintillator.
+\end{itemize}
+
+In all designs, the initial 5 layers forming the pre-shower part are still used for efficient hadron rejection. Despite its longer length, the first design grants a good energy resolution and a good hermeticity. In the second and third case, the calorimeter is more compact but has a worse energy resolution due to the thicker converter. A sketch of the two last designs is shown in Fig.\ref{fig:wcal-design} and compared to the original one used in the previous searches.
+
+The third design was chosen to be the most suited for our search. The loss in energy resolution has almost no impact on the signal efficiency. The reason is that the short lifetime of the $\DM$ favors the detection of the ones produced at high energy that are able to escape the dump more efficiently. These $\DM$ carry most of the initial e$^-$ energy outside of the WCAL in the calorimeter placed downstream (ECAL). Hence, the energy is reconstructed with a precision of $<$1\% regardless of the WCAL structure. The second and third designs are compared to the original WCAL in Table \ref{tab:wcal-length-results}.
+
+\begin{center}
+\begin{table}[tbh!]
+\begin{tabular}{lcr}
+  WCAL structure [mm](layers)  & $\epsilon$  & EOT to cover $\DM$ at 90\% confidence [$10^{10}$] \\
+  \hline
+  ECAL1:3+2(34)                & 0.001   & 17$\pm$3.4                                            \\ 
+  ECAL1:6+2(17)                & 0.001   & 7$\pm$0.9                                             \\
+  ECAL1:9+2(12)                & 0.001   & 6$\pm$0.7                                             \\
+  ECAL1:3+2(34)                & 0.0012  & 85$\pm$4.7                                            \\
+  ECAL1:6+2(17)                & 0.0012  & 24$\pm$6.9                                            \\  
+  ECAL1:9+2(12)                & 0.0012  & 19$\pm$5                                              \\  
+  \hline
+\end{tabular}
+\label{tab:wcal-length-results}
+\caption[Possible WCAL design and with their possible experimental reach]{Number EOT required to cover $\DM$ at 90\% confidence using different WCAL designs in the visible mode setup proposed for 2021. The first entry describes the structure using the convention:
+  ECALconverter-depth+counter-depth(number-of-layers).}
+\end{table}
+\end{center}
+
+\begin{figure}[tbh!]
+  \centering
+  \includegraphics[scale=0.5]{\pdirfive/WCAL_design.pdf}
+  \caption[New WCAL design for 2021]{Possible designs of the WCAL re-arranging the available tiles of 3 mm of Tungsten (W) and 2 mm of scintillator material. All designs posses the same radiation length of 30$X_0$.}
+  \label{fig:wcal-design}
+\end{figure}
+
 
 \subsubsection{Background and sensitivity}
 \label{ch5:sec:background-sensitivity}

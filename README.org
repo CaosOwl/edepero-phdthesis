@@ -119,6 +119,7 @@
    - [ ] chapter
    - [ ] Fig.
    - [ ] Dark Matter
+   - [ ] dark photon
 ** TODO Standard for tables
    - currently <2020-08-18 Tue> no vertical line, double line if table shows a result, to generalize
 * Presentation for X17
@@ -279,7 +280,11 @@ beam [61] and π 0 → Xγ decays [62].
    - [[https://gitlab.cern.ch/P348/p348-daq/-/tree/eth-reco-semivisible][eth-reco-semivisible]] create for *Cesare Cazzaniga* to save all reconstruction code for the semivisible mode. Used mostly for feasibility studies
    - [[https://gitlab.cern.ch/P348/p348-daq/-/tree/eth-straw][eth-straw]] Create for *Peter Degen* to reconstruct straw hits.
 ** Analysis
-   Tools used for the analysis on the reconstructed data can be found in my own ETH repository at 
+   Tools used for the analysis on the reconstructed data can be found in my own ETH repository at https://gitlab.ethz.ch/na64/na64analysis
+** Simulation of Micromegas output
+   A dedicated repository was written by me to simulate Micromegas response for different assumption and multiplex mapping.
+   The idea behind this deposit is to use the input of NA64 data to simulate the response as reliably as poissible, including noise an extreme topologies, but
+   it also supports clustering created by simple physical models. It can be found here: https://gitlab.ethz.ch/na64/mm-clustering
 ** Plotting the exclusion plot
    data and code for the exclusion plot mostly used some gnu plot provided in the form of some text file.
    The git repository with the relevant information can be retrieved here: [[https://gitlab.cern.ch/P348/NA64-exclusion-plot]]
