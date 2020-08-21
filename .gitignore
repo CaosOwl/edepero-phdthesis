@@ -14,3 +14,8 @@ auto
 PhDthesis-blx.bib
 *.fdb_latexmk
 *.fls
+*#
+*.docx
+*.gz
+.tex
+ltximg
