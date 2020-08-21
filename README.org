@@ -114,12 +114,31 @@
    - starting with the exclusion plot, are new one needed?
    - Permission obtained from *Peter Degen* to use part of his thesis [[https://ethzgrouprubbia.slack.com/archives/CPCQXU5SP/p1597676249001700]]
 * TODO Additional tasks
-** TODO [/] Substitution to a common standard
+** TODO [0/12] Substitution to a common standard
+   Python skript?
    - [ ] Tab. --> Table
    - [ ] chapter
    - [ ] Fig.
+   - [ ] S_i , for scintillators in the setup
+     - Si
    - [ ] Dark Matter
    - [ ] dark photon
+   - [ ] punch-through
+     - punchthrough
+   - [ ] non-uniformity
+   - [ ] sideband
+     - side band
+     - side-band
+   - [ ] electro-nuclear
+   - [ ] beamline
+   - [ ] well-defined
+     - well defined
+** common error
+   python skript?
+   - [ ] periphery
+     - perifery 
+   - [ ] bremsstrahlung
+     - bremstrahlung
 ** TODO Standard for tables
    - currently <2020-08-18 Tue> no vertical line, double line if table shows a result, to generalize
 * Presentation for X17
