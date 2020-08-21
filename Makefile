@@ -26,7 +26,7 @@ view:
 	evince $(PDF)
 
 PhDthesis.pdf: $(TARGET)
-	-latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -outdir=./ -cd -use-make $<
+	-latexmk -pdf -f -pdflatex="pdflatex -interaction=nonstopmode" -outdir=./ -cd -use-make $<
 	@cp -v $(MAIN)$(PDF) .
 
 clean:
