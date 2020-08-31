@@ -141,6 +141,11 @@
      - bremstrahlung
 ** TODO Standard for tables
    - currently <2020-08-18 Tue> no vertical line, double line if table shows a result, to generalize
+** TODO Check picture resolution
+   - check that every picture has the correct resolution
+*** TODO [0/1] list of picture to change:
+    - [ ] 1.1, improve resolution
+    - [ ] 1.3, improve resolution
 * Presentation for X17
   A small presentation to review the X17 anomaly.
 ** Main points
