@@ -163,7 +163,7 @@ This problem has been studied using both fitting procedures and neural networks 
 
 \begin{figure}[tbh!]
   \centering
-  \includegraphics[width=\textwidth]{\pdirfive/DM-dist.png}
+  \includegraphics[width=\textwidth]{\pdirfive/DM-dist.pdf}
   \caption[Distance of the decay products of X17 in the 2021 setup]{Distance between decay products of an $\DM$ decay outside the dump at a distance of 18 m from the decay vertex.}
   \label{fig:dm_dist1}
 \end{figure}
@@ -218,8 +218,8 @@ Therefore to ensure a small impact on the invariant mass reconstruction. The vac
       momentum reconstruction & 0.33\\
       \hline
     \end{tabular}
-    \label{tab:imass-width}    
     \caption[Error budget for the invariant mass in 2021 setup]{Width of the invariant mass after different error contributions are added cumulatively. In the first entry, all the space in the decay volume is substituted by perfect vacuum, the only material left is the one of the trackers and the W2. In the second entry, a 80 $\mu$m hit resolution is added to the trackers. In the third entry, the vacuum is substituted by the realistic setup shown in Fig.\ref{fig:setup-2021}. Finally, the last entry add the effect of the momentum reconstruction. The invariant mass distribution with all effects considered is presented in Fig.\ref{fig:imassreco}.}
+    \label{tab:imass-width}    
   \end{table}
 \end{center}
 
@@ -273,9 +273,9 @@ The third design was chosen to be the most suited for our search. The loss in en
   ECAL1:9+2(12)                & 0.0012  & 19$\pm$5                                              \\  
   \hline
 \end{tabular}
-\label{tab:wcal-length-results}
 \caption[Possible WCAL design and with their possible experimental reach]{Number EOT required to cover $\DM$ at 90\% confidence using different WCAL designs in the visible mode setup proposed for 2021. The first entry describes the structure using the convention:
   ECALconverter-depth+counter-depth(number-of-layers).}
+\label{tab:wcal-length-results}
 \end{table}
 \end{center}
 
@@ -291,7 +291,7 @@ The third design was chosen to be the most suited for our search. The loss in en
 \label{ch5:sec:background-sensitivity}
 
 A preliminary study of background was performed in this novel setup. As discussed in Sec.\ref{ch3:sec:bkg} the main source of background is coming from the production of $\ks$ in the WCAL escaping the dump and decaying in the vacuum tube as the $\DM$. The decay products can potentially mimic the signal either in the chain K$^0_S \rightarrow \pi^0 \pi^0$ where $\ee$ pair are produced in the $\gamma$ conversion of the photon pair into an $\ee$ or in the rare decays $\pi^0 \rightarrow \gamma e^- e^+$. To estimate the impact of such background a simulation of 5$\times 10^6$ $\ks$ was performed using the energy spectrum expected from the production of this particle via electro-nuclear interactions.
-The conservative assumption of the simulation is that the $K^0_S$ is produced in an inelastic scattering in the WCAL where all the energy is deposited inside the dump without leaving a significant signature in W2. It was found that only 3\% of the events left a shower separation in the ECAL similar to the one expected from $\DM$. Less than 1\% of the events are within the acceptance of the trackers. In the majority ($>$90\%) of the surviving events the $\ks$ has an energy $<$60 \gev. This spectrum is significantly different from the one predicted for the $\DM$, where 95\% of the spectrum is above 100 \gev with a sharp peak at 150 \gev (the nominal beam energy). Finally, no event in the sample was reconstructed with an invariant mass compatible with the $\DM$, the closest one being reconstructed at 280 MeV. This is well above any $A'$ scenario in the reach of the NA64 experiment \cite{Banerjee:2019hmi}. As the new WCAL design conserves the hermeticity of 30$X_0$, the background coming from $\gamma$-punchtrough (see Sec.\ref{ch3:sec:bkg}) is not expected to increase in the new setup. This contribution is hard to study in detail using MC simulation, it was however demonstrated in our previous measurements \cite{Banerjee:2019hmi} that longer setup adds a suppression to this background which is therefore expected to decrease due to the longer decay volume. As both neutral-punchtrough and $\ks$ are not expected to increase, one can conservatively put the background at a level of $0.01<$ (see Table \ref{tab:dm:background}).
+The conservative assumption of the simulation is that the $K^0_S$ is produced in an inelastic scattering in the WCAL where all the energy is deposited inside the dump without leaving a significant signature in W2. It was found that only 3\% of the events left a shower separation in the ECAL similar to the one expected from $\DM$. Less than 1\% of the events are within the acceptance of the trackers. In the majority ($>$90\%) of the surviving events the $\ks$ has an energy $<$60 \gev. This spectrum is significantly different from the one predicted for the $\DM$, where 95\% of the spectrum is above 100 \gev with a sharp peak at 150 \gev (the nominal beam energy). Finally, no event in the sample was reconstructed with an invariant mass compatible with the $\DM$, the closest one being reconstructed at 280 MeV. This is well above any $A'$ scenario in the reach of the NA64 experiment \cite{Banerjee:2019hmi}. As the new WCAL design conserves the hermeticity of 30$X_0$, the background coming from $\gamma$-punchtrough (see Sec.\ref{ch3:sec:bkg}) is not expected to increase in the new setup. This contribution is hard to study in detail using MC simulation, it was however demonstrated in our previous measurements \cite{Banerjee:2019hmi} that longer setup adds a suppression to this background which is therefore expected to decrease due to the longer decay volume. As both neutral-punchtrough and $\ks$ are not expected to increase, one can conservatively put the background at a level of $0.01<$ (see Table \ref{tab:vis-bkg}).
 
 An analysis based on the simulated data was conducted to estimate the reach of the experiment using the proposed setup. Most of the selection criteria already applied in our previous searches were used for this study. Additionally, a good separation of at least 8 cm is required between the two electromagnetic showers and the reconstructed invariant mass is selected to be within 10\% of the expected $\DM$ mass. The expected signal yield was computed after all the cuts were applied and used to calculate the 90\% exclusion of different $\DM$ scenarios. The results of the computation are presented in Fig.\ref{fig:exclusion-x17} that shows the number of EOT necessary to probe a specific $\DM$ scenario. Assuming a trigger-rate similar to the one observed during 2018 visible-mode data taking, a projection of the days needed is also shown. As expected, the EOTs required to probe a specific $\DM$ model increases exponentially with the coupling strength $\epsilon$, since the signal yield is dominated by the probability of $\DM$ to exit the dump. The conclusion is that the complete range $\epsilon < 1.4 \times 10^{-3}$ of $\DM$ parameter space proposed in \cite{PhysRevD.95.035017} can be covered in approximately 3 months of beam time by accumulating $\sim 7 \times 10^{11}$ EOTs. Models with V$\pm$A coupling mentioned in Sec.\ref{ch1:sec:dm-candidates} on the other hand can be covered faster ($<$10 days) due to the smaller allowed coupling. 
 

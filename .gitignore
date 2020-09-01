@@ -9,7 +9,7 @@
 *.toc
 *.xml
 auto
-*.pdf
+PhDthesis.pdf
 *.out
 PhDthesis-blx.bib
 *.fdb_latexmk
