@@ -299,7 +299,7 @@ During the calibration procedure, the three samples received by each channel of 
 r(t) = \frac{r_0}{(1 + \exp{\frac{t-t_0}{\tau}})}
 \end{equation}
 
-Where the parameters $r_0$, $t_0$ and $\tau$ are fitted using the same data measured at different values of the latency. The time of arrival is then extracted by reversing the function and solving for $t$ as a function of the ratio between pulses (Fig.\ref{fig:apv-signal-shape}):
+Where the parameters $r_0$, $t_0$ and $\tau$ are fitted using the same data measured at different values of the latency. The time of arrival is then extracted by reversing the function and solving for $t$ as a function of the ratio between pulses:
 
 \begin{equation}
 \label{eq:2}
@@ -308,15 +308,9 @@ t(r) = t_0 + \tau \times \ln{\frac{r_0}{r} - 1}
 
 A complete description of the method that takes into account the errors of the ratio and the parameters is described in \cite{dbanerjee-thesis}.
 
-
-\begin{figure}[bth!]
-\centering
-\caption[apv signal shape]{Shape of the signal of the APV chip and sampling performed.}
-\label{fig:apv-signal-shape}
-\end{figure}
-
 \begin{figure}[!bth]
-\centering
+  \centering
+  \includegraphics[width=\textwidth]{\pdirtwo/MM1Y_bp.pdf}
 \caption[APV25 banana plot]{Ratio between the first two vs the last two amplitudes sampled in an APV25 chip after the proper latency is set for the chip. The typical "banana" shape of this plot is the sign that the pulse is sampled during its rising edge.}
 \label{fig:banana-plot}
 \end{figure}
