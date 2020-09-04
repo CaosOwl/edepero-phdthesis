@@ -110,7 +110,7 @@
      - [X] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [X] See if Dissertori can be the external referee
-* TODO [10%]Diary
+* TODO [45%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
@@ -118,7 +118,7 @@
    - [ ] check SNF proposal to collect some additional reviews https://www.overleaf.com/project/5e6643b0ffa1760001a48d08
 ** TODO <2020-04-06 Mon>
    - [ ] Check for additional review about X17
-** TODO Date for the thesis<2020-06-12 Fri>
+** DONE Date for the thesis<2020-06-12 Fri>
    - Preliminary it should be early November
    - Thesis should be given early September 
 ** TODO [/] <2020-06-15 Mon>
@@ -128,22 +128,25 @@
     Poljakov, V.A., et al., Calorimetre module. Patent RU, no. 2338016 C1, 2008.
 *** TODO Find how to properly cite the thesis of the master student
     Is it possible to offer a reliable link to access this information?
-*** TODO Produce an image of the Micromegas design
-** TODO <2020-07-08 Wed>
-*** TODO [/] Find pictures for BGO and Shashlik Type SRD
+*** DONE Produce an image of the Micromegas design
+** DONE <2020-07-08 Wed>
+*** DONE [/] Find pictures for BGO and Shashlik Type SRD
     - [ ] BGO
     - [ ] SRD
-** TODO [/] <2020-07-16 Thu>
-   - [ ] Produce plot of signal shape of APV
+** DONE [1/1] <2020-07-16 Thu>
+   - [X] Produce plot of signal shape of APV
+     - not really needed
 ** TODO <2020-08-07 Fri>
 *** TODO Check background
     - [ ] estimate of mu-->enunu decay, currentyl I estimated 1e-5 for decay prob and 1e-7 for beam composition and SRD, more?
     - [ ] Estimate for momentum reconstruction, 1e-12 cited in Dipa thesis is not too clear, and also not sufficient at out current levels.
 ** <2020-08-14 Fri>
    - Added invisible mode cut list [[./inv-cuts.org][here]]
-** TODO [#C] <2020-08-17 Mon>
+** DONE [#C] <2020-08-17 Mon>
    - starting with the exclusion plot, are new one needed?
    - Permission obtained from *Peter Degen* to use part of his thesis [[https://ethzgrouprubbia.slack.com/archives/CPCQXU5SP/p1597676249001700]]
+** TODO <2020-09-04 Fri>
+   - Ask Henri permission to use plot showing the efficiency of the new Micromegas multiplex map.
 * TODO Additional tasks
 ** TODO [0/12] Substitution to a common standard
    Python skript?
