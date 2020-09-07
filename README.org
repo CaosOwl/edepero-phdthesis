@@ -110,6 +110,10 @@
      - [X] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [X] See if Dissertori can be the external referee
+** TODO Discussion with Laura <2020-09-07 Mon>
+   - [ ] Make things not personal
+   - [ ] Move experimental production and detection in the introduction
+   - [ ] Add chapter about collider experiments for Dark Matter
 * TODO [45%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
