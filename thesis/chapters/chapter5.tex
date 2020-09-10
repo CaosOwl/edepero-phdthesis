@@ -313,8 +313,55 @@ An analysis based on the simulated data was conducted to estimate the reach of t
   \label{fig:exclusion-x17}
 \end{figure}
   
-\section{A new approach: Muon mode setup}
+\section{A new approach: the Muon mode setup}
 \label{ch5:sec:muon-mode-setup}
+
+A new approach proposed for the next generation of fixed-target experiments performed by the NA64 collaboration is to use a muon beam to cover a larger region of parameter space \cite{Gninenko:2019qiv}. This search would boost the sensitivity for $\DM$, in particular for a dark mediator mass $m_{\DM} \gtrsim 100 \mev$ as suggested by detail calculation using the ETL cross-section \cite{Gninenko:2019qiv}. Outside of boosting the sensitivity for the $\umodel$, this setup would be sensitive to a dark mediator weakly coupled to muon. One example of such a particle would be a $\DMU$ which interacts predominantly via a $L_{\mu} - L_{\tau}$ current \cite{krasnikov2017muon,GNINENKO2001119}. Alternatively, the $\DMU$ could also be a leptophilic mediator of a dark force between SM and the Dark Sector, charged under U'(1)$_{L_{\mu} - L_{\tau}}$. Other appealing properties of this mediator include a mechanism to account for the observed DM relic abundance \cite{GNINENKO2001119,Kirpichnikov:2020tcf,PhysRevLett.121.011102} and the $\ammu$ anomaly in the case of a muon-specific scalar mediator \cite{krasnikov2017light,PhysRevD.95.115005}.
+
+For this new experiment, the M2 muon beamline will be used to provide 160 \gev muons at a rate of a few 10$^7$ MOT\footnote{Muon On Target} per spill. The setup will be placed upstream of the COMPASS experiment, in a space of 13 \si{\meter}. The case of a muon beam differs significantly from the electron case previously studied. We still use "Dark-Bremsstrahlung" as the primary production channel. we produce the boson using the interaction:
+
+\begin{equation}
+  \label{eq:dm-muon-int}
+  \mu + Z \to Z + \DMU + \mu
+\end{equation}
+
+Because of the higher penetration power of the muon, the interaction can now happen along the full length of the target, and not mainly in the first few radiation lengths as in the case of an electron primary.
+For a mass larger than 100 \mev, the expected decay time for this particle is in the order of $\tau_{\DMU} \lesssim 10^{-15} \si{\second}$. Thus, its decay is expected inside the setup shortly after its production. For mass $M_{\DMU} > 2 m_{\mu}$ the branching ratio is evenly shared between the invisible channel $\DMU \to \nu \bar{nu}$ and the visible channel $\DMU \to \mu^+ \mu^-$. The latter corresponds to a muon-trident signature in the setup and will be left for future searches. The current proposal for NA64 focuses on the invisible channel, hence the signature becomes once again missing momentum. To measure the energy of the $\mu^-$ primary after the interaction, a calorimeter approach is not possible. Instead, a second magnetic spectrometer is placed immediately after the target to measure the momentum a second time. The total energy deposited inside the ECAL must be compatible with the one of a single MIP passing through the detector, to make sure that no energy was lost because of Bremsstrahlung radiation or nuclear interaction. The setup is constructed rearranging the detectors already used in the two other modes. The ECAL is placed immediately after a first magnetic spectrometer (MS1), while the HCAL modules are placed $\sim$6 \si{\meter} downstream after the second spectrometer (MS2) to detect the scattered muon. To reduce background from large nuclear interaction inside the ECAL, the VHCAL modules discussed in Sec.\ref{ch5:sec:new-invismode-setup} is placed after M2 to catch particles emitted at a large angle. A sketch of the proposed setup is illustrated in Fig.\ref{fig:muon-mode-setup}.
+
+The experiment also needs an alternative method to reduce the initial trigger rate that does not rely on the energy deposited inside the calorimeters. A new set of scintillator counters is used for this purpose:
+\begin{itemize}
+\item $S_0$ and $S_1$: Placed before the ECAL and used to characterize the beam.
+\item $V_{m1}$,$V_{m1}$,$V_{m3}$,$V_{m4}$: Placed along each MBPL magnets with a width equal to the magnet gap. They are used to reject low energy particles entering the magnets.
+\item $S_4$: A scintillator counters shifted 5 \si{\centi\meter} away from the beam axis to trigger on the deflected muon.
+\item $V_1$: Placed in front of the beam axis, used to veto the primary beam to avoid a fake trigger of $S_4$ caused by the production of secondaries along the beamline.
+\item $S_{\mu}$: Placed at the end of the setup, after the four HCAL modules, and used to tag the scattered muon.
+\end{itemize}
+
+The trigger condition will combine all the information of these detectors:
+
+\begin{equation}
+\label{eq:trigger-mumode}
+Tr^{\DMU} = S_0 \times S_1 \times \overline{V_1} \times \overline{V_{m1}}\overline{V_{m2}}\overline{V_{m3}}\overline{V_{m4}}\times S_{\mu}
+\end{equation}
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirfive/setup-muon-2021.pdf}
+  \caption[Sketch of muon mode setup 2021]{Sketch of muon mode setup 2021. In Green the direction of a muon scattering in the ECAL is shown.}
+  \label{fig:muon-mode-setup}
+\end{figure}
+
+The selection criteria are chosen to select only muons that did not have a hard-scattering inside the ECAL. Hence less than 1 \gev energy deposit in the VHCAL and less than 4 \gev energy in each HCAL module. Also, only events with reconstructed momentum compatible with 160 \gev are selected as candidates. Events are binned in the plane (E$_{ECAL}$ + E$_{HCAL}$; p$_{\mu}$), where p$_{\mu}$ is the momentum reconstructed in MS2. The signal region is then defined as p$_{\mu} <$80 \gev and (E$_{ECAL}$+E$_{HCAL}$) $<$ 20 \gev. This means that to be selected a muon must have lost at least half of its original energy without any significant energy deposit in any of the calorimeters placed along the beamline.
+
+A detailed MC-simulation was used to test the feasibility of the setup. This included also a detailed simulation of the interaction along the beamline to reproduce faithfully the expected beam profile. It was found the expected background, mostly caused by large scattering neutrals produced in the ECAL, is $\lesssim 10^{-13}$. The setup will be tested in 2021 in the so-called phase 1, where the $\ammu$ parameter space will be probed by accumulating 10$^{11}$ MOT. NA64 plans a second phase after LS3\footnote{Long Shutdown 3 of the LHC}, where $\sim 10^{13}$ MOT will be accumulated to gain sensitivity on the parameter space justifying the observed relic abundance of Dark Matter \cite{Gninenko:2640930}. The projection of sensitivities expected in this second phase, combing results from both electron and muon mode, is illustrated in Fig.\ref{fig:dmyplane-mumode}.
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirfive/tldra-21-1-mumode.pdf}
+  \caption[sensitivity projection for invisible mode + muon mode 2021]{Projection of sensitivity of the NA64 experiment in the $\dmyplane$ for $5 \times 10^{12}$ EOT and for $5 \times 10^{12}$ EOT + $2 \times 10^{13}$ MOT that will are planned to be collected after LS3 \cite{Gninenko:2019qiv}.}
+  \label{fig:dmyplane-mumode}
+\end{figure}
+
 
 %%% Local Variables:
 %%% mode: latex
