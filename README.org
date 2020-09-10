@@ -83,12 +83,12 @@
      + Useful, free and has a desktop version for all OS
      + extremely intuitive
 * Discussions
-** TODO [5/5] Discussion with Paolo <2020-01-15 Wed>
+** DONE [5/5] Discussion with Paolo <2020-01-15 Wed>
    + [X] *Referee:* Paolo will check with Dissertori if Sergey Gnieneko cna be the external 
      presence at my defence *Sergei should be present*
    + *Title*
      + [X] Change beam colliders to fixed target
-     + [ ] Maybe put CERN inside the title? to discuss...
+     + [X] Maybe put CERN inside the title? to discuss...
    + [X] Move motivations to chapter one, they are more connected to the U(1) model
    + [X]  Add WCAL optimization to the new visible mode setup chapter
    + [X] Remove subtitles to the other subsection of the future prospects
@@ -97,36 +97,44 @@
      + Possible candidate for Dark Matter
      + Thermal dark matter
      + Dark Matter in colliders
-** TODO  [3/4] Discussion with Paolo <2020-04-06 Mon>
+** DONE [4/4] Discussion with Paolo <2020-04-06 Mon>
    - [X] Title to be changed to something more catchy and related to X17
    - [X] Add SRD paper, take most of the thing from the Master thesis plus some plot from the paper
    - [X] Add article for 2021 visible mode setup
-   - [ ] Add review about Beryllium Anomaly
-** TODO [2/3] Discussion with Paolo <2020-06-11 Thu>
-   - [-] some changes proposed by Pol
+   - [X] Add review about Beryllium Anomaly
+** DONE [3/3] Discussion with Paolo <2020-06-11 Thu>
+   - [X] some changes proposed by Pol
      - [X] Change a couple of position of the section
-     - [ ] Think about how to include ALPS results, just a mention in the Invisible mode results?
-     - [ ] Think if to extend the X17 chapter?
+     - [X] Think about how to include ALPS results, just a mention in the Invisible mode results?
+     - [X] Think if to extend the X17 chapter?
      - [X] Start inserting old notes in appropriate places
    - [X] Change some detail to the outline
    - [X] See if Dissertori can be the external referee
-** TODO Discussion with Laura <2020-09-07 Mon>
-   - [ ] Make things not personal
-   - [ ] Move experimental production and detection in the introduction
-   - [ ] Add chapter about collider experiments for Dark Matter
-* TODO [45%]Diary
+** DONE Discussion with Laura <2020-09-07 Mon>
+   - [X] Make things not personal
+   - [X] Move experimental production and detection in the introduction
+   - [X] Add chapter about collider experiments for Dark Matter
+** DONE Discussions with Laura <2020-09-09 Wed>
+   - Reorganization of chapter 1
+     - Proposed to move plots after computation of signal yield, for now just few more sentences were added
+       to make the passage more clear
+   - Comments on chapter 1
+   - Comments on chapter 2
+   - Convert most of text in third person
+   - Comments on organization of chapter 3
+* TODO [72%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
-** TODO <2020-03-27 Fri>
-   - [ ] check SNF proposal to collect some additional reviews https://www.overleaf.com/project/5e6643b0ffa1760001a48d08
-** TODO <2020-04-06 Mon>
-   - [ ] Check for additional review about X17
+** DONE <2020-03-27 Fri>
+   - [X] check SNF proposal to collect some additional reviews https://www.overleaf.com/project/5e6643b0ffa1760001a48d08
+** DONE <2020-04-06 Mon>
+   - [X] Check for additional review about X17
 ** DONE Date for the thesis<2020-06-12 Fri>
    - Preliminary it should be early November
    - Thesis should be given early September 
-** TODO [/] <2020-06-15 Mon>
-   - [ ] figure NA64Setup to be added
+** DONE [1/1] <2020-06-15 Mon>
+   - [X] figure NA64Setup to be added
 ** TODO <2020-06-30 Tue>
 *** TODO Find out how to cite patent properly for shashlik
     Poljakov, V.A., et al., Calorimetre module. Patent RU, no. 2338016 C1, 2008.
@@ -184,7 +192,7 @@
 *** TODO [0/1] list of picture to change:
     - [ ] 1.1, improve resolution
     - [ ] 1.3, improve resolution
-* TODO [#B] [0/1]Issue to solve
+* TODO [#A] [0/1]Issue to solve
   - [ ] Currently the abstract command fails for unknow reason. But the text is visualized as intended.
     The Makefile is structured to ignore any error and produce the output anyway. <2020-01-14 Tue>
 * Presentation for X17
