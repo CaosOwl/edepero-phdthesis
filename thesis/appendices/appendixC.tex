@@ -21,7 +21,15 @@ Particle transport is performed via a Stepping manager class that invokes action
 
 Where $\sigma(Z_i,E)$ is the cross sections per atom of the process and the sum runs over all atom components inside the material. $n_i$ finally is the number of atoms of type i in the volume. The minimal step size is also limited as a compromise between speed of the simulation and accuracy of the results \cite{geant4-phys-guide}. The minimal dimension of the step is by default chosen to avoid change of cross-sections larger than $\sim$20\% due to energy loss, with some relaxation imposed for very low energy particles where this minimal step becomes too small.
 
-In NA64, simulations are subdivided in different categories called ``examples'' inside the repository, each of them follows the same style and uses the same classes, but it is differentiated in the exact setup used, the presence or absence of Dark matter inside the model, and the precise output of it. Following the style of libraries
+In NA64, simulations are subdivided in different categories called ``examples'' inside the repository, each of them follows the same style and uses the same classes, but it is differentiated in the exact setup used, the presence or absence of Dark matter inside the model, and the precise output of it. Following the modular style of Geant4, C++ ``User'' classes are coded to extend the functionality of the basic Geant4 classes offered to control physics. We can divide this classes in multiple subgroup as function of their purpose in the simulation.
+
+\begin{itemize}
+\item \textbf{\textit{Geometry classes}}: These classes create the volumes used by the simulation. The class \textit{NA64DetectorConstruction} is the first class in hierarchical order, calling a set of subclasses to construct all different volumes of this setup. This approach has the advantage of simply removing part of the setup if needed by simply not calling the relevant class. Also it allows different detectors whose position or characteristic depends from other detectors to communicate those parameters via the class \textit{ParameterDBase} and throw an error if the relevant class was not yet called.
+\item \textbf{\textit{Initialization classes}}: These classes initialize the relevant physic to simulate and apply biases to specific cross-section if required by the study. The main classes of this type are \textit{NA64RunAction} and \textit{NA64RunActionWithA}. The first one initializes additional interactions not included in the modular physics list \textit{FTFP\_BERT}, namely the Synchrotron Radiation via \textit{G4SynchrotronRadiation} and dimuon conversion via \textit{G4GammaConversionToMuons}. A bias to these two interaction is optionally added by calling the method \it{SetCrossSecFactor} that set a multiplier to the total cross-section computed by the underlying model.
+\end{itemize}
+
+
+Between all of them, the class \textit{NA64DetectorConstruction} 
 
 %\section{The physics list}
 %\label{appC:sec:physics-list}
