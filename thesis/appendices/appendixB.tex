@@ -1,5 +1,8 @@
 % Appendix B
 
+% variables
+\newcommand{\appdirb}{appendices/plots/appendixB}
+
 \chapter{Physics tool} % Main appendix title
 
 \label{AppendixB} % For referencing this appendix elsewhere, use \ref{AppendixB}
@@ -9,7 +12,9 @@
 
 Synchrotron radiation is the known phenomenon based on the basic principle of the electrodynamics, which state that an accelerated charged particle always radiates electromagnetic waves. In particular synchrotron radiation describes the energy emitted by a charged particle in a circular motion. This phenomena was already investigated theoretically at the beginning of the 20th century and was later first observed and experimentally studied at the General electric 70 MeV synchrotron from which it gets its name \cite{synchrotron-radiation}. \\
 This type of radiation is well known thank to the advent of modern circular acceleration, where it is so strong that it can even be observed for heavy particles, like for instance protons. \\
-The experiment aims to use such a radiation to tag the incoming particles in order to distinguish between the electron primaries and the background given by hadron and muons. A small review on this effect, which will underline the important properties exploited for the experiment,will be presented. By no means this will be a complete review, a more proper treatment can be found in Ref.\cite{synchrotron-radiation}. \par 
+The experiment aims to use such a radiation to tag the incoming particles in order to distinguish between the electron primaries and the background given by hadron and muons. A small review on this effect, which will underline the important properties exploited for the experiment,will be presented.
+
+
 \subsection{Power emitted}
 The first result about the power radiated by an accelerated non-relativistic particle was obtained by Larmor:
 
@@ -68,11 +73,11 @@ For a very energetic electron ($\gamma >> 1$) we can reduce the above result to 
 \label{eqn:energy-emitted-simp}
 \end{equation}
 
- In our experiment this is not entirely the case since the particle will be under the influence of the magnetic field only for 2m, however because of the radial symmetry a factor $l/2\pi R$ where $l$ is the portion of the circle inside the magnetic field is sufficient to correct the equation. Eq.\ref{eqn:energy-emitted} already contains all the scaling and the physics we are interested in.
+In the NA64 experiment this is not entirely the case since the particle will be under the influence of the magnetic field only for 2-4 \si{\meter}, however because of the radial symmetry a factor $l/2\pi R$ where $l$ is the portion of the circle inside the magnetic field is sufficient to correct the equation. Eq.\ref{eqn:energy-emitted} already contains all the scaling and the physics we are interested in.
  Since at constant magnetic field R is constant too, there are only two scaling that are significant in Eq.\ref{eqn:energy-emitted}:
  \begin{enumerate}
- \item An inverse scaling to the fourth power of the mass, this means that heavy particle will produce much less of this radiation, in particular $\mu^{+/-}$ and $\pi^{+/-}$ that have a mass approximately 200 times the one of an electron will irradiate 5$\times 10^{-8}$ times less. This very high suppression factor is however reduced in our experiment, since it is still possible for an heavy particle to ionize electrons and give them enough kinetic energetic to leave a synchrotron-like signal in the detector. For particles heavier than the electron the maximum energy exchange in a collision is 1 GeV, the cross section of such interactions can be safely approximated by the Rutherford differential cross section at these energies and it roughly depends on the inverse of the energy transfered to the ionized electrons\cite{passage-particles-matter}. The simulation estimates such interactions to happen with at least 1 MeV transfered energy (enough to leave a fake signal in the detector) with a probability of $\sim 10^{-4}$ and therefore they dominate the value of the suppression factor.
- \item A scaling with the energy to the fourth power. To some degree this scaling would make possible to correlate the deposited energy in the detector with the momentum of the particle. There are however several problems that limit this approach, like the overlap of the spectra of the synchrotron radiation as well as the possibility of an electron interacting with some material or with residual gas to emit photons via bremsstrahlung. We conclude that such approach is not feasible to achieve the sensitivity required by our experiment and therefore synchrotron detectors are no substitute to a more efficient tracking system\cite{MM}.
+ \item An inverse scaling to the fourth power of the mass, this means that heavy particle will produce much less of this radiation, in particular $\mu^{+/-}$ and $\pi^{+/-}$ that have a mass approximately 200 times the one of an electron will irradiate 5$\times 10^{-8}$ times less. This very high suppression factor is however reduced in our experiment, since it is still possible for an heavy particle to ionize electrons and give them enough kinetic energetic to leave a synchrotron-like signal in the detector. For particles heavier than the electron the maximum energy exchange in a collision is 1 GeV, the cross section of such interactions can be safely approximated by the Rutherford differential cross section at these energies and it roughly depends on the inverse of the energy transfered to the ionized electrons \cite{review-particle-physics}. The simulation estimates such interactions to happen with at least 1 MeV transfered energy (enough to leave a fake signal in the detector) with a probability of $\sim 10^{-4}$ and therefore they dominate the value of the suppression factor.
+ \item A scaling with the energy to the fourth power. To some degree this scaling would make possible to correlate the deposited energy in the detector with the momentum of the particle. There are however several problems that limit this approach, like the overlap of the spectra of the synchrotron radiation as well as the possibility of an electron interacting with some material or with residual gas to emit photons via bremsstrahlung. We conclude that such approach is not feasible to achieve the sensitivity required by our experiment and therefore synchrotron detectors are no substitute to a more efficient tracking system.
  \end{enumerate}
  
  \subsection{Angular distribution of the radiation}
@@ -122,8 +127,8 @@ where we define $\xi = \omega/\omega_c$ given the \textbf{critical frequency} $\
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth,height=0.55\textwidth]{plots/MC_spectrum/syn_spectra.pdf}
-\includegraphics[width=\textwidth,height=0.55\textwidth]{plots/MC_spectrum/brems_spectra}
+\includegraphics[width=\textwidth,height=0.55\textwidth]{\appdirb/syn_spectra.pdf}
+\includegraphics[width=\textwidth,height=0.55\textwidth]{\appdirb/brems_spectra.pdf}
 \caption{upper plot: Spectrum for a single synchrotron photon emitted by an electron in the MC simulation. \\
 Bottom plot: total energy deposited in the BGO for one electron event after the bremsstrahlung is included in the simulation.}
 \label{fig:synch_spectrum}
