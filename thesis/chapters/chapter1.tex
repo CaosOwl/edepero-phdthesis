@@ -60,7 +60,7 @@ Each single model of DM is out of the scope of this thesis. For a complete revie
 \section{The Dark Sector}
 \label{ch1:sec:dm-sector}
 
-Dark sectors , introduced in Sec.\ref{ch1:sec:dm-candidates}, are very interesting candidates to explain the origin of Dark Matter (see \cite{battaglieri2017cosmic,alex2016dark} for recent reviews). On the top of reproducing the observed DM abundance in freeze-out or freeze-in scenarios, many experimental anomalies currently observed can be explained inside this framework. The anomalous magnetic moment of the muon \cite{blum2013muon}, the proton charge radius \cite{Pohl2010} and more recently the $\DMX$-anomaly \cite{Krasznahorkay:2015iga,Krasznahorkay:2019lyl} have been suggested as possible hints of a dark sector \cite{alex2016dark}. The definition of this sector is extremely broad, and can accommodate many different models. Its physics however, can be explored effectively and in a systematic way by using specific portal interaction as classification scheme.  The existence of a mediator acting as a portal is a necessity to create a Dark Sector, but a small interaction with SM allows a signature in particle physics experiments as well as a mechanism to compute the observed relic density \cite{prw, pospelov}. The gauge and Lorentz symmetries restricts the ways in which the mediator can couple to SM particles. We can classify them using their spin and parity, and by excluding dimension operators larger than 5 we obtain four renormalizable possibilities \cite{alex2016dark}:
+Dark sectors , introduced in Sec.\ref{ch1:sec:dm-candidates}, are very interesting candidates to explain the origin of Dark Matter (see \cite{battaglieri2017cosmic,alex2016dark} for recent reviews). On the top of reproducing the observed DM abundance in freeze-out or freeze-in scenarios, many experimental anomalies currently observed can be explained inside this framework. The anomalous magnetic moment of the muon \cite{blum2013muon}, the proton charge radius \cite{Pohl2010} and more recently the $\DMX$-anomaly \cite{Krasznahorkay:2015iga,Krasznahorkay:2019lyl} have been suggested as possible hints of a dark sector \cite{alex2016dark}. The definition of this sector is extremely broad, and can accommodate many different models. Its physics however, can be explored effectively and in a systematic way by using specific portal interaction as classification scheme.  The existence of a mediator acting as a portal is not a necessity to create a Dark Sector, but a small interaction with SM allows a signature in particle physics experiments as well as a mechanism to compute the observed relic density \cite{prw, pospelov}. The gauge and Lorentz symmetries restricts the ways in which the mediator can couple to SM particles. We can classify them using their spin and parity, and by excluding dimension operators larger than 5 we obtain four renormalizable possibilities \cite{alex2016dark}:
 
 \begin{equation}
   \label{eq:dm-portals}
@@ -75,6 +75,40 @@ Dark sectors , introduced in Sec.\ref{ch1:sec:dm-candidates}, are very interesti
 
 In this work, we will limit the discussion on the vector portal, as it is the most viable for thermal models of LDM. If we assume the DM mediator to be a vector boson arising from an additional U'(1) gauge group under which the LDM is charged, we can derive a term $\epsilon / \cos{\theta_W} B^{\mu \nu} F'{\mu \nu}/2$ that is invariant both on this symmetry and the well known U(1) from QED. This can be used to explain the phenomenology of a large class of models, such as scenarios where the Dark Photon couples preferentially to Baryonic, leptonic, or (B - L) currents. One such case, where the coupling to Baryon is disfavored, is the protophobic $\DMX$ gauge boson \cite{PhysRevD.95.035017}, that will be introduced at the end of this chapter. Other possibilities includes the DM possessing a Majorana coupling to the mediator \cite{PhysRevD.93.063523}, or the existence of a rich sector \cite{Morrissey_2014}.
 
+\subsection{Thermal Dark Matter and Dark Sector}
+\label{ch1:sec:thermal-dm}
+
+Arguably one of the most important quantities in astrophysics is the value of critical density $\rho_c$, which provides us knowledge of the relic abundance of Dark Matter in the present universe. The most widely used framework to justify this value describes Dark Matter as a thermal relic from the early universe, where DM was interacting with SM particles in the early universe thermal bath. In this environment, DM is produced in the direct annihilation SM SM $\to$ DM DM. After the universe cools down to a temperature $T$ below the dark matter particle mass $m_{\chi}$, the number of Dark Matter particles becomes Boltzmann suppressed, dropping as $e^{- T / m_{\chi}}$ \cite{Feng:2010gw}.  The exact relic density is then obtained by solving numerically the Boltzmann equation:
+
+  \begin{equation}
+    \label{eq:boltzman-equation}
+    \frac{d n}{d t} = -3 H n - \langle \sigma_A v \rangle (n^2 - n^2_{eq})
+  \end{equation}
+
+  where $n$ is the number density of DM particles, H is the Hubble parameter,  $\langle \sigma_A v \rangle$ is the thermally average cross-section, and $n_{eq}$ is the Dark Matter number density in thermal equilibrium. One can use the above formula to calculate the observed relic density, which will ultimately depend on the exact value of the cross-section of direct annihilation. As the annihilation cross-section is in many theories determined exclusively by the mass $m_{\chi}$, the two parameters can be matched using this framework. If we assume a weak interaction between DM and SM, for example, we get the formula \cite{Feng:2010gw}\footnote{An additional factor of $v^2$ multiplies the right hand side of the equation if we assume P-wave annihilation.}:
+
+  \begin{equation}
+    \label{eq:dm-fo-sigma}
+    \sigma_A v = k \frac{g^4_{weak}}{16 \pi^2 m^2_{\chi}}
+  \end{equation}
+
+  Which can be used to match the mass $m_{\chi}$ directly to the relic density observed in the present universe. WIMPs make an excellent Dark Matter candidate for this reason: a new particle in the mass range of 100 \gev - 1 \si{\tera\electronvolt} interacting weakly can easily account for all Dark Matter observed. There are many different caveats to this model that we skipped here, and many alternative mechanisms were proposed \cite{Hall:2009bx,Feng:2010gw,Marsh:2015xka,Griest:1990kh,Arcadi:2017kky}. Nevertheless, WIMPs remain a very popular candidate in the freeze-out frameworks, but the many negative results obtained by direct detection experiments would suggest that a wider range of masses should be explored instead. This provides an excellent motivation for the hidden sector, where a Lightest Thermal Dark Matter (LTDM) is stable and produced in the early universe via one of the portals described in the previous section. Most importantly, the Dark Sector accommodates a wider range of masses compared to WIMPs (see Fig.\ref{fig:dmplane-overview}). Particles in the mass range 1 \mev - 10 \gev are however hard to detect using direct detection experiments, as the energy recoil from the scattering of a thermal relic with a nucleus becomes too small to be detected by standard PMTs\footnote{Methods to lower the threshold are however being developed, which would allow also such experiments to extended their sensitivity to sub-\gev particles \cite{Baracchini:2020nut}.}. Accelerator experiments are on the other hand sensitive to these masses, and have the advantage of a production rate independent from the exact details of the Dark Sector predicted from the freeze-out mechanism \cite{battaglieri2017cosmic}. This cross-section can be computed for a generic Dark Sector portal. We assume a mediator MED to be present together with a generic LTDM which can account for the relic density. We obtain:
+
+  \begin{equation}
+    \label{eq:dm-cs-fo}
+    \langle \sigma v \rangle = \frac{1}{6\pi}\frac{g^2_D g^2_{SM} m^2_{LTDM} v^2}{(m^2_{MED} - 4m^2_{LTDM})^2 + m^2_{MED}\Gamma^2_{MED}}
+    \end{equation}
+
+    
+    Where we assumed $v \ll c$ and $m_e \ll m_{LTDM}$. If we further assume to be away from the resonance region $m_{MED} \approx 2m_{LTDM}$ and $m_{MED} \gg \Gamma_{MED}$, the cross-section only depends on the mass of the LTDM and the dimensionless parameter:
+
+    \begin{equation}
+      \label{eq:dmplane-y}
+      y = \frac{g^2_D g^2_{SM}}{16 \pi^2} \left( \frac{m_{LTDM}}{m_{MED}} \right)^4
+    \end{equation}
+
+ To be compatible with a freeze-out mechanism, a lower bound must be defined on the direct annihilation cross-section, which can be translated in a minimum value of $y$. A larger value of $y$ is also possible and describes models where the direct annihilation is not the dominant process that describes the relic abundance \cite{battaglieri2017cosmic}. This way we obtained a well-defined parameter space where to search for Dark Matter and a powerful method (accelerators) to explore it. In the next section, we will study the vector portal more in detail, and then develop the most relevant formulas needed for the production and detection of the mediator. In the study that follows, we will assume a Dirac spinor as LTDM. Accelerator experiments, however, can probe many possible candidates, the most important of which are complex scalar and axially coupled Majorana fermions. A detailed classification of mediators and LTDM in the dark sector can be found in \cite{PhysRevD.92.123531}.
+
 \subsection{The vector portal}
 \label{ch1:sec:dm-colliders}
 
@@ -83,7 +117,15 @@ To discuss about the experimental implications of the vector portal, we need to 
   \label{eq:dm-lagrangian}
   \mathcal{L}_{DS} = \mathcal{L}_{SM} \underbrace{- \frac{1}{4}F'_{\mu \nu}F'^{\mu \nu} + \frac{m_{\DM}}{2}A'_{\mu}A'^{\mu}}_{\textrm{U'(1)}} + \underbrace{i \bar{\chi} \partial_{\mu} \chi - m_{\chi}\bar{\chi}\chi - e_D \bar{\chi}\gamma^{\mu}A'_{\mu}\chi}_{\textrm{Dirac spinor}}
 \end{equation}
-This new symmetry introduced an additional gauge vector boson, called "Dark Photon" due to its equivalent role in the Dark Sector as the well known photon. In this work, we will label it $\DM$\footnote{The field will be labeled in the same way for commodity.}. Here we also added a Dirac spinor field $\chi$ that is coupled to $\DM$ by a coupling constant $g_D$. This is for the completeness of the model, which is also supposed to contain an LDM that justifies the relic density. There are however other possibilities to a simple Dirac fermion. The part of the lagrangian over the first parenthesis is the one generated by the new U'(1) symmetry and is the most relevant to compute the physics of the portal. In particular, the terms multiplied by $\epsilon$ represent the kinetic mixing between $\gamma$ and $\DM$, as it multiplies the two field tensor generated by the two U(1) groups. Here $\epsilon$ is taken as an a priori parameter that controls the strength of the kinetic mixing. it can in principle have any value, but being naturally generated inside loops of heavy fields charged under both symmetries, it is expected to be small, in the range $\epsilon \sim 10^{-8} - 10^{-2}$ \cite{jdb}. 
+This new symmetry introduced an additional gauge vector boson, called "Dark Photon" due to its equivalent role in the Dark Sector as the well known photon. In this work, we will label it $\DM$\footnote{The field will be labeled in the same way for commodity.}. Here we also added a Dirac spinor field $\chi$ that is coupled to $\DM$ by a coupling constant $g_D$. This is for the completeness of the model, which is also supposed to contain an LDM that justifies the relic density. Indeed the new parameter introduced in the Lagrangian can be used to describe the value $y$ as function of the parameter of our model:
+
+    \begin{equation}
+      \label{eq:dmplane-y-dp}
+      y = \alpha_D \epsilon^2 \left(m_{\chi}m_{\DM} \right)^4 
+    \end{equation}
+
+which can be used to cast results in the parameter space relevant for a freeze out scenario.
+The part of the lagrangian over the first parenthesis is the one generated by the new U'(1) symmetry and is the most relevant to compute the physics of the portal. In particular, the terms multiplied by $\epsilon$ represent the kinetic mixing between $\gamma$ and $\DM$, as it multiplies the two field tensor generated by the two U(1) groups. Here $\epsilon$ is taken as an a priori parameter that controls the strength of the kinetic mixing. it can in principle have any value, but being naturally generated inside loops of heavy fields charged under both symmetries, it is expected to be small, in the range $\epsilon \sim 10^{-8} - 10^{-2}$ \cite{jdb}. 
 
 The channels that allow the production of this new boson $\DM$ are similar to the one that can be used for $\gamma$ as they both are the generators of a U(1) symmetry. In first order they are the following:
 
@@ -110,15 +152,8 @@ Other channels might be possible with minimal extension of the model, or one cou
 When a high energy particle hits a thick target, all of the mentioned mechanism will be relevant to some degree. %One might object that the particles needed for each production channel are different. Indeed while a nuclei Z is always present in matter, the presence of a $\gamma$ or a $e^+$ might not be as straightforward if one starts for example from an electron beam. In an electromagnetic shower originated by a high energetic lepton, however, all three particles will be produced in large quantity due to the subsequent process of pair-production and Bremsstrahlung that are the most relevant for high energetic $\gamma$ and high energetic $\ee$ respectively \cite{Bichsel:2002cf}.
 In most fixed-target experiments, however, the Dark Bremsstrahlung $\darkbrem$ is used as "Golden Channel" of production. The reason it has a good yield compared to the other channels and is relatively easy to compute using analytical formulas in good approximation (see Appendix\ref{appA:sec:cross-section}) and . The other types of productions mechanism described are considered corrections to a production rate mostly dominated by this interaction. An dedicated setup, however, might make other contributions relevant as well. An example is found in \cite{Marsicano_2018}, where the non-resonant and resonant production are used to improve significantly the signal yield for a specific mass range.
 
-After the production mechanism is chosen, some first estimate on the signal yield can be performed. However successfully producing the particle is not by itself sufficient without a way to detect it. The question is: what happens to $\DM$ after it is produced inside a target? Since a coupling between standard matter and dark matter was theorized in the $\umodel$ model, the $\DM$ will be able to decay in a $\ee$ pair (or in more massive leptons) provided that its mass is sufficiently large, but it could also decay in particles of the dark sector $\dmchi$. It is important to know that there is no meaningful constraint that prevents both branching ratios to be on a similar footing. Likewise, models with more complicated decays are possible as well. An example is the one described in \cite{Mohlabeng_2019}, where the decay chain $\dmsemivis$ dominates. In the next section we will explore this model more in detail, and then develop the most relevant formulas needed for production and detection of this particles.
+After the production mechanism is chosen, some first estimate on the signal yield can be performed. However successfully producing the particle is not by itself sufficient without a way to detect it. The question is: what happens to $\DM$ after it is produced inside a target? Since a coupling between standard matter and dark matter was theorized in the $\umodel$ model, the $\DM$ will be able to decay in a $\ee$ pair (or in more massive leptons) provided that its mass is sufficiently large, but it could also decay in particles of the dark sector $\dmchi$. It is important to know that there is no meaningful constraint that prevents both branching ratios to be on a similar footing. Likewise, models with more complicated decays are possible as well. An example is the one described in \cite{Mohlabeng_2019}, where the decay chain $\dmsemivis$ dominates. 
 % It is of course possible to adjust the setup to be more sensitive to a specific model that turns out to be interesting, but in this work, we will focus on the two channels explained that are the main interest of the NA64 experiment.
-
-\subsection{Thermal Dark Matter}
-\label{ch1:sec:thermal-dm}
-
-The observed abundance of dark matter
-
-
 
 \subsection{Dark Photon production in fixed-target experiments}
 \label{ch1:sec:dm-u1model}
