@@ -122,6 +122,13 @@
    - Comments on chapter 2
    - Convert most of text in third person
    - Comments on organization of chapter 3
+** TODO Comments of Pol for chapter 1 <2020-09-17 Thu>
+   - In page 5 refs is given in the beginning, needs to be repeated?
+   - Proton charge radius to remove?
+   - Rich sector to justify
+   - page 7: while it is true that arrows goes in both ways, since I am talking about production is it not correct to keep the arrow this way?
+   - Is A-resonant production corrections needed?
+   - Removed last sentence of production chapter
 * TODO [72%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
@@ -192,6 +199,8 @@
 *** TODO [0/1] list of picture to change:
     - [ ] 1.1, improve resolution
     - [ ] 1.3, improve resolution
+** TODO References
+   - [ ] Fix reference order
 * TODO [#A] [0/1]Issue to solve
   - [ ] Currently the abstract command fails for unknow reason. But the text is visualized as intended.
     The Makefile is structured to ignore any error and produce the output anyway. <2020-01-14 Tue>
