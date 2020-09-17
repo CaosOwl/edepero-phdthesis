@@ -71,6 +71,22 @@
    data and code for the exclusion plot mostly used some gnu plot provided in the form of some text file.
    The git repository with the relevant information can be retrieved here: [[https://gitlab.cern.ch/P348/NA64-exclusion-plot]]
    To compute the exclusion limit in the full frequentist approach a sample can be found here: https://gitlab.cern.ch/P348/na64limits
+* NOTES
+  A collection of all notes produced for NA64 can be found [[https://gitlab.cern.ch/P348/na64-papers][here]] with the complete latex. A webpage containing all notes build in a pdf format can be found [[https://gitlab.cern.ch/P348/na64-papers/-/jobs/9911057/artifacts/browse][here]]. A twiki with all information about runs, detector, and computing infrastructure can be found [[https://twiki.cern.ch/twiki/bin/viewauth/P348/WebHome][here]].
+* DATA
+  What follows is a description for their thesis and their last known location
+** NA64 data
+   A complete collection of all data collected by NA64 is stored in the [[https://information-technology.web.cern.ch/services/eos-service][eos system]] provided by CERN. They are saved in the directory /eos/experiment/na64/data/cdr . The name of the file follow the format:
+   
+   - cdr01<batch-number>-<run-number>.dat
+     - <batch-number> is the part of the run in chronological order (each file is always mantained at 1.1 GB maximum for optimization purposes) and is always four number, where the first number are filled with 0 if not used.
+     - <run-number> is the run number of the file and is always expressed by 6 number, 0 are filled at the beginning if not used by the run number.
+** NA64 simulation
+   Most simulation performed during myu thesis can be found either on lxplus in /eos/experiment/na64/Tree/ or in essos1@ethz.ch in the folder /mnt/storage/deperoe.
+** NA64 clustering
+   Some toy data used for Micromegas can be found on essos1@ethz.ch in the folder /mnt/raid/groups/mm-clustering.
+** NA64 documents
+   A list of useful documents can be found in [[https://cds.cern.ch/collection/NA64][this website]] hosted by CERN 
 * Tools
 ** Histfitter
    - A useful tools for histogram fitting of complicate models
