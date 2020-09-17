@@ -190,28 +190,30 @@
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
-\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+%\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
-
+\begin{appendix}
 \include{appendices/appendixA}
 \include{appendices/appendixB}
 \include{appendices/appendixC}
 \include{appendices/appendixD}
 \include{appendices/appendixE}
 \include{appendices/appendixF}
-
+\end{appendix}
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 % ----------------------------------------------------------------------------------------
 
 \newpage
-%\printbibliography[heading=bibintoc]
+\printbibliography[heading=bibintoc]
 
 %----------------------------------------------------------------------------------------
 
-\end{document}  
+\end{document}
+
+\end{thebibliography}
 
 %%% Local Variables:
 %%% mode: latex
