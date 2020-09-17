@@ -25,11 +25,12 @@ In NA64, simulations are subdivided in different categories called ``examples'' 
 
 \begin{itemize}
 \item \textbf{\textit{Geometry classes}}: These classes create the volumes used by the simulation. The class \textit{NA64DetectorConstruction} is the first class in hierarchical order, calling a set of subclasses to construct all different volumes of this setup. This approach has the advantage of simply removing part of the setup if needed by simply not calling the relevant class. Also it allows different detectors whose position or characteristic depends from other detectors to communicate those parameters via the class \textit{ParameterDBase} and throw an error if the relevant class was not yet called.
-\item \textbf{\textit{Initialization classes}}: These classes initialize the relevant physic to simulate and apply biases to specific cross-section if required by the study. The main classes of this type are \textit{NA64RunAction} and \textit{NA64RunActionWithA}. The first one initializes additional interactions not included in the modular physics list \textit{FTFP\_BERT}, namely the Synchrotron Radiation via \textit{G4SynchrotronRadiation} and dimuon conversion via \textit{G4GammaConversionToMuons}. A bias to these two interaction is optionally added by calling the method \it{SetCrossSecFactor} that set a multiplier to the total cross-section computed by the underlying model.
+\item \textbf{\textit{Physics classes}}: These classes initialize the relevant physic to simulate and apply biases to specific cross-section if required by the study. The main classes of this type are \textit{NA64RunAction} and \textit{NA64RunActionWithA}. The first one initializes additional interactions not included in the modular physics list \textit{FTFP\_BERT}, namely the Synchrotron Radiation via \textit{G4SynchrotronRadiation} and dimuon conversion via \textit{G4GammaConversionToMuons}. A bias to these two interaction is optionally added by calling the method \it{SetCrossSecFactor} that set a multiplier to the total cross-section computed by the underlying model.
+\item \textbf{\textit{Output classes}}: These classes are used to extract relevant information produced in the MC-simulation and write them on an output file after proper modification are performed. To date only the class \textit{NA64SD.cc} is part of this group. Methods of this class are called each time a ``sensitive detector'' is crossed by a track. Sensitive detectors are defined internally to each geometry class and corresponds to the active area of the detectors used in NA64.
 \end{itemize}
 
 
-Between all of them, the class \textit{NA64DetectorConstruction} 
+Between all of them, the class \textit{NA64DetectorConstruction} act as a messenger between all classes, handling the transmission of relevant variables if they are needed.
 
 %\section{The physics list}
 %\label{appC:sec:physics-list}
