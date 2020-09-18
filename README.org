@@ -16,13 +16,15 @@
 ** Declaration of Authorship
 ** TODO Abstract
 ** TODO Acknowledgements
-** TODO Chapter 1, Why Dark Matter?
+** TODO Preface
+   - [[./thesis/chapters/preface.tex]]
+** TODO Chapter 1, Introduction I
    - [[./thesis/chapters/chapter1/chapter1.tex]]
 ** TODO Chapter 2, The NA64 experiment
    - [[./thesis/chapters/chapter2/chapter2.tex]]
-** TODO Chapter 3,  Data Analysis
+** TODO Chapter 3, Data Analysis
    - [[./thesis/chapters/chapter3/chapter3.tex]]
-** TODO Chapter 4,  Results
+** TODO Chapter 4, Results
    - [[./thesis/chapters/chapter4/chapter4.tex]]
 ** TODO Chapter 5, Future prospects
    - [[./thesis/chapters/chapter5/chapter5.tex]]
@@ -39,6 +41,8 @@
    - [[./thesis/chapters/appendices/appendixD.tex]]
 *** TODO AppendixE, Statistics
    - [[./thesis/chapters/appendices/appendixE.tex]]
+*** TODO AppendixF, Tables
+   - [[./thesis/appendices/appendixF.tex]]
 * Bibliography
   - [[./thesis/utility/bibliography.bib]]
 ** TODO Style
@@ -138,13 +142,18 @@
    - Comments on chapter 2
    - Convert most of text in third person
    - Comments on organization of chapter 3
-** TODO Comments of Pol for chapter 1 <2020-09-17 Thu>
-   - In page 5 refs is given in the beginning, needs to be repeated?
-   - Proton charge radius to remove?
-   - Rich sector to justify
-   - page 7: while it is true that arrows goes in both ways, since I am talking about production is it not correct to keep the arrow this way?
-   - Is A-resonant production corrections needed?
-   - Removed last sentence of production chapter
+** DONE Comments of Pol for chapter 1 <2020-09-17 Thu>
+   - [X] In page 5 refs is given in the beginning, needs to be repeated?
+   - [X] Proton charge radius to remove?
+   - [X] Rich sector to justify --> *added a sentence to clarify*
+   - [X] page 7: while it is true that arrows goes in both ways, since I am talking about production is it not correct to keep the arrow this way?
+   - [X] Is A-resonant production corrections needed?
+   - [X] Removed last sentence of production chapter
+** TODO Comments of Pol for chapter 2 <2020-09-18 Fri> 
+   - [ ] Is it necessary to quantify in section "Experimental Technique"?
+   - [ ] in EOT sentence, I am not yet talking about background. Shifted background example here.
+   - [ ] Source for 40 1E12 POT?
+   - [ ] Hodoscope were present in the invisible mode 2018, remove from both text and drawings?
 * TODO [72%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
