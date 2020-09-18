@@ -476,8 +476,33 @@ Main characteristic of the NA64 subdetectors
   \hline
   \caption[sub-detectors description]{Detail material budget for the the Micromegas used in NA64.}
   \label{tab:detector-tables}
-  \end{longtable}
+\end{longtable}
 
+
+\begin{table}[htbp]
+	\centering
+	\caption[Data cut efficiencies for calibration run 4009.]{Data cut efficiencies for calibration run 4009 with 280'200 EOT. Listed are the fraction of surviving events. The efficiencies are calculated relative to the EOT. Cumulative efficiencies below the horizontal line are calculated relative to the cumulative efficiency of the cuts above the line.}
+	\begin{tabular}{|cccc|}
+		\toprule
+		\textbf{Cut} & \thead{\textbf{Surviving}\\\textbf{Events}} & \thead{\textbf{Efficiency}}& \thead{\textbf{Cumulative}\\\textbf{Efficiency}}\\
+		\midrule
+		SRD cut & 1.7$\times 10^5$ & 0.61 & 0.61\\
+		$\chi^2$ cut & 1.63$\times 10^5$ & 0.95 & 0.58\\
+		ECAL center & 1.63$\times 10^5$ & 0.99 & 0.58\\
+		Zero degree HCAL & 1.58$\times 10^5$ & 0.96 & 0.56\\
+		Dimuon cut & 1.57$\times 10^5$ & 0.99 & 0.56\\
+		\midrule
+		ST 123 & 1.57$\times 10^5$ & 0.99 & 0.56\\
+		ST 12|23 & 1.57$\times 10^5$ & 0.99 & 0.56\\
+		ST mult. & 1.57$\times 10^5$ & 0.99 & 0.56\\ 
+		VETO cut  & 1.45$\times 10^5$ & 0.91 & 0.51\\
+		ST 1|2|3 & 1.34$\times 10^5$ & 0.84 & 0.48\\
+		\bottomrule
+	\end{tabular}
+	\label{res:Tab:event_selection}
+\end{table}
+
+\iffalse
 \begin{table}[bth!]
   \centering
   \begin{tabular}{|lrr|}
@@ -486,6 +511,7 @@ Main characteristic of the NA64 subdetectors
   \caption[efficiency cuts invisible mode]{efficiency and uncertainty for the cut in the invisible mode of 2018}
   \label{tab:inv-cut-eff}
 \end{table}
+\fi
 
 \section{Pulse reconstruction}
 \label{sec:pulse-reconstruction}

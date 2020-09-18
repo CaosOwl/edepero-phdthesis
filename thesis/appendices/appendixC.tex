@@ -136,7 +136,7 @@ As an example, \ref{res:fig:klong} shows a simulation of longitudinal vertex pos
 \begin{table}[htbp]
 	\centering
 	\caption[Simulated interactions lengths of various hadronic processes in a thick Fe target for different biasing factors.]{Simulated interactions lengths of various hadronic processes in a thick Fe target for different biasing factors. For comparison, the PDG value for the nuclear interaction length of Fe is \SI{16.77}{\centi\metre} and the pion interaction length is \SI{20.42}{\centi\metre} \cite{nist-database}.}
-	\begin{tabular}{r@{}l|c|c|c}
+	\begin{tabular}{|r@{}l|c|c|c|}
 		\toprule
 		\multicolumn{2}{c|}{Bias} & $\mathrm{K^0_L}$ inelastic [cm]& $\pi^+$ inelastic [cm]& Electronuclear [cm]\\
 		\midrule
@@ -178,7 +178,7 @@ which shows two histograms of the z position of electronuclear interactions betw
 \begin{table}[htbp]
 	\centering
 	\caption[Bias gain of upstream electronuclear interaction.]{Number of electronuclear interactions and bias gain for $2.5\times10^6$~EOT and a biasing factor of $k=200$.}
-	\begin{tabular}{c|c|c|c|c|c|c}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\toprule
 		\multirow{2}{*}{\thead{\textbf{Detector}\\\textbf{Component}}} &\multicolumn{3}{c|}{\textbf{No cuts}}&\multicolumn{3}{c}{\textbf{E\textsubscript{ECAL} < 80 GeV}}\\
 		\cmidrule(lr){2-7}
@@ -195,7 +195,31 @@ which shows two histograms of the z position of electronuclear interactions betw
 		\bottomrule
 	\end{tabular}
 	\label{res:Tab:biasgain}
-\end{table}
+      \end{table}
+
+\begin{table}[htbp]
+	\centering
+	\caption[MC cut efficiencies for the simulation with bias $k=200$ and $1.79\times10^7$ EOT.]{MC cut efficiencies for the simulation with bias $k=200$ and $1.79\times10^7$ EOT. Listed are the fraction of surviving events. The individual efficiencies are calculated relative to the the 80~GeV cut. The cumulative efficiencies are calculated relative to the EOT. Cumulative efficiencies below the horizontal line are calculated relative to the cumulative efficiency of the cuts above the line.}
+	\begin{tabular}{|cccc|}
+		\toprule
+		\textbf{Cut} & \thead{\textbf{Surviving}\\\textbf{Events}} & \thead{\textbf{Efficiency}}& \thead{\textbf{Cumulative}\\\textbf{Efficiency}}\\
+		\midrule
+		Trigger & 1.48$\times10^{7}$ & - & 0.83\\ 
+		80~GeV cut & 22'305 & 1 & 1.3$\times 10^{-3}$\\
+		SRD cut & 19'500 & 8.7$\times 10^{-2}$ & 1.1$\times 10^{-3}$\\
+		$\chi^2$ cut & 3069 & 2.1$\times 10^{-2}$ & 1.7$\times 10^{-4}$\\
+		ECAL center & 3022 & 8.6$\times 10^{-2}$ & 1.7$\times 10^{-4}$\\
+		Zero degree HCAL & 2938 & 9.6$\times 10^{-2}$ & 1.6$\times 10^{-4}$\\
+		Dimuon cut & 2615 & 9.8$\times 10^{-2}$ & 1.5$\times 10^{-4}$\\
+		\midrule
+		ST 123 & 2214 & 8.2$\times 10^{-2}$ & 1.2$\times 10^{-4}$\\
+		VETO & 1755 & 7.9$\times 10^{-2}$ & 9.8$\times 10^{-5}$\\
+		ST 12|23 & 1485 & 6.7$\times 10^{-2}$ & 9.8$\times 10^{-5}$\\
+		ST 1|2|3 & 481 & 2.2$\times 10^{-2}$ & 2.7$\times 10^{-5}$\\
+		\bottomrule
+	\end{tabular}
+	\label{res:Tab:mccuts}
+\end{table}      
 
 %%% Local Variables:
 %%% mode: latex
