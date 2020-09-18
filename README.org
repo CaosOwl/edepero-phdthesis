@@ -150,10 +150,20 @@
    - [X] Is A-resonant production corrections needed?
    - [X] Removed last sentence of production chapter
 ** TODO Comments of Pol for chapter 2 <2020-09-18 Fri> 
-   - [ ] Is it necessary to quantify in section "Experimental Technique"?
-   - [ ] in EOT sentence, I am not yet talking about background. Shifted background example here.
-   - [ ] Source for 40 1E12 POT?
-   - [ ] Hodoscope were present in the invisible mode 2018, remove from both text and drawings?
+   - [X] Is it necessary to quantify in section "Experimental Technique"?
+   - [X] in EOT sentence, I am not yet talking about background. Shifted background example here.
+   - [X] Source for 40 1E12 POT? --> *5-7E12, see Nikolaos mail*
+   - [X] Hodoscope were present in the invisible mode 2018, remove from both text and drawings? --> *REMOVED*
+*** mail from Nikolaos about POT on target
+    Hi Emilio,
+
+    The "usual" number of protons on the T2 target is 50 - 65 units. 1 unit is 10^11 protons.
+
+    Therefore I would quote in your thesis: 5-7 x 10^12 protons on the T2 target
+    
+    Does this under your question ?
+    
+    Cheers, Nikos 
 * TODO [72%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
