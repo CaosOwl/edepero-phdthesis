@@ -134,14 +134,95 @@ Bottom plot: total energy deposited in the BGO for one electron event after the 
 \label{fig:synch_spectrum}
 \end{figure}
 
-\section{Shower profile}
-\label{appB:sec:shower-profile}
+\section{Construction of the profiles for shower profile analysis}
+\label{Appb:sec:make_profile}
 
-\subsection{Electromagnetic shower}
-\label{appB:sec:shower-profile-ecal}
+A shower profile database can be understood as an $N\times N$ matrix
+where each entry represents a portion of the ECAL cell of dimension
+$d_x \times d_y$. Each entry of the matrix contains the mean value of
+energy deposited in the cell when the incoming particle hits the
+portion of the ECAL plane described by that entry. In order to also
+account for the deviation that such shower can have as function of the
+hitting point one would need a second matrix to encode such
+information. To build such database the root class \textit{TProfile2D} was used \cite{root-tprofile}.
 
-\subsection{Hadronic shower}
-\label{appB:sec:shower-profile-hcal}
+The main parameters that play a role in the construction of the shower
+profiles are the dimensions of the area that is covered by the
+\textit{TProfile2D}, and the dimensions $d_x \times d_y$ that each bin has,
+which represents the minimal distance between two hit points that can
+be resolved by the database.  The total dimension that the profile
+should have can be trivially set to be equal to the ones of one ECAL
+cell (38.2$\times$38.2 \mms) since our cuts
+already requires the majority of the shower to be contained in the
+cell aligned with the beam spot. The problem of the bin dimension is
+more subtle: due to the shower symmetry there is no particular reason
+to set $d_x \neq d_y$ the precise dimensions of the bin must be a
+compromise between having a large bin that allows good statistic and a
+small bin that allows enough precision. The large sample of electrons
+collected in NA64 typically allows good statistic for each bin even
+when their dimension is below 1 $\mmi$. However, defining a bin smaller
+than the accuracy that we are able to achieve in the extrapolation of
+the MicroMegas line to the ECAL should be avoided. This error can be
+derived analytically to be:
+\begin{equation}
+  \sigma_{ECALxy} = \sigma_{mm}\sqrt{1+2t^2}
+  \label{eqn:MMerror}
+\end{equation}
+
+\begin{equation}
+  t = \frac{Z_{ECAL}-Z_{MM4}}{Z_{MM4}-Z_{MM3}}
+  \label{eqn:T}
+\end{equation}
+
+where:
+\begin{description}
+\item[$\sigma_{ECALxy}$]: is the error of the hit position
+  extrapolated to the ECAL in the xy-plane.
+\item[$\sigma_{mm}$]: is the resolution of the hit position in each
+  MicroMegas.
+\item[$Z_{MM}$]: is the position in the Z-axis of the MicroMegas.
+\item[$Z_{ECAL}$]: is the position in the Z-axis of the ECAL plane.
+\end{description}
+
+
+This results in a resolution of $\sim$130 $\mu$m for our setup. A more
+complicate expression was considered to take into account possible
+misinformation in the exact position of the detectors. While the exact
+entrance angle of the particle was checked to have small effects on
+$\sigma_{ECALxy}$, assuming some error on the exact position of the
+detectors increases the error by a factor 2-4 for values around 1-2
+\si{\centi\meter}. The work presented here was performed using a TProfile2D
+with bin size of 0.34 $\mmi$ which accounts for such uncertainties.
+
+Electron calibration runs were used to produce the profiles in order to have a sample of electrons, cuts were applied to reject the contamination caused by the hadrons in the beam and out-of-time energy events. \\
+The following criteria were applied for the profiles tested in this
+note:
+
+\begin{itemize}
+\item Single cluster in each MicroMegas
+\item Energy larger than 1 MeV and smaller than 70 MeV in each SRD
+  plane
+\item Coincidence of $\sim$1 ns between timing in cell (3,3) of ECAL
+  and $S_0$ time.
+\item Pedestal fluctuation less than 10 ADC in cell (3,3) and each of
+  the surrounding cells.
+\end{itemize}
+
+The production of the database is done for the events
+selected by computing the hit point of the incoming particle in cell
+3x3 and updating the value of the corresponding bin in each of the 36
+TProfile2D representing each cell. The specific value filled is the
+percentage of energy deposited in the cell, i.e. $100 \times E^i/E^{tot}$.
+
+After the profile are constructed, they can be used to calculated the compatibility of a single event with an em-shower. The algorithm for the $\chi^2$ computation works as follows:
+\begin{enumerate}
+\item The values of the xy coordinates of the hitting point of the
+  particle are computed by extrapolating to the ECAL position the line
+  passing through the hit point of the last two MicroMegas planes.
+\item The predicted values $E_{pred}^i$,$\sigma^{i}_{pred}$ are read from the database in the corresponding bin
+\item The values $E_{mes}^i$ are computed normalizing the energy $E^i$ of each cell to the total energy measured in the ECAL.
+\item The value of $\chi^2$ is calculated using Eq.\ref{eqn:chi} and is normalized to the number of cells considered.
+\end{enumerate}
 
 %%% Local Variables:
 %%% mode: latex
