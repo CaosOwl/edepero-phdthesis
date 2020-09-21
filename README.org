@@ -149,7 +149,7 @@
    - [X] page 7: while it is true that arrows goes in both ways, since I am talking about production is it not correct to keep the arrow this way?
    - [X] Is A-resonant production corrections needed?
    - [X] Removed last sentence of production chapter
-** TODO Comments of Pol for chapter 2 <2020-09-18 Fri> 
+** DONE Comments of Pol for chapter 2 <2020-09-18 Fri> 
    - [X] Is it necessary to quantify in section "Experimental Technique"?
    - [X] in EOT sentence, I am not yet talking about background. Shifted background example here.
    - [X] Source for 40 1E12 POT? --> *5-7E12, see Nikolaos mail*
@@ -164,6 +164,8 @@
     Does this under your question ?
     
     Cheers, Nikos 
+** TODO Comments of Laura chapter 3 pt.1 <2020-09-21 Mon>
+   
 * TODO [72%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
