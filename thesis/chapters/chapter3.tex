@@ -8,9 +8,10 @@
 
 % ----------------------------------------------------------------------------------------
 
-In the previous chapter, we explored the general concepts, and all the components characterizing the invisible and visible mode setup. Now we describe the method used on how to analyze them. In Sec.\ref{ch3:sec:analysis-approach}, I will give an overall explanation of the analysis approach of NA64 with a flowchart to explain each step. After that, a description of the simulation framework of NA64 will be provided in Sec.\ref{ch3:sec:geant4}, this is the main tool used for prediction of both background and signal rate.
-Then, in Sec.\ref{ch3:sec:selection-criteria} we will list the selection criteria used for both the visible and the invisible mode. This section also includes a new analysis performed on the visible mode data, which uses the information recorded by the trackers on top of the one provided by the calorimeters.
-Finally, a complete description of the background predicted for invisible and visible mode will be given in Sec.\ref{ch3:sec:bkg}. The background will be described first more generally, then by giving some more precise example, showing how a background channel can be studied and accounted for. We will show that using these methods the background is reduced at least below 0.5. Finally, a detailed description of two background rejection methods developed as direct consequence of my work, namely SRD rejection and shower profile analysis, will be given in Sec.\ref{ch3:sec:bkg-srd}-\ref{ch3:sec:bkg-ecal-profile}.
+In the previous chapter, we explored the general concepts, and all the components characterizing the invisible and visible mode setup. Now the method used to analyze them is described. In Sec.\ref{ch3:sec:analysis-approach}, I will give an overall explanation of the analysis approach of NA64 with a flowchart to explain each step. After that, a description of the simulation framework of NA64 will be provided in Sec.\ref{ch3:sec:geant4}, this is the main tool used for prediction of both background and signal rate.
+A detailed description of two background rejection tools developed as direct consequence of my work, namely SRD rejection and shower profile analysis, will be given in Sec.\ref{ch3:sec:bkg-srd}-\ref{ch3:sec:bkg-ecal-profile}.
+Then, we will provide a description of both the analysis performed for the invisible and visible mode setup in Sec.\ref{ch3:sec:analysis-invis} and Sec.\ref{ch3:sec:analysis-vis} respectively. In the case of the visible mode, this section also includes a new analysis which uses the information recorded by the trackers on top of the one provided by the calorimeters.
+For both analyses, the list of the selection criteria is provided, then the background is discussed in detailed. We show that in both modes the background is expected to be under control, with an average of expected event in the signal region of $\simeq 0.5$ for the invisible mode and $\simeq 0.01$ for the visible mode.
 
 
 \section{General Analysis approach}
@@ -226,304 +227,13 @@ Some modifications of the \textit{FTFP\_BERT} were decided to improve the agreem
   \label{fig:geant4-hadron-final}
 \end{figure}
 
-\section{Selection criteria}
-\label{ch3:sec:selection-criteria}
+\section{Background rejection methods}
 
-We define here the selection criteria used in the analysis to maximize our sensitivity. The cuts used are chosen based on their significance in the MC simulation, hence they maximize:
+In this section, we can give a brief overview of the two main methods used to reject hadrons (and muons) contamination in the beam developed as a consequence of my work.
 
-\begin{equation}
-  \label{eq:significance}
-  S = \frac{s}{\sqrt{s + b}}
-\end{equation}
+The first method exploits the emission of synchrotron radiation by the electrons during their passage in the magnetic field to distinguish the ID of the incoming particle. The nature of this radiation is described more in detail in Appendix.\ref{appB:sec:sr}, together with the most relevant equation in the NA64 scenario. The method was tested using BGO crystals during the test beam performed in 2016 and resulted in a total suppression of hadrons of $p \simeq 10^{-5}$ published in \cite{Depero:2017mrr}.
 
-Where $s$ and $b$ are again signal and background. In this context, the signal is not necessarily an event with $\DMM$ production, but the particle that the cut is supposed to select. In the case of SRD for example, the cut is required to select electrons and reject any other kind of particle. So $s$ will be the number of electrons selected by the cut and $b$ will be the number of non-electron ($\pi^-$, $\mu^-$ selected). Since only $e^{-}$ can trigger the reaction $\ea$, this requirement also maximize the sensitivity of the experiment. The cuts are then optimized using the calibration run and control sample to take into account the effect caused by pileup and electronics as explained in Sec.\ref{ch3:sec:analysis-approach}.
-
-\subsection{Invisible mode}
-\label{ch3:sec:selection-criteria-invis}
-
-The selection criteria needs to select 100 $\gev$ electrons and reject any events involving interactions before reaching the target. A precise description of the background is left for Sec.\ref{ch3:sec:bkg}. Events are accepted if they surpass the following criteria:
-
-\begin{itemize}
-\item The difference between the reconstructed momentum and the nominal beam energy of 100 $\gev$ is not larger than 5 $\gev$. Additionally, the entrance angle of the particle needs to be within 2 $\mrad$ from the mean angle recorded in the calibration run. The track also needs to be reconstructed with a $\chi^2<5$.
-\item A deposit of at least 1.3 $\mev$ and not larger than 80 $\mev$ is required in each SRD crystal. Each signal is also required to be in a window of 5 $\nas$. To reject large backscattering from the ECAL, the maximum energy of 120 $\mev$ is allowed in total in the SRD. These cuts ensure the suppression of heavy charged particles in the beam.
-\item The energy deposited in the ECAL is required to be in time with $S_0$ within 13 \nas. If more than 30 $\gev$ energy is recorded out of time, the event is rejected. Furthermore, the largest energy deposit in the ECAL needs to be in the ECAL central cell\footnote{The cell is labeled (3$\times$3), a sketch can be seen in Fig.\ref{fig:ecal_example}}. The periphery of the shower is also checked by taking the ratio between the energy deposited outside of the 3$\times$3 matrix that surrounds the central cell and the total energy deposited in the ECAL. Since most of the energy of an em-shower will be deposited inside the Moliere radius, the value outside of it should be below 5\% of the total energy deposited. Finally, the compatibility with an em-shower is checked using the method described in Sec.\ref{ch3:sec:bkg-ecal-profile} with a cut $\chi^2 < 8$.
-\item All events with signal above noise in the VETO are rejected to avoid punch-through from the main target. The precise value of the cut is defined as 0.9$\times \emip$.
-\item Events where the energy deposited in one of the cells in the periphery of the HCAL is larger than the one deposited in the center are rejected.
-\item Events with multiple hits in the straw chamber are removed from the analysis. This cut is used to remove the contamination due to electron-hadron production upstream of the ECAL.
-\end{itemize}
-
-The efficiency of these cuts was studied using the MC simulation and the electron calibration runs.
-%A small summary of the uncertainty is provided in Table \ref{tab:inv-cut-eff}.
-The effect of these cuts can be appreciated in the $\ehcalplane$ plane, where the evolution from the original sample is particularly relevant. These effects are shown in Fig.\ref{fig:inv-cut-ehcal}, most notably the amount of hadrons is seen to greatly reduced after the SRD cut is applied, and consequentially the dimuon region becomes more visible. The VETO cut then removes most of the punchthrough particles, including dimuons. Finally, when the tracking selection criteria are applied, a large portion of the low energy deposit event and strong scattering upstream disappear\footnote{This is mostly visible in the requirement of "GoodTrack", visible between plot 5 and 6}.
-
-
-\begin{figure}[bth!]
-  \centering
-   \includegraphics[width=\textwidth]{\pdirthree/ec-hc-plots-veto-nobad-runs.png}
-  %\includegraphics[width=\textwidth]{\pdirthree/ec-hc-plots-veto-nobad-runs.pdf}
-  \caption[effect of the cuts in invisible mode]{Effect of selection criteria in the $\ehcalplane$ on the sample of data collected in 2018 invisible mode \cite{invis-cut-plot,NA64:2019imj}.}
-  \label{fig:inv-cut-ehcal}
-\end{figure}
-
-\subsection{Visible mode}
-\label{ch3:sec:selection-criteria-vis}
-
-For the visible mode, the signal is searched by matching the energy deposited in the target with the one detected by the ECAL downstream. Similarly to the invisible mode, several selection criteria ensure that the incoming particle is a well-defined electron track. Although the tracking procedure is still used to work with the control sample, the incoming particle is not required to have a momentum matching the nominal beam energy. This is because the energy conservation selection criteria already ensure that the particle will have a well-defined energy. The selection criteria for the visible mode can be summarized as follow:
-
-\begin{itemize}
-\item An energy above 1 $\mev$ is required in each SRD, and the total energy detected in both counters needs to be larger than 10 $\mev$. Events, where the energy deposit surpasses 200 $\mev$, are removed to suppress large scattering upstream or backscattering from the WCAL.
-\item Energy deposit $E_{PS} > 5 \gev$ compatible with an electron in the WCAL pre-shower.
-\item Energy deposited in S4 compatible with two MIP in the decay volume. This cut amounts to $E_{S_4} > $1.5$\times \emip$.
-\item At least 25 $\gev$ deposited in the ECAL. This cut rejects events where low energy particle punch-through the WCAL.
-\item The maximal energy of the shower should be deposited in the cell of the ECAL aligned with the beam axis (labeled as 3$\times$3). The longitudinal and lateral shape of the shower should be consistent with a single em-shower\footnote{Although the signal is expected from a $\ee$ pair, the distance of just a few $\mmi$ between the two particles does not allow for a separation between the two showers}. This means a maximal energy of 3 $\gev$ is allowed in the pre-shower of the ECAL and a compatibility of the transversal shape $\chi^2 < 10$ is required.
-\item  No energy deposit in the W2 counter placed after the WCAL. The value of this cut is $E_{W2} < $0.7$\times \emip$ \cite{Banerjee:2019hmi}.  
-\item Energy deposited in the VETO has to be smaller than 0.9$\times \emip$, energy deposited in each HCAL modules needs to be smaller than 1 $\gev$.  
-\end{itemize}
-
-The signal region is finally defined by looking at events where the sum of WCAL and ECAL energy is matching the nominal beam energy within the energy resolution of the detectors. This energy was originally 100 $\gev$ in 2017, but was increased to 150 $\gev$ in 2018 to boost the sensitivity for short-lived $\DMX$ (see Fig.\ref{fig:w-e-vis}).
-
-\subsubsection{Visible mode analysis using the tracking approach}
-\label{ch3:sec:vis-mode-tracking}
-
-The published analysis using the data collected in 2018 \cite{Banerjee:2019hmi} was based exclusively on the calorimeters and counters as described in Sec.\ref{ch2:sec:vismode}. The trackers after the decay volume were not used for signal discrimination. Here we present a novel method that exploits them providing a boost in the signal yields while maintaining the background under control. Even though this analysis is not sensitive when the decay length of the $\DMM$ is significantly smaller than the dimension of the dump, it has the advantage of being complementary to the calorimeter analysis. Unfortunately, the particularly interesting parameter space justifying the protophobic vector boson explanation of the $^8$Be anomaly is not significantly ($\lesssim$1\%) improved by this approach, the reason being the small decay length of $\DMX$ in the high-coupling region. It provides however an independent confirmation of the results obtained in \cite{Banerjee:2019hmi}, and a confirmation of the tracking procedure that be used in the next generation of this experiment (see Sec.\ref{ch5:sec:new-vismode-setup}).
-
-While in a first approximation the $\DMM$ is produced in the first few layers of the WCAL, it can also originate at a later stage of the em-shower. These events, which are typically rejected in the calorimeter analysis, are instead accepted in the new analysis presented here. First, an initial sample is selected in the same way described above. The final discrimination in the calorimeter analysis is based on the counter W2 placed at the end of the dump to reject the charged punch-through from the em-shower. This last cut is efficient if the $\DMM$ is produced in the first few layers of the WCAL but typically rejects the event if the $\DMM$ is produced at a later stage of the em-shower. The reason is that these events are accompanied by a long longitudinal development of the em-shower that leaves an energy deposit larger than the typical energy cut accepted in the calorimeter analysis. On the other hand, the low energy of the produced $\DMM$ implies a larger angle between the decay products that can be resolved by the trackers. Combining these two concepts, one can see that the signal yield is characterized by two different topologies that can be easily distinguished by looking at the energy deposited in the ECAL (see Fig.\ref{fig:combined-analysis}).
-
-Using this distinction, we divide all events that passed the initial selection criteria in two topologies based on the total energy deposited in the ECAL. The exact value of this threshold was selected to maximize the signal yield. The optimal value has a small dependence on the $\DMM$ mass and coupling. A simple threshold of 75 GeV amounting to half of the initial beam energy was found to be robust for most of the interesting signal scenario. After the topology is decided, a final set of cuts is applied to discriminate between signal and background. In the case of high energy $\DMM$, trackers do not have the capability of discriminating between single hits. If the energy deposited in the ECAL surpasses the 75 $\gev$, the selection criteria applied will be the one one described in the previous section. On the other hand, if the energy deposited in the ECAL is smaller than 75 GeV, trackers are used instead of the W2 as discriminator for an $\DMM$ production. Two tracks in the decay volume are required with a reconstructed vertex within 3$\sigma$ from the WCAL and an angle smaller than 3 $\mrad$. This different treatment leads to increased efficiency of the $\DMM$ produced at a late stage of the shower as shown in Fig.\ref{fig:combined-analysis}. However, the smaller energy of the $\DMM$ produced in this way has the effect of reducing the probability of the particle escaping the dump. For large coupling $\epsilon$ this suppression can be more than 2 orders of magnitude, making the boost of signal yield negligible. A summary of this boost for various interesting $\DMM$ scenario is illustrated in Table \ref{tab:dm:efftable}. The values reported consider also a conservative correction factor of 0.77$\pm$0.1 that takes into account inefficiencies of the detectors and the reconstruction algorithm. This factor was evaluated using a data-driven method precisely outlined in Sec.\ref{ch3:sec:dimuons}. We conclude that in the current setup trackers do not improve the limit on the $\DMX$ parameter space significantly. This is because the boost in signal yield becomes negligible for $\epsilon \sim 6 \times 10^{-4}$, a value which is already excluded with 90\% confidence by our previous analysis \cite{Banerjee:2019hmi}.
-
-\begin{figure}[tbh!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/X17-separation-v2.png}
-  \caption[Comparison of selected $\DM$ between the calorimeter and tracking analysis]{$\DM$ simulated in the visible mode 2018 setup. Two different cuts are used to discriminate between two $\DM$ topologies. The first one is based on angle cut and vertex position using information from the 4 GEM stations installed in the decay volume and is very efficient on the $\DM$ produced at low energy (red triangle). The second one relies on the Veto placed at the end of the dump and is more efficient for the high energy population (blue square).}
-  \label{fig:combined-analysis}
-\end{figure}
-
-\begin{table}[h!]
-  \centering
-  \begin{tabular}{|llr|}
-    \hline
-    M$_{A'}$ [MeV]& $\epsilon$ & N$^{new}_{A'}$ / N$^{old}_{A'}$ \\    
-    \hline
-    5    & 0.004    & 1   \\    
-    1    & 0.0015   & 1   \\    
-    1    & 0.003    & 1   \\    
-    16.7 & 0.0001   & 1.22\\
-    16.7 & 0.00018  & 1.2 \\    
-    16.7 & 0.000316 & 1.2 \\
-    16.7 & 0.0006   & 1.01\\
-    16.7 & 0.0007   & 1   \\
-    22   & 0.000316 & 1.22\\
-    \hline    
-  \end{tabular}
-  \caption[ratio between signal events observed in tracker-analysis compared to calorimeter-only analysis]{N$^{new}_{A'}$ / N$^{old}_{A'}$ ratio between signal events observed in tracker-analysis compared to calorimeter-only analysis. The new analysis uses cuts based on GEM tracking detectors if the energy detected by the downstream ECAL is below 75 GeV.}
-  \label{tab:dm:efftable}
-\end{table}
-
-\section{Background}
-\label{ch3:sec:bkg}
-
-In this section, we will try to go more in detail of what constitutes background in the NA64 experiment. With background, we mean an event detected in the signal region without involving the emission of $\DM$ that was able to pass all our selection criteria. Because of the different physics involving them, it is instructive to divide the background by the primary particle considered. We can define three categories:
-
-\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Electronic background}]
-\item[Hadronic background] Background coming from a hadronic ($\pi^-$,$K^-$,...) primary.
-\item[Muonic background] Background coming from a $\mu^-$ primary.
-\item[Electronic background] Background coming from a $e^-$ primary.
-\end{description}
-
-This classification is convenient, especially if one wants to study the background using MC-simulations. However, there is some overlap in the physics of these three scenarios. A trivial example would be the decay $\pi^- \rightarrow \mu^-\nu$, where an initial $\pi^-$ produces a $\mu^-$ in our setup. A more relevant but involved example is an $e^-$ or a $\gamma$ which triggers an hadronic shower after an inelastic scattering with a nucleus. This can cause energy escaping in the form of hadron, and since the initial particle is an electron, such background is also accepted by the SRD criteria. The main advantage of this classification is that it let us calculate the suppression factor for the background with a simple argument without necessarily using the MC-simulation. For example, for both hadronic and muonic background, we can conservatively assume a factor $10^{-5}$ of suppression due to both the beam-composition ($\lesssim 10^{-2}$) and the SRD selection applied upstream ($\lesssim 10^{-3}$).
-
-\subsection{Invisible mode background}
-\label{ch3:sec:bkg:inv}
-
-\subsubsection{Hadronic background}
-\label{ch3:sec:bkg:inv:hadr}
-
-
-In the case of invisible mode, the \textbf{Hadronic background} can arise simply from a $\pi^-$ that after leaving minimal energy in the ECAL, travels through the HCAL undetected. The probability of this happening with a total interaction length of 21 $\lambda_{int}$ is $p\lesssim 10^{-9}$. This number does not account for the high-efficiency VETO after the ECAL, SRD rejection, and the fact that the HCAL can detect a MIP interaction even without an inelastic interaction happening. Each of these factors pushes the background well below $<10^{-13}$ as pointed out in the NA64 first proposal \cite{Andreas:2013lya}. A more relevant background would be an inelastic scattering inside the ECAL in a process:
-
-\begin{equation}
-  \label{eq:pion-nucleus-scattering}
-  h + Z \longrightarrow h + Z + (hadrons)
-\end{equation}
-
-In this process, part of the energy can evaporate as a consequence of some particles emitted at a large angle and thus escaping the setup in the direction transverse to the beam. This background is suppressed by shower profile analysis, energy deposited in the pre-shower, and the VETO cut. The phase space of this process is however very complicate, and a lot of possible phenomenologies can arise from it. For example, large energy deposited in the pre-shower can be a simple consequence of some $\pi^0$ backscattering after the hadronization, while the shower profile can mimic the one of an electron if a large fraction of energy in the inelastic scattering is carried away by $\pi^0$. Also, if particles are emitted in the form of neutrons or other neutrals as $\ks$, the VETO would be ineffective to reject them.
-
-To have an estimate, we can take the process \ref{eq:pion-nucleus-scattering} and assume $\geq$2 neutrals particles are produced in the hadronization. This gives us a probability equal to \cite{gkkk1}:
-
-\begin{equation}
-  \label{eq:transverse-leak-estimate}
-  P \simeq P_n \cdot P_{la} \cdot P_{leak}
-\end{equation}
-
-Where we define $P_n$ the probability of such interaction to occur, $P_{la}$ the probability to produce particles at large scattering angle, and $P_{leak}$ the probability to escape HCAL without interactions. Here we stress again that this formula hides a large number of topologies that such an event could have, but is instructive to get an intuition for these processes. Since the ECAL has $\lambda_{int} \simeq 0.5$, the probability of interaction for an hadron is fairly high (roughly 50\% of the time such interaction will happen). We need at least 50 $\gev$ of energy leaking to produce a signal event. If we assume two neutrals to be produced at $\Theta_{n} \simeq 30$\si{\degree} this would mean crossing at least 4$\lambda_{int}$ each, for a $P_{leak} \lesssim 3 \cdot 10^{-4}$. We can take the measured values of NOMAD to estimate the value of the cross-section in this range \cite{AUTIERO1998285,GNINENKO1998583}. The probability of separating a cluster with energy $>$0.1E$_{\pi}$ at an angle $\Theta_{n} \gtrsim 30$\si{\degree} was measured to be P$_{la} \simeq 10^{-5}$ and it drops very quickly with the beam energy: a factor 20 difference was found between 15 $\gev$ and 6 $\gev$ $\pi^-$. Even if we take conservative value as $P_{la}$, we see that the probability of the energy to escape is already $P\simeq 10^{-9}$, which multiplied to the hadron contamination and SRD suppression leads to an estimate of $P<10^{-14}$ for this background.
-
-Another possible background is the decay of hadron inside the setup in neutrinos, which would cause some energy to disappear from the setup. The high energy of the primary suppress this background, since at 100 GeV the chance for a $\pi^-/K^-$ to decay is $P^{decay}_{\pi} \simeq  10^{-2}$(\footnote{calculated for a total length of 20 m assuming light-speed.}). Multiple possible decays are accompanied by a neutrino emission, the most likely one being the $\pi^-$ decay $\pi^- \rightarrow mu^- \nu_{\mu}$. The emission of the muon makes such decay very easy to spot, since it will leave an energy deposit both in the VETO and the HCAL, for a total probability similar to the one of a punch-through $\pi^-$ ($P < 10^{-14}$). One could argue that the $\mu^-$ could decay: $\mu^- \rightarrow e^- + \nu_{mu}+ \hbar{\nu_{e}}$, producing an electromagnetic shower with missing energy. The long decay time of the $\mu^-$ adds however an additional suppression factor of $P\simeq 10^{-5}$, which together with the upstream selection criteria put the background conservatively at $P \lesssim 10^{-13}$.
-
-Another background comes from a decay of $K^-$: $K^- \rightarrow \pi^0 + e^- + \hbar{\nu_e}$, commonly called $K^-_{3e}$, with a branching ratio of $\Gamma_i/\Gamma_{tot} \approx$0.05 \cite{particle-strange-mesons}. The total probability of background for an incoming $K^-$ is around $P\simeq 10^{-3}$ accounting for both probabilities of decay and branching ratio. A MC-simulation of $K^-$ confirms this simple estimate as shown in Fig.\ref{fig:kaonbkg-sim}, where the fraction of the events in the signal region corresponds to the probability calculated. Multiplying this probability for the SRD selection criteria and the suppression from the beam returns a probability of $P_{K_{3e}} < 10^{-12}$. %\footnote{Here a suppression from the beam of 10$^{-3}$ is used, since the $K^-$ is a smaller fraction than the contamination \cite{h4-beamline}}.
-There are however additional factors of rejection for this background that can be investigated using MC-simulations. A more precise account of SRD in this scenario and the effects of the tracking and shower profile push this background to $P_{K_{3e}} \lesssim 10^{-13}$.
-
-
-\begin{figure}[bth!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/kaonbkg.pdf}
-  \caption[$K^-$ simulation ]{Energy deposited in the $\ehcalplane$ plane after simulating $10^7$ $K^-$ as primary particle in the NA64 setup.}
-  \label{fig:kaonbkg-sim}
-\end{figure}
-
-\subsubsection{Muonic background}
-\label{ch3:sec:bkg:inv:muon}
-
-This type of background is also largely suppressed by both beam composition and SRD selection criteria, to a level of
-%\footnote{Here the suppression from the beam composition is larger ($10^{-3}$) \cite{h4-beamline} and SRD selection criteria are more stringent ($10^{-4}$) due to the absence of back-scattering.}
-$\lesssim 10^{-7}$. As in the case of $\pi^-$, we can convince ourselves that a complete punch-through of the setup without being detected is negligible. Indeed the muon needs to travel through both the VETO and 3 HCAL modules without leaving any detectable energy deposit. Using $p^{VETO} \simeq 10^{-3}$ for leaving undetectable energy in the VETO and $p^{HCAL} \simeq 10^{-4}$ to deposit less energy than the threshold in all modules, we see that the background is conservatively $< 10^{-14}$. In the case of muons, nuclear interaction is less likely. Thus, there is no chance for a large amount of energy to escape transversely. What remains is the decay $\mu^- \rightarrow e\nu\nu$, with neutrinos in the final state. The decay time of $\mu^-$ adds a suppression of $\lesssim 10^{-5}$. Similar to the previous case, proper accounting of SRD, tracking, and shower profile accounts for an additional $p\sim 0.1$ factor. The final level of this background is of $P_{\mu} \lesssim 10^{-13}$.
-
-\subsubsection{Electronic background}
-\label{ch3:sec:bkg:inv:elec}
-
-The last type of background is originating from electron primary. Since the beam is primarily made of electrons, and SRD are tuned to select them, no upstream suppression factor can be achieved. Simple punch-through of an electron through the whole setup is not possible, since the path is blocked by 3 HCAL modules. Other similar events, with energy losses due to non-uniformity and cracks in the ECAL/HCAL were as well studied and found unrealistic \cite{Andreas:2013lya}. Low energy electrons is also potentially background: if a primary electron with $E_0 < E_{th}$ arrives at the ECAL it will leave an energy deposit compatible with the signal. Such a background was also found extremely unlikely. The amount of electron $N(E_e<E_{th})$ in the beam with energy lower than the energy threshold for the signal amounts conservatively to $<10^{-2}$. Such particles are normally deflected by the two MBPL magnets outside the acceptance of the ECAL\footnote{A quick calculation shows that for $E_0$=50 $\gev$ the difference in deviation is about 0.4 \si{\meter}}. The tracking system in NA64 makes sure that the energy of the incoming particle is always measured with a resolution of $\delta p/p \approx 1\%$ \cite{Banerjee:2017mdu}, particles with large entrance angle in the magnet can in principle enter in the acceptance of the magnet, but their momentum is reconstructed by observing their displacement in the Micromegas. A dedicated simulation of $10^{10}$ EOT was performed by simulating electrons with energy compatible with the signal region. No event was found in the signal region after requiring a reconstructed momentum within 3$\sigma$. This allows us to put this background conservatively at a level of $\lesssim 10^{-13}$.
-
-An important source of background to be considered is the dimuon production inside the target. As mentioned, these events are very useful to check for systematics and validated the MC. However, fluctuation in the energy deposited in the HCAL might leak in the signal region. The background was estimated by exponential extrapolation of the control sample inside the signal region ($E_{HCAL} < 1 \gev$) considering the sideband I depicted in Fig.\ref{fig:ehcal-bkg-bands}. This estimate was performed using the control sample without applying the VETO cut, that is then taken into account as a factor $\sim 10^{-6}$ (probability of two MIP to leave no energy).
-
-\begin{figure}[bth!]
-  \centering
-  \includegraphics[width=0.45\textwidth]{\pdirthree/EHCAL_lastpub_left.png}
-  \includegraphics[width=0.45\textwidth]{\pdirthree/EHCAL_lastpub_right.png}
-  \caption[ECAL vs HCAL events band]{Distribution of events in the $\ehcalplane$ plane for the control sample of the data. The right panel shows the sample with all the selection criteria. The left panel shows the same sample without the VETO cut. The shaded area is the signal box. The size of the signal box is increased by a factor 5 in the Y-axis direction for illustration purposes. The region labeled I contains events caused by dimuon production, while region II contains mostly event leaking from the ECAL into the HCAL. The sidebands A and C are used to estimate the background inside the signal region \cite{NA64:2019imj}.}
-  \label{fig:ehcal-bkg-bands}
-\end{figure}
-
-Finally, the leading background in the invisible mode setup is the electro-nuclear and photo-nuclear production of neutral hadrons at a large angle. This case is similar to the one discussed for hadrons, but no additional suppression due to beam-composition and SRD selection criteria is present. In first approximation, the rarity of such interaction balances the absence of suppression factors, and accounts for $P_n \simeq 10^{-6}$ (see Eq.\ref{eq:transverse-leak-estimate}).
-The largest source of background, however, comes from electro-nuclear production happening upstream of the target. As Fig.\ref{fig:eh-prod-sketch} shows, if this interaction happens in a detector with a large distance from the ECAL, the displacement of the particle can be large enough to exit the setup transversely. 
-
-
-\begin{figure}[bth!]
-  \centering
-  \includegraphics[scale=0.4]{\pdirthree/hcal-leak.pdf}
-  \caption[upstream electro-hadron production upstream]{Sketch of electro-nuclear interaction happening upstream the ECAL leading to a possible background \cite{pdegen-thesis}.}
-  \label{fig:eh-prod-sketch}
-\end{figure}
-
-This background can be estimated by looking at the periphery region of the HCAL. Since the angular distribution is sharply suppressed for large angle \cite{AUTIERO1998285,GNINENKO1998583}, these particles typically leave an energy signature in the periphery of the first HCAL when they miss the ECAL. For this purpose, we define the variable R, defined as the ratio between energy deposited in all cell excluded the central one, and the total energy deposited in the modules:
-
-\begin{equation}
-  \label{eq:R-factor}
-  R = \frac{E^{all}_{HCAL} - E^{center}_{HCAL}}{ECAL^{all}_{HCAL}}
-\end{equation}
-
-In a normal event with particles leaking the ECAL, we typically observe $R<0.5$, as the HCAL module center is aligned with the beam direction, thus the dominating energy deposit will be in the central cell. If an electro-nuclear production happens upstream however, some distortion of this variable will be visible. In the most extreme scenario when the particle is missing the ECAL completely, the R value can be equal 1, since the central cell of the HCAL will be shielded by the ECAL while the periphery will be directly hit. We can observe such behavior in Fig.\ref{fig:r-value-csample}: most of the event considered have an R peaked at 0.35. Events, where the primary electron loses a large portion of its energy due to bremsstrahlung, are shown in region III and are responsible for events with large R. In this topology of events, the electron completely misses the ECAL after being deflected by the magnetic field, while the hard-$\gamma$ produced in the interaction propagates without being deflected and hits the HCAL in the periphery. Such events are also easily identifiable by looking at the HCAL placed in from the original beam direction. In the event of region III, this detector measure energy deposit $E>60$ $\gev$.
-
-\begin{figure}[bth!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/pp30-calsr-uncut-may2.pdf}
-  \caption[R value for control sample]{Energy distribution in the $\ehcalplane$ (left) and the corresponding distribution of the R for different interesting regions. Region I is populated by the dimuon production inside the ECAL. Region II are events leaking in the HCAL characterized by energy conservation. Region III contains events with hard bremsstrahlung of the $e^-$ upstream, where the primary completely miss the ECAL and the $\gamma$ energy is deposited in the HCAL periphery. Region IV is characterized by pileup events \cite{pdegen-thesis}.}
-  \label{fig:r-value-csample}
-\end{figure}
-
-Events with electro-nuclear scattering upstream are characterized by a distribution equivalent to the one of region III. The agreement of the R distribution between data and simulation was checked using data of HCAL and ECAL calibration runs, which shows a good fit with the simulated samples and small differences between different species of hadrons. This background can be suppressed by two additional tools:
-
-\begin{itemize}
-\item The straw tube in the beamline, as shown in Fig.\ref{fig:eh-prod-sketch} are in the way of the hadrons and can detect them in the periphery of their active area. A simple constraint that requires all hit to be within 3$\sigma_{beam}$ can reject this background effectively. A cut based on the multiplicity of the hit was observed to be equally powerful, since electro-nuclear interaction will produce a large number of particles in the final state. \cite{pdegen-thesis}.
-\item Since electronuclear interactions produce a large number of particles, this interaction saturates the MM detector strip output. A cut based on the total charge deposited in each plane is also effective to suppress the background \cite{na64-invisible-cuts}.
-\end{itemize}
-
-The first cut removed the contamination in the control sample, and where accounted for in the final background estimate. In practice, the background was extrapolated using an exponential distribution of the type:
-
-\begin{equation}
-  \label{eq:bkg-extrapolation}
-  e^{a \cdot E_{ECAL} + b}
-\end{equation}
-
-The parameters $a$ and $b$ are fitted using the data in the sideband C of the control sample, i.e. events with E$_{HCAL}<$ 1 $\gev$ and $E_{ECAL}>E_{th}$, and then integrated over the signal region. The results of this estimate were then accounted for conservatively in Table \ref{tab:inv-bkg}.
-
-\begin{figure}[bht!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/HCraio-e-428-pi-3924-MC.pdf}
-  \caption[R value comparison]{Distribution of the R variable for the 80 $\gev$ $e^-$, $\pi^-$, $K_L^0$ and n events obtained from data during the ECAL and HCAL calibration runs \cite{Banerjee:2020fue}.}
-  \label{fig:R-comp}
-\end{figure}
-
-\begin{table}[bth!]
-  \centering
-  \caption[Invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected at the time this thesis was written \cite{NA64:2019imj}}
-  \begin{tabular}{lr}
-    \hline \hline
-    Background source & Background, $n_b$ \\
-    \hline
-    $\pi^-$,$\mu^-$ punchthrough                      & $<10^{-14}$ \\
-    low energy $e^-$                                  & $<10^{-13}$ \\
-    $e^-$/hadron nuclear interaction in target        & $<0.044$   \\
-    $\pi^-$,$\mu^-$, $K_{3e}$ decay                    & 0.02 $\pm$ 0.01 \\
-    $e^-$ nuclear interaction in the  beam line       & 0.43 $\pm$ 0.16 \\
-    \hline
-    Total (conservatively)                            & 0.53 $\pm$ 0.17 \\
-    \hline \hline                       
-  \end{tabular}
-  \label{tab:inv-bkg}
-\end{table}
-
-
-\subsection{Visible mode background}
-
-Since now the signal requires the sum of the energy deposited in the two calorimeters (WCAL and ECAL) to be equal to the incoming primary energy, particles escaping the setup in the transverse direction are no longer a source of background. Because of the large distance between the WCAL and ECAL\footnote{7.5 \si{\meter} in the 2018 setup, 4.2 \si{\meter} in the 2017 setup}, such event is actually very likely. The background, on the other hand, can be caused by particles able to punch-through the first target without leaving any energy deposit in the W2 counter placed immediately after and then leave a pure electromagnetic signature in the ECAL downstream. Because of the different lengths of the setup and the addition of a vacuum tube (see Fig.\ref{fig:setup-vis-2018}), the background calculated for 2017 and 2018 differs significantly. The exact suppression depends on the exact source of background considered, but it can amount up to one order of magnitude \cite{Banerjee:2019hmi}. This thesis presents an alternative approach to \cite{Banerjee:2019hmi} that relies on the GEM trackers to boost the signal yield. The method is detailed in Sec.\ref{ch3:sec:vis-mode-tracking}, and consists of applying final discrimination to the event based on a tracking procedure instead of the W2 counter when the energy detected in the ECAL is smaller than 75 $\gev$. The background condition do not differ significantly and are reported in Table \ref{tab:vis-bkg}
-
-
-\subsubsection{Hadronic background}
-\label{ch3:sec:bkg:vis:hadr}
-
-Starting from the most simple scenario, punch-through of $\pi^-$ can be background if no energy is deposited in the W2 counter, an energy $> 2\emip$ in S4 is deposited, and the particle deposit the rest of its energy in the ECAL. The product of these probabilities was conservatively estimated to be $< 10^{-12}$ when factoring SRD and HCAL suppression. Inelastic scattering in the WCAL, for example in the form of
-
-\begin{equation}
-  \label{eq:vis-int-neutral}
-  \pi^- + p \rightarrow (\geq 1)\pi^0 + (neutrals)
-\end{equation}
-
-can be a source of background as they can punch-through the W2 undetected. This background was estimated using the extrapolation of the charge-exchange cross-section, measured on different nuclei, after taking into account SRD rejection. In the tracking-analysis, inelastic scattering in the WCAL produces a large occupancy in the decay volume that can potentially create vertex candidates. Such events are expected to be suppressed by the selection criteria applied downstream for hadron rejection outlined in Sec.\ref{ch3:sec:selection-criteria-vis}. Furthermore, events able to mimic the pure electromagnetic signal of the decay $\DM \rightarrow e^+ e^-$ are often accompanied by a large transversal spread and are thus rejected by the requirement of energy conservation at a level of $\lesssim 10^{-5}$. This estimate was obtained by integrating the events in the signal region with two tracks in the decay volume without applying any rejection criteria for hadrons in a $\pi^-$ simulation. Such an event should also pass the independent selection criteria applied upstream, namely large energy deposited in the SRD and WCAL pre-shower. In a sample up to $10^7$ EOT, it was not possible to find an event with such signature even after removing the HCAL and VETO from the selection criteria.
-
-To estimate the background for a larger number of EOT, the $\ks$ decay was used as a benchmark process, as its short decay length is expected to be compatible with the ones of the $\DM$. The energy spectrum of $\ks$ was simulated using an exponential distribution with an energy cut-off of 18 GeV, as $\ks$ below this energy has a negligible probability to decay outside the dump. To estimate the number of $\ks$ in the sample, neutrals event were selected by applying all selection criteria to the control sample but changing the requirement for $S4$ to $E_{S4} < 0.5 \emip$. The distribution of these events is shown in Fig.\ref{fig:w-e-vis}. Here we label signal-like the events that passed all selection criteria in the control sample. One such event was recorded in 2017, well outside of the signal region. In 2018 the number of neutral was reduced by a factor 2-3, and no signal-like events were observed. These data were used to estimate the ratio between neutral and signal-like events using the MC-simulation of $\ks$. This resulted in an estimate of 0.06 events for the 2017 data and 0.005 events for 2018 data. The statistical fluctuation of the data dominates the error for this estimate.
-
-To estimate the background for the tracking analysis, tracking-criteria were applied over the $\ks$ MC-sample. It was estimated that a rejection of $10^{-2}$ can be conservatively achieved for this background using the opening angle of the reconstructed vertex as a discriminator. This estimate however mostly depends on the main hadronic decay channel $\ks \rightarrow \pi^- + \pi^+$ which is further suppressed downstream by the hadron suppression cuts such as no energy deposited in the HCAL and the VETO. The decay channel $K^0_S \rightarrow \pi^0 + \pi^0$ has on the other hand a small chance to leave any signature in the GEM modules as no charged particle is typically emitted. Signal-like events can be produced either by the conversion of a photon from the $\pi^0 \rightarrow \gamma \gamma$ decay into a $\pair$ pair or in the decay chain $\ks \rightarrow \pi^0 + \pi^0 (\pi^0 \rightarrow \gamma + e^- + e^+$). This last channel is however suppressed by its low branching ratio $\Gamma_i$/$\Gamma \approx $1\% \cite{review-particle-physics}. A dedicated simulation performed with a biased branching ratio shows that the rejection for this channel is further improved to $\lesssim 10^{-3}$ since the large emission angle of a three-body decay is significantly different from the one expected in the $\xdecay$ decay. A conservative rejection of $\lesssim 10^{-5}$ is reached accounting both suppression factors. If we add the suppression factor coming from the angle using the trackers to what was computed for the calorimeter-analysis, one can conservatively estimate the background contribution from $\ks$ to be at a level of $<0.001$.
-
-
-\begin{figure}[bth!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/w-e-neutrals.pdf}
-  \caption[neutral events in visible mode]{Distribution of selected signal-like events in the $\ehcalplane$ plane for 2017 and 2018 data. Neutral events are shown as hollow (2017) and full (2018) triangles. The two shadowed bands represent the signal box region for the two different runs. A single signal-like event detected during the 2017 run not falling into the signal region is shown with a red triangle \cite{Banerjee:2019hmi}.}
-  \label{fig:w-e-vis}
-\end{figure}
-
-\subsubsection{Muonic background}
-\label{ch3:sec:bkg:vis:muon}
-
-Background coming from $\mu^-$ primaries is very suppressed for the visible mode and is dominated by the probability of punch-through $\mu^-$ that leaves most of its energy inside the ECAL. This is similar to a $\pi^-$ punch-through, with the difference that the probability of it happening is lower due to both beam suppression and the absence of strong interaction. The background can be conservatively estimated to be $<10^{-14}$.
-
-\subsubsection{Electronic background}
-\label{ch3:sec:bkg:vis:elec}
-
-The main contribution of the background from $e^-$ primary is the punch-through of high-energetic $\gamma$ that converts on the last tile of the WCAL or some material downstream and produces an $\ee$ pair. Since this background depends on the longitudinal fluctuation of the em-shower, it is hard to predict using MC-simulations alone. To estimate such contribution for $\sim10^{11}$ EOTs a data-driven method is used. A sample of 3$\cdot 10^9$ EOT was considered, roughly corresponding to $\sim$10\% of the data collected in 2018. Events in the signal region with $E_{ECAL} < 105$ GeV were selected with the requirement of at least two hits in each GEM module. Only one event with such property was found. Assuming a suppression due to the angle and minimal vertex requirement of $10^{-3}$ or $S4$ selection criteria this would push our background down conservatively to a level $<10^{-13}$. The analysis of the full 2018 data is compatible with this estimate: a total of three events were found with 2 two hits in the GEM modules. For none of these events, it was possible to reconstruct a physical vertex, suggesting that these particles experienced large multiple-scattering inside the WCAL before reaching the GEMs.
-
-
-\begin{table}[bth!]
-  \centering
-  \caption[Visible mode background]{Expected background for 5.5$\times$ $10^{10}$ EOT collected in 2017 \cite{Banerjee:2018vgk} and the 3.3$\times$ $10^{10}$ EOT collected in 2018 \cite{Banerjee:2019hmi}. The third column shows background for 2018 including the GEM trackers in the analysis.}
-  \begin{tabular}{lrrr}
-    \hline \hline
-    Background source                           & $n_b$ (2017)      &  $n_b$ (2018)   & $n_b$ (2018, new analysis)\\
-    \hline
-    $\pi^-$ punch-through                        & 0.0015$\pm$0.0008 &  0.0007$\pm$0.0004   & 0.0007$\pm$0.0004   \\    
-    $\ks \rightarrow \pi^0 \pi^0$                     & 0.06$\pm$0.034    & 0.005$\pm$0.003 &     $<$0.001\\
-    $e^-$/hadron nuclear interaction  & 0.01$\pm$0.004    & 0.01$\pm$0.004  & 0.01$\pm$0.004\\    
-    $\mu^-$ punch-through                        & $<0.001$ & $<0.001$ & $<0.001$       \\            
-    $\pi^-$,$K^- \rightarrow e\nu$ $K_{4e}$              & $<$0.001 & $<0.001$ & $<0.001$\\
-    $eZ \rightarrow e Z \mu^+\mu^-;\mu^{\pm}\rightarrow e^{\pm}\nu\bar{\nu}$ & $<$0.001 & $<0.001$ & $<0.001$\\
-    punch-through $\gamma$ & $<$0.001 & $<$0.0005 & $<$0.001 \\
-    \hline
-    Total (conservatively)                      & 0.07 $\pm$ 0.035   & 0.006 $\pm$ 0.003  & 0.006 $\pm$ 0.003\\
-    \hline \hline                       
-  \end{tabular}
-  \label{tab:vis-bkg}
-\end{table}
-
-
+The second method consists of a shower profile analysis to check the compatibility of the energy deposited in each cell with the one predicted for an em-shower. A set of measurement performed using calibration runs were used to build a model to predict the energy deposit as a function of the impact point of the incoming particle extrapolated from the Micromegas.  This method was documented in an official NA64 note \cite{na64-shower-profile}, and achieved a background suppression of $p \simeq 10^{-3}$.
 
 \subsection{Heavy charged particle rejection using synchrotron radiation}
 \label{ch3:sec:bkg-srd}
@@ -868,6 +578,310 @@ The main difference between the two plots concerns some events with very low ene
 \end{figure}
 \fi
 
+\section{Invisible mode analysis}
+\label{ch3:sec:analysis-invis}
+
+\subsection{Selection criteria}
+\label{ch3:sec:selection-criteria}
+
+We define here the selection criteria used in the analysis to maximize our sensitivity. The cuts used are chosen based on their significance in the MC simulation, hence they maximize:
+
+\begin{equation}
+  \label{eq:significance}
+  S = \frac{s}{\sqrt{s + b}}
+\end{equation}
+
+Where $s$ and $b$ are again signal and background. In this context, the signal is not necessarily an event with $\DMM$ production, but the particle that the cut is supposed to select. In the case of SRD for example, the cut is required to select electrons and reject any other kind of particle. So $s$ will be the number of electrons selected by the cut and $b$ will be the number of non-electron ($\pi^-$, $\mu^-$ selected). Since only $e^{-}$ can trigger the reaction $\ea$, this requirement also maximizes the sensitivity of the experiment. The cuts are then optimized using the calibration run and control sample to take into account the effect caused by pileup and electronics as explained in Sec.\ref{ch3:sec:analysis-approach}.
+
+%\subsection{Invisible mode}
+%\label{ch3:sec:selection-criteria-invis}
+
+The selection criteria needs to select 100 $\gev$ electrons and reject any events involving interactions before reaching the target. Events are accepted if they surpass the following criteria:
+
+\begin{itemize}
+\item The difference between the reconstructed momentum and the nominal beam energy of 100 $\gev$ is not larger than 5 $\gev$. Additionally, the entrance angle of the particle needs to be within 2 $\mrad$ from the mean angle recorded in the calibration run. The track also needs to be reconstructed with a $\chi^2<5$.
+\item A deposit of at least 1.3 $\mev$ and not larger than 80 $\mev$ is required in each SRD crystal. Each signal is also required to be in a window of 5 $\nas$. To reject large backscattering from the ECAL, the maximum energy of 120 $\mev$ is allowed in total in the SRD. These cuts ensure the suppression of heavy charged particles in the beam.
+\item The energy deposited in the ECAL is required to be in time with $S_0$ within 13 \nas. If more than 30 $\gev$ energy is recorded out of time, the event is rejected. Furthermore, the largest energy deposit in the ECAL needs to be in the ECAL central cell\footnote{The cell is labeled (3$\times$3), a sketch can be seen in Fig.\ref{fig:ecal_example}}. The periphery of the shower is also checked by taking the ratio between the energy deposited outside of the 3$\times$3 matrix that surrounds the central cell and the total energy deposited in the ECAL. Since most of the energy of an em-shower will be deposited inside the Moliere radius, the value outside of it should be below 5\% of the total energy deposited. Finally, the compatibility with an em-shower is checked using the method described in Sec.\ref{ch3:sec:bkg-ecal-profile} with a cut $\chi^2 < 8$.
+\item All events with signal above noise in the VETO are rejected to avoid punch-through from the main target. The precise value of the cut is defined as 0.9$\times \emip$.
+\item Events where the energy deposited in one of the cells in the periphery of the HCAL is larger than the one deposited in the center are rejected.
+\item Events with multiple hits in the straw chamber are removed from the analysis. This cut is used to remove the contamination due to electron-hadron production upstream of the ECAL.
+\end{itemize}
+
+The efficiency of these cuts was studied using the MC simulation and the electron calibration runs.
+%A small summary of the uncertainty is provided in Table \ref{tab:inv-cut-eff}.
+The effect of these cuts can be appreciated in the $\ehcalplane$ plane, where the evolution from the original sample is particularly relevant. These effects are shown in Fig.\ref{fig:inv-cut-ehcal}, most notably the amount of hadrons is seen to greatly reduced after the SRD cut is applied, and consequentially the dimuon region becomes more visible. The VETO cut then removes most of the punchthrough particles, including dimuons. Finally, when the tracking selection criteria are applied, a large portion of the low energy deposit event and strong scattering upstream disappear\footnote{This is mostly visible in the requirement of "GoodTrack", visible between plot 5 and 6}.
+
+
+\begin{figure}[bth!]
+  \centering
+   \includegraphics[width=\textwidth]{\pdirthree/ec-hc-plots-veto-nobad-runs.png}
+  %\includegraphics[width=\textwidth]{\pdirthree/ec-hc-plots-veto-nobad-runs.pdf}
+  \caption[effect of the cuts in invisible mode]{Effect of selection criteria in the $\ehcalplane$ on the sample of data collected in 2018 invisible mode \cite{invis-cut-plot,NA64:2019imj}.}
+  \label{fig:inv-cut-ehcal}
+\end{figure}
+
+\subsection{Background}
+\label{ch3:sec:bkg:inv}
+
+In this section, we will try to go more in detail of what constitutes background in the NA64 experiment. With background, we mean an event detected in the signal region without involving the emission of $\DM$ that was able to pass all our selection criteria. Because of the different physics involving them, it is instructive to divide the background by the primary particle considered. We can define three categories:
+
+\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Electronic background}]
+\item[Hadronic background] Background coming from a hadronic ($\pi^-$,$K^-$,...) primary.
+\item[Muonic background] Background coming from a $\mu^-$ primary.
+\item[Electronic background] Background coming from a $e^-$ primary.
+\end{description}
+
+This classification is convenient, especially if one wants to study the background using MC-simulations. However, there is some overlap in the physics of these three scenarios. A trivial example would be the decay $\pi^- \rightarrow \mu^-\nu$, where an initial $\pi^-$ produces a $\mu^-$ in our setup. A more relevant but involved example is an $e^-$ or a $\gamma$ which triggers an hadronic shower after an inelastic scattering with a nucleus. This can cause energy escaping in the form of hadron, and since the initial particle is an electron, such background is also accepted by the SRD criteria. The main advantage of this classification is that it let us calculate the suppression factor for the background with a simple argument without necessarily using the MC-simulation. For example, for both hadronic and muonic background, we can conservatively assume a factor $10^{-5}$ of suppression due to both the beam-composition ($\lesssim 10^{-2}$) and the SRD selection applied upstream ($\lesssim 10^{-3}$).
+
+\subsubsection{Hadronic background}
+\label{ch3:sec:bkg:inv:hadr}
+
+
+In the case of invisible mode, the \textbf{Hadronic background} can arise simply from a $\pi^-$ that after leaving minimal energy in the ECAL, travels through the HCAL undetected. The probability of this happening with a total interaction length of 21 $\lambda_{int}$ is $p\lesssim 10^{-9}$. This number does not account for the high-efficiency VETO after the ECAL, SRD rejection, and the fact that the HCAL can detect a MIP interaction even without an inelastic interaction happening. Each of these factors pushes the background well below $<10^{-13}$ as pointed out in the NA64 first proposal \cite{Andreas:2013lya}. A more relevant background would be an inelastic scattering inside the ECAL in a process:
+
+\begin{equation}
+  \label{eq:pion-nucleus-scattering}
+  h + Z \longrightarrow h + Z + (hadrons)
+\end{equation}
+
+In this process, part of the energy can evaporate as a consequence of some particles emitted at a large angle and thus escaping the setup in the direction transverse to the beam. This background is suppressed by shower profile analysis, energy deposited in the pre-shower, and the VETO cut. The phase space of this process is however very complicate, and a lot of possible phenomenologies can arise from it. For example, large energy deposited in the pre-shower can be a simple consequence of some $\pi^0$ backscattering after the hadronization, while the shower profile can mimic the one of an electron if a large fraction of energy in the inelastic scattering is carried away by $\pi^0$. Also, if particles are emitted in the form of neutrons or other neutrals as $\ks$, the VETO would be ineffective to reject them.
+
+To have an estimate, we can take the process \ref{eq:pion-nucleus-scattering} and assume $\geq$2 neutrals particles are produced in the hadronization. This gives us a probability equal to \cite{gkkk1}:
+
+\begin{equation}
+  \label{eq:transverse-leak-estimate}
+  P \simeq P_n \cdot P_{la} \cdot P_{leak}
+\end{equation}
+
+Where we define $P_n$ the probability of such interaction to occur, $P_{la}$ the probability to produce particles at large scattering angle, and $P_{leak}$ the probability to escape HCAL without interactions. Here we stress again that this formula hides a large number of topologies that such an event could have, but is instructive to get an intuition for these processes. Since the ECAL has $\lambda_{int} \simeq 0.5$, the probability of interaction for an hadron is fairly high (roughly 50\% of the time such interaction will happen). We need at least 50 $\gev$ of energy leaking to produce a signal event. If we assume two neutrals to be produced at $\Theta_{n} \simeq 30$\si{\degree} this would mean crossing at least 4$\lambda_{int}$ each, for a $P_{leak} \lesssim 3 \cdot 10^{-4}$. We can take the measured values of NOMAD to estimate the value of the cross-section in this range \cite{AUTIERO1998285,GNINENKO1998583}. The probability of separating a cluster with energy $>$0.1E$_{\pi}$ at an angle $\Theta_{n} \gtrsim 30$\si{\degree} was measured to be P$_{la} \simeq 10^{-5}$ and it drops very quickly with the beam energy: a factor 20 difference was found between 15 $\gev$ and 6 $\gev$ $\pi^-$. Even if we take conservative value as $P_{la}$, we see that the probability of the energy to escape is already $P\simeq 10^{-9}$, which multiplied to the hadron contamination and SRD suppression leads to an estimate of $P<10^{-14}$ for this background.
+
+Another possible background is the decay of hadron inside the setup in neutrinos, which would cause some energy to disappear from the setup. The high energy of the primary suppress this background, since at 100 GeV the chance for a $\pi^-/K^-$ to decay is $P^{decay}_{\pi} \simeq  10^{-2}$(\footnote{calculated for a total length of 20 m assuming light-speed.}). Multiple possible decays are accompanied by a neutrino emission, the most likely one being the $\pi^-$ decay $\pi^- \rightarrow mu^- \nu_{\mu}$. The emission of the muon makes such decay very easy to spot, since it will leave an energy deposit both in the VETO and the HCAL, for a total probability similar to the one of a punch-through $\pi^-$ ($P < 10^{-14}$). One could argue that the $\mu^-$ could decay: $\mu^- \rightarrow e^- + \nu_{mu}+ \hbar{\nu_{e}}$, producing an electromagnetic shower with missing energy. The long decay time of the $\mu^-$ adds however an additional suppression factor of $P\simeq 10^{-5}$, which together with the upstream selection criteria put the background conservatively at $P \lesssim 10^{-13}$.
+
+Another background comes from a decay of $K^-$: $K^- \rightarrow \pi^0 + e^- + \hbar{\nu_e}$, commonly called $K^-_{3e}$, with a branching ratio of $\Gamma_i/\Gamma_{tot} \approx$0.05 \cite{particle-strange-mesons}. The total probability of background for an incoming $K^-$ is around $P\simeq 10^{-3}$ accounting for both probabilities of decay and branching ratio. A MC-simulation of $K^-$ confirms this simple estimate as shown in Fig.\ref{fig:kaonbkg-sim}, where the fraction of the events in the signal region corresponds to the probability calculated. Multiplying this probability for the SRD selection criteria and the suppression from the beam returns a probability of $P_{K_{3e}} < 10^{-12}$. %\footnote{Here a suppression from the beam of 10$^{-3}$ is used, since the $K^-$ is a smaller fraction than the contamination \cite{h4-beamline}}.
+There are however additional factors of rejection for this background that can be investigated using MC-simulations. A more precise account of SRD in this scenario and the effects of the tracking and shower profile push this background to $P_{K_{3e}} \lesssim 10^{-13}$.
+
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/kaonbkg.pdf}
+  \caption[$K^-$ simulation ]{Energy deposited in the $\ehcalplane$ plane after simulating $10^7$ $K^-$ as primary particle in the NA64 setup.}
+  \label{fig:kaonbkg-sim}
+\end{figure}
+
+\subsubsection{Muonic background}
+\label{ch3:sec:bkg:inv:muon}
+
+This type of background is also largely suppressed by both beam composition and SRD selection criteria, to a level of
+%\footnote{Here the suppression from the beam composition is larger ($10^{-3}$) \cite{h4-beamline} and SRD selection criteria are more stringent ($10^{-4}$) due to the absence of back-scattering.}
+$\lesssim 10^{-7}$. As in the case of $\pi^-$, we can convince ourselves that a complete punch-through of the setup without being detected is negligible. Indeed the muon needs to travel through both the VETO and 3 HCAL modules without leaving any detectable energy deposit. Using $p^{VETO} \simeq 10^{-3}$ for leaving undetectable energy in the VETO and $p^{HCAL} \simeq 10^{-4}$ to deposit less energy than the threshold in all modules, we see that the background is conservatively $< 10^{-14}$. In the case of muons, nuclear interaction is less likely. Thus, there is no chance for a large amount of energy to escape transversely. What remains is the decay $\mu^- \rightarrow e\nu\nu$, with neutrinos in the final state. The decay time of $\mu^-$ adds a suppression of $\lesssim 10^{-5}$. Similar to the previous case, proper accounting of SRD, tracking, and shower profile accounts for an additional $p\sim 0.1$ factor. The final level of this background is of $P_{\mu} \lesssim 10^{-13}$.
+
+\subsubsection{Electronic background}
+\label{ch3:sec:bkg:inv:elec}
+
+The last type of background is originating from electron primary. Since the beam is primarily made of electrons, and SRD are tuned to select them, no upstream suppression factor can be achieved. Simple punch-through of an electron through the whole setup is not possible, since the path is blocked by 3 HCAL modules. Other similar events, with energy losses due to non-uniformity and cracks in the ECAL/HCAL were as well studied and found unrealistic \cite{Andreas:2013lya}. Low energy electrons is also potentially background: if a primary electron with $E_0 < E_{th}$ arrives at the ECAL it will leave an energy deposit compatible with the signal. Such a background was also found extremely unlikely. The amount of electron $N(E_e<E_{th})$ in the beam with energy lower than the energy threshold for the signal amounts conservatively to $<10^{-2}$. Such particles are normally deflected by the two MBPL magnets outside the acceptance of the ECAL\footnote{A quick calculation shows that for $E_0$=50 $\gev$ the difference in deviation is about 0.4 \si{\meter}}. The tracking system in NA64 makes sure that the energy of the incoming particle is always measured with a resolution of $\delta p/p \approx 1\%$ \cite{Banerjee:2017mdu}, particles with large entrance angle in the magnet can in principle enter in the acceptance of the magnet, but their momentum is reconstructed by observing their displacement in the Micromegas. A dedicated simulation of $10^{10}$ EOT was performed by simulating electrons with energy compatible with the signal region. No event was found in the signal region after requiring a reconstructed momentum within 3$\sigma$. This allows us to put this background conservatively at a level of $\lesssim 10^{-13}$.
+
+An important source of background to be considered is the dimuon production inside the target. As mentioned, these events are very useful to check for systematics and validated the MC. However, fluctuation in the energy deposited in the HCAL might leak in the signal region. The background was estimated by exponential extrapolation of the control sample inside the signal region ($E_{HCAL} < 1 \gev$) considering the sideband I depicted in Fig.\ref{fig:ehcal-bkg-bands}. This estimate was performed using the control sample without applying the VETO cut, that is then taken into account as a factor $\sim 10^{-6}$ (probability of two MIP to leave no energy).
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=0.45\textwidth]{\pdirthree/EHCAL_lastpub_left.png}
+  \includegraphics[width=0.45\textwidth]{\pdirthree/EHCAL_lastpub_right.png}
+  \caption[ECAL vs HCAL events band]{Distribution of events in the $\ehcalplane$ plane for the control sample of the data. The right panel shows the sample with all the selection criteria. The left panel shows the same sample without the VETO cut. The shaded area is the signal box. The size of the signal box is increased by a factor 5 in the Y-axis direction for illustration purposes. The region labeled I contains events caused by dimuon production, while region II contains mostly event leaking from the ECAL into the HCAL. The sidebands A and C are used to estimate the background inside the signal region \cite{NA64:2019imj}.}
+  \label{fig:ehcal-bkg-bands}
+\end{figure}
+
+Finally, the leading background in the invisible mode setup is the electro-nuclear and photo-nuclear production of neutral hadrons at a large angle. This case is similar to the one discussed for hadrons, but no additional suppression due to beam-composition and SRD selection criteria is present. In first approximation, the rarity of such interaction balances the absence of suppression factors, and accounts for $P_n \simeq 10^{-6}$ (see Eq.\ref{eq:transverse-leak-estimate}).
+The largest source of background, however, comes from electro-nuclear production happening upstream of the target. As Fig.\ref{fig:eh-prod-sketch} shows, if this interaction happens in a detector with a large distance from the ECAL, the displacement of the particle can be large enough to exit the setup transversely. 
+
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[scale=0.4]{\pdirthree/hcal-leak.pdf}
+  \caption[upstream electro-hadron production upstream]{Sketch of electro-nuclear interaction happening upstream the ECAL leading to a possible background \cite{pdegen-thesis}.}
+  \label{fig:eh-prod-sketch}
+\end{figure}
+
+This background can be estimated by looking at the periphery region of the HCAL. Since the angular distribution is sharply suppressed for large angle \cite{AUTIERO1998285,GNINENKO1998583}, these particles typically leave an energy signature in the periphery of the first HCAL when they miss the ECAL. For this purpose, we define the variable R, defined as the ratio between energy deposited in all cell excluded the central one, and the total energy deposited in the modules:
+
+\begin{equation}
+  \label{eq:R-factor}
+  R = \frac{E^{all}_{HCAL} - E^{center}_{HCAL}}{ECAL^{all}_{HCAL}}
+\end{equation}
+
+In a normal event with particles leaking the ECAL, we typically observe $R<0.5$, as the HCAL module center is aligned with the beam direction, thus the dominating energy deposit will be in the central cell. If an electro-nuclear production happens upstream however, some distortion of this variable will be visible. In the most extreme scenario when the particle is missing the ECAL completely, the R value can be equal 1, since the central cell of the HCAL will be shielded by the ECAL while the periphery will be directly hit. We can observe such behavior in Fig.\ref{fig:r-value-csample}: most of the event considered have an R peaked at 0.35. Events, where the primary electron loses a large portion of its energy due to bremsstrahlung, are shown in region III and are responsible for events with large R. In this topology of events, the electron completely misses the ECAL after being deflected by the magnetic field, while the hard-$\gamma$ produced in the interaction propagates without being deflected and hits the HCAL in the periphery. Such events are also easily identifiable by looking at the HCAL placed in from the original beam direction. In the event of region III, this detector measure energy deposit $E>60$ $\gev$.
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/pp30-calsr-uncut-may2.pdf}
+  \caption[R value for control sample]{Energy distribution in the $\ehcalplane$ (left) and the corresponding distribution of the R for different interesting regions. Region I is populated by the dimuon production inside the ECAL. Region II are events leaking in the HCAL characterized by energy conservation. Region III contains events with hard bremsstrahlung of the $e^-$ upstream, where the primary completely miss the ECAL and the $\gamma$ energy is deposited in the HCAL periphery. Region IV is characterized by pileup events \cite{pdegen-thesis}.}
+  \label{fig:r-value-csample}
+\end{figure}
+
+Events with electro-nuclear scattering upstream are characterized by a distribution equivalent to the one of region III. The agreement of the R distribution between data and simulation was checked using data of HCAL and ECAL calibration runs, which shows a good fit with the simulated samples and small differences between different species of hadrons. This background can be suppressed by two additional tools:
+
+\begin{itemize}
+\item The straw tube in the beamline, as shown in Fig.\ref{fig:eh-prod-sketch} are in the way of the hadrons and can detect them in the periphery of their active area. A simple constraint that requires all hit to be within 3$\sigma_{beam}$ can reject this background effectively. A cut based on the multiplicity of the hit was observed to be equally powerful, since electro-nuclear interaction will produce a large number of particles in the final state. \cite{pdegen-thesis}.
+\item Since electronuclear interactions produce a large number of particles, this interaction saturates the MM detector strip output. A cut based on the total charge deposited in each plane is also effective to suppress the background \cite{na64-invisible-cuts}.
+\end{itemize}
+
+The first cut removed the contamination in the control sample, and where accounted for in the final background estimate. In practice, the background was extrapolated using an exponential distribution of the type:
+
+\begin{equation}
+  \label{eq:bkg-extrapolation}
+  e^{a \cdot E_{ECAL} + b}
+\end{equation}
+
+The parameters $a$ and $b$ are fitted using the data in the sideband C of the control sample, i.e. events with E$_{HCAL}<$ 1 $\gev$ and $E_{ECAL}>E_{th}$, and then integrated over the signal region. The results of this estimate were then accounted for conservatively in Table \ref{tab:inv-bkg}.
+
+\begin{figure}[bht!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/HCraio-e-428-pi-3924-MC.pdf}
+  \caption[R value comparison]{Distribution of the R variable for the 80 $\gev$ $e^-$, $\pi^-$, $K_L^0$ and n events obtained from data during the ECAL and HCAL calibration runs \cite{Banerjee:2020fue}.}
+  \label{fig:R-comp}
+\end{figure}
+
+\begin{table}[bth!]
+  \centering
+  \caption[Invisible mode background]{Expected background for 2.84 $\times$ $10^{11}$ EOT collected at the time this thesis was written \cite{NA64:2019imj}}
+  \begin{tabular}{lr}
+    \hline \hline
+    Background source & Background, $n_b$ \\
+    \hline
+    $\pi^-$,$\mu^-$ punchthrough                      & $<10^{-14}$ \\
+    low energy $e^-$                                  & $<10^{-13}$ \\
+    $e^-$/hadron nuclear interaction in target        & $<0.044$   \\
+    $\pi^-$,$\mu^-$, $K_{3e}$ decay                    & 0.02 $\pm$ 0.01 \\
+    $e^-$ nuclear interaction in the  beam line       & 0.43 $\pm$ 0.16 \\
+    \hline
+    Total (conservatively)                            & 0.53 $\pm$ 0.17 \\
+    \hline \hline                       
+  \end{tabular}
+  \label{tab:inv-bkg}
+\end{table}
+
+
+
+\section{Visible mode analysis}
+\label{ch3:sec:analysis-vis}
+
+\subsection{Selection criteria}
+\label{ch3:sec:selection-criteria-vis}
+
+\subsubsection{Visible mode analysis using the calorimeter approach}
+\label{ch3:sec:vis-mode-calorimeter}
+
+For the visible mode, the signal is searched by matching the energy deposited in the target with the one detected by the ECAL downstream. Similarly to the invisible mode, several selection criteria ensure that the incoming particle is a well-defined electron track. Although the tracking procedure is still used to work with the control sample, the incoming particle is not required to have a momentum matching the nominal beam energy. This is because the energy conservation selection criteria already ensure that the particle will have a well-defined energy. The selection criteria for the visible mode can be summarized as follow:
+
+\begin{itemize}
+\item An energy above 1 $\mev$ is required in each SRD, and the total energy detected in both counters needs to be larger than 10 $\mev$. Events, where the energy deposit surpasses 200 $\mev$, are removed to suppress large scattering upstream or backscattering from the WCAL.
+\item Energy deposit $E_{PS} > 5 \gev$ compatible with an electron in the WCAL pre-shower.
+\item Energy deposited in S4 compatible with two MIP in the decay volume. This cut amounts to $E_{S_4} > $1.5$\times \emip$.
+\item At least 25 $\gev$ deposited in the ECAL. This cut rejects events where low energy particle punch-through the WCAL.
+\item The maximal energy of the shower should be deposited in the cell of the ECAL aligned with the beam axis (labeled as 3$\times$3). The longitudinal and lateral shape of the shower should be consistent with a single em-shower\footnote{Although the signal is expected from a $\ee$ pair, the distance of just a few $\mmi$ between the two particles does not allow for a separation between the two showers}. This means a maximal energy of 3 $\gev$ is allowed in the pre-shower of the ECAL and a compatibility of the transversal shape $\chi^2 < 10$ is required.
+\item  No energy deposit in the W2 counter placed after the WCAL. The value of this cut is $E_{W2} < $0.7$\times \emip$ \cite{Banerjee:2019hmi}.  
+\item Energy deposited in the VETO has to be smaller than 0.9$\times \emip$, energy deposited in each HCAL modules needs to be smaller than 1 $\gev$.  
+\end{itemize}
+
+The signal region is finally defined by looking at events where the sum of WCAL and ECAL energy is matching the nominal beam energy within the energy resolution of the detectors. This energy was originally 100 $\gev$ in 2017, but was increased to 150 $\gev$ in 2018 to boost the sensitivity for short-lived $\DMX$ (see Fig.\ref{fig:w-e-vis}).
+
+\subsubsection{Visible mode analysis using the tracking approach}
+\label{ch3:sec:vis-mode-tracking}
+
+The published analysis using the data collected in 2018 \cite{Banerjee:2019hmi} was based exclusively on the calorimeters and counters as described in Sec.\ref{ch2:sec:vismode}. The trackers after the decay volume were not used for signal discrimination. Here we present a novel method that exploits them providing a boost in the signal yields while maintaining the background under control. Even though this analysis is not sensitive when the decay length of the $\DMM$ is significantly smaller than the dimension of the dump, it has the advantage of being complementary to the calorimeter analysis. Unfortunately, the particularly interesting parameter space justifying the protophobic vector boson explanation of the $^8$Be anomaly is not significantly ($\lesssim$1\%) improved by this approach, the reason being the small decay length of $\DMX$ in the high-coupling region. It provides however an independent confirmation of the results obtained in \cite{Banerjee:2019hmi}, and a confirmation of the tracking procedure that be used in the next generation of this experiment (see Sec.\ref{ch5:sec:new-vismode-setup}).
+
+While in a first approximation the $\DMM$ is produced in the first few layers of the WCAL, it can also originate at a later stage of the em-shower. These events, which are typically rejected in the calorimeter analysis, are instead accepted in the new analysis presented here. First, an initial sample is selected in the same way described above. The final discrimination in the calorimeter analysis is based on the counter W2 placed at the end of the dump to reject the charged punch-through from the em-shower. This last cut is efficient if the $\DMM$ is produced in the first few layers of the WCAL but typically rejects the event if the $\DMM$ is produced at a later stage of the em-shower. The reason is that these events are accompanied by a long longitudinal development of the em-shower that leaves an energy deposit larger than the typical energy cut accepted in the calorimeter analysis. On the other hand, the low energy of the produced $\DMM$ implies a larger angle between the decay products that can be resolved by the trackers. Combining these two concepts, one can see that the signal yield is characterized by two different topologies that can be easily distinguished by looking at the energy deposited in the ECAL (see Fig.\ref{fig:combined-analysis}).
+
+Using this distinction, we divide all events that passed the initial selection criteria in two topologies based on the total energy deposited in the ECAL. The exact value of this threshold was selected to maximize the signal yield. The optimal value has a small dependence on the $\DMM$ mass and coupling. A simple threshold of 75 GeV amounting to half of the initial beam energy was found to be robust for most of the interesting signal scenario. After the topology is decided, a final set of cuts is applied to discriminate between signal and background. In the case of high energy $\DMM$, trackers do not have the capability of discriminating between single hits. If the energy deposited in the ECAL surpasses the 75 $\gev$, the selection criteria applied will be the one one described in the previous section. On the other hand, if the energy deposited in the ECAL is smaller than 75 GeV, trackers are used instead of the W2 as discriminator for an $\DMM$ production. Two tracks in the decay volume are required with a reconstructed vertex within 3$\sigma$ from the WCAL and an angle smaller than 3 $\mrad$. This different treatment leads to increased efficiency of the $\DMM$ produced at a late stage of the shower as shown in Fig.\ref{fig:combined-analysis}. However, the smaller energy of the $\DMM$ produced in this way has the effect of reducing the probability of the particle escaping the dump. For large coupling $\epsilon$ this suppression can be more than 2 orders of magnitude, making the boost of signal yield negligible. A summary of this boost for various interesting $\DMM$ scenario is illustrated in Table \ref{tab:dm:efftable}. The values reported consider also a conservative correction factor of 0.77$\pm$0.1 that takes into account inefficiencies of the detectors and the reconstruction algorithm. This factor was evaluated using a data-driven method precisely outlined in Sec.\ref{ch3:sec:dimuons}. We conclude that in the current setup trackers do not improve the limit on the $\DMX$ parameter space significantly. This is because the boost in signal yield becomes negligible for $\epsilon \sim 6 \times 10^{-4}$, a value which is already excluded with 90\% confidence by our previous analysis \cite{Banerjee:2019hmi}.
+
+\begin{figure}[tbh!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/X17-separation-v2.png}
+  \caption[Comparison of selected $\DM$ between the calorimeter and tracking analysis]{$\DM$ simulated in the visible mode 2018 setup. Two different cuts are used to discriminate between two $\DM$ topologies. The first one is based on angle cut and vertex position using information from the 4 GEM stations installed in the decay volume and is very efficient on the $\DM$ produced at low energy (red triangle). The second one relies on the Veto placed at the end of the dump and is more efficient for the high energy population (blue square).}
+  \label{fig:combined-analysis}
+\end{figure}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|llr|}
+    \hline
+    M$_{A'}$ [MeV]& $\epsilon$ & N$^{new}_{A'}$ / N$^{old}_{A'}$ \\    
+    \hline
+    5    & 0.004    & 1   \\    
+    1    & 0.0015   & 1   \\    
+    1    & 0.003    & 1   \\    
+    16.7 & 0.0001   & 1.22\\
+    16.7 & 0.00018  & 1.2 \\    
+    16.7 & 0.000316 & 1.2 \\
+    16.7 & 0.0006   & 1.01\\
+    16.7 & 0.0007   & 1   \\
+    22   & 0.000316 & 1.22\\
+    \hline    
+  \end{tabular}
+  \caption[ratio between signal events observed in tracker-analysis compared to calorimeter-only analysis]{N$^{new}_{A'}$ / N$^{old}_{A'}$ ratio between signal events observed in tracker-analysis compared to calorimeter-only analysis. The new analysis uses cuts based on GEM tracking detectors if the energy detected by the downstream ECAL is below 75 GeV.}
+  \label{tab:dm:efftable}
+\end{table}
+
+\subsection{Background}
+
+Since now the signal requires the sum of the energy deposited in the two calorimeters (WCAL and ECAL) to be equal to the incoming primary energy, particles escaping the setup in the transverse direction are no longer a source of background. Because of the large distance between the WCAL and ECAL\footnote{7.5 \si{\meter} in the 2018 setup, 4.2 \si{\meter} in the 2017 setup}, such event is actually very likely. The background, on the other hand, can be caused by particles able to punch-through the first target without leaving any energy deposit in the W2 counter placed immediately after and then leave a pure electromagnetic signature in the ECAL downstream. Because of the different lengths of the setup and the addition of a vacuum tube (see Fig.\ref{fig:setup-vis-2018}), the background calculated for 2017 and 2018 differs significantly. The exact suppression depends on the exact source of background considered, but it can amount up to one order of magnitude \cite{Banerjee:2019hmi}. This thesis presents an alternative approach to \cite{Banerjee:2019hmi} that relies on the GEM trackers to boost the signal yield. The method is detailed in Sec.\ref{ch3:sec:vis-mode-tracking}, and consists of applying final discrimination to the event based on a tracking procedure instead of the W2 counter when the energy detected in the ECAL is smaller than 75 $\gev$. The background condition do not differ significantly and are reported in Table \ref{tab:vis-bkg}
+
+
+\subsubsection{Hadronic background}
+\label{ch3:sec:bkg:vis:hadr}
+
+Starting from the most simple scenario, punch-through of $\pi^-$ can be background if no energy is deposited in the W2 counter, an energy $> 2\emip$ in S4 is deposited, and the particle deposit the rest of its energy in the ECAL. The product of these probabilities was conservatively estimated to be $< 10^{-12}$ when factoring SRD and HCAL suppression. Inelastic scattering in the WCAL, for example in the form of
+
+\begin{equation}
+  \label{eq:vis-int-neutral}
+  \pi^- + p \rightarrow (\geq 1)\pi^0 + (neutrals)
+\end{equation}
+
+can be a source of background as they can punch-through the W2 undetected. This background was estimated using the extrapolation of the charge-exchange cross-section, measured on different nuclei, after taking into account SRD rejection. In the tracking-analysis, inelastic scattering in the WCAL produces a large occupancy in the decay volume that can potentially create vertex candidates. Such events are expected to be suppressed by the selection criteria applied downstream for hadron rejection outlined in Sec.\ref{ch3:sec:selection-criteria-vis}. Furthermore, events able to mimic the pure electromagnetic signal of the decay $\DM \rightarrow e^+ e^-$ are often accompanied by a large transversal spread and are thus rejected by the requirement of energy conservation at a level of $\lesssim 10^{-5}$. This estimate was obtained by integrating the events in the signal region with two tracks in the decay volume without applying any rejection criteria for hadrons in a $\pi^-$ simulation. Such an event should also pass the independent selection criteria applied upstream, namely large energy deposited in the SRD and WCAL pre-shower. In a sample up to $10^7$ EOT, it was not possible to find an event with such signature even after removing the HCAL and VETO from the selection criteria.
+
+To estimate the background for a larger number of EOT, the $\ks$ decay was used as a benchmark process, as its short decay length is expected to be compatible with the ones of the $\DM$. The energy spectrum of $\ks$ was simulated using an exponential distribution with an energy cut-off of 18 GeV, as $\ks$ below this energy has a negligible probability to decay outside the dump. To estimate the number of $\ks$ in the sample, neutrals event were selected by applying all selection criteria to the control sample but changing the requirement for $S4$ to $E_{S4} < 0.5 \emip$. The distribution of these events is shown in Fig.\ref{fig:w-e-vis}. Here we label signal-like the events that passed all selection criteria in the control sample. One such event was recorded in 2017, well outside of the signal region. In 2018 the number of neutral was reduced by a factor 2-3, and no signal-like events were observed. These data were used to estimate the ratio between neutral and signal-like events using the MC-simulation of $\ks$. This resulted in an estimate of 0.06 events for the 2017 data and 0.005 events for 2018 data. The statistical fluctuation of the data dominates the error for this estimate.
+
+To estimate the background for the tracking analysis, tracking-criteria were applied over the $\ks$ MC-sample. It was estimated that a rejection of $10^{-2}$ can be conservatively achieved for this background using the opening angle of the reconstructed vertex as a discriminator. This estimate however mostly depends on the main hadronic decay channel $\ks \rightarrow \pi^- + \pi^+$ which is further suppressed downstream by the hadron suppression cuts such as no energy deposited in the HCAL and the VETO. The decay channel $K^0_S \rightarrow \pi^0 + \pi^0$ has on the other hand a small chance to leave any signature in the GEM modules as no charged particle is typically emitted. Signal-like events can be produced either by the conversion of a photon from the $\pi^0 \rightarrow \gamma \gamma$ decay into a $\pair$ pair or in the decay chain $\ks \rightarrow \pi^0 + \pi^0 (\pi^0 \rightarrow \gamma + e^- + e^+$). This last channel is however suppressed by its low branching ratio $\Gamma_i$/$\Gamma \approx $1\% \cite{review-particle-physics}. A dedicated simulation performed with a biased branching ratio shows that the rejection for this channel is further improved to $\lesssim 10^{-3}$ since the large emission angle of a three-body decay is significantly different from the one expected in the $\xdecay$ decay. A conservative rejection of $\lesssim 10^{-5}$ is reached accounting both suppression factors. If we add the suppression factor coming from the angle using the trackers to what was computed for the calorimeter-analysis, one can conservatively estimate the background contribution from $\ks$ to be at a level of $<0.001$.
+
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\pdirthree/w-e-neutrals.pdf}
+  \caption[neutral events in visible mode]{Distribution of selected signal-like events in the $\ehcalplane$ plane for 2017 and 2018 data. Neutral events are shown as hollow (2017) and full (2018) triangles. The two shadowed bands represent the signal box region for the two different runs. A single signal-like event detected during the 2017 run not falling into the signal region is shown with a red triangle \cite{Banerjee:2019hmi}.}
+  \label{fig:w-e-vis}
+\end{figure}
+
+\subsubsection{Muonic background}
+\label{ch3:sec:bkg:vis:muon}
+
+Background coming from $\mu^-$ primaries is very suppressed for the visible mode and is dominated by the probability of punch-through $\mu^-$ that leaves most of its energy inside the ECAL. This is similar to a $\pi^-$ punch-through, with the difference that the probability of it happening is lower due to both beam suppression and the absence of strong interaction. The background can be conservatively estimated to be $<10^{-14}$.
+
+\subsubsection{Electronic background}
+\label{ch3:sec:bkg:vis:elec}
+
+The main contribution of the background from $e^-$ primary is the punch-through of high-energetic $\gamma$ that converts on the last tile of the WCAL or some material downstream and produces an $\ee$ pair. Since this background depends on the longitudinal fluctuation of the em-shower, it is hard to predict using MC-simulations alone. To estimate such contribution for $\sim10^{11}$ EOTs a data-driven method is used. A sample of 3$\cdot 10^9$ EOT was considered, roughly corresponding to $\sim$10\% of the data collected in 2018. Events in the signal region with $E_{ECAL} < 105$ GeV were selected with the requirement of at least two hits in each GEM module. Only one event with such property was found. Assuming a suppression due to the angle and minimal vertex requirement of $10^{-3}$ or $S4$ selection criteria this would push our background down conservatively to a level $<10^{-13}$. The analysis of the full 2018 data is compatible with this estimate: a total of three events were found with 2 two hits in the GEM modules. For none of these events, it was possible to reconstruct a physical vertex, suggesting that these particles experienced large multiple-scattering inside the WCAL before reaching the GEMs.
+
+
+\begin{table}[bth!]
+  \centering
+  \caption[Visible mode background]{Expected background for 5.5$\times$ $10^{10}$ EOT collected in 2017 \cite{Banerjee:2018vgk} and the 3.3$\times$ $10^{10}$ EOT collected in 2018 \cite{Banerjee:2019hmi}. The third column shows background for 2018 including the GEM trackers in the analysis.}
+  \begin{tabular}{lrrr}
+    \hline \hline
+    Background source                           & $n_b$ (2017)      &  $n_b$ (2018)   & $n_b$ (2018, new analysis)\\
+    \hline
+    $\pi^-$ punch-through                        & 0.0015$\pm$0.0008 &  0.0007$\pm$0.0004   & 0.0007$\pm$0.0004   \\    
+    $\ks \rightarrow \pi^0 \pi^0$                     & 0.06$\pm$0.034    & 0.005$\pm$0.003 &     $<$0.001\\
+    $e^-$/hadron nuclear interaction  & 0.01$\pm$0.004    & 0.01$\pm$0.004  & 0.01$\pm$0.004\\    
+    $\mu^-$ punch-through                        & $<0.001$ & $<0.001$ & $<0.001$       \\            
+    $\pi^-$,$K^- \rightarrow e\nu$ $K_{4e}$              & $<$0.001 & $<0.001$ & $<0.001$\\
+    $eZ \rightarrow e Z \mu^+\mu^-;\mu^{\pm}\rightarrow e^{\pm}\nu\bar{\nu}$ & $<$0.001 & $<0.001$ & $<0.001$\\
+    punch-through $\gamma$ & $<$0.001 & $<$0.0005 & $<$0.001 \\
+    \hline
+    Total (conservatively)                      & 0.07 $\pm$ 0.035   & 0.006 $\pm$ 0.003  & 0.006 $\pm$ 0.003\\
+    \hline \hline                       
+  \end{tabular}
+  \label{tab:vis-bkg}
+\end{table}
+
 \section{Signal yield correction using $\gamma + Z \rightarrow \mu^+ \mu^-$ events }
 \label{ch3:sec:dimuons}
 
@@ -881,7 +895,7 @@ The $\emu$ interaction consists of the rare production of a $\mu^+mu^-$ inside a
 %Hence, a comparison between MC and data for dimuons is an excellent test for the reliability of the MC.
 \end{enumerate}
 
-We also remind that because of the double MIP signature that the $\emu$ interaction leaves inside the VETO and the HCALs, this interaction can be easily distinguished from a signal. The possibility of the leakage in the signal region was computed in Sec.\ref{ch3:sec:bkg} for both invisible and visible mode and was found not to be a relevant background.
+We also remind that because of the double MIP signature that the $\emu$ interaction leaves inside the VETO and the HCALs, this interaction can be easily distinguished from a signal. The possibility of the leakage in the signal region was computed for both invisible and visible mode and was found not to be a relevant background.
 
 In Geant4, the process is described starting from the formula \cite{dimuon-mc}:
 
