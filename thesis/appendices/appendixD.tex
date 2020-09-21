@@ -44,8 +44,40 @@ In the small angle approximation ($\sin\theta=\theta+\mathcal{O}(\theta^2)$ and 
         \tan\theta\simeq\frac{2h}{L},\hspace{5mm}x=\sqrt{h^2+L^2}=h\sqrt{1+\left(\frac{L}{h}\right)^2}\Rightarrow r_c\simeq\frac{L}{2}\sqrt{1+\left(\frac{L}{h}\right)^2}
 \end{equation}
 Finally the radius is projected on the beam axis and the momentum is obtained from the well-known relation $p_\perp^\text{reco}=0.3eBr_c$. 
-\subsection{Kalman filter}
+\subsection{Genfit and the Kalman filter}
 \label{appD:sec:kalman-filter}
+
+A more detailed method to reconstruct track and vertices is the Kalman filter, which is widely used for track fitting and vertex reconstruction in high-energy physics \cite{HOPPNER2010518}.
+
+The extended Kalman filter, that was used in NA64 for precise reconstruction of track and vertices, used for example in the novel analysis of the visible mode data using trackers, consist in a recursive algorithm to find the optimum estimate $\vec{x}_{reco}$ of the unknown true state vector $\vec{x}_{true}$. In NA64, this is implemented using the genfit library \cite{genfit}, that introduce the Kalman filter in a seamless way using object defined in the ROOT framework \cite{root}, which greatly simplify their manipulation in the reconstruction code. One of the main difference from the approach described in the previous section is that different error sources can be included easily in the algorithm using a noise matrix that carries the information over all possible source of error. This is particularly important for multiple scattering. Since this source of error depends on the amount of material between the two detectors where the particle is being propagated, it is not straight forward to compute analytically, especially if the amount of multiple scattering encountered depends on the particular topology of the event.
+
+An initial state is required as seed for the algorithm, as the Kalman filter propagated an initial state $\vec{x}_0$ through steps $\vec{x}_k \rightarrow \vec{x}_{k+1}$ that converge asymptotically to the optimal estimate $\vec{x}_{reco}$. In NA64, the track initial state is on the hit point recorded by the first GEM, with a momentum in the direction of the hit recorded by the second GEM detector. To compute multiple scattering corrections, the momentum can as well be relevant, as in its Gaussian approximation the RMS width is given by \cite{review-particle-physics}:
+
+\begin{equation}
+  \label{eq:mm-scattering}
+  \theta_{plane}^{rms} = \frac{13.6 \mev}{\beta c p} z \sqrt{\frac{x}{X_0}} \left[ 1 + 0.038 \ln{\frac{x z^2}{X_0 \beta^2}} \right]
+\end{equation}
+
+Where $p$, $\beta c$ and $z$ are the momentum, velocity, and charge number of the incident particle, and $x/X_0$ is the thickness of the scattering medium in radiation length. Inside the decay volume of the visible mode a magnetic spectrometer is not present, which means the momentum of each track is not known. To initial the vector magnitude, the energy measured by the ECAL downstream is used, and assumed to be equally shared between the track candidates detect in the decay volume.
+
+Before a recursion step, we define the vector $\vec{x}_k$ and the covariance matrix $C_k$ of the particle in the step $k$, which contain the information of all previous steps. Next, we define a \textit{prediction}, where both state vector and covariance matrix are extrapolated to a predicted state vector $\vec{x}_{k+1}^{pred}$ and $C_{k+1}^{pred}$. The covariance matrix $C_{k+1}$ is calculated by the sum of the track covariance matrix, which is in turn computed using Gaussian error propagation by the transformation of the Jacobian matrix of the propagation, and a noise matrix that takes into account the multiple scattering experienced in-between the two states. The predicted new state vector is then compared to the value measured by the tracking chamber, and corrected using this information. If we define as $\vec{x}_{k+1}^{mes}$ as the hit measured by the tracking chamber where the track is being extrapolated, this means:
+
+\begin{equation}
+  \label{eq:kf-updates}
+  \begin{aligned}  
+    &\underline{\vec{x}_{k+1} = \vec{x}_{k+1}^{pred} + K_{k+1} \cdot \vec{r}_{k+1}} \\
+    & \\
+    &C_{k+1} = ( I - K_{k+1} \cdot H_{k+1} )C^{pred}_{k+1} \\
+    &\vec{x}^{res}_{k+1} = \vec{x}_{k+1}^{mes} - H_{k+1} \cdot \vec{x}_{k+1}^{pred} \\
+    &K_{k+1} = C^{pred}_{k+1} H^T_{k+1}(H_{k+1}C_{k+1}^{pred}H^T_{k+1} + V_{k+1})^{-1}    
+  \end{aligned}
+\end{equation}
+
+Where the matrix $K_{k+1}$ is called Kalman gain, and $V_{k+1}$ is the covariance matrix of the measurement $\vec{x}_{k+1}^{mes}$. The projection matrix $H_{k+1}$ is a linear transformation from the coordinate system of the state vector $\vec{x}_{k+1}$ to the coordinate system of the measured state. As the elements of $C_k$ reduces at the inclusion of every additional steps, the final 
+
+
+
+
 
 %%% Local Variables:
 %%% mode: latex
