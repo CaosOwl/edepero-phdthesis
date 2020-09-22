@@ -8,10 +8,10 @@
 
 % ----------------------------------------------------------------------------------------
 
-In the previous chapter, we explored the general concepts, and all the components characterizing the invisible and visible mode setup. Now the method used to analyze them is described. In Sec.\ref{ch3:sec:analysis-approach}, I will give an overall explanation of the analysis approach of NA64 with a flowchart to explain each step. After that, a description of the simulation framework of NA64 will be provided in Sec.\ref{ch3:sec:geant4}, this is the main tool used for prediction of both background and signal rate.
+In the previous chapter, we explored the general concepts, and all the components characterizing the invisible and visible mode setup. In this one, we will described the method used to analyze them. In Sec.\ref{ch3:sec:analysis-approach}, I will give an overall explanation of the analysis approach of NA64 with a flowchart to explain each step. After that, a description of the simulation framework of NA64 will be provided in Sec.\ref{ch3:sec:geant4}, this is the main tool used for prediction of both background and signal rate.
 A detailed description of two background rejection tools developed as direct consequence of my work, namely SRD rejection and shower profile analysis, will be given in Sec.\ref{ch3:sec:bkg-srd}-\ref{ch3:sec:bkg-ecal-profile}. After that, in Sec.\ref{ch3:sec:dimuons}, we will show how the rare interaction $\emu$ is used in NA64 as an important tool to validate the MC and correct the signal yield for systematic effects.
-Finally, we will provide a description of both the analysis performed for the invisible and visible mode setup in Sec.\ref{ch3:sec:analysis-invis} and Sec.\ref{ch3:sec:analysis-vis} respectively. In the case of the visible mode, this section also includes a new analysis which uses the information recorded by the trackers on top of the one of the calorimeters.
-For both analyses, the list of the selection criteria is provided, then the background is discussed in detailed. We show that in both modes the background is expected to be under control, with an average of expected event in the signal region of $\simeq 0.5$ for the invisible mode and $\simeq 0.01$ for the visible mode.
+Finally, we will provide a description of both analyses performed for the invisible and visible mode setup in Sec.\ref{ch3:sec:analysis-invis} and Sec.\ref{ch3:sec:analysis-vis} respectively. In the case of the visible mode, this section also includes a new analysis I performed which uses the information recorded by the trackers on top of the one of the calorimeters.
+The list of the selection criteria is provided, and the background is discussed in detailed. We show that in both modes the background is expected to be under control, with an average of expected event in the signal region of $\simeq 0.5$ for the invisible mode and $\simeq 0.01$ for the visible mode.
 
 
 \section{General Analysis approach}
@@ -25,7 +25,7 @@ To define the analysis method the choice of signal region and the selection crit
   N_{SR} = \frac{(\mu s + b)^ne^{-(\mu s + b)}}{n!}
 \end{equation}
 
-where s and b represents the expected number of events for signal and background in the signal region, and $\mu$ is a control parameter that describes if the signal is present. If the signal is properly modeled, the parameter $\mu$ can be either 0 (no signal present) or 1 (signal is there), but we can also choose to allow a continuous spectrum of $\mu$, which means that the signal can have a larger (or smaller) rate than anticipated. The experiment will claim a signal if the number of events found exceeds the expected background $b$ to a degree that $\mu = 0$ is no longer compatible with the data. The current standard for discovery in the HEP\footnote{High Energy Physics.} community is the 5$\sigma$, which means that the number of the events is larger than the one predicted by the $\mu = 0$ hypothesis by 5 standard deviations\footnote{This is to be intended as correspondent p-value in a Gaussian distribution. The actual distribution defining the number of events observed is arbitrary and typically computed using numerical methods.}. The probability of an experiment returning such an outcome when no signal exists can be calculated to be 2.87$\times$10$^{-7}$.
+where $s$ and $b$ represents the expected number of events for signal and background in the signal region, and $\mu$ is a control parameter that describes if the signal is present. If the signal is properly modeled, the parameter $\mu$ can be either 0 (no signal present) or 1 (signal is there), but we can also choose to allow a continuous spectrum of $\mu$, which means that the signal can have a larger (or smaller) rate than anticipated. The experiment will claim a signal if the number of events found exceeds the expected background $b$ to a degree that $\mu = 0$ is no longer compatible with the data. The current standard for discovery in the HEP\footnote{High Energy Physics.} community is the 5$\sigma$, which means that the number of the events is larger than the one predicted by the $\mu = 0$ hypothesis by 5 standard deviations\footnote{This is to be intended as correspondent p-value in a Gaussian distribution. The actual distribution defining the number of events observed is arbitrary and typically computed using numerical methods.}. The probability of an experiment returning such an outcome when no signal exists can be calculated to be 2.87$\times$10$^{-7}$.
 
 If no signal is observed, a second problem arises, how do we interpret this result? In principle, since the initial no-signal hypothesis (frequently called $H_0$) remains satisfactory to explain the data, the hypothesis implying the existence of new physics is not needed (frequently called $H_1$). However, there might be a minimal difference between the two, so the fact that $H_0$ is sufficient to describe the data does not mean that $H_1$ is wrong, just that our experiment is not sensitive enough to distinguish between the two. After accumulating a sufficient number of EOTs, the difference in the prediction between the two hypotheses will be significant, such that one of the two can be rejected as insufficient to properly describe the data. The standard to reject an hypothesis is less stringent than the one used to claim a discovery. The exact standard differs between different searches, in the case of the dark photon $\DM$, the significance is set to be 90\% \cite{battaglieri2017cosmic}. We define $CL_{s+b}$ the "confidence level" as the probability to observe a number of events larger than the one observed in the experiment given the signal hypothesis to be true (hence $\mu = 1$):
 
@@ -38,7 +38,7 @@ In the NA64 experiment, we can assume that no background is expected in the sign
 
 After we finish the analysis of the data, if no event is in the signal region, we can reject all the hypothesis $H(m_{\DM}, \epsilon)$ that predict a number of signal events larger than 2.3. There are of course some complications to this: the background $b$ is often not exactly zero, which means in the more general case one has to numerically solve the equation above for $s$. A more detailed explanation is given in Appendix.\ref{AppendixE}.
 
-For a complete analysis, we need to calculate the expected signal s, the expected background b, and properly take all uncertainties into account. In first approximation, we developed some formula that can be used to compute the signal rate back in Sec.\ref{ch1:sec:dm-u1model}. However, each of the selection criteria used to reject the background will reduce the signal efficiency and needs to be taken into account. Estimating the background is also typically challenging, it is enough to take a look at all the possibly decays of the $K^-$\cite{particle-strange-mesons} to see how many effect could in principle conspire to the evaporation of a fraction of the total initial energy from the setup.
+For a complete analysis, we need to calculate the expected signal s, the expected background b, and properly take all uncertainties into account. In first approximation, we developed equations that can be used to compute the signal rate back in Sec.\ref{ch1:sec:dm-u1model}. However, each of the selection criteria used to reject the background will reduce the signal efficiency and needs to be taken into account. Estimating the background is also typically challenging, it is enough to take a look at all the possibly decays of the $K^-$\cite{particle-strange-mesons} to see how many effect could in principle cause the disappearance of a fraction of the total initial energy.
 
 A precise knowledge of the experimental conditions is needed to properly define the expected signal $s$ and the expected background $b$ for a given hypothesis of dark matter $\dmhypo$. We need first of all a tool that can reproduce precisely not only the single particles under analysis but also their interaction with the setup and how each detector responds to these interactions. Indeed while Eq.\ref{eq:dm-rate} is a good starting point it hardly represents all the possible outcomes of a particle entering the NA64 setup.
 %For example if the $\DM$ is not produced in the first layer how we assumed but instead after a few radiation length the energy spectrum will be different from the one we approximated initially. This can especially have a significant effect after the selection criteria are applied to the sample considered. An accurate description is even more important for background, usually caused by the tail of very complicated distributions, hard to characterize starting from simple equations.
@@ -46,12 +46,22 @@ A precise knowledge of the experimental conditions is needed to properly define 
 
 To compute these effects more precisely, we use a Monte Carlo simulation based on the Geant4 software \cite{AGOSTINELLI2003250,1610988} developed at CERN. This approach is very useful to directly simulate the background of the experiment, but it has some shortcomings. The simulation is a computationally expensive task: a single event requires $\simeq$1 second to be simulated by a single CPU\footnote{The exact time depends on what particle is exactly simulated. For example, the simulation is $\simeq$60 faster for muons.}. Thus, even with the help of a very large cluster like the one provided by the CERN computing infrastructure, more than $10^8$ EOT are challenging to simulate. This is still a long way from the $\sim 10^{11}$ EOT accumulated at the present date. To solve this, some type of background, like event with dimuon production $\emu$, electronuclear interactions, and the decay of the $K^0_S$, are accounted using dedicated simulation with biased cross-section/branching ratio (see Appendix.\ref{appC:sec:physics-list}). This allows us to study the background at a level compatible with the EOT accumulated in our search.
 
+Because of the different physics involving them, it is instructive to divide the background by the primary particle considered. We define three categories:
+
+\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Electronic background}]
+\item[Hadronic background] Background coming from a hadronic ($\pi^-$,$K^-$,...) primary.
+\item[Muonic background] Background coming from a $\mu^-$ primary.
+\item[Electronic background] Background coming from a $e^-$ primary.
+\end{description}
+
+This classification is convenient if one wants to study the background using MC-simulations. However, there is some overlap in the physics of these three scenarios. A trivial example would be the decay $\pi^- \rightarrow \mu^-\nu$, where an initial $\pi^-$ produces a $\mu^-$ in our setup. A more relevant but involved example is an $e^-$ or a $\gamma$ which triggers an hadronic shower after an inelastic scattering with a nucleus. This can cause energy escaping in the form of hadron, and since the initial particle is an electron, such background is also accepted by the SRD criteria. The main advantage of this classification is that it let us calculate the suppression factor for the background with a simple argument without necessarily using the MC-simulation. For example, for both hadronic and muonic background, we can conservatively assume a factor $10^{-5}$ of suppression due to both the beam-composition ($\lesssim 10^{-2}$) and the SRD selection applied upstream ($\lesssim 10^{-3}$). A specific list of all background considered for both searches is provided in Sec.\ref{ch3:sec:bkg:inv} for the invisible mode and Sec.\ref{ch3:sec:bkg:vis} for the visible mode.
+
 Next we need to improve the simulation to properly reproduce the data. Indeed while Geant4 simulates reliably particle interaction inside materials, by default no particular detector response is assumed. This has several consequences, the most important of which is that the detectors resolution is not properly reproduced. We can extract the energy deposited inside the ECAL or the position where the incoming particles hit a Micromegas detector, but none of these quantities will be measured with absolute precision in our real experiment. To improve the reliability of the MC, an approach relying on data collected in the calibration run is used. The Data collected in the electron/hadron calibration runs are used to directly measure the detector response, and this information is used to improve the distributions produced by the simulation. In this thesis, we will refer to this process as \textbf{Digitization}.
 
-After the development of a reliable MC, selection criteria are set to maximize the sensitivity of the experiment. This is done by simulating $\DM$ (or other types of Dark Matter) inside our setup and comparing their signature to the leading background in one of the relevant distribution (for example the synchrotron radiation detected in the SRD). We then choose the cut where the significance, defined as $S = s/\sqrt{s+b}$, is maximized.
+After that, selection criteria are set to maximize the sensitivity of the experiment. This is done by simulating $\DM$ (or other types of Dark Matter) inside our setup and comparing their signature to the leading background in one of the relevant distribution (for example the synchrotron radiation detected in the SRD). We then choose the cut where the significance, defined as $S = s/\sqrt{s+b}$, is maximized.
 %In some cases, where two distributions happen to be correlated (for example the SRD energy deposit and the $\chi^2$ compatibility of the signal shape with an e.m.-shower in the ECAL), the selection criteria are optimized using the 2D-distribution of the two variables instead.
 
-After the selection criteria are set, we start the comparison with the data collected with the physical trigger. This is tricky, because it implies the risk of substantial bias, but is necessary to study possible systematics that are still not correctly reproduced. One example of this would be the physical trigger described in Sec.\ref{ch2:sec:detectors-trigger}, that is a source of uncertainty for the signal yield. To solve this issue, NA64 uses a Hidden Signal Box blind analysis\cite{blind-analysis}: a small portion of the data ($\sim$10\%) is used to study in detail the distribution observed after the physical trigger while the signal box remains hidden until the final analysis involving the full sample is performed. This method allows to study more in detail distributions that might affect the background by directly looking at the data without introducing too much bias in the procedure. An example of this is the large-angle scattering of hadrons, that causes the energy to escape the setup transversely. Due to the complexity of the corresponding angular distribution and the rare occurrence of such an event, the background needs to be estimated using a data-driven method. Since the knowledge of the background improves after this step, some corrections to the selection criteria are then applied to increase the sensitivity.
+We then start the comparison with the data collected with the physical trigger. This is tricky, because it implies the risk of substantial bias, but is necessary to study possible systematics that are still not correctly reproduced. One example of this would be the physical trigger described in Sec.\ref{ch2:sec:detectors-trigger}, that is a source of uncertainty for the signal yield. To solve this issue, NA64 uses a Hidden Signal Box blind analysis\cite{blind-analysis}: a small portion of the data ($\sim$10\%) is used to study in detail the distribution observed after the physical trigger while the signal box remains hidden until the final analysis involving the full sample is performed. This method allows to study more in detail distributions that might affect the background by directly looking at the data without introducing too much bias in the procedure. An example of this is the large-angle scattering of hadrons, that causes the energy to escape the setup transversely, and is estimated using data-driven methods. Since the knowledge of the background improves after this step, some corrections to the selection criteria are applied to further increase the sensitivity.
 
 One also wants to estimate properly the efficiency of signal detection, including possible fluctuation in the efficiency of the DAQ or the physical trigger. Hence, a class of events that has similar properties to the signal is very desirable to study in detail the properties of a signal-like event and how are effected in by our measurement method. It is not obvious that such a class exists, but turns out the NA64 experiment is lucky! The dimuon production starting from gamma $\emu$ shares an important number of properties with the signal and at the same time can be easily distinguished from it by looking at the energy deposited in the HCAL: a double-MIP signature in each module. Additionally, being a QED interaction, it can be reproduced reliably by the simulation , hence the difference between the expected number of dimuon and the observed number of dimuon can be used to weight each run. This way, the systematics of the trigger and the setup are accounted for, even if they evolve with time. To each run is assigned a weight taking into account the dimuon discrepancy mentioned above $\omega_i = N^{data}_{dimu}/N^{simu}_{dimu}$, and the total number of effective EOT is obtained:
 
@@ -60,7 +70,7 @@ One also wants to estimate properly the efficiency of signal detection, includin
   N_{eff}^{EOT} = \sum_{i=run number} \omega_i \cdot N^{EOT}_i
 \end{equation}
 
-After this stage, we are finally ready to unblind the data and proceed to the final analysis. The selection criteria are fixed, and the signal region is made visible. We now count the events in the signal box after the selection criteria are applied to the full sample, and we compare this number to the expected background. We are no ready to decide the outcome of the measurement.
+After this stage, we are finally ready to unblind the data and proceed to the final analysis. We now count the events in the signal box after the selection criteria are applied to the full sample, and we compare this number to the expected background. 
 
 In all analysis performed by NA64 to date \cite{Banerjee:2020fue,Banerjee:2019hmi,NA64:2019imj,na64-prd,Banerjee:2018vgk,Banerjee:2016tad} no signal event was found in the signal box. To cast our results, a confidence limit was calculated using the modified frequentist approach, taking the profile likelihood as test statistics\cite{JUNK1999435,Read_2002,Cowan:2010js}. Compared to Eq.\ref{eq:poisson-simple}, here we consider all sources of background calculated and we take them into account. The expected signal for each hypothesis $\dmhypo$ is calculated using the following equation:
 
@@ -69,7 +79,7 @@ In all analysis performed by NA64 to date \cite{Banerjee:2020fue,Banerjee:2019hm
   N^{tot}_{\DM} = \sum_{i=runs} n_{\DM}(m_{\DM},\epsilon) \times \varepsilon_i(m_{A'},\epsilon) \times N^{EOT}_i
 \end{equation}
 
-Where $n_{\DM}(m_{A'},\epsilon)$ is the rate at which $\DM$ is produced considering the efficiency due to the selection criteria, $\varepsilon_i(m_{A'},\epsilon)$ is an efficiency factor taking into account detector inefficiencies and other sistematics\footnote{Not to be confused with the kinematic mixing $\epsilon$}, calculated with the help of the dimuon sample, and $N^{EOT}_i$ is the number of collected EOT in the run $i$.
+Where $n_{\DM}(m_{A'},\epsilon)$ is the rate at which $\DM$ is produced considering the efficiency due to the selection criteria, $\varepsilon_i(m_{A'},\epsilon)$ is an efficiency factor taking into account detector inefficiencies and other sistematics\footnote{Not to be confused with the kinematic mixing $\epsilon$}, and $N^{EOT}_i$ is the number of collected EOT in the run $i$.
 
 A summary of the full analysis machinery is depicted in Fig.\ref{fig:analysis-chart}. In short, we characterize the following steps:
 
@@ -93,7 +103,7 @@ A summary of the full analysis machinery is depicted in Fig.\ref{fig:analysis-ch
 \section{Geant4 simulation of the experiment}
 \label{ch3:sec:geant4}
 
-As introduced above, the first ingredient for our analysis is Monte Carlo simulation to reproduce the particle interactions in our setup. This task can be divided into three subtasks:
+The first ingredient for our analysis is Monte Carlo simulation to reproduce the particle interactions in our setup. This task can be divided into three subtasks:
 
 \begin{enumerate}
 \item A code to simulate particle interactions inside the NA64 setup.
@@ -149,7 +159,7 @@ The output of Geant4 can be divided into three different categories:
 \item MC truth information regarding the event, including all the kinematics of the $\DM$ if it was emitted.
 \end{itemize}
 
-The first type is straight forward. Each time a step is computed inside a sensitive detector, the energy deposited in the volume is added to some specific counters which are saved at the end of each event. At this point, some detector effects are already accounted for. Only the energy in the active part of each calorimeter is recorded, and the total sum of the energy deposited is corrected using a calibration constant which corrects the energy output to reflect the initial particle energy. Additionally, Birks law \cite{NYIBULE2014141} is implemented in the HCAL to correct for the propagation of optical photon in the WLS until the PMTs, using an attenuation length of 30 \si{\centi\meter}. This effects correct for the different light yields between $\pi^-$ and $\mu^-$, since in the case of $\mu^-$ the energy is deposited the full length of the detector evenly.
+The first type is straight-forward. Each time a step is computed inside a sensitive detector, the energy deposited in the volume is added to some specific counters which are saved at the end of each event. At this point, some detector effects are already accounted for. Only the energy in the active part of each calorimeter is recorded, and the total sum of the energy deposited is corrected using a calibration constant which corrects the energy output to reflect the initial particle energy. Additionally, Birks law \cite{NYIBULE2014141} is implemented in the HCAL to correct for the propagation of optical photon in the WLS until the PMTs, using an attenuation length of 30 \si{\centi\meter}. This effects correct for the different light yields between $\pi^-$ and $\mu^-$, since in the case of $\mu^-$ the energy is deposited the full length of the detector evenly.
 
 To reproduce tracking detectors, every time a particle crosses the gas volume of a gas chamber, multiple pieces of information are saved:
 
@@ -160,19 +170,20 @@ To reproduce tracking detectors, every time a particle crosses the gas volume of
 \item The PDG number of the particle \cite{particle-numbering-scheme}.
 \end{itemize}
 
-These data define a structure called \textit{MChit}, which is used by the reconstruction algorithm to reproduce both hits and tracks in the same format of the data. The algorithm for the reconstruction works as follow:
+These data define a structure called \textit{MChit}, which is used by the reconstruction algorithm to reproduce both hits and tracks in the same format of the data. This algorithm was developed during my thesis to improve the Digitization procedures. It works as follow:
 \begin{enumerate}
 
-\item Hits with an energy deposit in the volume smaller than a threshold are removed, since a minimum amount of energy needs to be deposited to start the ionization inside the gas. Practically, the minimum threshold was set to 2 keV based on previous studies performed for MM \cite{IGUAZ20121079}. A similar value is assumed for the GEM detector as well.
-\item Multiple \textit{MChit} are merged if they are found to be closer than a fixed distance. This distance is conservatively set to be 2 $\mmi$  for MM and 1.75 $\mmi$  for GEM. Hits closer than distance are merged in a single one and the new x-y position is computed by weighting each position by its energy deposit in the gas.
+\item Hits with an energy deposited in the volume smaller than the minimum amount to start the ionization inside the gas are removed. Practically, this threshold was set to 2 keV based on previous studies performed for MM \cite{IGUAZ20121079}. A similar value is assumed for the GEM detector as well.
+\item Multiple \textit{MChit} are merged if they are found to be closer than a fixed distance. This distance is conservatively set to be 2 $\mmi$  for MM and 1.75 $\mmi$  for GEM. The new x-y position of the hit is computed using the weighted average of each hit position, where the weight is defined by the energy deposited inside the gas.
 \item The x-y coordinates of the hits are transformed into the plane of the detectors using a simple matrix multiplication $u_{hit} = M_{uv}(\theta_{uv}) \cdot v_{hit}$ where $u_{hit}$ is the hit position in the detector coordinate system and $v_{hit}$ is the same vector expressed in the laboratory system. The Matrix $M_{uv}(\theta_{uv})$ is the rotation matrix of the $O(2)$ group where $\theta_{uv}$ is the angle between the axis of the detector and the axis of the laboratory system.
-\item Each coordinate on the detector plane is treated separately. To reproduce the genetic multiplexing of the MM, each physical strip is mapped to its corresponding channels, and a 64-dimension vector is obtained as output. Noise is also added to each channel using the same pedestal measured in the sparse mode of the APV chips. Now that the charge of each channel is defined, the vector is used as input for the same clusterization procedure used for the data. In the MM detector, the clusterization is fully reproduced. the physical cluster is parametrized by a Gaussian, and the charge is distributed on the physical strips starting from the hit center. The total charge of the cluster is decided starting from the total energy deposited in the gas volume and converting it into ADC counts based on a calibration procedure using the data of the electron calibration runs. The procedure for the GEM is more direct and only involves the smearing of the initial true hit position using a Gaussian distribution with a width corresponding to the hit resolution of the GEM detectors, estimated from the calibration runs using the Three Layer Method \cite{Bortfeldt:2014vvt}. This determined a resolution of $\sigma_{GEM} \approx 80$\mum. After the clusterization is performed, two set $X_n$,$Y_n$ of positions are computed for the two planes. The two set are finally combined to retrieve hit candidates.
-\item After the set $X_n$ and $Y_n$ is computed, hits candidate $(X;Y)_n$ are decided using all combinations between the two sets\footnote{In the most common case of just a single primary present upstream the ECAL, this association is trivial, since only one hit per plane is present.}. A hit number per plane larger than five, other than being rare ($\lesssim$0.1\%), is not relevant for $\DM$ searches and hence rejected during the analysis. The hits candidates are then used as input of the tracking or vertexing procedure. The total momentum of a track is calculated from the displacement after passing through the magnetic field of the MBPL (see Appendix.\ref{AppendixD}). The vertex reconstruction is more involved but starts from the same input above. The procedure is described more in detail in Sec.\ref{ch3:sec:vis-mode-tracking}.
+\item Each coordinate on the detector plane is treated separately. To reproduce the genetic multiplexing of the MM, each physical strip is mapped to its corresponding channels, and a 64-dimension vector is obtained as output. Noise is also added to each channel using the same pedestal measured in the sparse mode of the APV chips.
+\item  The charge vector is used as input for the same clusterization procedure used for the data. In the MM detector, the clusterization is fully reproduced. the physical cluster is parametrized by a Gaussian, and the charge is distributed on the physical strips starting from the hit center. The total charge of the cluster is decided starting from the total energy deposited in the gas volume which is it into ADC counts. The constant of conversion is computed using the data of the electron calibration runs. The procedure for the GEM is more direct and only involves the smearing of the initial true hit position using a Gaussian distribution with a width corresponding to the hit resolution of the GEM detectors. This was estimated to be $\sigma_{GEM} \approx 80$ $\mum$ using the Three Layer Method \cite{Bortfeldt:2014vvt}.
+\item After the clusterization is performed, two set $X_n$ and $Y_n$ of positions are extracted from the two planes and combined\footnote{In the most common case of just a single primary present upstream the ECAL, this association is trivial, since only one hit per plane is present.} in the set of hit candidates $(X;Y)_n$. A hit number per plane larger than five, other than being rare ($\lesssim$0.1\%), is not relevant for $\DM$ searches and hence rejected in the reconstruction. The hits candidates are then used as input of the tracking or vertexing procedure. The total momentum of a track is calculated from the displacement after passing through the magnetic field of the MBPL (see Appendix.\ref{AppendixD}). The vertex reconstruction is more involved but starts from the same input above. The procedure is described more in detail in Sec.\ref{ch3:sec:vis-mode-tracking}.
 \end{enumerate}
 
-After the energy deposited in each counter and the tracking procedure is performed, these quantities are saved in a tree structure implemented in ROOT \cite{root} that is equivalent to the one used for the data. A shower profile analysis is also performed at this step (see Sec.\ref{ch3:sec:bkg-ecal-profile}) and added to the tree. This design allows using the same analysis to study MC and data without the need of changing the code. For the simulation some additional quantities are saved in the tree. We call these quantities "MC truth", and are used to perform specific studies on the background. An example of this is the information about the reconstructed tracks, that allows the final user to know if a track was computed using true physical hits or hits produce in a wrong match between different planes/trackers. True information is also fundamental to study the signal, for example, to identify the effect of specific cuts on the $\DM$ spectrum. An example of this is provided in Sec.\ref{ch3:sec:bkg-ecal-profile}.
+Completed the procedure, these quantities are saved in a tree structure implemented in ROOT \cite{root} that is equivalent to the one used for the data. A shower profile analysis is also performed at this step (see Sec.\ref{ch3:sec:bkg-ecal-profile}) and added to the tree. This design allows using the same analysis to study MC and data without the need of changing the code.
 
-On the top of the reconstruction, the code of the simulation was as well modified to correct for effects observed in the calibration run. In the next section, we will provide a specific example of this, where the hadronic model was modified to improve the agreement between simulation and data of the stopping-power observed for hadrons.
+The simulation code was also optimised to correct effects observed in data during calibration runs. In the next section, we will provide a specific example of this, where the hadronic model was modified to improve the agreement between simulation and data of the stopping-power observed for hadrons.
 
 \subsection{Correction of longitudinal shower profile in the Hadronic calorimeter}
 \label{ch3:sec:geant4-hcal-corr}
@@ -228,10 +239,56 @@ Some modifications of the \textit{FTFP\_BERT} were decided to improve the agreem
   \caption[Comparison of hadron energy deposit after corrections]{Comparison between data (black line) and simulated $\pi^-$ in WCAL energy deposit using the physics list $FTFP\_BERT$ before and after corrections applied to the model.}
   \label{fig:geant4-hadron-final}
 \end{figure}
+\clearpage
+\newpage
+\section{Monte Carlo validation using $\gamma + Z \rightarrow \mu^+ \mu^-$ events}
+\label{ch3:sec:dimuons}
+
+The $\emu$ interaction consists of the rare production of a $\mu^+mu^-$ inside an em-shower after an incoming photon interacts with a target nucleus. The process of pair production is equivalent for all charged leptons (e,$\mu$,$\tau$) and has a cross-section in the order of $\sigma_{pair} \sim 4Z^2\alpha r^2_c$. Compared to the more frequent $\ee$ production, this interaction is suppressed by a factor ($m_e$/$m_{\mu}$)$^2$ = 2.34 $\times 10^{-5}$ because of the larger muon mass. This process is used both to validate the MC simulation and estimate the systematics of the experiment, as it shares many similarities to the signal under study:
+
+\begin{enumerate}
+\item Rare process produced inside an em-shower.
+\item In first approximation, it can be computed inside the QED framework, hence with high precision.
+\item The process penetrates very efficiently both the target and the HCAL modules. Each $\mu^{\pm}$ loses an energy $<250$\si{\mega\electronvolt} after its passage through the target, and $\sim$1.3 $\gev$ for each HCAL module encountered. 
+\item While the energy spectrum of the emitted $\mu^+\mu^-$ is not equivalent to the one of $\DM$ \cite{dimuon-mc}, it spans the same energy region relevant for the $\DM$ signal.
+%Hence, a comparison between MC and data for dimuons is an excellent test for the reliability of the MC.
+\end{enumerate}
+
+Additionally, because of the double MIP signature that the $\emu$ interaction leaves inside the VETO and the HCALs, this interaction can be easily distinguished from a signal event. The possibility of the leakage in the signal region was computed for both invisible and visible mode and was found not to be a relevant background (see for example Sec.\ref{ch3:sec:bkg:vis:elec}).
+
+In Geant4, the process is described starting from the formula \cite{dimuon-mc}:
+
+\begin{equation}
+  \label{eq:sigma-dimuon}
+  \sigma_{tot}^{\gamma \to \mu^+ \mu^-}(E_{\gamma}) = 4\alpha Z^2 r^2_c\int^{x_{max}}_{x_{min}} \left(1 - \frac{4}{3}x_+x_- \right) \log{W}dx_+
+\end{equation}
+
+Where $x_+$ the fraction of energy of the original $\gamma$ being transferred to the $\mu^+$ and $W$ is a function of $x_+$,$E_{\gamma}$, and the Z, A of the element, which also takes into account both the atomic-screening using the Thomas-Fermi model and the finite size of the nucleus. Some numerical values for this are provided in \cite{dimuon-mc}. To increase computation speed, a parameterization of Eq.$\ref{eq:sigma-dimuon}$ is used instead, with a precision greater than 2\%. After the dimuon pair is generated, the amount of energy transferred to the $\mu^+$ is decided by sampling the differential cross section\footnote{In this case, just the argument of the integral in Eq.\ref{eq:sigma-dimuon}} and the new particles are produced in Geant4. Since the interaction is approximately elastic, the relation $E_{\gamma} = E_{\mu^+} + E_{\mu^-}$ is used for the computation.
+
+For a comparison between data and MC, $\emu$ interaction are collected from the complete sample of data collected for both visible and invisible mode using the criteria $1.2 \gev < E_{HCAL}^{1,2,3} < 6.35 \gev$ compatible with the passage of two MIPs in all HCAL modules. All selection criteria are then applied to the sample obtained, excluding energy deposited on the VETO (and W2 in the case of the visible mode). After that, the energy spectra recorded in the target is compared between data and MC. First, both samples are normalized to the same value to compare the shapes of the two spectra and check the reliability of the MC. After that, the two distributions are normalized to the number of EOT collected, the difference between the two is taken as a correction factor to the total number of EOT accumulated, as it shows some disagreement between data and MC prediction due to the systematics of the experiment \cite{na64-prd}. Correction factors can be derived from the detailed comparison of the energy deposited in the ECAL between data and MC. Each bin of the spectrum is compared and the ratio is computed using the formula:
+
+\begin{equation}  
+  \label{eq:RR-factor}
+  \begin{aligned}
+  &R_{data/MC} = \frac{n_i^{ECAL}}{n_{tot}^{ECAL}} \\
+  &RR_i = R_{data}/R_{MC}
+  \end{aligned}
+\end{equation}
+
+Inside the MC simulation, each event is weighted by the corresponding factor $RR_i$ as a function of the energy deposited in the target. Such corrections are different between runs and are mostly affected by the intensity of the beam and the variation of the trigger-threshold in the PS detector during data taking. These corrections typically reduce the signal yield by 5\%-10\%. Differences in reweighting between runs collected at the same intensity are taken as systematic errors, which amount to a maximum of 7\%\footnote{The precise error has a small dependence from the $\DM$ mass, for masses of $\simeq$10 MeV this error amount to 5\% \cite{na64-prd}.} An example of such comparison is shown in Fig.\ref{fig:dimuon-comp-invis}.
+
+\begin{figure}[tbh!]
+  \centering
+  %\includegraphics[width=\textwidth]{\pdirthree/dimuon-hcal-comp.png}
+  \includegraphics[width=0.45\textwidth,height=0.43\textwidth]{\pdirthree/dimuon-ecal-comp.pdf}
+  \includegraphics[width=0.45\textwidth,height=0.4\textwidth]{\pdirthree/dimuon-RR-comp.pdf}
+  \caption[Dimuon spectra in ECAL for data and MC.]{Left: Distribution of energy deposited in the ECAL target by the scattered electron from the reaction $\emu$ selected from data (red dot) and MC generated event (green line). Data and MC are normalized to the same number of event. The unnormalized MC distribution is also shown with the corresponding error on the top histogram. Right: Ratio RR between MC and data efficiency of dimuon production as function of the energy deposited in the ECAL. The two color curves shows examples of empirical distribution of the values \cite{na64-prd}.}
+  \label{fig:dimuon-comp-invis}
+\end{figure}
 
 \section{Background rejection methods}
 
-In this section, we give a brief overview of the two main methods used to reject hadrons (and muons) contamination in the beam developed as a consequence of my work.
+Part of my work was also to improve the background condition. In this section, I will describe two methods developed during my thesis for this purpose.
 
 The first method exploits the emission of synchrotron radiation by the electrons during their passage in the magnetic field to distinguish the ID of the incoming particle. The nature of this radiation is described more in detail in Appendix.\ref{appB:sec:sr}, together with the most relevant equation in the NA64 scenario. The method was tested using BGO crystals during the test beam performed in 2016 and resulted in a total suppression of hadrons of $p \simeq 10^{-5}$ published in \cite{Depero:2017mrr}.
 
@@ -364,7 +421,7 @@ Electrons & $2.4\times10^{-1}$  & $2.60$ & $97.37$ \\
 \subsection{Hadron rejection using electromagnetic shower profile}
 \label{ch3:sec:bkg-ecal-profile}
 
-On the top of rejection using SRD, the transversal segmentation of the ECAL offers another tools for hadron rejection. The idea is to discriminate between a classical em-shower profile to a more complex hadronic shower using a $\chi^2$-test. A shower profile database can be built by correlating the hit position (x,y) on the ECAL with the fraction of energy deposited in each ECAL cell. From this database a predicted value of energy deposited in each ECAL cell can be extracted and compared to the one of the single event. The compatibility between the predicted profile and the measured one can be tested using the $\chi^2$-distribution:
+On the top of rejection using SRD, the transversal segmentation of the ECAL offers another tools for hadron rejection. The idea is to discriminate between a classical em-shower profile to a more complex hadronic shower using a $\chi^2$-test. A shower profile database can be built by correlating the hit position (x,y) on the ECAL with the fraction of energy deposited in each ECAL cell. The method used to build this database is detailed in Appendix.\ref{Appb:sec:make_profile}. A predicted value of energy deposited in each ECAL cell is extracted and compared to the one measured in the event. The compatibility between the predicted profile and the measured one can be tested using the $\chi^2$-distribution:
 
 \begin{equation}
   \chi^2 = \sum^{9,36}_i \left(\frac{E_{pred}^i(x_{hit},y_{hit})-E_{mes}^i}{\sigma^{i}_{pred}(x_{hit},y_{hit})}\right)^2
@@ -398,9 +455,6 @@ are used (total of 36, see Fig.\ref{fig:ecal_example}).
     example of how a profile for a cell looks like in the MC.}
   \label{fig:ecal_example}
 \end{figure}
-
-\subsubsection{Results}
-\label{ch3:sec:chi2-result}
 
 To test the rejection power and the efficiency of the
 method the algorithm described above was used for 3 type of samples\footnote{The database was generated using the electron  calibration runs 2363, 2182, 2410, 2406, 2438. A complete description of such runs can be found in \cite{na64-runs}. }:
@@ -580,53 +634,10 @@ The main difference between the two plots concerns some events with very low ene
 \end{figure}
 \fi
 
-\section{Signal yield correction using $\gamma + Z \rightarrow \mu^+ \mu^-$ events }
-\label{ch3:sec:dimuons}
-
-The $\emu$ interaction consists of the rare production of a $\mu^+mu^-$ inside an em-shower after an incoming photon interacts with a target nucleus. The process of pair production is equivalent for all charged leptons (e,$\mu$,$\tau$) and has a cross-section in the order of $\sigma_{pair} \sim 4Z^2\alpha r^2_c$. Compared to the more frequent $\ee$ production, this interaction is suppressed by a factor ($m_e$/$m_{\mu}$)$^2$ = 2.34 $\times 10^{-5}$ because of the larger muon mass. This process is important to estimate possible systematics of the experiment, as it shares many similarities to the signal under study:
-
-\begin{enumerate}
-\item Rare process produced inside an em-shower.
-\item In first approximation, it can be computed inside the QED framework, hence with high precision.
-\item The process penetrates very efficiently both the target and the HCAL modules. Each $\mu^{\pm}$ loses an energy $<250$\si{\mega\electronvolt} after its passage through the target, and $\sim$1.3 $\gev$ for each HCAL module encountered. 
-\item While the energy spectrum of the emitted $\mu^+\mu^-$ is not equivalent to the one of $\DM$ \cite{dimuon-mc}, it spans the same energy region relevant for the $\DM$ signal.
-%Hence, a comparison between MC and data for dimuons is an excellent test for the reliability of the MC.
-\end{enumerate}
-
-We also remind that because of the double MIP signature that the $\emu$ interaction leaves inside the VETO and the HCALs, this interaction can be easily distinguished from a signal. The possibility of the leakage in the signal region was computed for both invisible and visible mode and was found not to be a relevant background (see for example Sec.\ref{ch3:sec:bkg:vis:elec}).
-
-In Geant4, the process is described starting from the formula \cite{dimuon-mc}:
-
-\begin{equation}
-  \label{eq:sigma-dimuon}
-  \sigma_{tot}^{\gamma \to \mu^+ \mu^-}(E_{\gamma}) = 4\alpha Z^2 r^2_c\int^{x_{max}}_{x_{min}} \left(1 - \frac{4}{3}x_+x_- \right) \log{W}dx_+
-\end{equation}
-
-Where $x_+$ the fraction of energy of the original $\gamma$ being transferred to the $\mu^+$ and $W$ is a function of $x_+$,$E_{\gamma}$, and the Z, A of the element, which also takes into account both the atomic-screening using the Thomas-Fermi model and the finite size of the nucleus. Some numerical values for this are provided in \cite{dimuon-mc}. To increase computation speed, a parameterization of Eq.$\ref{eq:sigma-dimuon}$ is used instead, with a precision greater than 2\%. After the dimuon pair is generated, the amount of energy transferred to the $\mu^+$ is decided by sampling the differential cross section\footnote{In this case, just the argument of the integral in Eq.\ref{eq:sigma-dimuon}} and the new particles are produced in Geant4. Since the interaction is approximately elastic, the relation $E_{\gamma} = E_{\mu^+} + E_{\mu^-}$ is used for the computation.
-
-For a comparison between data and MC, $\emu$ interaction are collected from the complete sample of data collected for both visible and invisible mode using the criteria $1.2 \gev < E_{HCAL}^{1,2,3} < 6.35 \gev$ compatible with the passage of two MIPs in all HCAL modules. All selection criteria are then applied to the sample obtained, excluding energy deposited on the VETO (and W2 in the case of the visible mode). After that, the energy spectra recorded in the target is compared between data and MC. First, both samples are normalized to the same value to compare the shapes of the two spectra and check the reliability of the MC. After that, the two distributions are normalized to the number of EOT collected, the difference between the two is taken as a correction factor to the total number of EOT accumulated, as it shows some disagreement between data and MC prediction due to the systematics of the experiment \cite{na64-prd}. Correction factors can be derived from the detailed comparison of the energy deposited in the ECAL between data and MC. Each bin of the spectrum is compared and the ratio is computed using the formula:
-
-\begin{equation}  
-  \label{eq:RR-factor}
-  \begin{aligned}
-  &R_{data/MC} = \frac{n_i^{ECAL}}{n_{tot}^{ECAL}} \\
-  &RR_i = R_{data}/R_{MC}
-  \end{aligned}
-\end{equation}
-
-Inside the MC simulation, each event is weighted by the corresponding factor $RR_i$ as a function of the energy deposited in the target. Such corrections are different between runs and are mostly affected by the intensity of the beam and the variation of the trigger-threshold in the PS detector during data taking. These corrections typically reduce the signal yield by 5\%-10\%. Differences in reweighting between runs collected at the same intensity are taken as systematic errors, which amount to a maximum of 7\%\footnote{The precise error has a small dependence from the $\DM$ mass, for masses of $\simeq$10 MeV this error amount to 5\% \cite{na64-prd}.} An example of such comparison is shown in Fig.\ref{fig:dimuon-comp-invis}.
-
-\begin{figure}[tbh!]
-  \centering
-  %\includegraphics[width=\textwidth]{\pdirthree/dimuon-hcal-comp.png}
-  \includegraphics[width=0.45\textwidth,height=0.43\textwidth]{\pdirthree/dimuon-ecal-comp.pdf}
-  \includegraphics[width=0.45\textwidth,height=0.4\textwidth]{\pdirthree/dimuon-RR-comp.pdf}
-  \caption[Dimuon spectra in ECAL for data and MC.]{Left: Distribution of energy deposited in the ECAL target by the scattered electron from the reaction $\emu$ selected from data (red dot) and MC generated event (green line). Data and MC are normalized to the same number of event. The unnormalized MC distribution is also shown with the corresponding error on the top histogram. Right: Ratio RR between MC and data efficiency of dimuon production as function of the energy deposited in the ECAL. The two color curves shows examples of empirical distribution of the values \cite{na64-prd}.}
-  \label{fig:dimuon-comp-invis}
-\end{figure}
-
 \section{Invisible mode analysis}
 \label{ch3:sec:analysis-invis}
+
+The general method of analysis described in Sec.\ref{ch3:sec:analysis-approach} is now applied to the specific case of the invisible mode analysis. To apply the method a set of selection criteria is set to maximize the overall sensitivity of the setup using the MC-simulation described in Sec.\ref{ch3:sec:geant4}. The background is also detailed using the classification defined at the beginning of this chapter. We will show that the expected number of events in the signal region in absence of Dark Photon production is $\simeq 0.5$, making NA64 a background free experiment.
 
 \subsection{Selection criteria}
 \label{ch3:sec:selection-criteria}
@@ -654,7 +665,9 @@ The selection criteria needs to select 100 $\gev$ electrons and reject any event
 \item Events with multiple hits in the straw chamber are removed from the analysis. This cut is used to remove the contamination due to electron-hadron production upstream of the ECAL.
 \end{itemize}
 
-The efficiency of these cuts was studied using the MC simulation and the electron calibration runs.
+Finally, the signal region is defined by events with significant missing energy in the ECAL and no activity in the HCAL. This means $E_{ECAL} < 50$ $\gev$ and $E_{HCAL} < 1$ $\gev$, previously illustrated in Fig.\ref{fig:two-signature}.
+
+The efficiency of the cuts listed above was studied using the MC simulation and the electron calibration runs.
 %A small summary of the uncertainty is provided in Table \ref{tab:inv-cut-eff}.
 The effect of these cuts can be appreciated in the $\ehcalplane$ plane, where the evolution from the original sample is particularly relevant. These effects are shown in Fig.\ref{fig:inv-cut-ehcal}, most notably the amount of hadrons is seen to greatly reduced after the SRD cut is applied, and consequentially the dimuon region becomes more visible. The VETO cut then removes most of the punchthrough particles, including dimuons. Finally, when the tracking selection criteria are applied, a large portion of the low energy deposit event and strong scattering upstream disappear\footnote{This is mostly visible in the requirement of "GoodTrack", visible between plot 5 and 6}.
 
@@ -670,16 +683,7 @@ The effect of these cuts can be appreciated in the $\ehcalplane$ plane, where th
 \subsection{Background}
 \label{ch3:sec:bkg:inv}
 
-In this section, we will try to go more in detail of what constitutes background in the NA64 experiment. With background, we mean an event detected in the signal region without involving the emission of $\DM$ that was able to pass all our selection criteria. Because of the different physics involving them, it is instructive to divide the background by the primary particle considered. We can define three categories:
-
-\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Electronic background}]
-\item[Hadronic background] Background coming from a hadronic ($\pi^-$,$K^-$,...) primary.
-\item[Muonic background] Background coming from a $\mu^-$ primary.
-\item[Electronic background] Background coming from a $e^-$ primary.
-\end{description}
-
-This classification is convenient, especially if one wants to study the background using MC-simulations. However, there is some overlap in the physics of these three scenarios. A trivial example would be the decay $\pi^- \rightarrow \mu^-\nu$, where an initial $\pi^-$ produces a $\mu^-$ in our setup. A more relevant but involved example is an $e^-$ or a $\gamma$ which triggers an hadronic shower after an inelastic scattering with a nucleus. This can cause energy escaping in the form of hadron, and since the initial particle is an electron, such background is also accepted by the SRD criteria. The main advantage of this classification is that it let us calculate the suppression factor for the background with a simple argument without necessarily using the MC-simulation. For example, for both hadronic and muonic background, we can conservatively assume a factor $10^{-5}$ of suppression due to both the beam-composition ($\lesssim 10^{-2}$) and the SRD selection applied upstream ($\lesssim 10^{-3}$).
-
+In this section, we will try to go more in detail of what constitutes background in invisible mode setup, following the classification defined in Sec.\ref{ch3:sec:analysis-approach}. A complete summary of the expected background, including uncertainty for each single source, is provided in Table \ref{tab:inv-bkg}.
 \subsubsection{Hadronic background}
 \label{ch3:sec:bkg:inv:hadr}
 
@@ -811,6 +815,8 @@ The parameters $a$ and $b$ are fitted using the data in the sideband C of the co
 \section{Visible mode analysis}
 \label{ch3:sec:analysis-vis}
 
+In this section, we provide the selection criteria and background condition specific to the visible mode search. A new analysis I performed using the 4 GEMs tracker inside the decay volume is also described here. The validation of the MC and signal correction is also performed following the method described in Sec.\ref{ch3:sec:dimuons}, but also including a new tracking procedure developed to reconstruct vertex candidates in the decay volume. The background condition is similar for this analysis, as the selection criteria only differ for the low energy $\DMM$ produced in the late stage of the em-shower.
+
 \subsection{Selection criteria}
 \label{ch3:sec:selection-criteria-vis}
 
@@ -826,7 +832,7 @@ For the visible mode, the signal is searched by matching the energy deposited in
 \item Energy deposited in the VETO has to be smaller than 0.9$\times \emip$, energy deposited in each HCAL modules needs to be smaller than 1 $\gev$.  
 \end{itemize}
 
-The signal region is finally defined by looking at events where the sum of WCAL and ECAL energy is matching the nominal beam energy within the energy resolution of the detectors. This energy was originally 100 $\gev$ in 2017, but was increased to 150 $\gev$ in 2018 to boost the sensitivity for short-lived $\DMX$ (see Fig.\ref{fig:w-e-vis}).
+The signal region is finally defined by looking at events where the sum of WCAL and ECAL energy is matching the nominal beam energy within the energy resolution of the detectors (see Fig.\ref{fig:two-signature}). This energy was originally 100 $\gev$ in 2017, but was increased to 150 $\gev$ in 2018 to boost the sensitivity for short-lived $\DMX$ (see Fig.\ref{fig:w-e-vis}).
 
 \subsection{Visible mode analysis using the tracking approach}
 \label{ch3:sec:vis-mode-tracking}
@@ -943,6 +949,7 @@ A lower efficiency is observed in the data compared to the Monte Carlo after app
 \end{center}
 
 \subsection{Background}
+\label{ch3:sec:bkg:vis}
 
 Since now the signal requires the sum of the energy deposited in the two calorimeters (WCAL and ECAL) to be equal to the incoming primary energy, particles escaping the setup in the transverse direction are no longer a source of background. Because of the large distance between the WCAL and ECAL\footnote{7.5 \si{\meter} in the 2018 setup, 4.2 \si{\meter} in the 2017 setup}, such event is actually very likely. The background, on the other hand, can be caused by particles able to punch-through the first target without leaving any energy deposit in the W2 counter placed immediately after and then leave a pure electromagnetic signature in the ECAL downstream. Because of the different lengths of the setup and the addition of a vacuum tube (see Fig.\ref{fig:setup-vis-2018}), the background calculated for 2017 and 2018 differs significantly. The exact suppression depends on the exact source of background considered, but it can amount up to one order of magnitude \cite{Banerjee:2019hmi}. This thesis presents an alternative approach to \cite{Banerjee:2019hmi} that relies on the GEM trackers to boost the signal yield. The method is detailed in Sec.\ref{ch3:sec:vis-mode-tracking}, and consists of applying final discrimination to the event based on a tracking procedure instead of the W2 counter when the energy detected in the ECAL is smaller than 75 $\gev$. The background condition do not differ significantly and are reported in Table \ref{tab:vis-bkg}
 
