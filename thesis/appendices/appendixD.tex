@@ -47,9 +47,9 @@ Finally the radius is projected on the beam axis and the momentum is obtained fr
 \subsection{Genfit and the Kalman filter}
 \label{appD:sec:kalman-filter}
 
-A more detailed method to reconstruct track and vertices is the Kalman filter, which is widely used for track fitting and vertex reconstruction in high-energy physics \cite{HOPPNER2010518}.
+A more sophisticated method to reconstruct track and vertices is the Kalman filter, which is widely used for track fitting and vertex reconstruction in high-energy physics \cite{HOPPNER2010518}.
 
-The extended Kalman filter, that was used in NA64 for precise reconstruction of track and vertices, used for example in the novel analysis of the visible mode data using trackers, consist in a recursive algorithm to find the optimum estimate $\vec{x}_{reco}$ of the unknown true state vector $\vec{x}_{true}$. In NA64, this is implemented using the genfit library \cite{genfit}, that introduce the Kalman filter in a seamless way using object defined in the ROOT framework \cite{root}, which greatly simplify their manipulation in the reconstruction code. One of the main difference from the approach described in the previous section is that different error sources can be included easily in the algorithm using a noise matrix that carries the information over all possible source of error. This is particularly important for multiple scattering. Since this source of error depends on the amount of material between the two detectors where the particle is being propagated, it is not straight forward to compute analytically, especially if the amount of multiple scattering encountered depends on the particular topology of the event.
+The extended Kalman filter, that was used in NA64 for precise reconstruction of track and vertices, used for example in the novel analysis of the visible mode data using trackers, consists in a recursive algorithm to find the optimum estimate $\vec{x}_{reco}$ of the unknown true state vector $\vec{x}_{true}$. In NA64, this is implemented using the Genfit library \cite{genfit}, which introduces the Kalman filter in a seamless way using objects defined in the ROOT framework \cite{root}. This greatly simplifies their manipulation in the reconstruction code. One of the main differences from the approach described in the previous section is that different error sources can be included easily in the algorithm using a noise matrix that carries the information over all possible sources of error. This is particularly important for multiple scattering since this error depends on the amount of material between the two detectors where the particle is being propagated and is not straight forward to compute analytically.
 
 An initial state is required as seed for the algorithm, as the Kalman filter propagated an initial state $\vec{x}_0$ through steps $\vec{x}_k \rightarrow \vec{x}_{k+1}$ that converge asymptotically to the optimal estimate $\vec{x}_{reco}$. In NA64, the track initial state is on the hit point recorded by the first GEM, with a momentum in the direction of the hit recorded by the second GEM detector. To compute multiple scattering corrections, the momentum can as well be relevant, as in its Gaussian approximation the RMS width is given by \cite{review-particle-physics}:
 
@@ -58,7 +58,7 @@ An initial state is required as seed for the algorithm, as the Kalman filter pro
   \theta_{plane}^{rms} = \frac{13.6 \mev}{\beta c p} z \sqrt{\frac{x}{X_0}} \left[ 1 + 0.038 \ln{\frac{x z^2}{X_0 \beta^2}} \right]
 \end{equation}
 
-Where $p$, $\beta c$ and $z$ are the momentum, velocity, and charge number of the incident particle, and $x/X_0$ is the thickness of the scattering medium in radiation length. Inside the decay volume of the visible mode a magnetic spectrometer is not present, which means the momentum of each track is not known. To initial the vector magnitude, the energy measured by the ECAL downstream is used, and assumed to be equally shared between the track candidates detect in the decay volume.
+Where $p$, $\beta c$ and $z$ are the momentum, velocity, and charge number of the incident particle, and $x/X_0$ is the thickness of the scattering medium in radiation length. Inside the decay volume of the visible mode, a magnetic spectrometer is not present, which means the momentum of each track is not known. To initial the vector magnitude, the energy measured by the ECAL downstream is used and assumed to be equally shared between the track candidates detect in the decay volume.
 
 Before a recursion step, we define the vector $\vec{x}_k$ and the covariance matrix $C_k$ of the particle in the step $k$, which contain the information of all previous steps. Next, we define a \textit{prediction}, where both state vector and covariance matrix are extrapolated to a predicted state vector $\vec{x}_{k+1}^{pred}$ and $C_{k+1}^{pred}$. The covariance matrix $C_{k+1}$ is calculated by the sum of the track covariance matrix, which is in turn computed using Gaussian error propagation by the transformation of the Jacobian matrix of the propagation, and a noise matrix that takes into account the multiple scattering experienced in-between the two states. The predicted new state vector is then compared to the value measured by the tracking chamber, and corrected using this information. If we define as $\vec{x}_{k+1}^{mes}$ as the hit measured by the tracking chamber where the track is being extrapolated, this means:
 
@@ -73,8 +73,116 @@ Before a recursion step, we define the vector $\vec{x}_k$ and the covariance mat
   \end{aligned}
 \end{equation}
 
-Where the matrix $K_{k+1}$ is called Kalman gain, and $V_{k+1}$ is the covariance matrix of the measurement $\vec{x}_{k+1}^{mes}$. The projection matrix $H_{k+1}$ is a linear transformation from the coordinate system of the state vector $\vec{x}_{k+1}$ to the coordinate system of the measured state. As the elements of $C_k$ reduces at the inclusion of every additional steps, the final 
+Where the matrix $K_{k+1}$ is called Kalman gain, and $V_{k+1}$ is the covariance matrix of the measurement $\vec{x}_{k+1}^{mes}$. The projection matrix $H_{k+1}$ is a linear transformation from the coordinate system of the state vector $\vec{x}_{k+1}$ to the coordinate system of the measured state. As the elements of $C_k$ reduces at the inclusion of every additional step, the correction of the estimate becomes less relevant the more information was already processed by the algorithm. After each hit of the track was used in a Kalman step, the fit is repeated in the opposite direction, starting with $k = N_{hits}$ and performing again the process in reverse. This is done to correct for possible biases of the initial estimate $\vec{x}_0$ used as input of the algorithm. In this second round, the first fit result is used as starting value, and the covariance matrix is multiplied by a large factor ($\sim 1000$), to avoid redundancy of the information from the first fit performed.
 
+The Genfit library takes care of the track reconstruction using the algorithm described above, and at the same time provides a framework that takes care of the precise track representation used for the fit and the hit reconstruction that is used as input to evolve the state vector $\vec{x}_k$. Changing representation is also performed automatically for the covariance matrix and the reference plane when needed.
+
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\appdird/genfit-flowchart.jpg}
+  \caption[genfit flow diagram]{General structure of the objects used for track fitting. The arrow indicate the relation between objects. POCA stands for point of closest approach \cite{genfit}.}
+  \label{fig:genfit-diag}
+\end{figure}
+
+To reconstruct vertices, a simple approach based on the back-propagation of the reconstructed tracks is used. The tracks reconstructed by Genfit are paired following the prescription described in Sec.\ref{ch3:sec:vis-mode-tracking}. After that, tracks are back-propagated using Genfit to the point of minimum distance in an iteration algorithm with a step length of \SI{1}{\milli\meter}. A code snippet of the function used is presented below.
+
+\begin{lstlisting}
+  double TrackProximity(genfit::Track * track1, genfit::Track * track2, TVector3 * POCA, TVector3 * mom1, TVector3 * mom2) {
+    
+    // Start from first measurement point
+    genfit::StateOnPlane msop1 = track1->getFittedState();
+    genfit::StateOnPlane msop2 = track2->getFittedState();
+
+    TVector3 xpos1 = msop1.getPos();
+    TVector3 xpos2 = msop2.getPos();
+    
+    // First determine which direction the tracks will get closer
+    double h=0.1; //in cm
+    int steps=0;
+    double d = 99999999;
+    double oldd=999999;
+    double posd=99999;
+    double negd=99999;
+    oldd = (xpos1-xpos2).Mag();
+    // step with positive h
+    try{
+      track1->getCardinalRep()->extrapolateBy(msop1,h);
+      track2->getCardinalRep()->extrapolateBy(msop2,h);
+    }
+    catch(genfit::Exception& e){
+      std::cerr << e.what();
+      std::cerr << "Exception, next track" << std::endl;
+    }
+    xpos1 = msop1.getPos();
+    xpos2 = msop2.getPos();
+    posd = (xpos1-xpos2).Mag();
+    // step back to original position
+    try{
+      track1->getCardinalRep()->extrapolateBy(msop1,-h);
+      track2->getCardinalRep()->extrapolateBy(msop2,-h);
+    }
+    catch(genfit::Exception& e){
+      std::cerr << e.what();
+      std::cerr << "Exception, next track" << std::endl;
+    }
+    d = (xpos1-xpos2).Mag();
+
+    // step with negative h
+    try{
+      track1->getCardinalRep()->extrapolateBy(msop1,-h);
+      track2->getCardinalRep()->extrapolateBy(msop2,-h);
+    }
+    catch(genfit::Exception& e){
+      std::cerr << e.what();
+      std::cerr << "Exception, next track" << std::endl;
+    }
+    xpos1 = msop1.getPos();
+    xpos2 = msop2.getPos();
+    negd = (xpos1-xpos2).Mag();
+
+    if(negd < posd){
+      h = -1.0*h;
+      d = negd;
+    }else{
+      d = posd;
+    }
+
+    while(d < oldd){
+      oldd = d;
+      try{
+        track1->getCardinalRep()->extrapolateBy(msop1,h);
+        track2->getCardinalRep()->extrapolateBy(msop2,h);
+      }
+      catch(genfit::Exception& e){
+        std::cerr << e.what();
+        std::cerr << "Exception, next track" << std::endl;
+      } 
+      xpos1 = msop1.getPos();
+      xpos2 = msop2.getPos();
+      d = (xpos1-xpos2).Mag();
+      steps++;
+    }
+
+    // step back once 
+    try{
+      track1->getCardinalRep()->extrapolateBy(msop1,-h);
+      track2->getCardinalRep()->extrapolateBy(msop2,-h);
+    }
+    catch(genfit::Exception& e){
+      std::cerr << e.what();
+      std::cerr << "Exception, next track" << std::endl;
+    } 
+
+    *mom1 = msop1.getMom();
+    *mom2 = msop2.getMom();
+    
+    TVector3 poca = (xpos1+xpos2)*0.5;
+    *POCA = poca;
+    
+    return d;
+  } 
+\end{lstlisting}
 
 
 

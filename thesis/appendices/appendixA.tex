@@ -10,8 +10,63 @@
 \section{Cross section}
 \label{appA:sec:cross-section}
 
-\subsection{The Weizsacker-Williams approximation}
+\subsection{Calculation with the Weizsacker-Williams approximation}
 \label{appA:sec:cross-section-wz}
+
+In this appendix we want to calculate the cross-section of the Dark Bremsstrahlung process used by NA64 for the signal yield:
+
+\begin{equation}
+  \label{eq:dp-cs}
+  \frac{d\sigma(e(p) + Z(P_i) \to e(p') + Z(P_f) + A'(k))}{dE_{\DM}d\cos{\theta_{\DM}}}
+\end{equation}
+
+Following the method in \cite{jdb}. We use the WW approximation, where $k=(E_{\DM},\vec{k})$ is the momentum of the emitted Dark Photon and $\theta_{\DM}$ is the angle relative to the incoming momentum of the electron $p$ in the lab frame. In the scenario of a fixed target experiment, we set the target at rest $P_i = (M,0)$ and the primary to the nominal beam energy $p = (E_0, \vec{p})$.
+
+In the WW approximation picture, in the frame of the electron we see rapidly moving atom sources emitting a cloud of effective photons that the primary electron irradiates with to emit an $\DM$. This means we can reduce the cross section to the one of a real photon scattering, i.e. $e(p) + \gamma(q) \to e(p') + A(k)$ where the photon transports the difference of energy between initial and final state of the nucleus $q = P_f - P_i$. In this picture we redefine Eq.\ref{eq:dp-cs}:
+
+\begin{equation}
+  \label{eq:dp-cs-ww}
+  \begin{aligned}
+    \frac{d\sigma(e(p) + Z(P_i) \to e(p') + Z(P_f) + A'(k))}{dE_{\DM}d\cos{\theta_{\DM}}} = &\left(\frac{\alpha \chi}{\pi} \right) \left(\frac{E_0 x \beta_{\DM}}{(1 - x)} \right) \\
+    &\times \left( \frac{d\sigma(e(p) + \gamma(q) \to e(p') + \DM(k))}{d(p \cdot k)} \right)_{t = t_{min}}
+   \end{aligned}
+ \end{equation}
+
+ Where $x=E_{\DM}/E_0$ is the fraction of energy transfer to $\DM$ and $t=-q^2$. For a given four-momentum $k$ the virtuality $t$ has a minimum value $t_{min}$ when $\vec{q}$ is collinear with the vector $(\vec{k} - \vec{p})$. In this collinear geometry, we can solve the mass shell condition $(q + p - k)^2 = m^2_e$ and $P^2_f = (P_i - q)^2$:
+
+ \begin{equation}
+   \label{eq:t-min}
+   t_{min} = -q^2_{min} \approx \left(\frac{\rm{U}}{2E_0 (1 - x)} \right)
+ \end{equation}
+
+ Where we define $\rm{U}$ using only leading effects:
+
+ \begin{equation}
+   \label{eq:dp-u}
+   \rm{U}(x, \theta_{\DM} = E_0^2\theta_{\DM}x + m^2_{\DM} \frac{1-x}{x} + m^2_e x
+ \end{equation}
+
+ Using this kinematics, we can express the following variables:
+
+ \begin{equation}
+   \label{eq:dp-md-var}
+   \begin{aligned}
+     &-\widetilde{u} \equiv m_e^2 - u_2 = 2p\cdot k - m^2_{\DM} = \rm{U}\\
+     &\widetilde{s}  \equiv s_2 - m_e^2 = 2p' \cdot k + m^2_{\DM} = \frac{\rm{U}}{1-x} \\
+     &t_2 = (p - p')^2 = - \frac{\rm{U}x}{1-x} + m^2_{\DM}
+   \end{aligned}
+ \end{equation}
+
+ where $s_2$, $u_2$ and $t_2$ are the Mandelstam variables of the process. We compute the cross section as function of the variable defined above \cite{jdb}:
+
+ \begin{equation}
+   \label{eq:dp-cs-comp}
+   \begin{aligned}
+     \frac{d \sigma}{d(p \cdot k)} = 2 \frac{d\sigma}{dt_2} &\approx \frac{1}{8 \pi (s_2 - m^2_e)} |M|^2 \\
+     &=\frac{4 \pi \alpha^2 \epsilon^2}{\widetilde{s}^2} \left( \frac{\widetilde{s}}{-\widetilde{u}} + \frac{-\widetilde{u}}{\widetilde{s}} + \frac{s m^2_{\DM} t_2}{-\widetilde{u}\widetilde{s}} \right) \\
+           &(4 \pi \alpha^2 \epsilon^2) \frac{(1-x)}{\rm{U}^2}
+   \end{aligned}
+ \end{equation}
 
 \subsection{The Tree-level corrections}
 \label{appA:sec:cross-section-tl}
