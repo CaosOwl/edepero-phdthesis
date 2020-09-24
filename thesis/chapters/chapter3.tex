@@ -186,61 +186,6 @@ Completed the procedure, these quantities are saved in a tree structure implemen
 
 The simulation code was also optimised to correct effects observed in data during calibration runs. In the next section, we will provide a specific example of this, where the hadronic model was modified to improve the agreement between simulation and data of the stopping-power observed for hadrons.
 
-\subsection{Correction of longitudinal shower profile in the Hadronic calorimeter}
-\label{ch3:sec:geant4-hcal-corr}
-
-In this section we provide a specific example of how the simulation is corrected using data from the calibration runs that was part of my work. In this instance we improve the energy deposited inside a calorimeter in events with intranuclear inelastic scattering. A large amount of events where an incoming hadron deposit all its energy inside an electromagnetic calorimeter was observed in the simulation and not reproduced in the data.
-% The reason of this deviation might be that most of hadronic models are optimized for a scenario where $\lambda_{int}$ of the target is large enough to stop completely the incoming hadron on average, which is not the case for the ECAL or the WCAL. As large em-shower triggered by hadrons is a source of background in the visible mode, this comparison is particularly significant to estimate the background of this mode precisely.
-
-We compare the data and predictions by simulating a sample of $\pi^-$ and compare the distribution with the data of an hadron calibration run and do the same for $e^-$. The result of this first comparison is shown in Fig.\ref{fig:ecal-comp}. In the first plot, we see the energy deposited in the WCAL for electrons measured in the calibration run compared to what is predicted by our MC. As expected because of the QED nature of the process, the two distributions agree quite well in the core, with some minor disagreement in the tail mostly due to pileup. On the other hand, even after accounting for the detector corrections, we can see that there is a fundamental disagreement at the end of the spectrum when the comparison is performed with pions, specifically in the region relevant for deep inelastic scattering. Since the disagreement is large when all the nominal energy of the beam is deposited inside the target, the disagreement appears to be caused by some electron contamination in the hadron beam. However, the data were filtered by requiring less than 1 MeV energy deposited in each SRD counter facing the beam inlet. This reduces the contamination conservatively at a level $<$0.01\%, which is far below the disagreement observed. A faulty calibration is also unrealistic since the agreement with electrons is excellent in that energy range. The simulation systematically overestimates the number of events in the region where most of the energy released in the inelastic scattering is emitted in the form of $\pi^0$,$\eta$, $\eta'$ which trigger an em-shower completely contained in the calorimeter.
-
-\begin{figure}[bth!]
-  \centering
-  \includegraphics[scale=0.6]{\pdirthree/wcal_elec_comp.pdf}
-  \includegraphics[scale=0.6]{\pdirthree/wcal_pion_comp.pdf}
-  \includegraphics[scale=0.6]{\pdirthree/ecal_pion_comp.pdf}
-  \caption[MC/DATA Comparison of $\pi^-$ in ECAL and WCAL]{Comparison between MC and data for different detectors and different runs. Top: WCAL energy deposited for electrons, Middle: WCAL energy deposited for hadrons, Bottom: ECAL energy deposited for hadrons.}
-  \label{fig:ecal-comp}
-\end{figure}
-
-To investigate this mismatch, a complete comparison between different physics lists was performed to investigate 
-different models. We used the energy deposited in the WCAL as a benchmark for this comparison, and simulate the interaction of $\pi^-$ using two alternative physics list. The \textit{QGSP\_FTFP\_BERT}, which uses the alternative Quark-Gluon String model to simulate hadrons at energy higher than 25 \gev, and the \textit{FTFP\_BERT\_TRV}, which uses the recommended Fritiof model but with an alternative method for the elastic scattering \cite{AGOSTINELLI2003250}. The result is shown in Fig.\ref{fig:geant4-hadron-plist}, the recommended physics list has the best agreement for high energy deposit, but for all three the disagreement remains significant. The QGSP model, although offers the worst prediction at high energy, has better agreement after in the range 25-80 $\gev$.
-
-\begin{figure}[tbh!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/physlist_v1.pdf}
-  \caption[Comparison of physics list for $\pi^-$ in WCAL energy spectrum]{Energy deposited in WCAL for different physics lists. Data collected in the hadron calibration run in 2018 are plotted in black.}
-  \label{fig:geant4-hadron-plist}
-\end{figure}
-
-The next test performed was to simulate different particles in the setup. The three main contributions to the beam impurities in H4 were simulated using the \textit{FTFP\_BERT} physics list: $\pi^-$, K$^-$, and p$^-$. Here a significant improvement is visible in the case of anti-proton (Fig.\ref{fig:geant4-hadron-particles}), where data and MC are compatible at the tail of the distribution. This would suggest that such an event is caused by charge-exchange interaction between pions and the target nucleus, enhanced for light mesons. To date, no proper treatment is offered by Geant4 for this process, which means the disagreement must be caused by an improper treatment of hadronization in the limit of diffraction,  where most of the energy is exchanged between two partons: one of the nucleus and one of the projectile impacting it. The discussion becomes here more complicated and requires the tuning of specific parameters inside the FTF model.  The \textit{FTFP\_BERT} physics list was modified as illustrated in Appendix \ref{appC:sec:ftfp-modifications} to experiment with different possibilities. The target diffraction and the projectile diffraction were switched on and off respectively to investigate the effect on the distribution.
-
-
-\begin{figure}[tbh!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/physlist_particles.pdf}
-  \caption[Comparison of different simulated hadrons in WCAL energy spectrum]{Comparison of different simulated hadrons in WCAL energy deposit.}
-  \label{fig:geant4-hadron-particles}
-\end{figure}
-
-\begin{figure}[tbh!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/physlist_diffraction.pdf}
-  \caption[Comparison of different diffraction limits for hadrons in WCAL energy spectrum]{Comparison of simulated $\pi^-$ in WCAL energy deposit using the physics list $FTFP\_BERT$ using different parameters for the model. Main difference between models is the diffraction of target or projectile, which is switched on and off.}
-  \label{fig:geant4-hadron-diff}
-\end{figure}
-
-The conclusion of this comparison (Fig.\ref{fig:geant4-hadron-diff}) is that the largest contribution to the disagreement comes from the projectile diffraction incorrectly excluded in the standard \textit{FTFP\_BERT} physics list, whereas target diffraction contributes instead negatively to the residual.
-
-Some modifications of the \textit{FTFP\_BERT} were decided to improve the agreement in the distributions considered. The target diffraction was switched off, the projectile diffraction was switched on, and the parameters of the FTF model were modified to shift the behavior of $\pi^-$ to the one predicted for an anti-baryon. This is performed by acting mostly on the probability of each quark to be involved in the scattering and the average energy exchanged between partons. The final result is shown in Fig.\ref{fig:geant4-hadron-final}, the disagreement for the high-energy spectrum improves, with some overestimation of the probability of large inelastic scattering still present in the energy range 25-80 \gev. The disagreement for deposit larger than 20 $\gev$ is now $\sim$15\%, improved by a factor 2 compared to the original model.
-
-\begin{figure}[tbh!]
-  \centering
-  \includegraphics[width=\textwidth]{\pdirthree/final_comp.pdf}
-  \caption[Comparison of hadron energy deposit after corrections]{Comparison between data (black line) and simulated $\pi^-$ in WCAL energy deposit using the physics list $FTFP\_BERT$ before and after corrections applied to the model.}
-  \label{fig:geant4-hadron-final}
-\end{figure}
-
 \section{Monte Carlo validation using $\gamma + Z \rightarrow \mu^+ \mu^-$ events}
 \label{ch3:sec:dimuons}
 
