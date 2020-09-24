@@ -7,10 +7,7 @@
 \section{Thermal Dark Matter}
 \label{appA:sec:thermal-dark-matter}
 
-\section{Cross section}
-\label{appA:sec:cross-section}
-
-\subsection{Calculation with the Weizsacker-Williams approximation}
+\subsection{Calculation of $\ae$ cross-section using the Weizsacker-Williams approximation}
 \label{appA:sec:cross-section-wz}
 
 In this appendix we want to calculate the cross-section of the Dark Bremsstrahlung process used by NA64 for the signal yield:
@@ -43,7 +40,7 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
 
  \begin{equation}
    \label{eq:dp-u}
-   \rm{U}(x, \theta_{\DM} = E_0^2\theta_{\DM}x + m^2_{\DM} \frac{1-x}{x} + m^2_e x
+   \rm{U}(x, \theta_{\DM}) = E_0^2 \theta_{\DM}x + m^2_{\DM} \frac{1-x}{x} + m^2_e x
  \end{equation}
 
  Using this kinematics, we can express the following variables:
@@ -64,9 +61,78 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
    \begin{aligned}
      \frac{d \sigma}{d(p \cdot k)} = 2 \frac{d\sigma}{dt_2} &\approx \frac{1}{8 \pi (s_2 - m^2_e)} |M|^2 \\
      &=\frac{4 \pi \alpha^2 \epsilon^2}{\widetilde{s}^2} \left( \frac{\widetilde{s}}{-\widetilde{u}} + \frac{-\widetilde{u}}{\widetilde{s}} + \frac{s m^2_{\DM} t_2}{-\widetilde{u}\widetilde{s}} \right) \\
-           &(4 \pi \alpha^2 \epsilon^2) \frac{(1-x)}{\rm{U}^2}
+           &=\underline{(4 \pi \alpha^2 \epsilon^2) \frac{(1-x)}{\rm{U}^2} \left[ 1 + (1 - x)^2 + \frac{2(1-x)^2m^2_{\DM}}{\rm{U}^2} \left( m^2_{\DM} - \frac{\rm{U}x}{1-x} \right) \right]}
    \end{aligned}
  \end{equation}
+
+ In the last step the equation was expanded in the order $m^2_e$.
+
+ Now that we calculated the cross section of the $2 \to 2$ process we can plug it in Eq.\ref{eq:dp-cs-ww} to reach a complete formula of the WW cross-section:
+
+ \begin{equation}
+   \label{eq:dp-cs-ww-num}
+   \frac{1}{E^2_0} \frac{d\sigma_{WW}}{dx d\cos{\theta_{\DM}}} = (8 \alpha^3 \epsilon^2 \chi \beta_{\DM}) \left[ \frac{1 - x + x/2}{\rm{U}^2} + \frac{(1-x)^2m^2_{\DM}}{\rm{U}^4} \left(m^2_{\DM} - \frac{\rm{U}x}{1 - x} \right) \right]
+ \end{equation}
+
+ To obtain a differential cross-section for $dx$ we need to integrate the equation above for $\cos{\theta_{\DM}}$. There are two problems to this integral:
+
+ \begin{itemize}
+ \item In the limit $m^2_{\DM} \to 0$ the denominator $\rm{U}(x, \theta_{\DM} = 0)$ becomes singular in $x \to 0$, which is the standard Bremsstrahlung singularity of photons.   
+ \item The term $\chi$ can depend on $\theta_{\DM}$.
+ \end{itemize}
+
+ The singularity is in most of the cases of interest regulated by the Dark Photon mass. For the case $m_{\DM} \gg m_e$ the denominator takes the form $\rm{U} \approx m^2_{\DM} \frac{1-x}{x}$.
+ $\chi$ on the other hand is an effective flux of photons that is integrated from the minimum to maximum momentum exchange $t_{min}$/$t_{max}$. For a general electric form factor $G_2(t)$:
+
+ \begin{equation}
+   \label{eq:g-ff}
+   \chi = \int^{t_{max}}_{t_{min}} dt \frac{t - t_{min}}{t^2} G_2(t)
+ \end{equation}
+
+ The form factor $G_1(t)$ is relevant only for a negligible amount of the case of interest and is here neglected. As discussed in \cite{Kim:1973he,RevModPhys.46.815}, the maximum momentum transfer can be set to be $t_{max} \sim m^2_{\DM}$, where the matrix element of $2 \to 3$ drops dramatically. We divide the form factor in elastic and inelastic component \cite{jdb}:
+
+ \begin{align}
+   \label{eq:g-ff-el}
+   &G_{2,el}(t) = \left( \frac{a^2 t}{1 + a^2t} \right)^2 \left( \frac{1}{1 + t/d}\right) Z^2\\
+   \label{eq:g-ff-in}
+   &G_{2,in}(t) = \left( \frac{a'^2 t }{1 + a'^2 t} \right)^2 \left( \frac{1 + t (\mu_p^2 -1) / (4m^2_p)}{(1 + t / (\SI{0.71}{\giga\electronvolt\squared})^4} \right) Z
+ \end{align}
+
+ The parametrization becomes uncertain for high masses of the Dark Photon, but they are reliable for the ranges of interest in NA64 of $m^2_{\DM} < \SI{1}{\giga\electronvolt}$. Numerically, the factor $\chi / Z^2$ depends on the beam energy used, but can be set to be $\chi/Z^2 \mathcal{L}og \approx 5-10$ for the NA64 case. As we can see, we can neglect in good approximation the angular dependence of $\chi$ using these formulas. Coming back at Eq.\ref{eq:dp-cs-ww-num}, we drop $m^2_e$ and perform the integration on the angle and obtain a form for the $dx$ differential cross-section. The results is Eq.\ref{eq:dm-diff-cross} that we reported in chapter \ref{chapter1}, with the flux of photon $\chi$ expressed as the constant $\mathcal{L}og$:
+
+ \begin{equation}
+   \label{eq:dp-cs-dx}
+\frac{d\sigma_{WW}}{dx} \approx \frac{8 Z^2 \alpha^3 \epsilon^2 x}{m^2_{\DM}} \left( 1 + \frac{x^2}{3(1-x)} \right) \mathcal{L}og    
+\end{equation}
+
+
+\subsection{Production rate}
+
+TO compute the production rate, we integrated the differential cross section compute above in the scenario of an high-energy electron impacting a fixed-target of $T$ radiation lengths used in chapter \ref{chapter1}:
+
+
+\begin{equation}
+  \label{eq:dm-gy}
+  \frac{dN}{dx} = N_e \frac{N_0 X_0}{A} \int_{E_{\DM}}^{E_0} \frac{dE_1}{E_1} \int_0^T dt I(E_1;E_0;t) \times E_0 \frac{d\sigma}{dx'}\Big|_{x' = E_{\DM}/E_1}
+\end{equation}
+
+We need first to parametrize the energy distribution of the electrons after $t$ radiation lengths. Here we assume the production of $\DM$ will happen in the first few radiation length, hence we neglect the $t$ dependence, and we use the paramterization \cite{jdb}:
+
+\begin{equation}
+  \label{eq:i-dist}
+  I(E_1;E_0,t) \approx  \frac{1}{E_0} y^{bt-1} bt \quad T \gtrsim 1
+\end{equation}
+
+where we take $y = \frac{E_) - E_1}{E_0}$ and $b=4/3$. With this we find:
+
+\begin{equation}
+  \label{eq:i-int}
+  \widetilde{I} = \int^T_0 dt I(E_1; E_0, t) \approx \frac{1 + y^{bT}(bT\ln{y} - 1}{E_0by(\ln{y})^2} \underbrace{\to}_{T \to \infty} \frac{1}{E_0by(\ln{y})^2}
+\end{equation}
+
+Where the last approximation is correct within 1\% for $T>7$ and $0.5 < y$
+
+
 
 \subsection{The Tree-level corrections}
 \label{appA:sec:cross-section-tl}
