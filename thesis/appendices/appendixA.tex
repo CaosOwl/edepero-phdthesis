@@ -107,6 +107,7 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
 
 
 \subsection{Production rate}
+\label{appA:sec:production-rate}
 
 TO compute the production rate, we integrated the differential cross section compute above in the scenario of an high-energy electron impacting a fixed-target of $T$ radiation lengths used in chapter \ref{chapter1}:
 
@@ -130,15 +131,44 @@ where we take $y = \frac{E_) - E_1}{E_0}$ and $b=4/3$. With this we find:
   \widetilde{I} = \int^T_0 dt I(E_1; E_0, t) \approx \frac{1 + y^{bT}(bT\ln{y} - 1}{E_0by(\ln{y})^2} \underbrace{\to}_{T \to \infty} \frac{1}{E_0by(\ln{y})^2}
 \end{equation}
 
-Where the last approximation is correct within 1\% for $T>7$ and $0.5 < y$
+Where the last approximation is correct within 1\% for $T>7$ and $0.5 < y$.
 
 
 
 \subsection{The Tree-level corrections}
 \label{appA:sec:cross-section-tl}
 
-\section{Decay length}
-\label{appA:sec:decay-length}
+In the NA64 experiment, the cross section is compute using precise tree-level calculation instead of one based on the IWW approximation \cite{DMsimulation}. We start again using the notation of momenta used in Eq.\ref{eq:dp-cs}, and we perform the calculations in the frame of reference where the vector $\bf{V} = \bf{p} - \bf{k}$ is parallel to the z-axis and the vector $\bf{k}$ is in the xz-plane. We can express the relevant cross-section using the formula:
+
+\begin{equation}
+  \label{eq:cs-tl}
+  \frac{d\sigma}{dx d\cos{\theta}} = \frac{\epsilon^2 \alpha^3 |\bf{k}| E_0}{|\bf{p}| |\bf{k} - \bf{p}|} \cdot \int_{t_{min}}^{t_{max}} \frac{dt}{t^2} g^{el}_{2}(t) \cdot \int_0^{2\pi} \frac{d\phi_q}{2\pi} \frac{|A^{2 \to 3}_{\DM}|^22}{8 M^2}
+\end{equation}
+
+Where the angle $\phi_q$ is the axial angle of $\bf{q}$ defined in Eq.\ref{eq:t-min}. and $|A^{2 \to 3}_{\DM}|$ is the matrix element of the Dark Bremsstrahlung. We define the boundary of the first integral as in the previous section, and we express the amplitude squared of the cross section as:
+
+\begin{equation}
+  \label{eq:cs-dp-amp}
+  \begin{aligned}
+    |A^{2 \to 3}_{\DM}|^2 = \frac{2}{\widetilde{s}^2\widetilde{t}^2} \Big( &2m^2_e (\mathcal{P}^2 t (\widetilde{s} + \widetilde{u})^2 - 4((\mathcal{P} \cdot p)\widetilde{u} + (\mathcal{P} \cdot p')\widetilde{s})^2  \\
+      &+ m^2_{\DM}(\mathcal{P}^2 t (\widetilde{s} - \widetilde{u})^2 -4((\mathcal{P}\cdot p)\widetilde{u} + (\mathcal{P}\cdot p')\widetilde{s})^2 \\
+      &+ \widetilde{s}\widetilde{u}(\mathcal{P}^2 ((\widetilde{s} + t)^2 + (\widetilde{u}+t)^2) - 4 t ((\mathcal{P} \cdot p)^2 + (\mathcal{P} \cdot p')^2) \Big)
+  \end{aligned}    
+\end{equation}
+
+Where we used the Mandelstam variables defined in Eq.\ref{eq:dp-md-var} (without the last equivalence to $\rm{U}$) and:
+
+\begin{equation}
+  \label{eq:dp-md-var-2}
+  \mathcal{P}^2 = 4M^2 + t, \quad \mathcal{P} \cdot p = 2 M E_0 k_0 - (\widetilde{s} + t)/2, \quad \mathcal{P} \cdot p' = 2 M (E_0 - k_0) + (\widetilde{u} - t)/2
+\end{equation}
+
+Next we perform the integration over $\phi_q$ to find:
+
+\begin{equation}
+  \label{eq:dp-cs-tl-int}
+  \int_0^{2\pi} \frac{d\phi_q}{2\pi} |A^{2 \to 3}_{\DM}|^2
+\end{equation}
 
 % The color of links can be changed to your liking using:
 
