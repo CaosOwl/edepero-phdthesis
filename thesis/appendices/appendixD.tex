@@ -3,7 +3,7 @@
 % variables
 \newcommand{\appdird}{appendices/plots/appendixD}
 
-\chapter{Particle tracking} % Main appendix title
+\chapter{Algorithms and particle tracking} % Main appendix title
 
 \label{AppendixD} % For referencing this appendix elsewhere, use \ref{AppendixC}
 
@@ -185,6 +185,80 @@ To reconstruct vertices, a simple approach based on the back-propagation of the 
 \end{lstlisting}
 
 
+\section{Pulse reconstruction}
+
+This section gives a brief overview of the pulse reconstruction procedure used in NA64 which uses the raw data received by the DAQ to reconstruct the energy of a specific detector. This same procedure is applied to all detector used in NA64.
+
+The input of this algorithm comes from the 25 16-bit samples saved by the Event Builder PC (see Fig.\ref{fig:daq}). Each sample consist in a number between 0 and 4095 separated by \SI{12.5}{\nano\second}. Additional input of the algorithm are calculated beforehand using calibration runs. They consist in a calibration constant $K$ used to convert the raw sample into an estimate of the energy deposit, the expected arrive time $t_E$, which is the average time of arrival expected for a primary in coincidence with the scintillator $S_0$. This value is obtained using a Gaussian fit of $t_{S_0} - t_{\rm{cell}}$ for each active cell in the setup. The sigma of the fit is also stored as uncertainty of this value in a separate array.
+
+Using this input the energy is reconstructed in an event in the following way:
+
+\begin{enumerate}
+\item The pedestal of the event is calculated. The first 8 samples are used for this purpose, as no interaction is expected in this range. As the DAQ receive signal from two different multiplexer\footnote{This is done to increase the rate of sampling from \SI{20}{\mega\hertz} to \SI{40}{\mega\hertz}.}, two different pedestal are defined for even sample and odd sample. The pedestal in each of these cases is computed as the mean between all the samples in the range defined. If the difference between the largest and the smallest sample is larger than 20 ADC count, the event is flagged as pileup, and the pedestal is defined as the minimum sample in the range instead.
+\item The pedestal is subtracted to every sample of the cell, if a value becomes negative because of this subtraction, it is set to zero instead.
+\item A peak search algorithm is run to find all peaks between sample 10 and the last sample recorded. A peak is defined simply as a sample with a value larger than the one of its neighbor sample. All peaks are saved in a separate vector.
+\item A time is extracted for each peak. This is done using the rising edge of the signal to calculate the $t_0$ of the event. The code being used for the purpose is shown below.
+\item A specific peak is selected as candidate for the primary particle. Different methods were implemented for and tested this purpose. The standard in the NA64 searches is to select the peak whose $t_0$ is best compatible with the one expected for the primary as measured in the calibration run. The energy is set to zero if the best peak is more than $4\sigma_t$ away from this value, where $\sigma_t$ is the uncertainty of the expected time.
+\item The energy of the peak selected is extracted by multiplying the calibration constant to the ADC value of the peak maximum.
+\end{enumerate}
+
+In Fig.\ref{fig:pulse-example}
+
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=0.45\textwidth]{\appdird/raw-ecal33.pdf}
+  \includegraphics[width=0.45\textwidth]{\appdird/wave-ecal33.pdf}
+  \includegraphics[width=0.45\textwidth]{\appdird/raw-pil-ecal33.pdf}
+  \includegraphics[width=0.45\textwidth]{\appdird/wave-pil-ecal33.pdf}    
+  \caption[example of pulse reconstruction in NA64]{Example of reconstruction of the pulse for the central cell of the ECAL. On the left column, the pulse is shown before any treatment is applied to the waveform. On the right, the waveform is shown after the pedestal is subtracted and the best peak is selected. The expected time of arrival is drawn with a red line, with three square covering an area with 1-2-3 $\sigma_t$ uncertainty respectively. On the top, the event has a single primary particle hitting the ECAL. On the bottom, we show the waveform of an event where a second particle hit the target after approximately \SI{100}{\nano\second}.}
+  \label{fig:pulse-example}
+\end{figure}
+
+
+\begin{lstlisting}
+
+  double t0_RisingEdge(const int i_max) const
+  {      
+      // search for rising edge
+      // https://indico.cern.ch/event/569549/contributions/2302932/
+      // run the search in the backward direction from `i_max` to ensure the
+      // t0 edge corresponds to `A_max` sample
+      const double A_max = wave(i_max);
+      const double A_half = 0.5*A_max;
+      double A_min = A_max;
+      const double noise = 1.;
+      
+      for (int i = i_max-1; i > 0; --i) {
+        const double wi = wave(i);
+        
+        // check the rising edge is end
+        if (wi > A_min + noise) break;
+        if (A_min < wi) A_min = wi;
+        
+        // check the 0.5*A_max cross condition
+        const bool cross05 = (wi <= A_half);
+        if (!cross05) continue;
+        
+        // check the segment is rising
+        const double wi1 = wave(i+1);
+        const bool rising = (wi < wi1);
+        if (!rising) continue;
+        
+        // calculate intersection of the rising edge with time axis to get origin time
+        const double t0_rise = (i+1) - wi1/(wi1 - wi);
+        
+        if (SADC_t0_method == kT0_RisingEdgeHH) {
+          const double t0_hh = t0_rise + A_half/(wi1 - wi);
+          return t0_hh;
+        }
+        
+        return t0_rise;
+      }
+      
+      return 0.;
+  }
+
+\end{lstlisting}
 
 
 %%% Local Variables:

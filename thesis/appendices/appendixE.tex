@@ -4,8 +4,82 @@
 
 \label{AppendixE} % For referencing this appendix elsewhere, use \ref{AppendixC}
 
+\section{The $CL_s$ technique in the asymptotic approximation using Asimov data set}
 
+In the section, we will give a brief overview of the method used to calculate the coverage and present the sensitivity in the NA64 experiment. For a more complete review, see \cite{Read_2002,JUNK1999435,Cowan:2010js}.
 
+As introduced in Sec.\ref{ch3:sec:analysis-approach}, a general procedure to discover new phenomena in the context of particle physics consist in defining two Hypothesis, H$_0$ and H$_1$. These two describe respectively the value being measured as background only or by assuming the presence of a signal on the top of the expected background.  To distinguish between the two hypothesis, a specific variable is measured and an histogram with N bin is constructed from this measurement. Each bin of this histogram has a predicted background and a predicted signal rate, which allow to cast prediction on the value expected in each of the hypothesis.
+
+In a realistic search, some additional measurement are performed to constraint nuisance parameters that can impact the measured value of the rate. In the NA64 case, events are histogrammed in the $\ehcalplane$, and the additional measure that is performed is the one on the dimuon sample used to correct for signal systematic. More in general, also the measurements performed using the electron/hadron calibration runs are used to measure the efficiency of each cut precisely. The set of nuisance parameter is often label $\vec{\theta} = (\theta_1, \theta_2, ...)$, which is vector containing all of the nuisance parameter of the experiment.
+
+In the frequentist approach used, a test statistic is defined to quantify the compatibility of the data with the two hypothesis, i.e. $P(H_0 | data)$ and $P(H_1 | data)$, and ultimately decide if the background-only hypothesis can be rejected. This test statistic is built starting from the likelihood function, which is the product of the Poisson probability for all bins:
+
+\begin{equation}
+  \label{eq:likelihood}
+  L(\mu; \vec{\theta}) = \prod_{j=1}^N \frac{\mu s_j + b_j}{n_j!} \prod_{l=1}^{L}\prod_{k=1}^{M_{\theta_l}}\frac{u^{m_k}_k(\theta_l)}{m_k!} e^{-u_k(\theta_l)}
+\end{equation}
+
+Here we assumed a number $L$ of nuisance parameter and we multiplied the value measured in each corresponding histogram in the likelihood. Finally, we define our test statistics as:
+
+\begin{equation}
+  \label{eq:profile-likelihood}
+  \lambda(\mu) = \frac{L(\mu,\hat{\theta})}{L(\mu,\hat{\hat{\theta}})}
+\end{equation}
+
+Where the quantity $\hat{\hat{\theta}}$ denotes the value of the nuisances parameter that maximize the likelihood for a specific $\mu$ while the denominator maximizes the likelihood globally.
+
+If the signal is exclusively positive, i.e. the presence of the signal can only increase the value of each bin, we define a more convenient test statistic that allow only for positive $\mu$:
+
+\begin{equation}
+  \label{eq:profile-q}
+  q_0 = -2\ln{\lambda(0)} \quad \mu \geq 0
+\end{equation}
+
+And is zero otherwise, which means that a fluctuation of the background under the expected value is automatically interpreted as an experiment compatible with background. Here we are clearly imply a strong trust in the background model used to describe our data, but there is the advantage that the coverage is not effected if the data show less event compared to the background-only hypothesis. In NA64, the expected background is zero, which makes this distinction not relevant.
+
+To claim a signal, we need to calculate the p-value under the hypothesis $\mu = 0$ and see the significance of the observed value of $q^{obs}_0$. More generally for the case of no observed event, the interest is in seeing what model can be rejected by our experiment, hence we compare the observed value against a specific hypothesis with a signal modulation $\mu \neq 0$:
+
+\begin{equation}
+  \label{eq:p-value-q}
+  p_{\mu} = \int_{q_{\mu, obs}}^{\infty} f(q_{\mu}|\mu) dq_{\mu}
+\end{equation}
+
+Using the above expression, we can exclude all hypothesis with $p_{\mu} < 0.05$ as defined by our 95\% CL.
+
+The results above can be further simplified using the results of Wald \cite{10.2307/1990256}. For a case of a single parameter of interest, it was shown that:
+
+\begin{equation}
+  \label{eq:wald-asym}
+  - 2 \ln{\lambda(\mu)} = \frac{(\mu - \hat{\mu})^2}{\sigma^2} + \mathcal{O}(1/\sqrt{N})
+\end{equation}
+
+Where $\hat{\mu}$ follows a Gaussian distribution with mean $\mu'$ and standard deviation $\sigma$. The value of the mean $\mu'$ is extract from the data as most compatible value with the distribution measured, while the error $\sigma$ is obtained from the covariance matrix of the estimator for all the parameters. In practice, these values are instead extracted from an MC-simulation by building the so-called Asimov data set. Providing that a sufficient number of signal events can be produced using an MC, we can build a distribution where the value of each bin correspond exactly to the expectation value of that bin in a general experiment. This means that the Asimov dataset is the ``typical'' distribution expected if an experiment is performed under the assumption that $\mu = \mu'$ where $\mu'$ is the signal strength chosen. If we consider the generic likelihood in Eq.\ref{eq:likelihood}, we write:
+
+\begin{equation}
+  \label{eq:asimov-dataset-prop}
+  \begin{aligned}
+    &n_{i, A} = E[n_i] = \mu' s_i (\vec{\theta}) + b_i(\vec{\theta}) \\
+    &m_{i, A} = E[m_i] = u_i(\vec{\theta})
+  \end{aligned}    
+\end{equation}
+
+One can use the above properties and calculate $q_{\mu, A} = - 2 \ln{\lambda_{\mu}}$, and then invert Eq.\ref{eq:wald-asym} to extract the value of $\sigma^2_{A} = (\mu - \mu')/q_{\mu,A}$. This provides the median exclusion significance for a signal hypothesis $\mu'$.
+
+Now that we have all parameter needed  we can calculate the p-value in the asymptotic approximation proposed. If we neglect higher order terms $\mathcal{O}(1/\sqrt{n})$ then we can show that the test statistic $q_{\mu}$ follows a \textit{noncentral chi-square} distribution for one degree of freedom:
+
+\begin{equation}
+  \label{eq:p-value-asym}
+  f(q_{\mu}; \Lambda) = \frac{1}{2\sqrt{q_{\mu}}} \frac{1}{\sqrt{2\pi}} \times \Big[ \rm{exp}\left(-\frac{1}{2} (\sqrt{q_{\mu}} + \sqrt{\Lambda})^2 \right) + \rm{exp}\left(-\frac{1}{2} (\sqrt{q_{\mu}} - \sqrt{\Lambda})^2 \right) \Big]
+\end{equation}
+
+Where we defined the non-central parameter as:
+
+\begin{equation}
+  \label{eq:non-central-par}
+  \Lambda = \frac{(\mu - \mu')^2}{\sigma^2}
+\end{equation}
+
+Which for the special case of $\mu - \mu'$ exactly approaches a chi-square distribution as first shown by Wilks \cite{10.2307/2957648}. With the above formula, one can easily calculate the significance of an hypothesis and decide if it is excluded by the data collected, starting from the Asimov data set produced by our MC. The final is obtained by defining the above model in a code using RooStat \cite{moneta2010roostats}, a library implementing a large number of statistical model inside the ROOT framework \cite{root}. This allows to easily process the output of the MC simulation and calculate the test statistic $q_0$ starting from the binned event that passed all selection criteria. This approach is applied to a set of 10-12 points that are then interpolated in the $\dmplane$ as shown in chapter \ref{chapter4}.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../PhDthesis"
