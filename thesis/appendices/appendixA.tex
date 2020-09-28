@@ -68,7 +68,7 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
    \end{aligned}
  \end{equation}
 
- In the last step the equation was expanded in the order $m^2_e$.
+ In the last step, the equation was expanded in the order $m^2_e$.
 
  Now that we calculated the cross section of the $2 \to 2$ process we can plug it in Eq.\ref{eq:dp-cs-ww} to reach a complete formula of the WW cross-section:
 
@@ -134,7 +134,7 @@ where we take $y = \frac{E_) - E_1}{E_0}$ and $b=4/3$. With this we find:
   \widetilde{I} = \int^T_0 dt I(E_1; E_0, t) \approx \frac{1 + y^{bT}(bT\ln{y} - 1}{E_0by(\ln{y})^2} \underbrace{\to}_{T \to \infty} \frac{1}{E_0by(\ln{y})^2}
 \end{equation}
 
-Where the last approximation is correct within 1\% for $T>7$ and $0.5 < y$. This equation account for the constant $C'$ that multiples the signal rate in Eq.\ref{eq:dm-rate}. We stress that although the scaling are well reproduced using this method, numerical results deviate substantially for many interesting results. For a precise computation of the signal yield, the exact tree level cross-section is used instead, together with an MC simulation to properly reproduce the em-shower and the efficiency of the cuts.
+Where the last approximation is correct within 1\% for $T>7$ and $0.5 < y$. This equation account for the constant $C'$ that multiples the signal rate in Eq.\ref{eq:dm-rate}. We stress that although the scaling is well reproduced using this method, the numerical result produced still has a significant uncertainty that depends on the exact scenario considered. For a precise computation of the signal yield, the exact tree-level cross-section is used instead, implemented inside an MC simulation to reproduce the em-shower and the efficiency of the cuts.
 
 
 
@@ -187,7 +187,7 @@ Where we divided the calculation of the cross-section as the sum of different am
   \end{aligned}
 \end{equation}
 
-To derive the total cross-section it is needed the numerical computation of Eq.\ref{eq:cs-tl} along all allowed range of $x$ and $\theta$ (which is shown as an explicit $t$ integration in the equation). For a benchmark calculation the invisible mode scenario was used, using Lead as target ($Z = 82$) and $E_0 = 100 \gev$. Fig.\ref{fig:dp-cs-tl} show the results of these calculation as the differential cross-section calculate for different mass as function of $x$. The same cross section is shown also for Geant4 in the case of classical Bremsstrahlung which agrees remarkably with the above calculation when a mass $m_{\DM} = 0$ is used, with a total relative disagreement of 8\%. For most of interesting cases for NA64, the expression used avoid infrared divergency as the Dark Photon is massive. Moreover, the large cut used in NA64 searches $E^{ECAL}_{miss} > 50 \gev$ cut the part of the spectrum containing the divergency even for $\DM$ mass close to zero.
+To derive the total cross-section it is needed the numerical computation of Eq.\ref{eq:cs-tl} along with all allowed range of $x$ and $\theta$ (which is shown as an explicit $t$ integration in the equation). For a benchmark calculation the invisible mode scenario was used, using Lead as target ($Z = 82$) and $E_0 = 100 \gev$. Fig.\ref{fig:dp-cs-tl} show the results of these calculation as the differential cross-section calculate for different mass as function of $x$. The classical Bremsstrahlung of gamma is also shown as implemented in Geant4 which agrees remarkably with the above calculation when a mass $m_{\DM} = 0$ is used, for a total relative disagreement of 8\%. In NA64, the expression used avoids infrared divergencies as the Dark Photon is expected to be massive. Moreover, the large cut used in NA64 searches $E^{ECAL}_{miss} > 50 \gev$ cut the part of the spectrum containing the divergency even for $\DM$ mass close to zero.
 
 \begin{figure}[bth!]
   \centering
@@ -214,7 +214,7 @@ which is numerically the correction to the cross-section calculated in the IWW a
   \label{fig:k-factor}
 \end{figure}
 
-For the simulation, $K$-factor are tabulated and used to extract the real cross-section for a general case. The cross-section is calculated precisely for a number of benchmark cases (the same one shown in Fig.\ref{fig:k-factor}) and then extrapolated using a Bilinear interpolation.
+For the simulation, the $K$-factors are tabulated and used to extract the real cross-section for a general case. The cross-section is calculated precisely for several benchmark cases (the same one shown in Fig.\ref{fig:k-factor}) and then extrapolated using a Bilinear interpolation.
 
 % The color of links can be changed to your liking using:
 
