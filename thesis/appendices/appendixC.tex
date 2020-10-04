@@ -32,9 +32,70 @@ In NA64, simulations are subdivided in different categories called ``examples'' 
 
 Between all of them, the class \textit{NA64DetectorConstruction} act as a messenger between all classes, handling the transmission of relevant variables if they are needed.
 
+\iffalse
+\begin{lstlisting}
+if( ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->
+                         GetDarkMatterPointer()->Emission(ekin, DensityMat, StepLength) ) {
+
+      if(NEmissions) {
+        G4cout << "Attempt to emit more than one A in the event, rejected!!! E = " << ekin << G4endl;
+      } else {
+
+        if(abs(theParticleDefinition->GetPDGEncoding()) == 11) {
+          if(aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName() == "eBrem" &&
+             ekin - track->GetKineticEnergy()/GeV > 1.) {
+            G4cout << "Emission at brem step, dE = " << ekin - track->GetKineticEnergy()/GeV << G4endl;
+            if(ekin - track->GetKineticEnergy()/GeV > 1.) EBrem = ekin - track->GetKineticEnergy()/GeV;
+          }
+        }
+
+        NEmissions++;
+
+        G4double XAcc, angles[2];
+        if(abs(theParticleDefinition->GetPDGEncoding()) != 13 &&
+           abs(theParticleDefinition->GetPDGEncoding()) != 22 &&
+           ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->GetDarkMatterPointer()->Decay() ) {
+          XAcc = ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->
+                                             GetDarkMatterPointer()->SimulateEmissionWithAngle(ekin, angles);
+        } else {
+          XAcc = ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->
+                                             GetDarkMatterPointer()->SimulateEmission(ekin, angles);
+        }
+
+        if(XAcc > 0.001) {
+
+          if(theParticleDefinition->GetPDGEncoding() == 22) {
+            track->SetKineticEnergy(0.000001*GeV);
+            track->SetTrackStatus(fKillTrackAndSecondaries);
+          } else {
+            track->SetKineticEnergy(ekin*(1.-XAcc)*GeV);
+          }
+
+          if(abs(theParticleDefinition->GetPDGEncoding()) == 13) {
+            G4double DarkMass = ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->GetDarkMatterPointer()->GetMA();
+            G4double angle = - 0.002 * log(0.83*G4UniformRand()) * (100./ekin) * (ekin*XAcc/60.) * (DarkMass/0.1);
+            DHF1(413, angle, 1.);
+            G4double PhiAcc = G4UniformRand() * 2. * 3.1415926;
+            G4double anglex = angle*cos(PhiAcc);
+       	    G4double angley = angle*sin(PhiAcc);
+            G4double PE[3];
+            PE[0] = (track->GetMomentumDirection())[0] + anglex;
+            PE[1] = (track->GetMomentumDirection())[1] + angley;
+            PE[2] = (track->GetMomentumDirection())[2];
+            G4double sc = 1./sqrt(PE[0]*PE[0]+PE[1]*PE[1]+PE[2]*PE[2]);
+            PE[0] *= sc;
+            PE[1] *= sc; // muon new direction
+            PE[2] *= sc;
+            aStep->GetPostStepPoint()->SetMomentumDirection(G4ThreeVector(PE[0], PE[1], PE[2]));
+          }
+
+\end{lstlisting}
+\fi
+
 %\section{The physics list}
 %\label{appC:sec:physics-list}
 
+\FloatBarrier\noindent
 \section{Interaction biasing}
 \label{appC:sec:physics-list}
 
@@ -221,6 +282,7 @@ which shows two histograms of the z position of electronuclear interactions betw
 	\label{res:Tab:mccuts}
       \end{table}
 
+\FloatBarrier\noindent
 \section{Modification of the Fritiof String Model}
 \label{appC:sec:ftfp-modifications}
 
@@ -267,7 +329,7 @@ The next test performed was to simulate different particles in the setup. The th
 
 The conclusion of this comparison (Fig.\ref{fig:geant4-hadron-diff}) is that the largest contribution to the disagreement comes from the projectile diffraction incorrectly excluded in the standard \textit{FTFP\_BERT} physics list, whereas target diffraction contributes instead negatively to the residual.
 
-Some modifications of the \textit{FTFP\_BERT} were decided to improve the agreement in the distributions considered. The target diffraction was switched off, the projectile diffraction was switched on, and the parameters of the FTF model were modified to shift the behavior of $\pi^-$ to the one predicted for an anti-baryon. This is performed by acting mostly on the probability of each quark to be involved in the scattering and the average energy exchanged between partons. The final result is shown in Fig.\ref{fig:geant4-hadron-final}, the disagreement for the high-energy spectrum improves, with some overestimation of the probability of large inelastic scattering still present in the energy range 25-80 \gev. The disagreement for deposit larger than 20 $\gev$ is now $\sim$15\%, improved by a factor 2 compared to the original model.
+Some modifications of the \textit{FTFP\_BERT} were decided to improve the agreement in the distributions considered. The target diffraction was switched off, the projectile diffraction was switched on, and the parameters of the FTF model were modified to shift the behavior of $\pi^-$ to the one predicted for an anti-baryon. This is implemented by changing the probability of each quark to be involved in the scattering and the average energy exchanged between partons. The exact modification of the file \textit{G4FTFParameters.cc} is illustrated in the code snippet below. The final result is shown in Fig.\ref{fig:geant4-hadron-final}, the disagreement for the high-energy spectrum improves, with some overestimation of the probability of large inelastic scattering still present in the energy range 25-80 \gev. The disagreement for deposit larger than 20 $\gev$ is now $\sim$15\%, improved by a factor 2 compared to the original model.
 
 \begin{figure}[tbh!]
   \centering
@@ -275,6 +337,43 @@ Some modifications of the \textit{FTFP\_BERT} were decided to improve the agreem
   \caption[Comparison of hadron energy deposit after corrections]{Comparison between data (black line) and simulated $\pi^-$ in WCAL energy deposit using the physics list $FTFP\_BERT$ before and after corrections applied to the model.}
   \label{fig:geant4-hadron-final}
 \end{figure}
+
+\begin{lstlisting}
+else if ( ProjectileabsPDGcode == 211  ||  ProjectilePDGcode ==  111 ) {  // Projectile is Pion 
+
+    //        Proc#   A1      B1            A2       B2   A3   Atop       Ymin
+    SetParams( 0,  150.0,    1.8 ,       -247.3,     2.3,    0.,   1. ,       2.3 );
+    SetParams( 1,   5.77,    0.6 ,        -5.77,     0.8,    0.,   0. ,       0.0 );
+    SetParams( 2,   2.27,    0.5 ,     -98052.0,     4.0,    0.,   0. ,       3.0 ); 
+    SetParams( 3,    7.0,    0.9,        -85.28,     1.9,  0.08,   0. ,       2.2 );
+    SetParams( 4,    1.0,    0.0 ,       -11.02,     1.0,   0.0,   0. ,       2.4 );  // Qexchange with    Exc. Additional multiply
+
+    //               PROJECTILE DIFFRACTION (FOR ALL TARGET NUCLEI):
+    //               ==============================================
+    //               -  COMMENT OUT THE LINE BELOW TO SWITCH IT ON
+    //               -  USE THE LINE BELOW TO SWITCH IT OFF.
+    //SetParams( 2,      0.0 , 0.0 ,           0.0  , 0.0 , 0.0, 0.0  ,  -100.0  );  // SWITCH OFF Projectile diffraction
+
+    //               TARGET DIFFRACTION (FOR ALL TARGET NUCLEI): 
+    //               ===========================================
+    //               -  COMMENT OUT THE LINE BELOW TO SWITCH IT ON
+    //               -  USE THE LINE BELOW TO SWITCH IT OFF.
+    SetParams( 3,      0.0 , 0.0 ,           0.0  , 0.0 , 0.0, 0.0  ,  -100.0  );  // SWITCH OFF Target diffraction
+
+
+
+    SetDeltaProbAtQuarkExchange( 0.56 );
+    SetProjMinDiffMass( 1.0 );            // GeV
+    SetProjMinNonDiffMass( 1.0 );         // GeV 
+    SetTarMinDiffMass( 1.16 );            // GeV
+    SetTarMinNonDiffMass( 1.16 );         // GeV
+    SetAveragePt2( 0.3 );                 // GeV^2
+    SetProbLogDistrPrD( 0.55 );
+    SetProbLogDistr( 0.55 );
+
+  }
+
+\end{lstlisting}
 
 %%% Local Variables:
 %%% mode: latex
