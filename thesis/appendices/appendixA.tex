@@ -22,7 +22,7 @@ In this section, we calculate the cross-section of the Dark Bremsstrahlung proce
 
 Following the method in \cite{jdb}. We use the WW approximation, where $k=(E_{\DM},\vec{k})$ is the momentum of the emitted Dark Photon and $\theta_{\DM}$ is the angle relative to the incoming momentum of the electron $p$ in the lab frame. In the scenario of a fixed target experiment, we set the target at rest $P_i = (M,0)$ and the primary to the nominal beam energy $p = (E_0, \vec{p})$.
 
-In the WW approximation picture, in the frame of the electron we see rapidly moving atom sources emitting a cloud of effective photons that the primary electron irradiates with to emit an $\DM$. This means we can reduce the cross section to the one of a real photon scattering, i.e. $e(p) + \gamma(q) \to e(p') + A(k)$ where the photon transports the difference of energy between initial and final state of the nucleus $q = P_f - P_i$. In this picture we redefine Eq.\ref{eq:dp-cs}:
+Using WW approximation, in the frame of the electron we see rapidly moving atom sources emitting a cloud of effective photons that the primary electron interact with to emit an $\DM$. This means we can reduce the cross section to the one of a real photon scattering, i.e. $e(p) + \gamma(q) \to e(p') + A(k)$ where the photon transports the difference of energy between initial and final state of the nucleus $q = P_f - P_i$. In this picture we redefine Eq.\ref{eq:dp-cs}:
 
 \begin{equation}
   \label{eq:dp-cs-ww}
@@ -43,7 +43,7 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
 
  \begin{equation}
    \label{eq:dp-u}
-   \rm{U}(x, \theta_{\DM}) = E_0^2 \theta_{\DM}x + m^2_{\DM} \frac{1-x}{x} + m^2_e x
+   \rm{U}(x, \boldsymbol{\theta}_{\DM} ) = E_0^2 \boldsymbol{\theta}_{\DM} x + m^2_{\DM} \frac{1-x}{x} + m^2_e x
  \end{equation}
 
  Using this kinematics, we can express the following variables:
@@ -74,7 +74,7 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
 
  \begin{equation}
    \label{eq:dp-cs-ww-num}
-   \frac{1}{E^2_0} \frac{d\sigma_{WW}}{dx d\cos{\theta_{\DM}}} = (8 \alpha^3 \epsilon^2 \chi \beta_{\DM}) \left[ \frac{1 - x + x/2}{\rm{U}^2} + \frac{(1-x)^2m^2_{\DM}}{\rm{U}^4} \left(m^2_{\DM} - \frac{\rm{U}x}{1 - x} \right) \right]
+   \frac{1}{E^2_0 x} \frac{d\sigma_{WW}}{dx d\cos{\theta_{\DM}}} = (8 \alpha^3 \epsilon^2 \chi \beta_{\DM}) \left[ \frac{1 - x + x^2/2}{\rm{U}^2} + \frac{(1-x)^2m^2_{\DM}}{\rm{U}^4} \left(m^2_{\DM} - \frac{\rm{U}x}{1 - x} \right) \right]
  \end{equation}
 
  To obtain a differential cross-section for $dx$ we need to integrate the equation above for $\cos{\theta_{\DM}}$. There are two problems to this integral:
@@ -101,7 +101,7 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
    &G_{2,in}(t) = \left( \frac{a'^2 t }{1 + a'^2 t} \right)^2 \left( \frac{1 + t (\mu_p^2 -1) / (4m^2_p)}{(1 + t / (\SI{0.71}{\giga\electronvolt\squared})^4} \right) Z
  \end{align}
 
- The parametrization becomes uncertain for high masses of the Dark Photon, but they are reliable for the ranges of interest in NA64 of $m^2_{\DM} < \SI{1}{\giga\electronvolt}$. Numerically, the factor $\chi / Z^2$ depends on the beam energy used, but can be set to be $\chi/Z^2 \mathcal{L}og \approx 5-10$ for the NA64 case. As we can see, we can neglect in good approximation the angular dependence of $\chi$ using these formulas. Coming back at Eq.\ref{eq:dp-cs-ww-num}, we drop $m^2_e$ and perform the integration on the angle and obtain a form for the $dx$ differential cross-section. The results is Eq.\ref{eq:dm-diff-cross} that we reported in chapter \ref{chapter1}, with the flux of photon $\chi$ expressed as the constant $\mathcal{L}og$:
+ The parametrization becomes uncertain for high masses of the Dark Photon, but they are reliable for the ranges of interest in NA64 of $m^2_{\DM} < \SI{1}{\giga\electronvolt}$. Numerically, the factor $\chi / Z^2$ depends on the beam energy used, but can be set to be $\chi/Z^2 = \mathcal{L}og \approx 5-10$ for the NA64 case. As we can see, we can neglect in good approximation the angular dependence of $\chi$ using these formulas. Coming back at Eq.\ref{eq:dp-cs-ww-num}, we drop $m^2_e$ and perform the integration on the angle and obtain a form for the $dx$ differential cross-section. The results is Eq.\ref{eq:dm-diff-cross} that we reported in chapter \ref{chapter1}, with the flux of photon $\chi$ expressed as the constant $\mathcal{L}og$:
 
  \begin{equation}
    \label{eq:dp-cs-dx}
@@ -112,7 +112,7 @@ In the WW approximation picture, in the frame of the electron we see rapidly mov
 \subsection{Production rate}
 \label{appA:sec:production-rate}
 
-TO compute the production rate, we integrated the differential cross section compute above in the scenario of an high-energy electron impacting a fixed-target of $T$ radiation lengths used in chapter \ref{chapter1}:
+To compute the production rate, we integrated the differential cross section compute above in the scenario of an high-energy electron impacting a fixed-target of $T$ radiation lengths used in chapter \ref{chapter1}:
 
 
 \begin{equation}
@@ -120,18 +120,18 @@ TO compute the production rate, we integrated the differential cross section com
   \frac{dN}{dx} = N_e \frac{N_0 X_0}{A} \int_{E_{\DM}}^{E_0} \frac{dE_1}{E_1} \int_0^T dt I(E_1;E_0;t) \times E_0 \frac{d\sigma}{dx'}\Big|_{x' = E_{\DM}/E_1}
 \end{equation}
 
-We need first to parametrize the energy distribution of the electrons after $t$ radiation lengths. Here we assume the production of $\DM$ will happen in the first few radiation length, hence we neglect the $t$ dependence, and we use the paramterization \cite{jdb}:
+We need first to parametrize the energy distribution of the electrons after $t$ radiation lengths. Here we assume the production of $\DM$ will happen in the first few radiation length, hence we neglect the $t$ dependence. We use the parametrization \cite{jdb}:
 
 \begin{equation}
   \label{eq:i-dist}
   I(E_1;E_0,t) \approx  \frac{1}{E_0} y^{bt-1} bt \quad T \gtrsim 1
 \end{equation}
 
-where we take $y = \frac{E_) - E_1}{E_0}$ and $b=4/3$. With this we find:
+where we take $y = \frac{E_0 - E_1}{E_0}$ and $b=4/3$. With this we find:
 
 \begin{equation}
   \label{eq:i-int}
-  \widetilde{I} = \int^T_0 dt I(E_1; E_0, t) \approx \frac{1 + y^{bT}(bT\ln{y} - 1}{E_0by(\ln{y})^2} \underbrace{\to}_{T \to \infty} \frac{1}{E_0by(\ln{y})^2}
+  \widetilde{I} = \int^T_0 dt I(E_1; E_0, t) \approx \frac{1 + y^{bT}(bT\ln{y} - 1)}{E_0by(\ln{y})^2} \underbrace{\to}_{T \to \infty} \frac{1}{E_0by(\ln{y})^2}
 \end{equation}
 
 Where the last approximation is correct within 1\% for $T>7$ and $0.5 < y$. This equation account for the constant $C'$ that multiples the signal rate in Eq.\ref{eq:dm-rate}. We stress that although the scaling is well reproduced using this method, the numerical result produced still has a significant uncertainty that depends on the exact scenario considered. For a precise computation of the signal yield, the exact tree-level cross-section is used instead, implemented inside an MC simulation to reproduce the em-shower and the efficiency of the cuts.
@@ -145,7 +145,7 @@ In the NA64 experiment, the cross section is compute using precise tree-level ca
 
 \begin{equation}
   \label{eq:cs-tl}
-  \frac{d\sigma}{dx d\cos{\theta}} = \frac{\epsilon^2 \alpha^3 |\bf{k}| E_0}{|\bf{p}| |\bf{k} - \bf{p}|} \cdot \int_{t_{min}}^{t_{max}} \frac{dt}{t^2} g^{el}_{2}(t) \cdot \int_0^{2\pi} \frac{d\phi_q}{2\pi} \frac{|A^{2 \to 3}_{\DM}|^22}{8 M^2}
+  \frac{d\sigma}{dx d\cos{\theta}} = \frac{\epsilon^2 \alpha^3 |\bf{k}| E_0}{|\bf{p}| |\bf{k} - \bf{p}|} \cdot \int_{t_{min}}^{t_{max}} \frac{dt}{t^2} G^{el}_{2}(t) \cdot \int_0^{2\pi} \frac{d\phi_q}{2\pi} \frac{|A^{2 \to 3}_{\DM}|^22}{8 M^2}
 \end{equation}
 
 Where the angle $\phi_q$ is the axial angle of $\bf{q}$ defined in Eq.\ref{eq:t-min}. and $|A^{2 \to 3}_{\DM}|$ is the matrix element of the Dark Bremsstrahlung. We define the boundary of the first integral as in the previous section, and we express the amplitude squared of the cross section as:
@@ -183,7 +183,7 @@ Where we divided the calculation of the cross-section as the sum of different am
     &+ 2t(-m^2_{\DM} - 2m_e^2 + t)) - 2E_0 M t ((1-x)\widetilde{u} + (x-2)(m^2_{\DM} + 2m^2_e + t) + t^2 (\widetilde{u} - m^2_{\DM}) \Big] \\
     &A^{(0)}_{\DM} = \frac{8}{\widetilde{u}^2} \Big[ M^2 (2t\widetilde{u} + (t - 4E_0^2(x-1)^2)(m^2_{\DM} + 2m^2_e)) + 2E_0M t (\widetilde{u} - (x-1)(m^2_{\DM} + 2m^2_e)) \Big] \\
     &A^{(1)}_{\DM} = \frac{8M^2}{\widetilde{u}} \\
-    &Y = q^2 + 2q_0 E_0 - 2 \frac{|\bf{q}| |\bf{p}|}{\bf{p} - \bf{k}|} (|\bf{p} - \bf{k} \cos{\theta})\cos{\theta_q}, \quad W = Y^2 - 4 \frac{|\bf{q}|^2|\bf{p}|^2|\bf{k}|^2}{|\bf{q} - \bf{k}|^2} \sin{\theta}^2\sin{\theta_q}^2
+    &Y = q^2 + 2q_0 E_0 - 2 \frac{|\bf{q}| |\bf{p}|}{\bf{p} - \bf{k}|} (|\bf{p} - \bf{k} \cos{\boldsymbol{\theta}})\cos{\boldsymbol{\theta}_q}, \quad W = Y^2 - 4 \frac{|\bf{q}|^2|\bf{p}|^2|\bf{k}|^2}{|\bf{q} - \bf{k}|^2} \sin{\boldsymbol{\theta}}^2\sin{\boldsymbol{\theta}_q}^2
   \end{aligned}
 \end{equation}
 
@@ -210,7 +210,7 @@ which is numerically the correction to the cross-section calculated in the IWW a
 \begin{figure}[bth!]
   \centering
   \includegraphics[width=\textwidth]{\appdira/k-factor.pdf}
-  \caption{Ratio between cross-section calculated in the IWW approximation and using ETL computation $K = \sigma^{\DM}_{IWW} / \sigma^{\DM}_{ETL}$ described in Sec.\ref{appA:sec:cross-section-tl} for different Dark photon masses.}
+  \caption{Ratio between cross-section calculated in the IWW approximation and using ETL computation $K = \sigma^{\DM}_{IWW} / \sigma^{\DM}_{ETL}$ described in Sec.\ref{appA:sec:cross-section-tl} for different Dark photon masses \cite{DMsimulation}}
   \label{fig:k-factor}
 \end{figure}
 

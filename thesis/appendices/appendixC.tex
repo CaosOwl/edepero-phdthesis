@@ -24,76 +24,29 @@ Where $\sigma(Z_i,E)$ is the cross sections per atom of the process and the sum 
 In NA64, simulations are subdivided in different categories called ``examples'' inside the repository, each of them follows the same style and uses the same classes, but it is differentiated in the exact setup used, the presence or absence of Dark matter inside the model, and the precise output of it. Following the modular style of Geant4, C++ ``User'' classes are coded to extend the functionality of the basic Geant4 classes offered to control physics. We can divide this classes in multiple subgroup as function of their purpose in the simulation.
 
 \begin{itemize}
-\item \textbf{\textit{Geometry classes}}: These classes create the volumes used by the simulation. The class \textit{NA64DetectorConstruction} is the first class in hierarchical order, calling a set of subclasses to construct all different volumes of this setup. This approach has the advantage of simply removing part of the setup if needed by simply not calling the relevant class. Also it allows different detectors whose position or characteristic depends from other detectors to communicate those parameters via the class \textit{ParameterDBase} and throw an error if the relevant class was not yet called.
-\item \textbf{\textit{Physics classes}}: These classes initialize the relevant physic to simulate and apply biases to specific cross-section if required by the study. The main classes of this type are \textit{NA64RunAction} and \textit{NA64RunActionWithA}. The first one initializes additional interactions not included in the modular physics list \textit{FTFP\_BERT}, namely the Synchrotron Radiation via \textit{G4SynchrotronRadiation} and dimuon conversion via \textit{G4GammaConversionToMuons}. A bias to these two interaction is optionally added by calling the method \it{SetCrossSecFactor} that set a multiplier to the total cross-section computed by the underlying model.
-\item \textbf{\textit{Output classes}}: These classes are used to extract relevant information produced in the MC-simulation and write them on an output file after proper modification are performed. To date only the class \textit{NA64SD.cc} is part of this group. Methods of this class are called each time a ``sensitive detector'' is crossed by a track. Sensitive detectors are defined internally to each geometry class and corresponds to the active area of the detectors used in NA64.
+\item \textbf{\textit{Geometry classes}}: These classes create the volumes used by the simulation. The class \textit{NA64DetectorConstruction} is the first class in hierarchical order, calling a set of subclasses to construct all different volumes of this setup. This approach has the advantage of simply removing part of the setup if needed by simply not calling the relevant class. Also it allows different detectors whose position or characteristic depends from other detectors to communicate those parameters via the class \textit{ParameterDBase} and throw an error if the relevant class was not called.
+\item \textbf{\textit{Physics classes}}: These classes initialize the relevant physic to simulate and apply biases to specific cross-section if required by the study. The main classes of this type are \textit{NA64RunAction} and \textit{NA64RunActionWithA}. The first one initializes additional interactions not included in the modular physics list \textit{FTFP\_BERT}, namely the Synchrotron Radiation via \textit{G4SynchrotronRadiation} and dimuon conversion via \textit{G4GammaConversionToMuons}. A bias to these two interaction is optionally added by calling the method \textit{SetCrossSecFactor} that set a multiplier to the total cross-section computed by the underlying model.
+\item \textbf{\textit{Output classes}}: These classes are used to extract relevant information produced in the MC-simulation and write them on an output file after proper modification are performed. To date only the class \textit{NA64SD} is part of this group. Methods of this class are called each time a sensitive detector is crossed by a track. Sensitive detectors are defined internally to each geometry class and corresponds to the active area of the detectors used in NA64.
 \end{itemize}
 
 
-Between all of them, the class \textit{NA64DetectorConstruction} act as a messenger between all classes, handling the transmission of relevant variables if they are needed.
+The summary of the simulation design is depicted in Fig.\ref{fig:sim-chart}. The setup used for the study presented in Sec.\ref{ch5:sec:new-vismode-setup} is show in Fig.\ref{fig:setup-2021-g4}.
 
-\iffalse
-\begin{lstlisting}
-if( ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->
-                         GetDarkMatterPointer()->Emission(ekin, DensityMat, StepLength) ) {
+\begin{figure}[tbh!]
+    \centering
+    \includegraphics[width=\textwidth]{\appdirc/simulation-chart.pdf}
+    \caption{Flowchart of the MC simulation developed for the NA64 experiment. All classes used are presented.}
+    \label{fig:sim-chart}
+\end{figure}
 
-      if(NEmissions) {
-        G4cout << "Attempt to emit more than one A in the event, rejected!!! E = " << ekin << G4endl;
-      } else {
+\begin{figure}[bth!]
+    \centering
+    \includegraphics[width=\textwidth]{\appdirc/visible-mode-2021-g4-geo-v2.pdf}
+    \caption{Setup for the visible mode of 2021 as implemented in the Geant4 simulation. This setup was used for the feasibility study presented in Sec.\ref{ch5:sec:new-vismode-setup}.}.
+    \label{fig:setup-2021-g4}
+\end{figure}
 
-        if(abs(theParticleDefinition->GetPDGEncoding()) == 11) {
-          if(aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName() == "eBrem" &&
-             ekin - track->GetKineticEnergy()/GeV > 1.) {
-            G4cout << "Emission at brem step, dE = " << ekin - track->GetKineticEnergy()/GeV << G4endl;
-            if(ekin - track->GetKineticEnergy()/GeV > 1.) EBrem = ekin - track->GetKineticEnergy()/GeV;
-          }
-        }
-
-        NEmissions++;
-
-        G4double XAcc, angles[2];
-        if(abs(theParticleDefinition->GetPDGEncoding()) != 13 &&
-           abs(theParticleDefinition->GetPDGEncoding()) != 22 &&
-           ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->GetDarkMatterPointer()->Decay() ) {
-          XAcc = ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->
-                                             GetDarkMatterPointer()->SimulateEmissionWithAngle(ekin, angles);
-        } else {
-          XAcc = ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->
-                                             GetDarkMatterPointer()->SimulateEmission(ekin, angles);
-        }
-
-        if(XAcc > 0.001) {
-
-          if(theParticleDefinition->GetPDGEncoding() == 22) {
-            track->SetKineticEnergy(0.000001*GeV);
-            track->SetTrackStatus(fKillTrackAndSecondaries);
-          } else {
-            track->SetKineticEnergy(ekin*(1.-XAcc)*GeV);
-          }
-
-          if(abs(theParticleDefinition->GetPDGEncoding()) == 13) {
-            G4double DarkMass = ((NA64::RunActionWithA*)(GetEventAction()->GetRunAction()))->GetDarkMatterPointer()->GetMA();
-            G4double angle = - 0.002 * log(0.83*G4UniformRand()) * (100./ekin) * (ekin*XAcc/60.) * (DarkMass/0.1);
-            DHF1(413, angle, 1.);
-            G4double PhiAcc = G4UniformRand() * 2. * 3.1415926;
-            G4double anglex = angle*cos(PhiAcc);
-       	    G4double angley = angle*sin(PhiAcc);
-            G4double PE[3];
-            PE[0] = (track->GetMomentumDirection())[0] + anglex;
-            PE[1] = (track->GetMomentumDirection())[1] + angley;
-            PE[2] = (track->GetMomentumDirection())[2];
-            G4double sc = 1./sqrt(PE[0]*PE[0]+PE[1]*PE[1]+PE[2]*PE[2]);
-            PE[0] *= sc;
-            PE[1] *= sc; // muon new direction
-            PE[2] *= sc;
-            aStep->GetPostStepPoint()->SetMomentumDirection(G4ThreeVector(PE[0], PE[1], PE[2]));
-          }
-
-\end{lstlisting}
-\fi
-
-%\section{The physics list}
-%\label{appC:sec:physics-list}
+A notable addition to the simulation framework above is the interaction biasing, used to increase the interaction probability for some interesting processes, and the modification of the \textit{FTFP\_BERT} physics list, used to improve the agreement between data and MC. I implemented both of these tools during my work. I will present in the next two sections.
 
 \FloatBarrier\noindent
 \section{Interaction biasing}
