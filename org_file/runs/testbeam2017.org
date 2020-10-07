@@ -1,0 +1,1080 @@
+* runs								       :runs:
+** high mult runs for MM5 and MM7			     :efficiencyscan:
+runs from *3256* and *3268* were done with multiplicity 4 on the MM downstream due to an error after latency snca
+** latency run							    :latency:
+*** latency run upstream
+|  run | latency |
+|------+---------|
+| 2818 | 46      |
+| 2817 | 47      |
+| 2819 | 45      |
+| 2822 | 44      |
+| 2824 | 48      |
+|------+---------|
+*** latency run downstream
+|  run | latency |
+|------+---------|
+| 2972 |      37 |
+| 2971 |      38 |
+| 2970 |      39 |
+| 2969 |      40 |
+| 2968 |      41 |
+| 2967 |      42 |
+|------+---------|
+** calibration runs						:calibration:
+| Run Number | Energy [GeV] | Spills | Trig     | Specifics           | Note       |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3194 |          100 |     65 | S04Vn    | *S1* = 3.5E6        | Ecal~2.7E6 |
+|            |              |        |          | *S01Vn* = 3.2E6     |            |
+|            |              |        |          | *S2* = 2.2E6        |            |
+|            |              |        |          | *S04Vn* = 1.7E6     |            |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3195 |          100 |     53 | S04VnPsh | -------             |            |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3246 |          100 |     65 | S04Vn    | *S04vn* = 3.3E6     |            |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3247 |          100 |     49 | S04VnPsh | *S04Vn* = 3.3E6     |            |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3287 |          100 |     56 | S04VnPsh | *S1* = 5.1E6        |            |
+|            |              |        |          | *S01Vn* = 4.5E6     |            |
+|            |              |        |          | *S04Vn* = 2.85E6    |            |
+|            |              |        |          | *S04VnPsh* = 2.65E6 |            |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3321 |          100 |     50 | S04VnPsh | *S0* = 6.1E6        |            |
+|            |              |        |          | *S01Vn= 4.87E6      |            |
+|            |              |        |          | *S04Vn* = 3.3E6     |            |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3322 |          100 |     30 | S04Vn    | *S0* = 6.1E6        |            |
+|            |              |        |          | *S01Vn* = 4.92E6    |            |
+|            |              |        |          | *S04Vn* = 3.03E6    |            |
+|------------+--------------+--------+----------+---------------------+------------|
+|       3323 |          100 |    112 | S04Vn    | *S0* = 54E3         |            |
+|            |              |        |          | *S01Vn* = 35E3      |            |
+|            |              |        |          | *S04Vn* = 23.6E3    |            |
+|------------+--------------+--------+----------+---------------------+------------|
+*** run 
+** hadrons run 							     :hadron:
+| Run Number | Energy [GeV] | Spills | Trig | Specifics  | Note                           |
+|------------+--------------+--------+------+------------+--------------------------------|
+|       3193 |          100 |    102 | --   | *S1* = 5E4 |                                |
+|------------+--------------+--------+------+------------+--------------------------------|
+|       3248 |          100 |    120 | ?    | ?          | 1)Run stopped due to not, beam |
+|            |              |        |      |            | 2)Strange error in DAQ         |
+|------------+--------------+--------+------+------------+--------------------------------|
+* shift
+** evening shift <2017-09-01 Fre>
+Latency scan of MM1-4, no activity.
+** evening shift <2017-09-02 Sam>
+*** run 2860
+    - *S1*
+    - *S2*
+    - *Vnot*
+    - *coincidence*
+* latency scan							    :latency:
+** template tables
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM1x |    |    |    |
+| MM1y |    |    |    |
+| MM2x |    |    |    |
+| MM2y |    |    |    |
+| MM3x |    |    |    |
+| MM3y |    |    |    |
+| MM4x |    |    |    |
+| MM4y |    |    |    |
+|------+----+----+----|
+
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+
+| MM | latency | efficiency |
+|----+---------+------------|
+|    |         |            |
+|    |         |            |
+|----+---------+------------|
+** first scan <2017-09-01 Fre>
+First table record on <2017-09-01 Fre>, only MM1-4 are avaiable due to beam and chips issues
+*WARNING* MM3 had still a bad chips in it, maybe do not trust this table for them
+*** *LATENCY* = 46 (standard value) *run2818*      
+| MM   |    a0 |    a1 |    a2 |
+|------+-------+-------+-------|  
+| MM1x |  61.9 | 76.97 | 85.85 |
+| MM1y | 111.8 | 130.6 | 139.6 |
+| MM2x | 33.85 | 44.69 | 52.45 |
+| MM2y | 69.21 | 85.64 | 94.66 |
+| MM3x | 26.24 |  35.8 | 45.45 |
+| MM3y | 50.17 |  65.7 | 77.34 |
+| MM4x | 28.17 | 38.22 | 46.14 |
+| MM4y | 56.75 | 71.28 | 80.73 |
+|------+-------+-------+-------
+*** *LATENCY* = 47 (standard value) *run2817*
+| MM   |    a0 |    a1 |    a2 |
+|------+-------+-------+-------|
+| MM1x | 41.12 | 61.75 | 77.93 |
+| MM1y | 85.09 | 117.8 | 141.9 |
+| MM2x | 24.27 | 36.93 | 48.64 |
+| MM2y | 51.39 | 73.98 | 93.12 |
+| MM3x | 20.44 | 30.69 | 42.72 |
+| MM3y | 36.86 | 55.88 | 74.33 |
+| MM4x | 20.38 | 31.95 | 43.25 |
+| MM4y | 41.47 | 60.39 | 77.41 |
+|------+-------+-------+-------|
+*** *LATENCY* = 45  *run2819*
+| MM   |    a0 |    a1 |    a2 |
+|------+-------+-------+-------|
+| MM1x | 79.79 | 86.12 | 88.35 |
+| MM1y | 129.3 | 131.5 | 128.3 |
+| MM2x |  44.1 | 51.05 | 53.88 |
+| MM2y | 83.82 | 89.68 | 88.75 |
+| MM3x | 32.68 | 40.23 | 47.09 |
+| MM3y | 61.99 | 71.11 | 75.16 |
+| MM4x | 36.47 | 43.41 | 47.35 |
+| MM4y | 69.65 | 76.69 | 78.33 |
+|------+-------+-------+-------|
+*** *run2820* STILL SAME LATENCY DUE TO AN ERROR
+| MM   |    a0 |    a1 |    a2 |
+|------+-------+-------+-------|
+| MM1x | 79.79 | 86.12 | 88.35 |
+| MM1y | 129.3 | 131.5 | 128.3 |
+| MM2x |  44.1 | 51.05 | 53.88 |
+| MM2y | 83.82 | 89.68 | 88.75 |
+| MM3x | 32.68 | 40.23 | 47.09 |
+| MM3y | 61.99 | 71.11 | 75.16 |
+| MM4x | 36.47 | 43.41 | 47.35 |
+| MM4y | 69.65 | 76.69 | 78.33 |
+|------+-------+-------+-------|
+*** *LATENCY* = 44 *run2822*
+| MM   |    a0 |    a1 |    a2 |
+|------+-------+-------+-------|
+| MM1x |    93 | 90.24 | 86.44 |
+| MM1y | 132.8 | 122.4 | 112.8 |
+| MM2x | 51.18 | 53.11 | 52.49 |
+| MM2y | 89.04 | 85.25 | 78.26 |
+| MM3x | 37.86 | 42.58 |  46.6 |
+| MM3y |  68.4 | 70.29 | 68.28 |
+| MM4x | 42.59 | 45.36 | 46.06 |
+| MM4y | 76.31 | 75.03 | 71.15 |
+|------+-------+-------+-------|
+*** *LATENCY* = 48 *run2824*
+| MM   |    a0 |    a1 |    a2 |
+|------+-------+-------+-------|
+| MM1x | 25.51 | 45.94 | 67.79 |
+| MM1y | 53.05 | 92.98 | 130.1 |
+| MM2x | 15.83 | 29.06 | 43.47 |
+| MM2y | 32.65 | 57.98 | 84.23 |
+| MM3x | 15.67 | 25.69 | 38.95 |
+| MM3y | 24.02 | 43.77 | 66.46 |
+| MM4x | 13.25 | 25.19 | 38.87 |
+| MM4y | 26.29 | 46.59 | 68.58 |
+|------+-------+-------+-------|
+** second scan for MM8 <2017-09-02 Sam>
+*NOTE:*  THRESHOLD WAS MULT=1
+*** *LATENCY* = 46 
+MM8X:
+a0:12.2
+a1:14.25
+a3:18.27
+MM8Y
+a0:31.85
+a1:32.47
+a2:35.9
+*** *LATENCY* = 45 
+MM8X:
+a0:12.07
+a1:14.03
+a3:18.03
+MM8Y
+a0:31.45
+a1:31.5
+a2:35.82
+*** *LATENCY* = 47 
+MM8X:
+a0:12.2
+a1:14.37
+a3:18.64
+MM8Y
+a0:32.3
+a1:33
+a2:36
+*** *LATENCY* = 50 
+MM8X:
+a0:12.34
+a1:14.5
+a3:18.5
+MM8Y
+a0:32.7
+a1:33.5
+a2:36.8
+*** *LATENCY* = 55 
+MM8X:
+a0:12.6
+a1:14.6
+a3:18.6
+MM8Y
+a0:32.6
+a1:33.5
+a2:37.4
+*NOTE:*  THRESHOLD WAS MULT=2
+*** *LATENCY* = 65 
+MM8X:
+a0:26
+a1:29
+a3:35
+MM8Y
+a0:61
+a1:61.8
+a2:65.9
+*** *LATENCY* = 60 
+MM8X:
+a0:21.9
+a1:25.1
+a3:31.7
+MM8Y
+a0:50.04
+a1:51.24
+a2:55.5
+*** *LATENCY* = 100 
+    MM8X:
+a0:22.87
+a1:25.46
+a3:31.99
+MM8Y
+a0:51.3
+a1:52.6
+a2:56.3
+*** *LATENCY* = 47 
+MM8X:
+a0:
+a1:
+a3:
+MM8Y
+a0:
+a1:
+a2:
+** third scan for MM1-4 and MM8
+** scan on downstream module using upstream adc v0x0110<2017-09-06 Mit>
+it was annoted both mean of the histo and mvp by eye looking the histogram maximum value. A landau fit could be done offline to improve results.
+Latency was performed with a threshold of *4.0 mult* for increasing latency quality
+*** *efficiency recorded*
+**** run 2973 latency = 37
+| MM  | efficiency |
+|-----+------------|
+| MM5 |      98.47 |
+| MM6 |      98.47 |
+| MM7 |       99.1 |
+| MM8 |       97.7 |
+|-----+------------|
+**** run 2974 latency = 38
+| MM  | efficiency |
+|-----+------------|
+| MM5 |      98.46 |
+| MM6 |       99.5 |
+| MM7 |       98.9 |
+| MM8 |       96.2 |
+|-----+------------|
+**** run 2975 latency = 39
+| MM  | efficiency |
+|-----+------------|
+| MM5 | 96         |
+| MM6 | 98.9       |
+| MM7 | 97.6       |
+| MM8 | 93.25      |
+|-----+------------|
+*** *LATENCY* = 46 *run2953*
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 47 *run2954*
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 48 *run2955*
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 49 *run2956*
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 50 *run2957* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 51 *run2958* *NOTE: AFTER THIS RUN MULT OF MM3 AND MM4 WAS SET TO 4 TO COMPARE EFFICIENCY*
+*** *LATENCY* = 52 *run2959* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 45 *run2961* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 44 *run2965* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 43 *run2966* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 42 *run2967* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 41 *run2968* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 40 *run2969* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 39 *run2970* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 38 *run2971* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 37 *run2972* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+** new scan fllowing the inclusion of ECAL in the trigger<2017-09-10 Son>
+   scan were performed just for the modules upstream that showed a slight 
+   decrease in efficiency (~1%)
+*** *LATENCY* = 47 *run3187* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 48 *run3188* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 46 *run3189* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+** new scan for MM5 and MM7 since it has a bad fit<2017-09-13 Mit>
+*** *LATENCY* = 37 *run3252* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 38 *run3253* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 39 *run3254* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 40 *run3255* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+*** *LATENCY* = 41 *run3256* 
+**** MEAN
+| MM   | a0 | a1 | a2 |
+|------+----+----+----|
+| MM5x |    |    |    |
+| MM5y |    |    |    |
+| MM6x |    |    |    |
+| MM6y |    |    |    |
+| MM7x |    |    |    |
+| MM7y |    |    |    |
+| MM8x |    |    |    |
+| MM8y |    |    |    |
+|------+----+----+----|
+**** MVP
+* efficiency scan					     :efficiencyscan:
+** first scan <2017-09-02 Sam>
+*** intensity (coincidence S1-S2-V0) =  *2.7M/spill* _run2860_ interrupted due to low efficiency of MM8
+**** MM1
+| VOLTAGE | S1-S2-V_NOT | MMhit | efficiency |
+|---------+-------------+-------+------------|
+|     480 |       12782 |  5679 |            |
+|     490 |       12568 |  6937 |            |
+|     500 |             |       |            |
+|     520 |             |       |            |
+|     530 |             |       |            |
+|     540 |             |       |            |
+|     550 |             |       |            |
+|     560 |             |       |            |
+|---------+-------------+-------+------------|
+**** MM2
+| VOLTAGE | S1-S2-V_NOT | MMhit | efficiency |
+|---------+-------------+-------+------------|
+|     480 |       12782 |  3242 |            |
+|     490 |       12568 |  4321 |            |
+|     500 |             |       |            |
+|     520 |             |       |            |
+|     530 |             |       |            |
+|     540 |             |       |            |
+|     550 |             |       |            |
+|     560 |             |       |            |
+|---------+-------------+-------+------------|
+**** MM3
+| VOLTAGE | S1-S2-V_NOT | MMhit | efficiency |
+|---------+-------------+-------+------------|
+|     480 |       12782 |  2431 |            |
+|     490 |       12568 |  2865 |            |
+|     500 |             |       |            |
+|     520 |             |       |            |
+|     530 |             |       |            |
+|     540 |             |       |            |
+|     550 |             |       |            |
+|     560 |             |       |            |
+|---------+-------------+-------+------------|
+**** MM4
+| VOLTAGE | S1-S2-V_NOT | MMhit | efficiency |
+|---------+-------------+-------+------------|
+|     480 |       12782 |  4370 |            |
+|     490 |       12568 |  5162 |            |
+|     500 |             |       |            |
+|     520 |             |       |            |
+|     530 |             |       |            |
+|     540 |             |       |            |
+|     550 |             |       |            |
+|     560 |             |       |            |
+|---------+-------------+-------+------------|
+** second scan<2017-09-03 Son>
+   run were recorded as function of the efficiency. Intensity was kept constant for now. Here is a summary. For each run 10 spills were recorded. *DO NOT TRUST MM8 VALUES*
+   Summary of intensity:
+   - *S1* = 32M
+   - *S0* = 28M
+   - *V0* = 308K
+   - *S0S1_V0_* = 24M
+*** *run2869* 480 Volt
+*** *run2870* 490 Volt
+*** *run2871* 500 Volt
+*** *run2872* 510 Volt
+*** *run2873* 520 Volt    
+*** *run2874* 530 Volt
+*** *run2875* 540 Volt
+    *NOTE* = MM1 Voltage was kept at 535 since at 540 the current was around 700 nA.
+*** *run2876* 550 Volt
+    *NOTE* = it was attemoted to push MM1 to 540 Volt to see the results.
+*** *run2877* 560 Volt
+    MM1 pushed back to 530, no significant improvent of efficiency was observed at 540
+*** *run2878* 565 Volt    
+*** *run2879* 570 Volt    
+* instruction  
+** beam
+*** collimator
+    XCSV.022.386 has the purpose of regulate the intensity and quality of the beam. Larger distance means larger intensity but worse beam (worse momentum resolution and larger spread)
+** MM shift instruction
+*** General monitoring
+    The MicroMegas can be monitored using the COOOL software:
+    1. type in the terminal $StartCOOOL.sh
+    2. tick the MicroMegas box in the open window
+    3. check beam profile by clicking on one of the MicroMegas and clicking on MMXY histogram
+    4. Check profile of single planes by looking at histograms MM0NX_BestClu_Position and MM0NY_BestClu_Position where N is the number of Micromegas.
+    5. Check Banana Plots in each X-Y projection by looking at the histogram MM0NX_AmpRatio and MM0NY_AmpRatio
+    6. Check efficiency of each MicroMegas and signel projection by dividing the number of entries of the above histograms to the total Entries in COOOL.
+
+    *NOTE*  : The geometry of MM2 and MM4 is rotated by 90 degree within respect to the one of the other MicroMegas, this is the reason they look rotated in COOOL
+
+*** Voltage and current monitoring
+    All MicroMegas should have 0-5 nA current (can be occasionaly a bit larger for some modules, not above 10 nA) on both power supply channel off spill
+    and some current during the spill on channel B (resistive strips). It is important to check that the current correctly
+    goes back to zero between two spills. If not the accumulated current might bring the
+    detector to breakdown. The Voltages on MicroMegas should be the following:
+    | MM  | Channel A (Drift) | Channel B (Resistive strips) |
+    |-----+-------------------+------------------------------|
+    | MM1 | 300               | 530                          |
+    | MM2 | 360               | 565                          |
+    | MM3 | 300               | 565                          |
+    | MM4 | 360               | 565                          |
+    | MM5 | 300               | 565                          |
+    | MM6 | ---               | ---                          |
+    | MM7 | 300               | 565                          |
+    | MM8 | ---               | ---                          |
+    |-----+-------------------+------------------------------|
+    If problems arise check that this values are correct. If too much current is registered
+    on one detector one can try to slowly lower the Voltage on channel B (in steps of 5 Volts)
+    to limit the currrent output.
+    *NOTE1*:  current on _MM5_ never goes to zero but to 35-40 nA instead, this seems
+    to be a problem of the power supply and not of the detector and it does not decrease
+    efficiency. For this module this 35 nA current should be interpreted as zero.
+    *NOTE2*: _MM1_ has typically more current than the other modules during the spills
+    This is not a problem if it correctly manages to return to 0 between the two spills,
+    this module should however be monitored with particular care.
+*** Gas monitoring
+    The value of the pressure of the gas bottle connected to the _red gas pipe_ and attached label with the name _Emilio Depero_ on it. 
+    should be monitored (ideally by making a photo and put it on the ELOG) at the beginning and at the end of every shift. If the values
+    of the first manometer (the one closer to the gas bottle) drop lower than 50 Bar contact one of the MM responsable.
+*** Troubleshooting
+**** MM are not loading
+     It happens quite a lot that MM need to be loaded more then once. Type:
+
+     * LOAD -A 622
+       
+      at least 3-4 times before giving up. If it doesn't work try to type the following
+       command in order:
+
+     * LOAD -g 622
+     * LOAD -zR 622
+     * LOAD -ra 622
+     * LOAD -p 622
+       
+       This can sometime works when the command LOAD -A 622 does not work. If you get error immediately and consistently after typing
+       LOAD -zR 622 there are two possible solutions:
+     * switch off the GEM ADC in the database. Type LOAD -A 622 one more time, if it works, switch on GEM ADC one more time and try to load again. This has proven to work in the past.
+     * ADC need a power cycle, enter the beam area and switch off and on the ADC (both upstream and downstream) after waiting a few seconds between the steps. *DO NOT CHANGE THE VOLTAGES*
+**** MM are loading but do not show up in COOOL
+     Means that those modules are not synchronized. The Module eeds to be loaded again and then checked in COOOL. They might need a few try before they get all synchronized.
+**** MM have low efficiency
+     Check the voltages and current in each detector. If Voltages are okay but no current is shown during the spill check that the gas bottle has the correct pressure.
+*** Contacts
+    Emilio Depero
+    - *Mail*  : emilio.depero@cern.ch
+    - *mobile* : +41 77 408 74 69
+    - *mobile (only whatsapp or telegram)* :  +39 348 85 23 812
+    Dipanwita Banerjee
+    - *Mail*  : dipanwita.banerjee@cern.ch
+    - *mobile* : +41 76 548 42 16
+* layout
+** table of connection to the electric panel
+*** invisible mode
+**** UPSTREAM PANEL (WHITE)
+     | MM  | type of connection | panel number |
+     |-----+--------------------+--------------|
+     | MM1 | DRIFT              | A1           |
+     | MM1 | RESISTIVE          | A13          |
+     | MM2 | DRIFT              | A2           |
+     | MM2 | RESISTIVE          | A14          |
+     | MM3 | DRIFT              | A3           |
+     | MM3 | RESISTIVE          | A15          |
+     | MM4 | DRIFT              | A4           |
+     | MM4 | RESISTIVE          | A16          |
+     |-----+--------------------+--------------|
+**** DOWNSTREAM PANEL (GREY)   
+     | MM  | type of connection | panel number |
+     |-----+--------------------+--------------|
+     | MM5 | DRIFT              | A15          |
+     | MM5 | RESISTIVE          | A27          |
+     | MM6 | DRIFT              | A16          |
+     | MM6 | RESISTIVE          | A28          |
+     | MM7 | DRIFT              | A17          |
+     | MM7 | RESITIVE           | A29          |
+     | MM8 | DRIFT              | A18          |
+     | MM8 | RESITIVE           | A30          |
+     |-----+--------------------+--------------|
+*** visible mode
+**** UPSTREAM PANEL (WHITE)
+     | MM  | type of connection | panel number | label on power supply |
+     |-----+--------------------+--------------+-----------------------|
+     | MM1 | DRIFT              | A1           | MM1                   |
+     | MM1 | RESISTIVE          | A13          | MM1                   |
+     | MM3 | DRIFT              | A3           | MM3                   |
+     | MM3 | RESISTIVE          | A15          | MM3                   |
+     |-----+--------------------+--------------+-----------------------|
+**** DOWNSTREAM PANEL (GREY)   
+     | MM  | type of connection | panel number | label on power supply |
+     |-----+--------------------+--------------+-----------------------|
+     | MM5 | DRIFT              | A15          | MM5                   |
+     | MM5 | RESISTIVE          | A27          | MM5                   |
+     | MM4 | DRIFT              | A16          | MM6                   |
+     | MM4 | RESISTIVE          | A28          | MM6                   |
+     | MM7 | DRIFT              | A17          | MM7                   |
+     | MM7 | RESITIVE           | A29          | MM7                   |
+     | MM2 | DRIFT              | A18          | MM2                   |
+     | MM2 | RESITIVE           | A30          | MM2                   |
+     |-----+--------------------+--------------+-----------------------|
+** table of connection to the bus card
+*** visible mode
+    | MM  | ADC type | ADC connection | bus card address | GeSiCa port |
+    |-----+----------+----------------+------------------+-------------|
+    | MM1 | V12      |             15 |               24 |           1 |
+    | MM3 | V12      |             11 |               38 |           1 |
+    | MM5 | V35      |             11 |               3E |           2 |
+    | MM4 | V12      |              7 |               26 |           2 |
+    | MM7 | V35      |             15 |               2C |           2 |
+    | MM2 | V12      |              3 |               2E |           2 |
+    |-----+----------+----------------+------------------+-------------|
+*** invisible mode
+**** first table during testing
+     | MM  | ADC type | ADC connection | bus card address | GeSiCa port |
+     |-----+----------+----------------+------------------+-------------|
+     | MM1 | V12      |              3 |               24 |           1 |
+     | MM2 | V12      |              7 |               2E |           1 |
+     | MM3 | V12      |             11 |               38 |           1 |
+     | MM4 | V12      |             15 |               3E |           1 |
+     | MM5 | V35      |              3 |               3E |           2 |
+     | MM6 | V35      |              7 |               3A |           2 |
+     | MM7 | V35      |             11 |               2C |           2 |
+     | MM8 | V35      |             15 |               26 |           2 |
+     |-----+----------+----------------+------------------+-------------|
+**** second table during data taking
+     | MM  | ADC type | ADC connection | bus card address | GeSiCa port |
+     |-----+----------+----------------+------------------+-------------|
+     | MM1 | V12      |              3 |               24 |           1 |
+     | MM2 | V12      |              7 |               2E |           1 |
+     | MM3 | V12      |             11 |               38 |           1 |
+     | MM4 | V12      |             15 |               3E |           1 |
+     | MM5 | V35      |             11 |               3E |           2 |
+     | MM7 | V35      |             15 |               2C |           2 |
+     |-----+----------+----------------+------------------+-------------|
+** position of MM
+*** visible mode
+   ECAL------MM2---------MM7--------MM4-----------MM5--------WCAL
+** position of triggers on the scaler
+*** <2017-09-02 Sam>
+    from the top:
+    - S2
+    - S1
+    - S1 and S2 and not Veto
+    - not Veto
+    - 
+* Geometry
+** invisible mode
+   // MM offsets actual for runs range: #2000 - ...
+   ECAL_pos.pos = TVector3(     0,   0,     0);  
+   pipe_pos.pos = TVector3(     0,   0,  4260);
+   MAGD_pos.pos = TVector3(     0,   0, 18130-170-4300);//magnet downstream side
+   MAGU_pos.pos = TVector3(     0,   0, 18130-170);//magnet upstream side
+   //GEM position
+   GM1_pos.pos  = TVector3(     -294,   0,  1126+234+1022+621);
+   GM2_pos.pos  = TVector3(     -349,   0,  1126);
+   GM3_pos.pos  = TVector3(     -342,   0,  1126+234+1022);
+   GM4_pos.pos  = TVector3(     -343,   0,  1126+234);  
+   //MM position
+   //////////////////////////////////////////////////////////////////
+   ////first values is coordinate respect the beam axis in the beam area
+   ////second cordinate is the correction for the beam axis measured
+   //////////////////////////////////////////////////////////////////
+   MM1_pos.pos  = TVector3(-17,-6,19670) + TVector3(0,0,0);
+   MM2_pos.pos  = TVector3(-6,8,19580) + TVector3(0,0,0);
+   MM3_pos.pos  = TVector3(-17,-1.5,18220) + TVector3(0,0,0);
+   MM4_pos.pos  = TVector3(-8,2.7,18130) + TVector3(0,0,0);
+   MM5_pos.pos  = TVector3(-317,0,3170) + TVector3(-8.1,-7.5,0);
+   MM7_pos.pos  = TVector3(-366,5,1030) + TVector3(2.4,0.45,0);
+   //MM angles
+   MM1_pos.Angle = PI/4;
+   MM2_pos.Angle = -PI/4;
+   MM3_pos.Angle = PI/4;
+   MM4_pos.Angle = -PI/4;
+   MM5_pos.Angle = PI/4;
+   MM7_pos.Angle = PI/4;
+   //magnetic field
+   MAG_field = 1.8;
+** visible mode
+*** self measured
+  // MM offsets actual for runs range: #2000 - ...
+  ECAL_pos.pos = TVector3(     0,   0,     0);  
+  pipe_pos.pos = TVector3(     0,   0,  4260);
+  MAGD_pos.pos = TVector3(     0,   0, 18130-170-4300);//magnet downstream side
+  MAGU_pos.pos = TVector3(     0,   0, 18130-170);//magnet upstream side
+  //GEM position
+  GM1_pos.pos  = TVector3(     -295,   0,  3239);
+  GM2_pos.pos  = TVector3(     -358,   0,  787);
+  GM3_pos.pos  = TVector3(     -328,   0,  2687);
+  GM4_pos.pos  = TVector3(     -342,   0,  1481);  
+  //MM position
+  //////////////////////////////////////////////////////////////////
+  ////first values is coordinate respect the beam axis in the beam area
+  ////second cordinate is the correction for the beam axis measured
+  //////////////////////////////////////////////////////////////////
+  MM1_pos.pos  = TVector3(-17,-6,19670) + TVector3(0,0,0);
+  MM2_pos.pos  = TVector3(-365,0,1311) + TVector3(0,0,0);
+  MM3_pos.pos  = TVector3(-17,-1.5,18220) + TVector3(0,0,0);
+  MM4_pos.pos  = TVector3(-325.7,0,2542) + TVector3(0,0,0);
+  MM5_pos.pos  = TVector3(-320,0,3164) + TVector3(-8.1,-7.5,0);
+  MM7_pos.pos  = TVector3(-357,5,905) + TVector3(2.4,0.45,0);
+  //MM angles
+  MM1_pos.Angle = PI/4;
+  MM2_pos.Angle = -PI/4;
+  MM3_pos.Angle = PI/4;
+  MM4_pos.Angle = -PI/4;
+  MM5_pos.Angle = PI/4;
+  MM7_pos.Angle = PI/4;
+  //magnetic field
+  MAG_field = 1.8;
+**** offset gem and MM in Y
+|-----+-------|
+| G1  | 127   |
+| MM5 | 125,1 |
+| G3  | 128,4 |
+| MM4 | 127   |
+| G4  | 128,4 |
+| MM2 | 126,7 |
+| MM7 | 126,7 |
+| G2  | 127   |
+|-----+-------|
+|     |       |
+
+*** metereology team measurements
+metereology report can be found in [[/home/emilio/polybox/PhD/org_files/run_september2017/geometry][here]] or in the website [[https://edms.cern.ch/ui/#!master/navigator/document?D:100000600:100000600:subDocs][link]]
+**** summary table
+***** MM
+****** upstream MM
+for upstream MicroMegas perfect measurement of the circle center is quoted as done
+by the metereology team.
+| MM  | X[mm] | Y[mm] |  Z[mm] |
+|-----+-------+-------+--------|
+| MM1 | -14.4 |  -9.2 | 2697.2 |
+| MM3 | -14.3 |  -5.1 | 4147.2 |
+|-----+-------+-------+--------|
+****** old MM
+Old Micromega the correction had to be recalculated
+- the Z position was done as mean of all 5 point in the MicroMegas
+- Y position was divided in up and Down, Up are corrected by subtracting 115 mm while for down we add 115
+- X position are corrected adding 175 mm
+- in the end the mean of all point is performed
+- numbers are given as in our setup numbering, not the one used by the metereology team
+| MM  | Y Up[mm] | Y Down[mm] | X-pos[mm]sub | X-pos[mm]add | Y-pos[mm] | Z-pos[mm] |
+|-----+----------+------------+--------------+--------------+-----------+-----------|
+| MM5 |   -21.15 | --         |         -657 |         -307 |    -21.15 |   21680.6 |
+| MM7 |   -16.29 | --         |      -704.05 |      -354.05 |    -16.29 | 23924.025 |
+|-----+----------+------------+--------------+--------------+-----------+-----------|
+****** new MM
+New Micromega were rotated of 90 degree, the correction had to be recalculated
+- the Z position was done as mean of all 5 point in the MicroMegas
+- Y position was divided in up and Down, Up are corrected by subtracting 175 mm while for down we add 175
+- X position are corrected adding 115 mm
+- in the end the mean of all point is performed
+- numbers are given as in our setup numbering, not the one used by the metereology team
+| MM  | Y Up[mm] | Y Down[mm] | X-pos[mm]sub | X-pos[mm]add | Y-pos[mm] | Z-pos[mm] |
+|-----+----------+------------+--------------+--------------+-----------+-----------|
+| MM4 |    -7.25 |       -7.4 |      -550.75 |      -320.75 |    -7.325 |  22292.34 |
+| MM2 |    -11.8 |        -12 |       -586.1 |       -356.1 |     -11.9 | 23520.025 |
+|-----+----------+------------+--------------+--------------+-----------+-----------|
+***** GEM
+Other correction are used for *GEM* as shown in the report of the metereology team
+- the Z position was done as mean of all 5 point (or number of availaible point) in the *GEM* 
+- Y position was divided in up and Down, Up are corrected by subtracting 166 mm while for down we add 260
+- X position are corrected adding 256 mm
+- in the end the mean of all point is performed
+- numbers are given as in our setup numbering, not the one used by the metereology team
+| GEM   | Y Up[mm] | Y Down[mm] | X-pos[mm]sub | X-pos[mm]add | Y-pos[mm] | Z-pos[mm] |
+|-------+----------+------------+--------------+--------------+-----------+-----------|
+| GEM01 |     1.75 |        1.9 |      -808.05 |      -296.05 |     1.825 | 21606.576 |
+| GEM03 |     9.55 |       8.95 |       -839.9 |         -327 |      9.25 |  22151.92 |
+| GEM04 |      3.6 |       2.60 |      -855.75 |      -343.75 |       3.1 |   23359.8 |
+| GEM02 |     -6.3 |       -7.5 |         -861 |         -349 |      -6.9 | 24042.425 |
+|-------+----------+------------+--------------+--------------+-----------+-----------|
+***** MAGNET
+****** magnet position
+| MAGNET   | X-pos[mm] | Y-pos[mm] | Z-pos[mm] |
+|----------+-----------+-----------+-----------|
+| MBPL13_E |    -123.5 |     607.7 |    4881.8 |
+| MBPL13_S |    -121.4 |     610.6 |    6948.2 |
+| MBPL24_E |    -121.9 |     612.9 |    7898.3 |
+| MBPL24_S |    -118.5 |     615.8 |    9964.8 |
+|----------+-----------+-----------+-----------|
+****** flanges position
+| FLANGES        | X-pos[mm] | Y-pos[mm] | Z-pos[mm] |
+|----------------+-----------+-----------+-----------|
+| Flange1_centre |    -121.4 |     -13.8 |    4407.5 |
+| Flange2_centre |    -121.9 |      -9.1 |    7410.9 |
+| Flange3_centre |    -193.9 |        -6 |   10442.7 |
+|----------------+-----------+-----------+-----------|
+**** c++ function
+void Init_Geometry_2017_Invisible()
+{
+  /// METEREOLOGY MEASUREMENTS
+  //MM position
+  //////////////////////////////////////////////////////////////////
+  ////first values is coordinate respect the beam axis in the beam area
+  ////second cordinate is the correction for the beam axis measured
+  //////////////////////////////////////////////////////////////////
+  //UPSTREAM
+  MM1_pos.pos  = TVector3(-14.4,-9.2,2697.2);
+  MM3_pos.pos  = TVector3(-14.3,-5.1,4147.2);
+  //DOWNSTREAM
+  MM2_pos.pos  = TVector3(-356.1,-11.9,23520.025);
+  MM4_pos.pos  = TVector3(-320.75,-7.325,22292.34);
+  MM5_pos.pos  = TVector3(-307,-21.15,21680.6);
+  MM7_pos.pos  = TVector3(-354.05,-16.29,23924.025);
+  //GEM position in the order of distance from WCAL
+  GM1_pos.pos  = TVector3(-296.05,1.825,21606.576);
+  GM3_pos.pos  = TVector3(-327,9.25,22151.92);
+  GM4_pos.pos  = TVector3(-343.75,3.1,23359.8);  
+  GM2_pos.pos  = TVector3(-349,-6.9,24042.425);
+
+  //define magnet position based on the offset recorded in the measurement of NA64
+  ECAL_pos.pos = TVector3(     0,   0,     GM2_pos.pos.Z() + 968);  
+  pipe_pos.pos = TVector3(     0,   0,  GM1_pos.pos.Z() - 860);
+  //take measurement of the metereology team, the X-Y position is the center of the correspondent
+  //flange, the Z-position is the position of the magnet upstream
+  MAGD_pos.pos = TVector3(-121.4,-13.8,4881.8);//magnet downstream side
+  MAGU_pos.pos = TVector3(-121.9,-9.1,7898.3);//magnet upstream side
+
+  //MM angles
+  MM1_pos.Angle = M_PI/4;
+  MM2_pos.Angle = 3*M_PI/4;
+  MM3_pos.Angle = M_PI/4;
+  MM4_pos.Angle = 3*M_PI/4;
+  MM5_pos.Angle = M_PI/4;
+  MM7_pos.Angle = M_PI/4;
+  //magnetic field Tesla
+  MAG_field = 1.8;
+}
+* anaylsis
+* inventory
+** list of electronics gave by Dipanwita
+*** already in possesion
+    | Item No. | Serial No. | Class | Description                              | status      |
+    |----------+------------+-------+------------------------------------------+-------------|
+    |     0234 |         29 | VME   | CCT VP110 - 800Mhz PIII CPU, 512Mb, USB  | to be found |
+    |     0268 |          7 | VME   | CAEN V1718 - USB - VME BRIDGE            | to be found |
+    |     0282 |         54 | NIM   | CAEN N1145 - VISUAL SCALER/TIMER         | found       |
+    |     0482 |          3 | NIM   | CERN TRAY 1U - NIM FAN TRAY 1U           | found       |
+    |     0482 |          4 | NIM   | CERN TRAY 1U - NIM FAN TRAY 1U           | found       |
+    |     9331 |        112 | NIM   | WIENER UEP 22 M - POWER SUPPLY 300 WATTS | to be found |
+    |     9484 |          5 | VME   | CAEN V 260 N - 100MHZ 16CH SCALER        | to be found |
+    |----------+------------+-------+------------------------------------------+-------------|
+*** to buy
+    | Item No. | Serial No. | Class    | Description                    | status       |
+    |----------+------------+----------+--------------------------------+--------------|
+    |     0282 |         15 | N1145    | VISUAL SCALER/TIMER            | to be bought |
+    |     0136 |          5 | M166167  | CRATE 7 SLOTS (VME 64X TOWER)  | to be bought |
+    |     0240 |         31 | OFO0700  | LHC6UFANTRAY FM COOL.-CAN      | to be bought |
+    |     0239 |         38 | OBO6025J | LHC-6UVME64X-BIN LOCAL 21X6U   | to be bought |
+    |     0241 |         86 | OPO60710 | 6UCAN3.3V,5V100A,12V10A,48V12A | to be bought |
+    |----------+------------+----------+--------------------------------+--------------|
+* note
+ 

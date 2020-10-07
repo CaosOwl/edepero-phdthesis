@@ -1,0 +1,222 @@
+* link  
+  #+LINK: home /home/deppy/polybox/PhD/org_files/Muon_Mode
+* documents                                                           :plans:
+  - [[./NA64e_mu_plans.pdf][planes]] received from vladimir about the muon mode 2018 <2019-09-17 Tue>
+** Muon proposal
+  * last version of [[./documents/Muon_proposal.pdf][muon proposal]]
+  * *Last version of the drawing of the setup*: [[./documents/Muon_proposal.pdf::16][link]]
+  * *digital drawing of the mc*: [[./documents/Muon_proposal.pdf::23][link]]
+  * *Trigger option 1*: [[./documents/Muon_proposal.pdf::27][link]]
+  * *Trigger option 2*: [[./documents/Muon_proposal.pdf::32][link]]
+** article of muon trigger for compass                              :trigger:
+   - link to document [[./documents/trigger_muon_compass.pdf][here]]
+** $\pi$ contamination in $\mu$ COMPASS beam
+   Samoylenko started a study to see the pion contamination in the muon COMPASS
+   beam. Here is a first analysis of his:
+   - [[https://indico.cern.ch/event/853149/contributions/3587902/attachments/1920464/3176657/Talk4oct.pdf]]
+   - A note is under preparation...
+* drawings                                                         :drawings:
+  - original [[./drawings/guard_phase1.pdf][drawings]] received from Vladimir at <2019-09-17 Tue>
+  - *Last version of the drawing of the setup*: [[./documents/Muon_proposal.pdf::16][link]]
+* diary
+** review of Mikhail code example 203 <2019-09-23 Mon>
+   - hole is just 5 cm compared to Vladimir drawing (8cm)
+   - Compared to Vladimir drawings, VHCAL is only 40cm (compared to 1 m)
+   - Width is 30 cm, it is not very clear from Vladimir drawings but it should
+     have a distance of at least 5 cm from undeflected beam, (from HALO of beam Core?)
+   - Hodoscope all commented out. Why?
+   - V12 implemented? Veto immediately the second magnetic field
+   - New drawing show new HCAL and counters inside the magnet, is it useful for the trigger?
+** TODO starting rewriting the code <2019-09-25 Wed>
+   1. following the specification on [[./NA64e_mu_plans.pdf::7][page7]] copper should be 20mm and counter 2mm but by dividing the
+      length of the calorimeter by 35 each layer should be 30 mm, 8mm are missing.
+   2. If one check the interaction length for [[http://pdg.lbl.gov/2019/AtomicNuclearProperties/HTML/copper_Cu.html][copper]] one get 4.57 $\lamba$ for 20mmx35, while for
+      28mm one get 6.3, one would think that the calorimeter as some empty space to compensate for that.
+** Answer of Mikhail
+   Mikhail answered themail with my concers. Some *questions* arises 
+   from his answer.
+   1. What is the priority? Muon mode or electron mode?
+   2. Still no idea how to boost background... figure of merit will be needed.
+   3. 
+*** 
+** NA64 Meeting <2019-09-27 Fri>
+   - I prensented [[/home/deppy/polybox/PhD/presentation/NA6427092019/NA6427092019.pdf][this]] in the hope of getting some answer...
+*** Answer to me questions
+    1. Electron mode and muon mode very different, 8 cm would be for electron
+       while 6 cm for muon. Mikhail propose to roll back to previous specification 
+       for muons
+    2. Just put the vacuum at the very end of the layer
+    3. Emphasis should be put on the eelctron mode, but modular version of the calorimeter 
+       could be used instead making it possible two different design for the different modes.
+** Talk with Laura <2019-09-30 Mon>
+   - nothing too much to be reported
+** NA64 meeting I was absent <2019-10-04 Fri>
+   
+* simulation                                                     :simulation:
+** TODO [5/7] Questions
+   - [X] Size of the hole?
+     According to Mikhail preliminary studies, the hole should be rectangular and no more than 6 cm in muon mode
+   - [X] Longitudinal size of the calorimeter?
+     Larger as possible, but might run into space issue
+   - [ ] possible to put trackers inside the calorimeter? Would give more flexibility to the setup.
+     Probably not... *BUT CHECK IT*
+   - [X] Use same VHCAL for muon and electron? need to be discusses.
+     Mikhail proposed modular geometry, condition are generally very different
+   - [X] Two example, can only be used one?
+     but 204 can do both things (background simulation and signal)
+   - [ ] Visualization in repository switch one?
+   - [X] Which trigger design to choose?
+     Laura claims [[./documents/Muon_proposal.pdf::32][trigger1]] will be used
+   - [ ] How much is the treshold possible for the VHCAL?
+** instruction for Running MuonMode simulation <2019-10-01 Tue>
+   This are the instruction for example 203 after modification, soon the same will be applied 
+   for example 204
+*** setup
+    The setup na64-tools/geant4/simulation/examples/Condor/config/setup_lxplus_g4105p01_muonmode.sh is
+    used for the simulation (both in lxplus and in Condor)
+*** to build it
+    After bulding the core and sourced the setup, just type after cd in the example:
+    - ./runconfigure_roothisto
+    -  make
+      
+    if one has to make sure that no old file are left and rebuild it from scratch, type beforehand:
+    - make clean
+    - ../clean
+*** To run it
+    See the README in the folder
+*** Some important option
+    - If the number 3 is choosen in ModeOut (option /NA64/Output/mode <modeout-number>), only event
+      with a minimum energy deposit will be saved as output (number of trigger is still saved, so that the rate can be recovered).
+      You can customize the energy in line: https://gitlab.cern.ch/P348/na64-tools/commit/a53cf1834665c5af10ad9362f338287ed6390d0e#b0095d56482fbb0563a0e5ddc9c791bcf1f7ed7e_600_602
+    - By default event seed are saved if more than 1 GeV is deposited in the VetoCal. 
+      To customized these value see line:https://gitlab.cern.ch/P348/na64-tools/blob/master/geant4/simulation/examples/example203/NA64SD.cc#L763
+    - Particle in the MCtruth detector are saved only if they carry more than 1 GeV energy.
+      Customize this value at: https://gitlab.cern.ch/P348/na64-tools/blob/master/geant4/simulation/examples/example203/NA64SD.cc#L411
+*** Send job in Condor
+    The usual machinery can be used to simulate event in Condor, i.e. in folder
+    na64-tools/geant4/simulation/examples/Condor/
+    Use the bash skript ExecuteSimulation.sh:
+    
+    *./ExecuteSimulation.sh <number-of-jobs> <number-of-events-per-jobs> <configuration-file>*
+    
+    *WARNING:* 
+    + the setup file has to be adapted to the folder of the user
+    + By default queue espresso is used, change it if you want larger number of events simulated.
+** Usefull information                                                 :info:
+   - *Simulation time: 1000 event*
+     | real | 2m26.479s |
+     | user | 1m55.728s |
+     | sys  | 0m2.347s  |
+   - *Signal yields*
+     | Sigmanorm [1e-5] | Norm factor [1e-10] | yield / 100 events |
+     |------------------+---------------------+--------------------|
+     |              1.8 |                 1.6 | 4                  |
+** Neutral cross section
+   - [[/home/deppy/polybox/PhD/materials/Start materials/physics/Geant4/Nuclear_Interaction.pdf][page of nuclear interaction]]
+*** comments
+    - Photonuclear data based on about 50 Nuclei which
+      have been measured in the energy range :
+      + *Giant Dipole Resonance* (GDR) region, extends from 10 MeV
+        to 30 MeV
+
+      + *Quasi-deuteron* extends from 30 MeV to around pion threshold.
+        Characterised by small cross section and a broad low peak
+
+      + the *$\Delta$ region* characterised b dominant peak in the cross
+        section from Pion threshold to 450 MeV
+
+      + *Roper resonance region* from 450 MeV to 1.2 GeV. Cross section is not strictly
+        identified with the real Roper resonance because other process 
+        occur in this region
+
+      + *Reggeon-pomeron region* is all the rest
+
+        + This contribution was parametrised as follow:
+          
+          \[
+          RP(e,h) = h \cdot th(7, 0.2) \cdot (0.0116 \cdot exp(e \cdot 0.16) + 0.4 \cdor exp(3 e \cdot 0.2))
+          \]
+
+    - Only 14 Nuclei are currently used in the parametrization though
+
+    - For *ElectroNuclear*
+      
+    - Equivalent Photon Approximation (WW) was proposed bu E.Fermi and then developed by WW.
+      A covariant form now exist.
+      + When using this method is important to take into account that real photon are always transverly polarized
+        while virtual photon might be longitudinally polarized.
+    - In General ElectronNuclear cross-section for *ElectroNuclear* interaction can be expressed as:
+      
+      \[
+      \frac{d^2 \sigma}{dydQ^2} = \frac{\alpha}{\pi Q^2} (S_{TL} \cdot (\sigma_T + \sigma_L) - S_L \cdot \sigma_L)
+      \]
+    - This can be rewritten as:
+      \[
+      \frac{d^2 \sigma_{eA}}{dydQ^2} = \frac{\alpha}{\pi Q^2} ( \frac{(1 - y/2)^2}{y^2 + Q^2/E^2} + \frac{1}{4} - \frac{m^2_e}{Q^2} ) \sigma_{\gamma^* A}
+      \]
+
+    - last term for small Q^2 can be approximated to depend
+      on $\vu$ and the cross section of virtual photon is considered
+      to be $\epsilon$ indepedent
+
+    - Electronuclear problem can be splitted in two:
+
+      + at small Q^2 one use the independent cross section discussed before
+
+      + for $Q^2 \gg m_e$ it necessary to calculate the effective virtual-photon cross section
+        For $y \ll 1$ and $Q^2 < 4m_e^2$, and $Q^2 < m^2_e$ lead to the result:
+
+        \[
+        \frac{y dn(y)}{dy} = -\frac{2\alpha}{\pi} ln(y)
+        \]
+**** Final state generation
+***** Gamma-nuclear
+      - For high energy gamma, QGSP model is used.
+        - Incedent gamma treated as QCD strings
+        - remnant nuclear is de-excited using the GEANT4 precoumpound and de-excitation sub-models
+        - At lower energy, Bertini-style cascade is used
+        - Another handlng of low energy is handleded by the 
+          *Chiral Invariant Phase Space* model
+        - LEND (low energy nuclear data model) utilised evaluated data to sample
+          the final states of gamma-nuclear interaction to high precision.
+          - particularly suited for incident gammas below 20 MeV with higher precision
+            than Bertini-Cascade
+***** Electro-Nuclear
+      - Generation proceed in two steps
+      - step one:
+        + vertex of electron/positron nucleus reaction is calculated
+        + Virtual photon generated by sampling parametrised Q^2 and vu distributions
+        + equivalent photon method is used to get a real photon from this distribution
+      - Second step:
+        + real photon is interacted with teh target nucleus at the hadronic vertex
+          assuming photon can be treated as an hadron
+        + below 10 GeV photon can interact directly with nucleons using measured partial
+          cross section, this is done by Bertini-cascade
+        + Above 10 GeV this is done by FTFP model
+
+*** Articles
+**** 
+
+* Reconstruction
+** Useful information                                                  :info:
+*** compression
+    - *based on 100 file weighting 350K each*
+    | flag k0 | flag k6 |
+    | 33M     | 31M     |
+*** time
+    - *reconstruction of 50 files with 1000 events each*
+   | real | 10m56.733s |
+   | user | 1m56.142s  |
+   | sys  | 0m37.602s  |
+    - 
+* TODO [1/2] tasks
+** DONE Start note on VHCAL and neutrals for both electrons and muons
+** TODO  Start note on WCAL length studies
+** [5/6] Finish refactoring of simulation
+*** DONE put parameter
+*** DONE put mctruth detector
+    Maybe already implemented by Mikhail (Control Counter 1 )
+*** DONE Fix HTCondor
+*** DONE HCAL fix 
+*** DONE stop seed
+*** TODO Find a way to boost neutral in muon mode

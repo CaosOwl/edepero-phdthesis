@@ -1,0 +1,955 @@
+ #+options: H:1
+* NA64 collaboration meetings
+** <2019-08-09 Fri>
+*** Vladimir Poliankov presentation
+    - Sergei points out that target is crucial, maybe ECAL can be used for the first run, then veto system is needed
+    - Vladimir insist on the importance of simulation for the new hcal design.
+    - new VHCAL design was proposed in slide 8 of [[https://indico.cern.ch/event/840386/contributions/3525689/attachments/1891971/3120355/NA64_mu_plans.pdf][this]]
+    - Reminded that CAEN mainframe is already in our possession
+*** Sergei presentation about WCAL length optimization
+    - some nice overview slide with general formulas in [[https://indico.cern.ch/event/840386/contributions/3525694/attachments/1891895/3120217/sng.pdf][this]]
+    - resolution should be degraded by a factor square root of two
+*** My presentation
+    - Sergei points out that a very fast readout is needed for the WVETO to suppress the 
+      pileup that spoiler very low energy deposit resolution.
+    - included a third version of the wcal of 21 X0 active part of the dump and 10-15 X0 tail of catcher
+      ===> energy resolution worsen by a factor 1.4-1.6
+    - What is a good threshold for the VHCAL? Approximately 300 eV per plane, MIP should be used 
+      for a tentative threshold.
+    - most important optimization lies in the size of the hole and shape (tentative square dimension should still be used)
+    - Muon simulation is more important as it will be less flexible to change in this case
+    - Iron is to be substituted by copper! VHCAL is to be placed very near to the magnets
+*** CERN open days
+    - Poster was very well received
+    - A page of comments was requested to help the russian part of the collaboration.
+** <2019-08-23 Fri>
+   - Vladimir asked for HCAL sampling, what is the energy resolution? He claims it should be 6%
+   - Typically additional smearing is used to fit the data, maybe sampling is already like that?
+*** signal simulation
+    - Code right now is not sharable
+    - Renat is tasked with include the implementation of the code using G4Classes
+*** WCAL corrections
+    - Endless discussion about LED correction if it is nedded or not. 
+*** reconstruction
+    - 1 event predicted from hadron, 3 observed
+    - some other mechanism is making the peak sharper
+    - Mikhail claims that a leakage of 3 MIP is impossible, why half of events should have 3 MIP,
+      sharpness of the peak is unphysical
+    - LOOOONG discussion about comparison of leak in the simulation of the ECAL
+    - Idea of substitute random tail of other event
+** Andrea Celentano presentation <2019-09-30 Mon>
+   - [[https://indico.cern.ch/event/851881/][link]] to the event
+   - Andrea Celentano presents his idea for the resonant production into dark matter (Dark photon specifically)
+   - The presentation is aims for the ERC grant
+   - Positron beam should give a unique boost to the cross section *but background?*
+   - Suggestion are Jefferson lab
+   - Sergei remarks in plot Fig.2 of Celentano presentation that the two experiment are quite compelementary
+   - Vladimir remarks 
+*** plan for the ERC *DARKPOS*
+    - The first three year will be mostly about MC simulation and design
+    - Why not using *NA64?*, the proposal is focused to the single channel of resonant production
+      - If DM is produced like this, there should be an accumulation of missing energy (due to sharp resonance)
+      - *ADVANTAGES*:
+        - It is powerful, can use background subtraction an peak over the background. Also in case of discovery mass is immediately given.
+        - ERC wants (high gain, high risk) scenario. Radition damage can be sold this way.
+        - Very nice scaling to the fine-structure constant.
+        - He has expertees in Electronmagnetic calorimeter.
+      - *DISATVANTAGES*: 
+        - One need a very good energy resolution for this. ==> ECAL must be very good (35 $X_0$), introduce more dangerous radiation damage
+    - the demonstartion of the idea should happen the fourth year
+    - NA64 connection might be too strong, so won't be underlined in the ERC.
+** <2019-10-11 Fri>
+*** Last result
+    - [[https://indico.cern.ch/event/855043/contributions/3596479/attachments/1923631/3183004/DirectandNA64.pdf][presentation]]
+    - NA64 independent from the precise dark matter model
+      + fermion
+      + Majorana
+      + pseudo-dirac
+**** XENON1T
+     - Most powerful result, manage to extend the results to light dark matter (>30 MeV). See page 10
+     - last bound cross section is $\sigma \sim 10^{-40}$
+     - there is a double bound, one is less optimistic based on the background observed.
+     - We did some comparison from our results and XENON, see page 13. This was done using a generic model
+       + dependending on dark matter coupling $\alpha_D$ NA64 is better.
+** <2019-10-18 Fri>
+*** Report and search for long lived visible decay
+   [[https://indico.cern.ch/event/857172/contributions/3608009/attachments/1928847/3194080/report-18oct2019.pdf][slides]]
+    - Different variant checked
+    - What cuts everything for the first variant in the ratio in the HCAL
+*** Report of Renat over complementarity with XENON1T
+    [[https://indico.cern.ch/event/857172/contributions/3608007/attachments/1928871/3194132/alps.pdf][alps plot]]
+    [[https://indico.cern.ch/event/857172/contributions/3608007/attachments/1928871/3194133/cs-el.pdf][XENON1T plot]]
+    - NA64 is able to explore parameter space of particle with mass with less than ~30 MeV.
+    - Sergei points out one could see how sensitive we are to the ratio between Chi particle
+      and mediator
+    - There are some new results of the LUX experiment that could come in the plot as well.
+    - Dmitry ask how we calculate the cross section. But for that curve we assume vector mediator interacting with electron.
+** <2019-11-08 Fri>
+*** Sergey news
+    [[https://indico.cern.ch/event/862229/contributions/3632270/attachments/1941174/3219029/sng-news.pdf][presentation]]
+    + Atomki new search:
+      1. Similar decay width discovered by the Atomki collaboration
+      2. Could this be estimate from Atomki the decay width?
+      3. Could not be coupled to the photon (only at loop level). It cannot be a dark photon
+      4. Number is constraint by the coupling to quarks
+      5. Test from $10^{-3}$ to $10^{-5}$ is interesting
+** <2019-11-29 Fri>
+*** Sergey talked for visible mode
+    - [[https://indico.cern.ch/event/867441/contributions/3655435/attachments/1953556/3244361/sng-setup-vis-2021.pdf][link]]
+**** comments
+     - Samoyenko suggested liquid scintillator and Cherenkov radiation to check vertex in Z
+     - Distance can be increased up to 1.3 m
+     - reduce thickness of preshower to 3 radiation length (keep 3mm W for it)
+     - Overall thickness of the WCAL cannot be significantly smaller than 30 X0
+     - 1.1 mm reduction of Sc
+** <2019-12-06 Fri>
+*** Vladimir
+    possible modification of the zone for the visible mode
+    - https://indico.cern.ch/event/869101/contributions/3664102/attachments/1957984/3253087/New_zone_visible.pdf
+*** Strawtube                                                         :straw:
+    Some measurements for the strawtube
+    - [[/home/deppy/polybox/PhD/materials/na64/presentation/straw_tube_status_2019.pdf][presentation]]
+*** Mikhail
+    some update on the visible mode simulation
+    - https://indico.cern.ch/event/869101/contributions/3664099/attachments/1958049/3253237/Simulation73.pdf
+    - what is this chamber and backplate?
+*** Volkov
+    two track resolution in GEMs
+    - https://indico.cern.ch/event/869101/contributions/3664105/attachments/1957756/3252666/NA64_GEM_tracking_reconstruction_accuracy.pdf
+** <2019-12-16 Mon>
+   - [[/home/deppy/polybox/PhD/presentation/NA6416122019/NA6405122019.pdf][my presentation]]
+*** Implication of NA64 results for (g-2)e and Be-anomaly¶        :Krasnikov:
+    - [[https://indico.cern.ch/event/870740/contributions/3672781/attachments/1962465/3262185/VISIBLEMUONE.pdf][presentation]]
+**** comments
+     - Out bounds currentyl are $\epsilon > 6.8 10^{-4}$
+     - Calculate with both frequentist and Bayesian approach
+     - Our last result means that coupling with electron with *vector current* is excluded <== *electron (g-2) already exclude completely our first case
+     - *Pure axial coupling* is also excluded
+     - *Chiral case* is still possible on the other hand
+     - *Carefull* misprint in slide for espilon there is a -12 in the exponent instead of a -4
+*** Simulation of Mikhail                                           :Mikhail:
+    - [[https://indico.cern.ch/event/870740/contributions/3672783/attachments/1962626/3262628/Simulation74.pdf][presentation]]
+**** comments
+     - Some design feature in the fist slide
+       + Added Aluminium plate before ECAL, apparently useful for backscattering
+     - Increased array size to 50 for increasing efficiency of Micromegas
+     - Commited in *example 48*
+     - He also has some invariant mass calculation
+     - Slide 5 shows position of the decay
+     - Slide 6 weighted energy distribution
+*** Micromegas two tracks resolution                                 :Volkov:
+    - [[https://indico.cern.ch/event/870740/contributions/3675463/attachments/1962466/3262186/NA64_MM_tracking_reconstruction_accuracy.pdf][presentation]]
+**** comments
+     - long discussion, need to recheck the results
+*** g-2 e anomaly                                                      :Dima:
+    - [[https://indico.cern.ch/event/870740/contributions/3672777/attachments/1962692/3262772/December_16_2019_Kirpichnikov.pdf][presentation]]
+**** comments
+** <2020-01-17 Fri>
+*** Sergey presentation
+    - Organizations and plans
+    - [[https://indico.cern.ch/event/879774/contributions/3706649/attachments/1971158/3279102/sng-news.pdf][link]]
+**** comments
+    - Some ideas for the referee
+    - Focus on Beryllium anomaly or invisible?
+    - Vladimir said we plan two weeks running in 2021 for invisible mode
+*** Two track separation Sergey
+    - [[https://indico.cern.ch/event/879774/contributions/3706663/attachments/1971159/3279037/sng-setup-vis-2021.pdf][link]]
+**** comments
+     - Vladimir Volkov suggest to select events from calibration well separated in one
+       plane and try to separate them in another plane
+*** SImuation update from Mikhail
+    - [[https://indico.cern.ch/event/879774/contributions/3706650/attachments/1971275/3279258/Simulation75.pdf][link]]
+**** comments
+     - Show AGAIN a spectrum of the WCAL in the 150 GeV
+     - Proposal to add Synchrotron radiation in trigger
+     - Several remarks on testing the pre-shower
+** <2020-01-24 Fri>
+*** Sergey meeting with SPC
+    - https://indico.cern.ch/event/882839/contributions/3719844/attachments/1975053/3286919/sng-news.pdf
+**** TODO [/] comments
+     - went well
+     - We should report to them periodically about status preparation of the detectors
+     - Hot discussion with compass
+       + start in beginning of 2022 the muon run
+       + Some competition coming from *Belle II*
+     - Start to probe this decay channel as soon as possible
+     - Mikhail proposed to extract from data the wide of shower of HCAL
+     - [ ] Study pre-shower of visible mode in the trigger
+     - Sergey proposed to study both pre-shower and SRD
+*** Vladimir remarks for 2021 run
+    - https://indico.cern.ch/event/882839/contributions/3719850/attachments/1975043/3286905/Preparation_for_2021_runs.pdf
+**** TODO [0/0] comments
+     - Invisible mode does not have a pre-shower problem
+     - Mikhail comment that for a Threshold of 0.5 GeV we lose 10% of signal
+     - Technical meeting one time per month about status report of all responsible
+       + First meeting will be on <2020-02-14 Fri>
+     - New visible zone mode can be seen in slide 24
+       + 2.4 MBPL goes to 1m MBPL
+       + 2.3 and 3.4 m can be reduced
+       + two hadron modules
+       + Gain up to 5 m
+       + [ ] Propose to simulate exactly this distance
+         * This would let us keep the synchrotron radiation detector
+         * If same setup needs to be used 3 HCAL needs to be used
+       + Urgent need of an MC simulation
+       + 2000 kg of copper was already done for the new calorimeter
+       + 5 interaction length
+       + Mikhail is proposing to produce two of an half a meter
+         * this is only 2.5 interaction length, is it enough?
+         * Vladimir is very against this
+         * Longer VHCAL means longer distance between ECAL and MBPL
+            ==> hole should be make smaller to make acceptance
+         * Vladimir propose 20 cm hole, Mikhail said that nobody ever mentioned this and he want to simulate this
+         * Laura mentioned that a document should be written about this
+         * Sergey said we should wait SPC response to see where we are about muon mode
+         * Asked to simulate beam profile
+       + Dipanwita commented that 20 cm magnet can be arranged(1 m length) MBPS
+         * Spoke with *Phillip short* of the magnet department and say it is okay
+         * occupy 1.2-1.4 m
+       + 
+** <2020-02-14 Fri>
+   - https://indico.cern.ch/event/888815/
+*** Sergey presentation
+    - call of conference [[https://indico.cern.ch/event/888815/contributions/3747068/attachments/1987669/3312625/sng-news.pdf][slides]]
+*** Paper review
+    - [[https://indico.cern.ch/event/888815/contributions/3749980/attachments/1987736/3312752/eth_NA64meeting_visible140220202.pdf][slides]]
+    - My questions about hadorn shower must be clarified still
+    - mistake of refereeB, one only TUngsten should matter, also one should account that X-boson will skyp a few radiation length
+*** New light boson
+    - [[https://indico.cern.ch/event/888815/contributions/3747128/attachments/1987081/3311580/ZMU2020.pdf][slides]]
+*** MM / GEM track reconstruction
+    - https://indico.cern.ch/event/888815/contributions/3747063/attachments/1987700/3312679/NA64_GEM_two_track_separation_14022020.pdf
+**** comments
+     - hadron run 4239 used for benchmark
+     - almost no detail
+** <2020-02-21 Fri>
+   - https://indico.cern.ch/event/891235/
+*** answer to the referee                                           :article:
+    - Nuetron quasi-elasticscattering
+      + In terms of the electric charge for the largest value
+        of the coupling strength 10^-2 is about 20 m.
+      + Absorbtion of X donot happen due to neutro scattering
+    - proton scattering
+      + real losses occur due to the X interaction with the protons producing virtual pair
+      + Compare to the poton this is suppressed by the coupling of X
+      + Is in the order of 1 Km
+*** visible mode setup 2021
+    + https://indico.cern.ch/event/891235/contributions/3758922/attachments/1991701/3321107/2021_runs.pdf
+    + maximum distance is 13.4 meter
+    + DIscussion if one has to use 2 or 3 module
+**** TODO check if yield on dimuon is significant in this case
+*** paper discussion 2018
+    - Redo picture for neutrals
+      + different shape between 2017 and 2018 run
+      + differet shape for the signal in 2017
+      + different color forthe signal ban?
+** <2020-02-28 Fri>
+    <2020-02-28 Fri 10:17>
+    - https://indico.cern.ch/event/893126/
+*** Sergey discussion 
+    - https://indico.cern.ch/event/893126/contributions/3769290/attachments/1995448/3328964/sng-plans.pdf
+    - Sergey asked again Mikhail the rate of neutral for the VHCAL design
+    - Discussion about what to put in the note for neutrals
+    - discussion about R values and simulation of different hadrons
+*** Vladimir Poliankov
+    <2020-02-28 Fri 10:36>
+    - https://indico.cern.ch/event/893126/contributions/3767386/attachments/1995414/3328910/setup_2021_vis_invis.pdf
+    - Installation of the detector should be possible from July
+**** visible mode setup
+     - *Very important* we don't touch the shielding around bridge and GIF dump
+     - Final drawing will be ready at the beginning of March
+     - Increased tube space, now 18 m
+     - total WCAL, ECAL distance will be 25 meter ==> very good news, track separation should be perfect now (to be simulated)
+     - setup needs to be confirmed with radiation protection team
+     - Now that setup is close to be finalized, a final simulation to choose position of MBPL is needed (to be done: Emilio)
+     - TODO:
+       - MBPL position
+       - Distance from vacuum tube
+       - distance from ECAL
+**** invisible mode
+     - Nico Simulated 100 GeV electrons (preliminary)
+     - Beam is quite spread (Vladimir quote 4x4 cm)
+     - beam is expected to be different for 150 GeV (slighlty worse)
+*** Mikhail Kirsanov and Renat
+    <2020-02-28 Fri 11:20>
+    - [[https://indico.cern.ch/event/893126/contributions/3767393/attachments/1995561/3329213/Energy_deposition_ECAL1_PRS.pdf][Mikhail presentation]]
+    - [[https://indico.cern.ch/event/893126/contributions/3767402/attachments/1995518/3329115/28-02-2020_-_Update_on_simulations_of_R_distribution.pdf][Renat presentation]]
+    - Discussion about pre-shower resolution
+    - Discussion of R-values obtained by Renat
+      + HCAL bug? Renat point out some strange plane appearing when he plots the setup, but me and Laura don't observe it
+        + maybe it is just related to old HCAL geometry that we now fixed
+      + Sergey points out that the peaks should be at the same position
+*** Laura
+    <2020-02-28 Fri 12:06>
+    - https://indico.cern.ch/event/893126/contributions/3767389/attachments/1995503/3329193/molina_ETHZmeeting_28022020.pdf
+    - new presentation of the setup
+    - efficiency for signal and background reported
+    - Sergey asked for sensitivity estimate
+*** henri
+    <2020-02-28 Fri 12:30>
+    - https://indico.cern.ch/event/893126/contributions/3767389/attachments/1995503/3329084/Presentation_ETH_NA64-2.pdf
+    - Overall happy with the numbers
+    - Puzzled by VHCAL results, Sergey asked to estimate the punchthrough
+      + WHCAL should be able to contain pions at a level of 0.6%, right now looks like 16%
+        + Bug found: VHCAL layer needs to be corrected, fix commited
+*** Dima
+    <2020-02-28 Fri 13:01>
+    - https://indico.cern.ch/event/893126/contributions/3767389/attachments/1995503/3329084/Presentation_ETH_NA64-2.pdf      
+
+*** end of meeting
+    <2020-02-28 Fri 13:07>
+** <2020-03-13 Fri>
+   https://indico.cern.ch/event/897660/
+*** Outlook from Sergey
+    <2020-03-13 Fri 10:01>
+    - https://indico.cern.ch/event/897660/contributions/3785626/attachments/2003064/3344690/sng-addendum.pdf
+    - Show intention at the meeting April 7-8
+    - Unfortunately the two measurements (invisible and visible) can't be combined. As now the modification 
+      between the two setup is not minor
+    - Draft of the document is being prepared by Sergey
+    - Summarizing plan for 2021 report
+    - Discussion about if to put the draft in git
+    - Some new plot about R -value for the ALP paper
+      + data and MC seems to agree well now
+      + difference taken into account for the systematic error
+*** status of X17 paper
+    <2020-03-13 Fri 10:28>
+    - Paper resubbitted in git
+    - detailed answer are to be sent still prepared by Valery
+    - Sergey suggest to invest one more week to have all comments implemented
+      + is better to send the paper in the final form
+      + Mikhail points out that color in journal is not printed, so one should have another possibility for the caption
+      + Valery points out that referee prefer to receive all the answer at once
+      + Complains of keep changing the .tex file
+    - Article was submitted before all collaboration finished comment
+      + Mikhail should send a mail said he cannot be correspondent of the paper
+      + Paolo takes over instead
+      + We ask then the possibility to re-submit the paper like this
+      + Answer precisely to the answerof the referee
+    - Valery asked all the correspondence to be submitted to the all collaboration
+*** Muon mode
+    <2020-03-13 Fri 10:54>
+    - Laura update over VHCAL bug and EATM
+*** Discussion visible mode 2021     
+    <2020-03-13 Fri 10:55>
+    - *MIKHAIL*
+      - boost of 50\% in signal yield
+    - *EMILIO*      
+      + https://indico.cern.ch/event/897660/contributions/3785632/attachments/2002946/3344146/NA6413032020.pdf
+      + 
+*** Discussion on R value
+    <2020-03-13 Fri 11:53>
+    - Vladimir points out that VHCAL should be done with 2 mm Sc, Copper as layer and 30 layers
+    - Bugs were found, to be corrected
+    - should be 5-% insteadof what shown in the HCAL
+    - Should be 25 mm and not 25.5 mm
+*** end of meeting
+    <2020-03-13 Fri 12:16>
+** <2020-03-20 Fri>
+   <2020-03-20 Fri 10:08>
+*** Sergey contibution                                               :sergey:
+    <2020-03-20 Fri 10:08>
+    - https://indico.cern.ch/event/899424/contributions/3790032/attachments/2006626/3351387/sng-addendum2.pdf
+    - addendum for NA64e required for th X17 invairnat mass reconstruction setup
+    - Would be nice to say setupo optimized for spatial constraint
+    - Update for the new beam characteristic
+      + hadron contamination
+      + Beam size
+      + Good also for political reasons
+    - Include optimized WCAL
+    - include section about larger ECAL
+    - Possibility of reconstruct invariant mass of punchthough photon that convert in the last layers
+    - Single document will be drafted, no problem with page size for most of the journals
+    - Sergey argues that we should think about reducing the WCAL further since our expected background is very small and people could suggest this
+    - 
+*** Laura contribution                                                :laura:
+    <2020-03-20 Fri 10:58>
+    - https://indico.cern.ch/event/899424/contributions/3790029/attachments/2006646/3351432/molina_NA64meeting_20032020.pdf
+    - Laura presented what was suppossed to be presented at the EATM meeting
+    - Dipanwita said that the space to place the detectors should be fine
+    - magnet gap needs to be 20 cm      
+*** room crashed
+    <2020-03-20 Fri 11:11>
+    - trying to fix the problem
+*** reconnected VidYo via zoom with henri
+    <2020-03-20 Fri 11:29>
+    - Dipanwita said that the efficiency presnted is not too off
+*** Mikhail contribution                                            :Mikhail:
+    <2020-03-20 Fri 11:32>
+    - 
+
+*** henri contribution                                                :henry:
+    <2020-03-20 Fri 12:10>
+    - 
+** <2020-03-27 Fri>
+   - https://indico.cern.ch/event/903159/
+*** News plans                                                       :sergey:
+    <2020-03-27 Fri 10:03>
+    - https://indico.cern.ch/event/903159/contributions/3801071/attachments/2010434/3358970/sng-plan.pdf
+    - summary of all item with the referee meeting
+    - Draft of the note about search for scalar and axionlike particle is now online 
+*** NA64 Background studies Using straw chamber                      :pdegen:
+    <2020-03-27 Fri 10:29>
+    - https://indico.cern.ch/event/903159/contributions/3801437/attachments/2010420/3358943/strawtubes_presentation_march27_v2.pdf
+    - possibility of contacting a guy in Chile to compare Geant4 with FLUKA
+    - New official example for neutral biasing from Mikhail
+    - invisible mode miss the WCATCHER, one should add it in the simulation
+    - offset HCAL calorimeter is already in the simulation
+    - Sergey overall satisfied of the results, he would like a detailed comparison with MC that we are working on
+      
+*** Update on NA64mu simulation and design                          :laura:
+    <2020-03-27 Fri 10:56>
+     - https://indico.cern.ch/event/903159/contributions/3801074/attachments/2010478/3359036/molina_NA64meeting_27032020.pdf
+     - Laura show correct distribution of the initial position of the beam
+     - Dipanwita will check if is possible to have an even less spread beam
+
+*** Update on conference                                             :sergey:
+    <2020-03-27 Fri 11:08>
+    - update on status of some conference, they required to be ready by September
+
+*** Addendum on X17 SPS report
+    <2020-03-27 Fri 11:14>
+    - Sergey reminded to ask Nikos and Sylvas about the status of the zone
+    - Dipanwita sends the remarks of Nikos: new layout looks OK. Detailed integration is ongoing.
+*** Energy resolution                                                 :henry:
+    <2020-03-27 Fri 11:18>
+     - henri reported about the status of the note
+*** tracking separation                                              :volkov:
+    <2020-03-27 Fri 11:16>
+    - Volkov said he will discuss with Mikhail about Multiple scattering
+    - He said he will send his portion of the note to me
+*** ALPS update                                                       :renat:
+    <2020-03-27 Fri 11:20>
+    - Renat need to add a section for the calculation of sensitivity
+*** Update on ALPS search                                              :Dima:
+    - https://indico.cern.ch/event/903159/contributions/3801073/attachments/2010484/3359045/ALP_MC.pdf
+    - Paper on calculation on ALP production in NA64
+** <2020-04-17 Fri>
+*** new plans                                                        :sergey:
+*** 2021 NA64 plans                                               :poliankov:    
+    <2020-04-17 Fri 10:15>
+    - https://indico.cern.ch/event/908141/contributions/3829952/attachments/2021729/3380714/setup_2021_vis_invis_april.pdf
+    - Difficult to combine single measurements in a single run
+    - https://indico.cern.ch/event/908141/contributions/3820906/attachments/2021716/3380678/Material_X17.pdf
+      + Cross check again with 2 cm air and no vacuum window
+**** 
+*** Neutral MC                                                      :Mikhail:
+    <2020-04-17 Fri 10:50>
+    - https://indico.cern.ch/event/908141/contributions/3820906/attachments/2021716/3380751/Simulation80.pdf
+    - Doubts on the simulation
+*** Track error and separation
+    <2020-04-17 Fri 11:03>
+    - https://indico.cern.ch/event/908141/contributions/3820912/attachments/2021766/3380788/NA64_Tracker_error_budget_10042020.pdf
+*** Muon SImulation                                                   :laura:
+    <2020-04-17 Fri 11:20>
+    - https://indico.cern.ch/event/908141/contributions/3820910/attachments/2021814/3380896/molina_NA64meeting_17042020.pdf
+** <2020-04-24 Fri>
+*** Introduction                                                     :sergey:
+    - A set of document is prepared to receive a grant from the ministry, Paolo helped with that
+    - 
+*** new layout 2021                                               :poliankov:
+    - https://indico.cern.ch/event/912384/contributions/3837035/attachments/2026285/3389873/SETUP_NA64_2021_17_04_20.pdf
+    - Final setup visible mode 2021
+    - Very good setup design by nicos
+*** ALP papers                                                        :paolo:
+    - Nothing major to implement
+    - Soon to be uploaded to the archive
+** <2020-05-15 Fri>
+   - https://indico.cern.ch/event/919094/
+*** Status and plan                                                  :sergey:
+    - https://indico.cern.ch/event/919094/contributions/3862875/attachments/2039398/3415094/sng-plan.pdf
+*** Status of electronic                                               :Igor:
+    - https://indico.cern.ch/event/919094/contributions/3862914/attachments/2039453/3415201/igor_NA64_15052020.pdf
+*** 2021 visible mode paper 
+    - https://indico.cern.ch/event/919094/contributions/3862874/attachments/2039471/3415212/NA6415052011.pdf
+      - Valery and DIma for introduction
+      - Add something about our strategy.
+      - If background under control, calorimeter analysis can stil be used as a separate blind analysis
+      - 
+*** 2021 tracker error budget                                        :volkov:
+    - https://indico.cern.ch/event/919094/contributions/3862871/attachments/2039461/3415196/NA64_Tracker_error_budget_15052020.pdf
+** <2020-05-22 Fri>
+   - https://indico.cern.ch/event/921067/
+*** SPSC report preparation. News.                                   :sergey:
+    <2020-05-22 Fri 10:07>
+    - 
+    - https://indico.cern.ch/event/921067/contributions/3869727/attachments/2043052/3422146/sng_news_plans.pdf
+*** The sensitivity of NA64 to a semi-visible channel                :cesare:
+    - https://indico.cern.ch/event/921067/contributions/3870204/attachments/2042842/3421991/Semi_visible_NA64.pdf
+      - *START*     <2020-05-22 Fri 10:19>
+      - *END*       <2020-05-22 Fri 10:38>
+      - *QUESTIONS* 
+*** 
+** <2020-05-29 Fri>
+   - https://indico.cern.ch/event/924021/
+*** SPSC report preparation                                          :sergey:
+    <2020-05-29 Fri 10:03>
+    - https://indico.cern.ch/event/924021/contributions/3882258/attachments/2047328/3430532/sng_news_plans.pdf
+      + H4 preparation will be skip (it is just a technicality)
+      + Paper to be submitted in Arxiv for <2020-06-17 Wed>
+      + Select some people to send meaningful comments
+      + 
+*** Update on X17 setup simulations                                 :Mikhail:
+    <2020-05-29 Fri 10:18>
+    - https://indico.cern.ch/event/924021/contributions/3882259/attachments/2047455/3430776/Simulation83.pdf
+      + 3 layer with 3 mm in the pre-shower should be the best to avoid signal lost (the one I used for my studies)
+*** Track budget for 2021
+    - https://indico.cern.ch/event/924021/contributions/3882254/attachments/2047458/3430781/NA64_Tracker_error_budget_29052020.pdf
+      + 
+** <2020-06-05 Fri>
+   <2020-06-05 Fri 10:06>
+   - https://indico.cern.ch/event/925902/
+*** sergei plan                                                      :sergey:
+    - https://indico.cern.ch/event/925902/contributions/3890910/attachments/2051568/3438924/sng_news.pdf
+*** muon update                                                       :laura:
+    <2020-06-05 Fri 10:19>
+    - https://indico.cern.ch/event/925902/contributions/3890912/attachments/2051594/3438963/molina_NA64meeting_5062020.pdf
+*** DM update                                              :renat:darkmatter:
+    <2020-06-05 Fri 10:27>
+    - https://indico.cern.ch/event/925902/contributions/3890915/attachments/2051617/3439009/meet506.pdf
+*** end
+    <2020-06-05 Fri 10:39>
+** <2020-07-03 Fri>
+   - https://indico.cern.ch/event/935087/
+*** NA64 news in brief
+    - https://indico.cern.ch/event/935087/contributions/3929169/attachments/2068403/3471797/sng_news.pdf
+*** Request for simulations for muon setup
+    <2020-07-03 Fri 10:07>
+    - https://indico.cern.ch/event/935087/contributions/3929162/attachments/2068369/3471712/NA64_mu_detectors_MC.pdf
+    - Grant from ministry of science
+    - Larger transverse size
+    - Larger depth for the muon zone?
+*** Peter presentation voer straw                                    :pdegen:
+    <2020-07-03 Fri 11:05>
+    - 
+*** Magnetic field studies
+*** muon mode                                                           :lua:
+    <2020-07-03 Fri 11:55>
+    - https://indico.cern.ch/event/935087/contributions/3929167/attachments/2068454/3471887/molina_NA64meeting_3072020.pdf
+    - 
+*** Update on electronics development                                  :Igor:
+    <2020-07-03 Fri 12:11>
+    - https://indico.cern.ch/event/935087/contributions/3929245/attachments/2068455/3471888/igor_NA64_03072020.pdf
+    - 
+*** X17 mass reconstruction accuracy                                         :volkov:
+    <2020-07-03 Fri 12:18>
+    - https://indico.cern.ch/event/935087/contributions/3929165/attachments/2068287/3471544/NA64_SPECTRO__ECAL_inv_mass_03072020.pdf
+    - 
+*** Update on a,s -> inv search
+    <2020-07-03 Fri 12:54>
+    - https://indico.cern.ch/event/935087/contributions/3929164/attachments/2068526/3472019/meet307.pdf
+** <2020-07-31 Fri>
+   - https://indico.cern.ch/event/943679/
+*** News in brief                                                    :sergey:
+    <2020-07-31 Fri 10:06>
+    - 
+*** update on simulation                                            :Mikhail:
+    - https://indico.cern.ch/event/943679/contributions/3964632/attachments/2083427/3499683/Simulation85.pdf
+    - Mikhail calculated that the decay width is even larger than expected (*FOR SCALAR PARTICLES, NOT X17*
+    - This will scale with large epsilon even more
+    - This is not relevant for the X17 anomaly, since it is a pseudo-scalar particle
+    - It will be different for scalar, and not for pseudo-scalar
+*** Update on paper                                                   :deppy:
+    <2020-07-31 Fri 10:22>
+    - Comments from Sergei and Mikhail by Monday
+    - JEP C as target journal
+    - seems no problem with new Mikhail results
+*** muon update                                                 :laura:henri:
+    <2020-07-31 Fri 10:31>
+    - https://indico.cern.ch/event/943679/contributions/3964628/attachments/2083430/3499718/molina_NA64meeting_31072020.pdf
+    - https://indico.cern.ch/event/943679/contributions/3964628/attachments/2083430/3499731/Presentation.pdf
+*** theory update                                                      :Dima:
+    - https://indico.cern.ch/event/943679/contributions/3964631/attachments/2083463/3499810/Jul_31_2020_Kirpichnikov.pdf
+*** end meeting
+    <2020-07-31 Fri 11:40>
+** <2020-08-28 Fri>
+*** Muon mode <2020-08-28 Fri>                                        :laura:
+    <2020-08-28 Fri 10:02>
+    - Proposed to simulate different magnet gap to compare with previous results
+    - Simulate decay along the beam line
+    - Recheck beam quality with Dipanwita
+    - 
+*** New punchthrough method                                           :henri:
+    <2020-08-28 Fri 10:51>
+    - 
+    - Symetric VHCAL will be produced due to simplicity, background is not significantly different
+    - Larger statistic of 1E8 is required
+    - No increase of later size of the first module
+*** X17 new paper                                                    :sergey:
+    <2020-08-28 Fri 11:48>
+    - https://indico.cern.ch/event/950113/contributions/3991748/attachments/2092937/3517049/SNG_28-08-20.pdf
+    - new paper published that suggests the X17 anomaly can't be protophobic https://arxiv.org/pdf/2008.11288.pdf
+    - Write new sentence for the paper 
+*** Anton part                                                        :anton:
+    <2020-08-28 Fri 12:14>
+    - was not connected
+** <2020-09-11 Fri>
+   * https://indico.cern.ch/event/954532/
+*** Implication of FIPS for NA64                                     :sergey:
+    <2020-09-11 Fri 10:03>
+    - https://indico.cern.ch/event/954532/contributions/4010589/attachments/2100777/3531813/SNG_11-09-20.pdf
+    - https://indico.cern.ch/event/954532/contributions/4010589/attachments/2100777/3531820/SNG_new-ALP_11-09-20.pdf
+**** points
+     - LDMX is in a good shape, beamline will be completed after 2 years, first run forseen for 2024-2025
+       - They also want to extend the results for higher masses using 3 GeV muon missing momentum
+     - By January 2021, we want to extend the proposal for 2-3 1E13 EOT at H4 and 2E13 MOT
+     - We need to address the problem of running at high intensity
+*** Increasing H4 electron beam line                               :nikolaos:
+    <2020-09-11 Fri 10:29>
+    - https://indico.cern.ch/event/954532/contributions/4010600/attachments/2100796/3531841/NA64_HigherIntensity_H4.pdf
+**** points
+     - *solution 1* Physics competition, negotiated with COMPASS and NA62
+       - Increasing the intesity on the target for a factor 3, bring units from 50 --> 150
+       - Needs to be tried, not guarantee that the increase will be linear with intensity in the target
+     - *solution 2* Re-design the H4 line
+       - Increase the acceptance by a factor 2
+       - Exchange converter with a crystal, factor 1.25 shown in the past
+       - 
+*** Detector issues for running at high intensity                 :poliankov:
+    <2020-09-11 Fri 10:54>
+    - https://indico.cern.ch/event/954532/contributions/4010585/attachments/2100745/3531749/Detectors_high_intensity.pdf
+**** points
+     - radiation damage for Micromegas, 2 cm +- 2 sigmas
+       - Some feeling about Micromegas radiation damage
+       - Take a look at the NIM paper about micromegas detector for study of larger intensity
+     - Swallow larger momenta could increase a lot the gain in intensity
+*** Upgrade of electronics for high intensity runs                  :konorov:
+    <2020-09-11 Fri 11:18>
+    - https://indico.cern.ch/event/954532/contributions/4010588/attachments/2100776/3531812/Igor_20200901.pdf
+**** points
+     - 
+*** Website update                                                    :anton:
+    - https://indico.cern.ch/event/954532/contributions/4012030/attachments/2100780/3531818/20200911%20website.pdf
+*** Update on light scalar and ALP calculations
+    - https://indico.cern.ch/event/954532/contributions/4010580/attachments/2101111/3532397/Sep_11_2020_Kirpichnikov.pdf
+*** Simulation by Mikhail Kirsanov                                  :Mikhail:
+    - https://indico.cern.ch/event/954532/contributions/4010582/attachments/2100819/3531901/Simulation86.pdf
+**** points
+     - Implemented DM using Geant4 classes
+*** End
+** <2020-09-25 Fri>
+   - https://indico.cern.ch/event/958554/
+   <2020-09-25 Fri 10:08>
+*** new detectors                                                 :poliankov:
+    - https://indico.cern.ch/event/958554/contributions/4029555/attachments/2109313/3547846/Status%20of%20the%20detectors%20upgrade.pdf
+    - 
+**** comments
+     - 
+*** Simulation news                                                 :Mikhail:
+    <2020-09-25 Fri 10:52>
+    - https://indico.cern.ch/event/958554/contributions/4029557/attachments/2109640/3548521/Simulation87.pdf
+    - collaboration with Andrea Celentano for the development of direct annihilation in the visible mode.
+*** Update for muon-mode                                              :henri:
+    - https://indico.cern.ch/event/958554/contributions/4029556/attachments/2109662/3548558/Presentation_PunchThrough.pdf
+*** Other update of muon mode                                         :laura:
+    <2020-09-25 Fri 11:17>
+    - https://indico.cern.ch/event/958554/contributions/4029556/attachments/2109662/3548587/molina_NA64meeting_25092020.pdf
+    - Sergei suggest 2D extrapolation function
+*** Theory update                                                      :Dima:
+    - https://indico.cern.ch/event/958554/contributions/4029558/attachments/2109656/3548546/meet2509.pdf
+    - 
+* Internal meeting                                                 :meetings:
+** <2019-12-17 Tue>
+   -
+** <2020-02-12 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/414/
+*** muon setup                                                        :laura:
+    - [[http://positronweb.dhcp.phys.ethz.ch/indico/event/414/contribution/1/material/slides/0.pdf][muon setup]]
+*** Paper discussion                                                  :deppy:
+*** Straw tube implementation                                        :pdegen:
+*** Muonium studies                                                   :henri:
+** <2020-02-26 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/416/
+*** Introduction and muon setup status                                :laura:
+    <2020-02-26 Wed 10:39>
+    - explanation of new setup for muon
+    - main difference is that now the four modules are arranged side by side to improve hermeticity
+    - two module of HCAL length gained (now only 10.7m are used from the 12 m available)
+    - new beam profile shown in the slides
+    - Some preliminary distribution with signal will be done for Friday
+*** Energy resolution in NA64 calorimeters                            :henri:
+    <2020-02-26 Wed 11:01>
+    - Very complete summary
+    - To be discussed what to put in the presentation for the collaboration
+      - In general we plan to just put graphs with energy resolution and leave the rest in the back-up
+*** Update on electro-nuclear interactions studies in NA64 invisible mode :pdegen:
+    <2020-02-26 Wed 11:09>
+    - bump was explained, it is the well known bremstrahlung bump
+    - strawtube 1 shows more hit than the others, this is consistent between simulation and data
+    - Need to increase step size in Geant4 to get proper energy estimation
+    - Very nice correlation between R value and strawtube cut! Exactly as expected
+    - Also HCAL profile is summarized in slides
+*** AxPET performance                                              :benjamin:
+    <2020-02-26 Wed 11:25>
+    - some discussion about if the first peak observed is 55 keV or 88 keV peaks
+    - ToFPET argue that it should be 55 keV, but this seems implausible from their explanation
+*** NA64 semi-invisible mode                                         :cesare:
+    <2020-02-26 Wed 11:35>
+    - Verified that Dark Photon decay is indeed prompt in this parameter space
+    - nice superposition of the two plots in slide 9
+    - end <2020-02-26 Wed 11:47>
+** <2020-03-04 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/419/
+   *Meeting <2020-03-04 Wed 10:51>*
+*** *muon mode (Laura Molina Bueno)*                                  :laura:
+    <2020-03-04 Wed 10:52>
+    - fixed bug on the vhcal
+    - controlling HCAL modules (some weird difference in energy deposition)
+      + maybe consequence of the shifts of the HCAL modules
+*** *new visible mode setup (Emilio Depero)*                          :deppy:
+    <2020-03-04 Wed 10:56>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/417/contribution/5/material/slides/0.pdf
+    - Current position of the magnets seems to be sufficient, magnetic field has to be adjusted
+      + current estimate say that at 1.3 T one would have 100% efficiency 
+      + performance is similar if one uses ECAL or momentum from trackers for reconstruction the invariant mass
+      + large tracker (~200mm) is needed to have full acceptance
+*** *Energy resolution of calorimeters (henri Sieber)*                :henri:
+    <2020-03-04 Wed 11:18>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/417/contribution/1/material/slides/0.pdf
+    - Calibrated VHCAL
+    - Punchthrough probability was tested, apparently a bit lower than what predicted, but still compatible
+*** *Neutral punchtrough (Peter Degen)*                              :pdegen:
+    <2020-03-04 Wed 11:23>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/417/contribution/3/material/slides/0.pdf
+    - After new gas composition as was added, now most of neutrals are produced in Micromegas of new design (as it is correct)
+    - agreement still to be adjusted between MC and DATA for the number of hits
+      + Try to select events with hits on all strawtubes
+      + Try to do hit matching
+      + Suppress noise in the straw
+    - some idea to improve the gas energy deposit by using smaller step-size
+    - Pion simulation will be performed as cross-check
+*** *performance of Axpet (Benjamin Banto)*                        :benjamin:
+    <2020-03-04 Wed 11:35>
+    - two module connected instead of only 1
+    - First module working perfectly
+    - Second module has still some problems, probably mapping is wrong
+    - from six ASICs two are from another type (BGA instead of COB), this should
+      already be accounted for in the maps but maybe not in an entirely correct way (TO BE CHECKED)
+*** *Semi-visible mode update (Cesare Cazzaniga)*                    :cesare:
+    <2020-03-04 Wed 11:41>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/417/contribution/2/material/slides/0.pdf
+    - Using simulation it was estimated that the band should still be covered in the invisible mode using parameter of the paper
+    - next step is calculate a few points from the simulation, then re-scale them for different parameter to see when semi-visible mode
+      is powerful
+    - Would be useful to have a second opinion about what have sense to change in the model
+*** End
+    <2020-03-04 Wed 11:50>
+** <2020-03-25 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/420/
+*** Axpet performance                                              :benjamin:
+    <2020-03-25 Wed 10:45>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/420/contribution/4/material/slides/0.pdf
+    - Update on the situation of the TofPet analysis after several filters
+    - Adding parametrization of Johannes in the simulation
+    - suggestion of Pol to involve Carlos in the simulation side since he had direct experience with the problem
+*** Muon setup status                                                 :laura:
+    <2020-03-25 Wed 10:54>
+    - efficiency of the counter of the beam
+    - Distance has to be corrected for the muon simulation
+    - Efficiency is now similar to what Dipanwita quoted
+    - Dipanwita is checking if it is possible to improve more the dispersion in Y
+    - Laura is checking the list of all the things that need to be ready for the muon setup
+    - Checking weird event in verbose mode
+*** Update on Nuclear interaction study                     :pdegen:
+    <2020-03-25 Wed 11:03>
+    - Shows different correlation with the R values
+    - small overview of strawtube
+    - Paolo suggest to change title to avoid problem with straw people
+*** Paper discussion                                                  :deppy:
+    <2020-03-25 Wed 11:23>
+*** Energy resolution                                                 :henri:
+    <2020-03-25 Wed 11:44>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/420/contribution/6/material/slides/0.pdf
+    - setting up discussion with henri at 16:30
+*** NA64 semi-visible                                                :cesare:
+    <2020-03-25 Wed 11:51>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/420/contribution/2/material/slides/0.pdf
+    - Update on how to discover the parameter spaceanzi 
+*** end of meting
+    <2020-03-25 Wed 11:59>
+** <2020-04-29 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/445/
+     <2020-04-29 Wed 10:51>
+*** Axpet Performance                                              :benjamin:
+    - Quick update on NN, meeting at 1:00 with Balint
+*** Muon Setup Status                                                 :laura:
+    <2020-04-29 Wed 10:53>
+    - Checking biasing
+    - Background studies
+    - Studying the tail of the momentum reconstruction
+    - 
+*** Electronnuclear interaction                                      :pdegen:
+** <2020-05-20 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/448/
+*** Axpet performance                                              :benjamin:
+    <2020-05-20 Wed 10:50>
+    - Different parameter tested to see the performance of BDT and NN
+      - events
+      - layers
+      - energy resolution
+      - position on the Z axis
+*** Introduction to muon setup status                                 :laura:
+*** NA64mu momentum reconstruction                                    :henri:
+    <2020-05-20 Wed 11:25>
+*** NA64 semi-visible mode                                           :cesare:
+    <2020-05-20 Wed 11:41>
+    - reharsal of master thesis in front of the group
+*** end
+    <2020-05-20 Wed 12:00>
+** <2020-05-27 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/450/
+*** AxPET performance                                              :benjamin:
+    <2020-05-27 Wed 10:48>
+    - tweaking NN as side project
+    - Now switched more on the hardware side, using Axpet with the bunched beam
+*** Muon mode                                                         :laura:
+    <2020-05-27 Wed 10:54>
+    - Talk on X17
+    - 
+*** visible mode 2021 paper                                           :deppy:
+    <2020-05-27 Wed 11:05>
+*** NA64mu momentum reconstruction                                    :henri:
+    <2020-05-27 Wed 11:16>
+    - http://positronweb.dhcp.phys.ethz.ch/indico/event/450/contribution/3/material/slides/0.pdf
+    - 
+** <2020-06-03 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/455/
+*** AxPET performance                                              :benjamin:
+*** Introduction and muon setup status                                :laura:
+    <2020-06-03 Wed 11:10>
+*** NA64mu momentum reconstruction                                    :henri:
+*** NA64 semi-invisible mode                                         :cesare:
+** <2020-06-24 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/457/
+*** AxPET performance                                              :benjamin:
+    <2020-06-24 Wed 11:05>
+    - Impossible to disable the gate after the last firmware update
+    - 
+*** Introduction and muon setup status                                :laura:
+    <2020-06-24 Wed 11:25>
+    - 
+*** NA64 semi-visible                                                :cesare:
+** <2020-07-08 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/465/
+*** AxPET performance                                              :benjamin:
+*** Introduction and muon setup status                                :laura:
+** <2020-07-15 Wed>
+*** Micromegas todo list
+**** Micromegas parameters
+***** Large Micromegas
+     - *Number to produce* 3-4
+     - *Dimension*: 245x80 $mm^2$
+     - *Strip size*: 256 $\mu m$
+     - *length of flat cable*: 1.2 m
+     - *multiplexing* 5
+       + Multiplexing map to be discussed
+     - *reduce material budget*
+       + minimize the PCB thickness
+       + Remove the copper/FR4 cover and substitute it with Mylar/Kapton
+***** Small Micromegas
+     - *Number to produce* at least 2, maybe 4 for the muon mode pilot run
+     - *Dimension*: 80x80 $mm^2$
+     - *Strip size*: 256 $\mu m$
+     - *multiplexing* 5
+       + Multiplexing map used is the one received by Procureur
+     - *reduce material budget*
+       + minimize the PCB thickness, or completely remove it using only Kapton substrate
+       + Remove the copper/FR4 cover and substitute it with Mylar/Kapton
+**** TODO tasks
+     - [ ] Multiplex map for the large Micromegas, ask Procureur and produce a first estimate.
+     - [ ] Discuss the reduction of material budget with CERN workshop
+     - [ ] Understand the number of ADCs needed and ask *Igor Konorov* to produce them
+       + We think 5 ADC are enough for all runs, two spares would be good
+       + We currently have 1 ADC in good conditions (4 channels working) and 1 ADC that has only two channels working
+     - [ ] Number of GeSiCa card needed
+       + probably two will be needed (one can support 4 ADC)
+     - [ ] Number of APV needed
+       + following our estimate, we will need between 10-14 APV chips to work with all MM modules (depends on the number of MM used for the momentum reconstruction upstream)
+**** Questions
+     - How many Micromegas to be produce already?
+     - In total we estimate 264 channels for a single Large Micromegas of 250 $mm$ transversal length. Two APV can read 256 channels. Possiblities:
+       + Add one more APV chip (but most of the channel not used)
+       + Reduce the length to 245 $mm$ would accomodate all the channels
+       + other possibility would be to increase the strip size to 260 $\mu m$
+     - ADCs? We will need new ADC from *Igor Konorov*
+       + *Visible mode*
+         + 4 Micromegas upstream for momentum reconstruction (2 ADC)
+         + 2 Micromegas downstream decay volume (1 ADC)
+         + 2 large Micromegas after MBPL (2 ADC, maybe 1 if long cable are produced, but given the reduced S/N this might be a risk)
+         + *TOTAL ADC*  5 ADC
+         + *TOTAL APV*  10-14 (depending how many MM are used for upstream momentum reconstruction)
+       + *Muon mode Pilot run*
+         + 4 Micromegas near the BMS station (2 ADC)
+         + 2 Micromegas between ECAL and VHCAL (1 ADC)
+         + 1 after VHCAL (probably 1 more ADC just for that)
+         + 2 Large Micromegas between MBPL and S4 (1 ADC)
+         + *TOTAL* 5 ADC
+       + *Muon mode Physics run*
+         + Produce 4 additional Micromegas for MS1
+** <2020-07-29 Wed>
+   - http://positronweb.dhcp.phys.ethz.ch/indico/event/465/     
+*** NA64 muon mode                                                    :laura:
+    <2020-07-29 Wed 11:01>
+    - note ready
+    - Finalized the sizes for the scintillator counters
+    - todo:
+      + optimize setup for large masses
+      + simulated kaon and pion
+    - for 2022 a new simulation setup was produced
+      + flexible for 1-2 magnets
+      + optimize for modules size
+      + Decide if two different sizes modules are needed
+*** Longitudinal Hermeticity                                          :henri:
+    <2020-07-29 Wed 11:23>
+    - First simulation running
+    - Larger simulation (some discrepancy observed preliminary)
+    - Comparisdon with literature
+    - Little bump observed for neutrons
+    - 2022 some studies for the HCAL moduels
+*** Micromegas talk                                                   :laura:
+    <2020-07-29 Wed 11:39>
+    - 
+*** end
+    <2020-07-29 Wed 11:53>
+** Meeting with Igor <2020-08-03 Mon>
+   <2020-08-03 Mon 14:06>
+*** problem with rate
+    - 20 kByte
+    - A lot of data
+    - 4 adc 4k, for 6 of them 5k
+    - layout will be2 months, somewhere September for the production.
+    - They will probably avaiable at November, then debug it. Then probably December.
+    - Test bench at CERN? It should be avaiable.
+    - 6 ADCs
+**** Conclusions
+     - ADC have a flat price of 1500Fr. for the base + 500 for any ADC produced
+       + *We are planning to go with 6 ADC, for an estimated price of 5000 Fr.*
+     - New design for APV are now used, one important point is that the connector will be changed. New Micromegas should be produced with the new connector already installed.
+     - For the old Micromegas we will use the old APV (total of 8 are needed, currently ~10 in our possesion) *TO BE CHECKED AT CERN*
+     - For the new Micromegas, 6 APV are needed *We plan to buy 8 more from Bernhard Ketzer*
+***** Time scale
+** <2020-08-19 Wed>
+*** Micromegas studies                                                :henri:
+    <2020-08-19 Wed 11:06>
+    - Change clusterization method
+    - Possibly send to Procureur today
+    - 
+*** CERN print of the paper
+    <2020-08-19 Wed 11:05>
+*** 
+    <2020-08-19 Wed 11:27>
+** <2020-08-26 Wed>
+*** punchthrough study                                                :henri:    
+* Students
+** Peter Degen
+*** Meeting to discuss Friday presentation <2020-03-23 Mon>
+    - 
+* Special meeting
+** New Micromegas project <2020-09-07 Mon>
+   <2020-09-07 Mon 14:31>
+   - We will try to re-design genetic layout
+   - For the larger Micromegas, the GBAR old layout will be used as an example and re-adapted
+   - Connector seems basically equivalent
+   - New offer will be sent
+
+

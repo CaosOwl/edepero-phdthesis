@@ -1,0 +1,42 @@
+* sensitivity calculations
+** papers
+*** Asymptotic formulae for likelihood-based tests of new physics
+    [[/home/deppy/polybox/PhD/materials/statistics/sensitivity_calculations/Quoted_in_paper/Cowan2011_Article_AsymptoticFormulaeForLikelihoo.pdf][paper]]
+**** text
+     - result based on Wilks and Wald to avoid large MC computation
+     - estimation of the median significance by replacing data sets by a single
+       representative one, called Asimov dataset
+     - formal mathematical justificaiton of the method
+     - numerical implementation is presented in *RooStats*
+     - For purpose of exlcuding a signal hypothesis, a threshold of p-value 0.05 (Z=1.64)
+       is typically used
+     - a method for the binned analysis is described
+     - Likelihood function is defined as product of Poisson probability for all bins
+     - To test the hypothesis we consider the profile likelihood ratio:
+       
+       $\lambda(\mu) = \frac{L(\mu,\theta)}{L(\mu,\theta)}$
+       - the numerator is the profile likelihood function, where theta maximize L for a specific mu
+
+       - the denominator is maximized (unconditional) likelihood function.
+
+     - The presence of nuisance parameter typically broadens the profile likelihood as a function of mu 
+       relative to what one would have if their values were fixed.
+
+     - sometime the expected signal \mu can be regarded as negative as long as the total expected 
+       entries of each bin are positive for convienience
+
+     - The final test statistics is defined as:
+       
+       $t_{\mu} = -2 \ln{\mu}$
+
+       - higher value of t_mu corresponds to increasing compatibility between the data and mu
+
+       - we can test the compatibility of a specific value of mu by using the statistics t_mu
+        corresponding to increasing disagreement, to quantify the level of disagreement:
+
+        $p_{\mu} = \int_{t_{mu},obs}^\infty f(t_{\mu} | \mu)dt_{mu}$
+
+       - where the lower limit is the statistics t_mu observed from the data
+
+       - I will not cover the case where mu=0 is effectively the signal, if mu is expected to
+         be different from zero.

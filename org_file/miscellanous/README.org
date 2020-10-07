@@ -1,0 +1,39 @@
+Here is a bunch of txt file that can be used for the analysis using the batch.sh
+skript developed by Anton
+*WARNING:* when such skript is used the code must always produce output with the same name, 
+change the code accordingly
+* list of txt file<2017-08-03 Don>
+** calibrun.txt
+   A list with all the file with calibration run on it. Here is a list of the run used:
+   *NOTE* only pure calibration run were used as found in the run list file
+   no run using Ps as trigger were included
+   - 2363
+   - 2179
+   - 2182
+   - 2335 ---> REMOVED, only one chunk found
+   - 2408
+   - 2410
+   - 2438
+** calibrunps.txt
+   in this txt file the calibration run with Ps included in the trigger
+   were written.
+   - 2365
+   - 2406
+   - 2439
+
+** run of the low intensity group 
+   See presentation [[https://indico.cern.ch/event/616409/contributions/2488057/attachments/1417949/2171593/report-24feb2017.pdf][pres]] for more information
+*** run2288_2296.txt
+*** run2297_2386.txt
+*** run2318_2334.txt
+*** run2336_2355.txt
+*** run2356_2361.txt
+
+** run of the high intensity group
+   See presentation [[https://indico.cern.ch/event/616409/contributions/2488057/attachments/1417949/2171593/report-24feb2017.pdf][pres]] for more information
+*** run2366_2375.txt
+*** run2376_2386.txt
+*** run2392_2401.txt
+*** run2411_2423.txt
+*** run2432_2436.txt
+*** run2441_2457.txt

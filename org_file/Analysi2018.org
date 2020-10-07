@@ -1,0 +1,16 @@
+* Software meeting <2019-03-06 Wed>
+** Points
+   - Check why is longer than 150 GeV in MC for simulation
+   - Correction of SRD and V2 to be corrected, like the one we used currently
+   - 2 was significantyl miss-calibrated
+   - Dimuon number dropped significantly after number in 4298
+   - 8 Events found in the region,1 with WVETO2 energy is zero
+   - Think hard about possible background for tracking
+   - Electron calibration shown in the agenda is not known
+   - *Problem*: very small number of dimuons, in the last 9 run of visible mode
+** TODO [ / ] tasks
+ - [ ] Think hard about possible background of tracking analysis
+ - [ ] rechek efficiency for tracking in 2018
+ - [ ] Check MIP in run 4266 or 4265 Vladimir think this could be an explanation
+ - [ ] FIX WCAL[2]
+   - [ ] Try to work on timing adjustment

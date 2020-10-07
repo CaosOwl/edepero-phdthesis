@@ -1,0 +1,12 @@
+
+* Articles  
+** A guide for deploying Deep Learning in LHC searches:How to achieve optimality and account for uncertainty
+   Article to show standard technique in LHC searches
+   - [[https://arxiv.org/pdf/1909.03081.pdf][link]]
+*** source of uncertainty                                       :uncertainty:
+    section that discuss source of uncertainty
+    There are generally two source of uncertainty, statistical and systematic (not dependent on the number of event)
+    - simulation used for training the DN is not accurate
+    - *precision / optimality* important for analysis optimization,
+    - An automated approach to estimate those uncertainty is *Bayesian Neural Network* some reference in the article
+    - to estimate tha *accuracy / bias*, network is fixed and input are varied.

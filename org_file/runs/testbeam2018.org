@@ -1,0 +1,873 @@
+* schedule                                                         :schedule:
+* equipment                                                       :equipment:
+** pixel
+*** Pixel sensor
+*** PCB
+*** TODO connectors [2/3]
+    - [X] 8 [[https://www.distrelec.ch/de/modularbuchse-bel-stewart-si-50170/p/14269453?q=*&filter_Buyable=1&filter_Category3=Steckverbinder+Industrial+Ethernet&page=10&origPos=10&origPageSize=25&simi=99.65][Ethernet Connectors]]
+    - [X] Two lemo connectors for high voltage
+    - [ ] Two connectors for low voltage: [[https://www.distrelec.ch/en/pin-header-straight-pitch-mm-4p-wago-733-334/p/14841142?q=*&filter_Category3=Pluggable+Terminal+Blocks&filter_productFamilyCode=cat-DC-96692&filter_Buyable=1&page=2&origPos=2&origPageSize=25&simi=99.65][example]]
+*** TODO Cables [/]
+    - [ ] 8 ETHERNET CABLES, to take from DPHYS Shop
+    - [ ] 2 HV cables, they have to be Lemo cables, probably compatible with SHV
+    - [ ] Low Voltage cables longer to accomodate the beam area. Contact Burtsev
+*** Power supply  
+**** HV power supply
+     *Solutions:*
+     - Configure it with existing CAEN mainframe, possible modules are:
+       - [[http://www.caen.it/csite/CaenProd.jsp?parent=20&idmod=132][A1735N]] , not currently present in the epool. Check again
+       - [[http://www.caen.it/csite/CaenProd.jsp?parent=20&idmod=470][A1821HN]], also currently not avaiable
+       - [[http://www.caen.it/csite/CaenProd.jsp?parent=20&idmod=131][A1833N]], also currently not avaiable
+       - [[http://www.caen.it/csite/CaenProd.jsp?parent=20&idmod=533][A1535DN]]. currently two piece avaiable at the epool
+     - Configure it with normal NIM Create and power it through the panel
+       - [[http://www.caen.it/csite/CaenProd.jsp?parent=21&idmod=867][N1570]] modules avaiable
+**** LV Power Supply
+     *Solutions:*
+     - Configure it to the mainframe
+     - Use Michael adapters with modules
+       - [[https://aisdb.cern.ch/pls/htmldb_aisdb_prod/f?p=152:7:210847374485684::NO:RP,7:P7_ITEM:0250][A1514A]] , also possible solution for LV power supply. here is the [[/home/deppy/polybox/PhD/org_files/CAEN Mainframe/manuals/250_1383.pdf][manual]]
+** Micromegas
+*** ADC
+    - *ADC*
+    - *Transition cards*   
+*** MM new design
+    - *Mantel der Box*: 25mm
+    - *Deckel der Box*: 2.4mm
+    - *PCB*: 3.95mm
+    - *AVP Chip Halter*: 6.05mm
+    - *AVP Chip*: 1.1mm
+    - *Schraubekopf von der Box*: 4mm
+      Here is a [[/home/deppy/polybox/PhD/detector/MM/New Design][link]] to the folder with a bunch of document about the design
+** Gas
+** Equipment from CMS Workshop
+   - Multimeter
+   - Soldering station
+   - solderer wick
+   - adjustable spanner
+   - 14mm spanner
+   - cables cutter
+   - cutter
+   - screw drivers
+   - Spray for leak checking
+* runs                                                                 :runs:
+  [[/home/deppy/polybox/PhD/org_files/run_May_2018/runs/runlist.pdf][run list]]
+** Invisible Mode
+*** Calibration runs 100 GeV electrons
+    | Run number | Trigger          | spills | note                                               | Date             |
+    |------------+------------------+--------+----------------------------------------------------+------------------|
+    |       3897 | S1-4-V+Psh       |        | Change S1 scintillator from 42mm to 25mm diameter. | <2018-05-20 dom> |
+    |       3988 | trig=S1-4-V+Wcat |     50 |                                                    | <2018-05-25 ven> |
+    |       4009 | S1-4-V+Psh-Wcat  |     50 | First calibration run after beam tuning *good run* | <2018-05-26 sab> |
+    |       4038 | S1-4-V0          |     35 |                                                    | <2018-05-27 dom> |
+    |------------+------------------+--------+----------------------------------------------------+------------------|
+*** Calibration runs 100 GeV hadrons
+ | Run number | Trigger           | spills | energy[GeV] | note                                                                | Date             |   |
+ |------------+-------------------+--------+-------------+---------------------------------------------------------------------+------------------+---|
+ |       4013 |                   |        |          50 | Veto, Wcat                                                          | <2018-05-26 sab> |   |
+ |       4014 |                   |        |          50 | Veto, Wcat, after this Wcat threshold changed from 30 MIP to 15 MIP | <2018-05-26 sab> |   |
+ |       3924 | Trig = S1-4-V     |        |         100 | Ecal moved out of beam                                              | <2018-05-21 lun> |   |
+ |       3925 | Trig = S1-4-V+Psh |        |         100 | Ecal moved out of beam                                              | <2018-05-21 lun> |   |
+ |------------+-------------------+--------+-------------+---------------------------------------------------------------------+------------------+---|
+** Visible Mode
+*** hadron calibration run 150 GeV
+    Intensity of hadron was typically a few tousand per second
+    as they are low intensity they should be very good for simulation
+    comparison.
+ | Run number | Number of spill | Intensity | Trigger         | Notes                      |
+ |------------+-----------------+-----------+-----------------+----------------------------|
+ |       4239 |              66 | ---       | S1-2-V0-Wcat    |                            |
+ |       4265 |              10 | ---       | S1-2-V0-Wcat+S4 |                            |
+ |       4266 |              10 | ---       | S1-2-V0-Wcat+S4 | after access               |
+ |       4267 |              15 | ---       | S1-2-V0-Wcat+S4 | Change latency for MSADC 3 |
+ |------------+-----------------+-----------+-----------------+----------------------------|
+*** Electron calibration run 150 GeV
+    Intensity is measured by trigger of S1 in a single spill.
+    When intensity is not given. the intensity of the previous recorded
+    data run is given instead (probably the two are close)
+ | Run number | Number of spill | Intensity[1E3] | Trigger      | Notes |
+ |------------+-----------------+----------------+--------------+-------|
+ |       4238 |              45 |           3700 | S1-2-V0-Wcat |       |
+ |       4263 |              40 |           3100 | S1-2-V0-Wcat |       |
+ |       4288 |              20 |           3500 | S1-2-V0-Wcat |       |
+ |------------+-----------------+----------------+--------------+-------|
+
+* shift
+* latency scan							    :latency:
+** Latency summary
+| Run Nr. | Latency upstream | Latency downstream | spill | notes |
+|---------+------------------+--------------------+-------+-------|
+|         |                  |                    |       |       |
+|---------+------------------+--------------------+-------+-------|
+** template table
+| MM   | a0 | a1 | a2 | efficiency | Voltage |
+|------+----+----+----+------------+---------|
+| MM1x |    |    |    |            |         |
+| MM1y |    |    |    |            |         |
+| MM2x |    |    |    |            |         |
+| MM2y |    |    |    |            |         |
+| MM3x |    |    |    |            |         |
+| MM3y |    |    |    |            |         |
+| MM4x |    |    |    |            |         |
+| MM4y |    |    |    |            |         |
+|------+----+----+----+------------+---------|
+** first latency scan <2018-05-12 sab>
+*** run 3607 *UpLatency = 49* *DownLatency = 39*
+| MM   | a0 | a1 | a2 | efficiency | Voltage |
+|------+----+----+----+------------+---------|
+| MM1x |    |    |    |            |         |
+| MM1y |    |    |    |            |         |
+| MM2x |    |    |    |            |         |
+| MM2y |    |    |    |            |         |
+| MM3x |    |    |    |            |         |
+| MM3y |    |    |    |            |         |
+| MM4x |    |    |    |            |         |
+| MM4y |    |    |    |            |         |
+|------+----+----+----+------------+---------|
+- latency was different, aborted scan
+* Voltage scan
+** run 3871
+   *Voltage applied* = 540
+   *spills* = 5
+   *beam type* = electrons 100 GeV
+   *total event* =  50870
+   | Physical MM | events registered | inside eam spot | efficiency [ % ] | note |
+   |-------------+-------------------+-----------------+------------------+------|
+   | MM1         |             49413 |                 |               97 |      |
+   | MM2         |             46846 |                 |               92 |      |
+   | MM3         |             50095 |                 |             98.5 |      |
+   | MM4         |             49786 |                 |             97.8 |      |
+   | MM5         |             46228 |                 |             90.8 |      |
+   | MM6         |             46217 |                 |             90.8 |      |
+   |-------------+-------------------+-----------------+------------------+------|
+** run 3872
+   *Voltage applied* = 550
+   *spills* = 5
+   *beam type* = electrons 100 GeV
+   *total event* =  
+   | Physical MM | events registered | inside eam spot | efficiency | note |
+   |-------------+-------------------+-----------------+------------+------|
+   | MM1         |                   |                 |            |      |
+   | MM2         |                   |                 |            |      |
+   | MM3         |                   |                 |            |      |
+   | MM4         |                   |                 |            |      |
+   | MM5         |                   |                 |            |      |
+   | MM6         |                   |                 |            |      |
+   |-------------+-------------------+-----------------+------------+------|
+** run 3873
+   *Voltage applied* = 560
+   *spills* = 5
+   *beam type* = electrons 100 GeV
+   *total event* =  41565
+   | Physical MM | events registered | inside eam spot | efficiency | note                     |
+   |-------------+-------------------+-----------------+------------+--------------------------|
+   | MM1         |             41327 |                 |       99.4 |                          |
+   | MM2         |             40853 |                 |       98.2 |                          |
+   | MM3         |             41267 |                 |       99.2 | MM goes OVc during spill |
+   | MM4         |             41394 |                 |       99.5 |                          |
+   | MM5         |             40766 |                 |       98.0 |                          |
+   | MM6         |             40884 |                 |       98.3 |                          |
+   |-------------+-------------------+-----------------+------------+--------------------------|
+** run 3874
+   *Voltage applied* = 565
+   *spills* = 5
+   *beam type* = electrons 100 GeV
+   *total event* =  
+   | Physical MM | events registered | inside beam spot | efficiency | note                     |
+   |-------------+-------------------+------------------+------------+--------------------------|
+   | MM1         |                   |                  |            |                          |
+   | MM2         |                   |                  |            |                          |
+   | MM3         |                   |                  |            | MM goes OVc during spill |
+   | MM4         |                   |                  |            |                          |
+   | MM5         |                   |                  |            |                          |
+   | MM6         |                   |                  |            |                          |
+   |-------------+-------------------+------------------+------------+--------------------------|
+** run 3875
+   *Voltage applied* = table
+   *spills* = 5
+   *beam type* = electrons 100 GeV
+   *total event* =  44090
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note                     |
+   |-------------+-------------------+---------+------------------+------------+--------------------------|
+   | MM1         |             43837 |     565 |                  |            |                          |
+   | MM2         |             43805 |     570 |             99.3 |            |                          |
+   | MM3         |             39729 |     565 |              90. |            | tripped, value not valid |
+   | MM4         |             43958 |     565 |                  |            |                          |
+   | MM5         |             42954 |     570 |             97.4 |            |                          |
+   | MM6         |             43636 |     570 |             98.9 |            |                          |
+   |-------------+-------------------+---------+------------------+------------+--------------------------|
+** run 3876
+   *Voltage applied* = table
+   *spills* = 5
+   *beam type* = electrons 100 GeV
+   *total event* =  76311
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note                   |
+   |-------------+-------------------+---------+------------------+------------+------------------------|
+   | MM1         |             75937 |     565 |                  |            |                        |
+   | MM2         |             75750 |     570 |                  |            |                        |
+   | MM3         |             75874 |     563 |                  |       99.4 | OvC,tripped after test |
+   | MM4         |             76057 |     565 |                  |            | Tripped last spill     |
+   | MM5         |             74330 |     568 |                  |       97.3 | Ovc                    |
+   | MM6         |             75563 |     568 |                  |         99 |                        |
+   |-------------+-------------------+---------+------------------+------------+------------------------
+** run 3877
+   *Voltage applied* = table
+   *spills* = 7
+   *beam type* = electrons 100 GeV
+   *total event* =  
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note                   |
+   |-------------+-------------------+---------+------------------+------------+------------------------|
+   | MM1         |             75937 |     565 |                  |            |                        |
+   | MM2         |             75750 |     570 |                  |            |                        |
+   | MM3         |             75874 |     563 |                  |       99.4 | Tripped immediately |
+   | MM4         |             76057 |     565 |                  |            | Tripped last spill     |
+   | MM5         |             74330 |     563 |                  |       97.3 | Ovc                    |
+   | MM6         |             75563 |     568 |                  |         99 |                        |
+   |-------------+-------------------+---------+------------------+------------+------------------------|
+** run 3878 *Tripped MM4*
+   *Voltage applied* = table
+   *spills* = 7
+   *beam type* = electrons 100 GeV
+   *total event* =  
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note |
+   |-------------+-------------------+---------+------------------+------------+------|
+   | MM1         |                   |     565 |                  |            |      |
+   | MM2         |                   |     570 |                  |            |      |
+   | MM3         |                   |     562 |                  |            |      |
+   | MM4         |                   |     564 |                  |            | tripped |
+   | MM5         |                   |     563 |                  |            | Ovc  |
+   | MM6         |                   |     568 |                  |            |      |
+   |-------------+-------------------+---------+------------------+------------+------|
+** run 3879 *Tripped MM3 and MM4*
+   *Voltage applied* = table
+   *spills* = 4
+   *beam type* = electrons 100 GeV
+   *total event* =  
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note |
+   |-------------+-------------------+---------+------------------+------------+------|
+   | MM1         |                   |     565 |                  |            |      |
+   | MM2         |                   |     570 |                  |            |      |
+   | MM3         |                   |     560 |                  |            |      |
+   | MM4         |                   |     564 |                  |            |      |
+   | MM5         |                   |     563 |                  |            | Ovc  |
+   | MM6         |                   |     568 |                  |            |      |
+   |-------------+-------------------+---------+------------------+------------+------|
+** run 3880 
+   *Voltage applied* = table
+   *spills* = 11
+   *beam type* = electrons 100 GeV
+   *total event* =  50842
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note |
+   |-------------+-------------------+---------+------------------+------------+------|
+   | MM1         |             50638 |     565 |                  |       99.5 |      |
+   | MM2         |             50447 |     570 |                  |       99.2 |      |
+   | MM3         |             50587 |     560 |                  |       99.4 |      |
+   | MM4         |             50653 |     560 |                  |       99.6 |      |
+   | MM5         |             49600 |     563 |                  |       97.5 | Ovc  |
+   | MM6         |             50272 |     568 |                  |       98.8 |      |
+   |-------------+-------------------+---------+------------------+------------+------|
+   *NOTE* = during night MM6 tripped
+
+** run 3894
+   *Voltage applied* = table
+   *spills* = 6
+   *beam type* = electrons 100 GeV
+   *total event* =  36435
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note |
+   |-------------+-------------------+---------+------------------+------------+------|
+   | MM1         |             36325 |     565 |                  | 99.6       |      |
+   | MM2         |             36185 |     570 |                  | 99.3       |      |
+   | MM3         |             36334 |     560 |                  | 99.7       |      |
+   | MM4         |             36367 |     560 |                  | 99.8       |      |
+   | MM5         |             35910 |     563 |                  | 98.5       | Ovc  |
+   | MM6         |             36304 |     563 |                  | 99.6       |      |
+   |-------------+-------------------+---------+------------------+------------+------|
+** comments
+   - for now these were found to be more safe settings, even with efficiency not maximized
+
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note |
+   |-------------+-------------------+---------+------------------+------------+------|
+   | MM1         |             36325 |     565 |                  | 99.6       |      |
+   | MM2         |             36185 |     570 |                  | 99.3       |      |
+   | MM3         |             36334 |     560 |                  | 99.7       |      |
+   | MM4         |             36367 |     560 |                  | 99.8       |      |
+   | MM5         |             35910 |     563 |                  | 98.5       | Ovc  |
+   | MM6         |             36304 |     560 |                  | 98.9       |      |
+   |-------------+-------------------+---------+------------------+------------+------|
+   
+** update <2018-05-21 lun>
+   - *entries* = 10960
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note |
+   |-------------+-------------------+---------+------------------+------------+------|
+   | MM1         |             10924 |     565 |                  |  99.671533 |      |
+   | MM2         |             10882 |     570 |                  |  99.288321 |      |
+   | MM3         |             10929 |     560 |                  |  99.717153 |      |
+   | MM4         |             10935 |     560 |                  |  99.771898 |      |
+   | MM5         |             10821 |     563 |                  |  98.731752 | Ovc  |
+   | MM6         |             10906 |     560 |                  |  99.507299 |      |
+   |-------------+-------------------+---------+------------------+------------+------|
+   #+TBLFM: $5=100*$2/10960
+** update <2018-05-22 mar>
+   - *run* = 3944
+   - *entries* = 302835
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note                  |
+   |-------------+-------------------+---------+------------------+------------+-----------------------|
+   | MM1         |            301786 |     565 |                  |  99.653607 |                       |
+   | MM2         |            300287 |     570 |                  |  99.158618 |                       |
+   | MM3         |            286621 |     533 |                  |  94.645929 | tripped at some point |
+   | MM4         |            272520 |     560 |                  |  89.989598 | tripped at some point |
+   | MM5         |            291536 |     563 |                  |  96.268925 | Ovc                   |
+   | MM6         |            292216 |     560 |                  |  96.493470 |                       |
+   |-------------+-------------------+---------+------------------+------------+-----------------------|
+   #+TBLFM: $5=100*$2/302835
+** update <2018-05-22 mar 17:50>
+   updated after some waiting, MM3 seems stable at 550 Volt
+   - *run* = 3946
+   - *entries* = 22829
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note                                      |
+   |-------------+-------------------+---------+------------------+------------+-------------------------------------------|
+   | MM1         |             22754 |     565 |                  |  99.671470 |                                           |
+   | MM2         |             22653 |     570 |                  |  99.229051 |                                           |
+   | MM3         |             22351 |     545 |                  |  97.906172 | voltage of MM3 was lowered to avoid trips |
+   | MM4         |             22693 |     560 |                  |  99.404267 |                                           |
+   | MM5         |             22031 |     565 |                  |  96.504446 | Ovc                                       |
+   | MM6         |             22323 |     565 |                  |  97.783521 |                                           |
+   |-------------+-------------------+---------+------------------+------------+-------------------------------------------|
+   #+TBLFM: $5=100*$2/22829
+** update <2018-05-22 mar 19:20>   
+   - *run* = 3950
+   - *entries* = 20626
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | note                                      |
+   |-------------+-------------------+---------+------------------+------------+-------------------------------------------|
+   | MM1         |             20553 |     565 |                  |  99.646078 |                                           |
+   | MM2         |             20468 |     570 |                  |  99.233977 |                                           |
+   | MM3         |             20344 |     545 |                  |  98.632794 | voltage of MM3 was lowered to avoid trips |
+   | MM4         |             20547 |     560 |                  |  99.616988 |                                           |
+   | MM5         |             19932 |     563 |                  |  96.635315 | Ovc                                       |
+   | MM6         |             20282 |     565 |                  |  98.332202 |                                           |
+   |-------------+-------------------+---------+------------------+------------+-------------------------------------------|
+   #+TBLFM: $5=100*$2/20626
+
+** update <2018-05-25 ven 18:00>
+   - *run* = 3993
+   - *entries* = 29176
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | efficiency inside beam spot | note |
+   |-------------+-------------------+---------+------------------+------------+-----------------------------+------|
+   | MM1         |             29047 |     565 |            28357 |  99.557856 |                   97.192898 |      |
+   | MM2         |             28952 |     570 |            28383 |  99.232246 |                   97.282013 |      |
+   | MM3         |             29080 |     560 |            27985 |  99.670962 |                   95.917878 |      |
+   | MM4         |             29068 |     560 |            27979 |  99.629833 |                   95.897313 |      |
+   | MM5         |             28782 |     563 |            27423 |  98.649575 |                   93.991637 | Ovc  |
+   | MM6         |             29076 |     565 |            27369 |  99.657253 |                   93.806553 |      |
+   |-------------+-------------------+---------+------------------+------------+-----------------------------+------|
+   #+TBLFM: $5=100*$2/29176
+   #+TBLFM: $6=100*$4/29176
+
+** update <2018-06-09 sab 01:04>
+   - *run* = 4104
+   - *entries* = 100081
+   | Physical MM | events registered | voltage | inside beam spot | efficiency | efficiency inside beam spot | note |
+   |-------------+-------------------+---------+------------------+------------+-----------------------------+------|
+   | MM1         |             99559 |     565 |                  |  99.478422 |                             |  Ovc |
+   | MM2         |             99457 |     570 |                  |  99.376505 |                             |      |
+   | MM3         |             97666 |     560 |                  |  97.586955 |                             |      |
+   | MM4         |             98697 |     560 |                  |  98.617120 |                             |      |
+   | MM5         |             93580 |     563 |                  |  93.504262 |                             | Ovc  |
+   | MM6         |             98747 |     565 |                  |  98.667080 |                             |      |
+   |-------------+-------------------+---------+------------------+------------+-----------------------------+------|
+   #+TBLFM: $5=100*$2/100081
+
+** update <2018-06-11 lun 14:40>
+   Adjusted Voltage and current limit after large intensities spill, MM5 appears to have large current off-spill but it's still working.
+   - *run* = 4184
+   - *entries* = 64499
+   | Physical MM | events registered | voltage | Ilimit [muA] | inside beam spot | efficiency | efficiency inside beam spot | note                                      |
+   |-------------+-------------------+---------+--------------+------------------+------------+-----------------------------+-------------------------------------------|
+   | MM1         |             64131 |     565 |          1.2 |                  |  99.429449 |                             | Ovc on spill sometimes                    |
+   | MM2         |             64102 |     570 |          1.0 |                  |  99.384487 |                             |                                           |
+   | MM3         |             62864 |     560 |          1.0 |                  |  97.465077 |                             |                                           |
+   | MM4         |             63678 |     563 |          1.2 |                  |  98.727112 |                             | Ovc on spill sometimes, 0.8 muA off-spill |
+   | MM5         |             58302 |     555 |          1.3 |                  |  90.392099 |                             | Ovc                                       |
+   | MM6         |             63770 |     565 |          1.2 |                  |  98.869750 |                             |                                           |
+   |-------------+-------------------+---------+--------------+------------------+------------+-----------------------------+-------------------------------------------|
+   #+TBLFM: $6=100*$2/64499
+** update <2018-06-11 lun 14:50>
+   Adjusted Voltage and current limit after large intensities spill, MM5 appears to have large current off-spill but it's still working.
+   - *run* = 4184
+   - *entries* = 81685
+   | Physical MM | events registered | voltage | Ilimit [muA] | inside beam spot | efficiency | efficiency inside beam spot | note                                      |
+   |-------------+-------------------+---------+--------------+------------------+------------+-----------------------------+-------------------------------------------|
+   | MM1         |             81275 |     565 |          1.2 |                  |  99.498072 |                             | Ovc on spill sometimes                    |
+   | MM2         |             81188 |     570 |          1.0 |                  |  99.391565 |                             |                                           |
+   | MM3         |             79901 |     565 |          1.2 |                  |  97.816000 |                             |                                           |
+   | MM4         |             80764 |     565 |          1.2 |                  |  98.872498 |                             | Ovc on spill sometimes, 0.8 muA off-spill |
+   | MM5         |             73625 |     555 |          1.3 |                  |  90.132827 |                             | Ovc                                       |
+   | MM6         |             80739 |     565 |          1.2 |                  |  98.841893 |                             |                                           |
+   |-------------+-------------------+---------+--------------+------------------+------------+-----------------------------+-------------------------------------------|
+   #+TBLFM: $6=100*$2/81685
+
+* efficiency scan					     :efficiencyscan:
+* instruction  
+** beam
+*** collimator
+    XCSV.022.386 has the purpose of regulate the intensity and quality of the beam. Larger distance means larger intensity but worse beam (worse momentum resolution and larger spread)
+** MM shift instruction
+*** General monitoring
+    The MicroMegas can be monitored using the COOOL software:
+    1. type in the terminal $StartCOOOL.sh
+    2. Open the config file /home/daq/MM.cfg to look at the profiles
+    3. After 50 spills save a ps immage using config file /home/daq/SHIFT_MM.cfg in the folder /home/emilio/MMruns with name MM_<run number>
+    *NOTE*  : The geometry of MM1,MM3,MM4 and MM6 is rotated by 90 degree within respect to the one of the other MicroMegas, that show the beam spot as an observer standing in front of them would see it,
+    this is the reason they look rotated in COOOL
+
+*** Voltage and current monitoring
+    All MicroMegas should have 0-5 nA current (can be occasionaly a bit larger for some modules, not above 10 nA) on both power supply channel off spill
+    and some current during the spill on channel B (resistive strips). It is important to check that the current correctly
+    goes back to zero between two spills in Slow Control. If not the accumulated current might bring the
+    detector to breakdown.
+*** Gas monitoring
+    The value of the pressure of the gas bottle connected to the _red gas pipe_ and attached label with the name _Emilio Depero_ on it. 
+    should be monitored (ideally by making a photo and put it on the ELOG) at the beginning and at the end of every shift. If the values
+    of the first manometer (the one closer to the gas bottle) drop lower than 30 Bar contact one of the MM responsable.
+*** Troubleshooting
+**** MM are not loading
+     It happens quite a lot that MM need to be loaded more then once. Type:
+
+     * LOAD -A 622
+       
+     at least 3-4 times before giving up. If it doesn't work try to type the following
+     command in order:
+
+     * LOAD -g 622
+     * LOAD -zR 622
+     * LOAD -ra 622
+     * LOAD -p 622
+       
+       This can sometime works when the command LOAD -A 622 does not work. If you get error immediately and consistently after typing
+       LOAD -zR 622 or LOAD -g 622 there are two possible solutions:
+     * switch off the ADCGemFull in the database (http://pcdmfs01.cern.ch/). Type LOAD -A 622 one more time, if it works, switch on ADCGemFull one more time and try to load again. This has proven to work in the past.
+     * ADC need a power cycle. This can done automatically using the slow control software on the windows desktop on the left corner of the controlroom with name DCS PCCOMPASS010:
+       *username* = PCCOMPASS010\dcs
+       *password* = Na642018
+       Then click on the GEM button, the LV System and finally on the OFF button of both of the power supply windows. Wait for one minute all channel to show OFF, then click ON on both of the windows to turn
+       them on again.
+     [[/home/deppy/PhD/org_files/run_May_2018/photos/Slow control/LV_SC.jpg]]
+       
+**** MM are loading but do not show up in COOOL
+     the most probable cause is that those modules are not synchronized, typically happens to two of the Micromegas downstream either MM3,MM4 or MM5,MM6 will fail to show hits simultaneously.
+     The Module needs to be loaded again and then checked in COOOL. They might need a few try before they get all synchronized. Alternatively GemMonitor can be used to quickly test the response of the modules.
+**** MM are loading but show only noise or very low efficiency     
+     1. Check the voltages and current in HV strips in the slow control. 
+        Just click on the MM icon and HV strips on the window appeared. If one of the channel tripped an error message in red will be appeared in the message browser on the top window. One can try to
+        turn on the channel again, it is better to do it in two stages, first setting a voltage 20 Volt lower than the nominal one, turn on the Micromega, wait for the voltage to reach the selected value and then
+        set the nominal one. If unsure about this step contact one of Micromegas expert.
+        
+        *Slow Control without problems:*
+
+        [[/home/deppy/PhD/org_files/run_May_2018/photos/Slow control/good_SC.jpg]]
+
+        *Slow Control with tripped channel:*
+
+        [[/home/deppy/PhD/org_files/run_May_2018/photos/Slow control/bad_SC.jpg]]
+
+     2. If Voltages are okay but no current is shown during the spill check that the gas bottle has the correct pressure. If pressure on first regulator less than 0.5 bar contact one of Micromegas expert
+        immediately.
+        
+        *Gas bottle with not enough pressure*
+
+        [[/home/deppy/PhD/org_files/run_May_2018/photos/gas/12_05_2018/inlet2.jpg]]
+
+*** Contacts
+    Emilio Depero
+    - *Mail*  : emilio.depero@cern.ch
+    - *mobile* : +41 77 408 74 69
+    - *mobile (only whatsapp or telegram)* :  +39 348 85 23 812
+      
+    *ONLY IF NO ANSWER WITH THE FIRST NUMBER TRY:*
+    Dipanwita Banerjee
+    - *Mail*  : dipanwita.banerjee@cern.ch
+    - *mobile* : +41 76 548 42 16
+* layout
+** MM Layout
+*** <2018-05-10 gio>
+| Label MM | MM ordering from upstream | Channel CAEN | ADC port | bus address | chip | GeSica Port | Cable lable resistive | Cable label Drift |
+|        4 |                         1 |            0 |        3 |          38 |   37 |           0 | MM4 Resistive         | MM4 Drift         |
+|        5 |                         2 |            1 |        7 |          3c |   51 |           0 | MM3 Resistive         | MM3 Drift         |
+|        6 |                         3 |            2 |       11 |          26 |   25 |           0 | MTC51                 | MTC52             |
+|        2 |                         4 |            3 |       15 |          3e |   39 |           0 | MTC53                 | MTC55             |
+|        1 |                         5 |            4 |       11 |          3e |   23 |           1 | 10                    | 3                 |
+|        3 |                         6 |            5 |       15 |          24 |   24 |           1 | 1                     | 2                 |
+
+*** <2018-05-12 sab>
+| Label MM | MM design | MM ordering from upstream | Channel CAEN | ADC port | bus address | chip | GeSica Port | Cable lable resistive | Cable label Drift |
+|        4 | old       |                         1 |            0 |        3 |          38 |   37 |           2 | MM4 Resistive         | MM4 Drift         |
+|        5 | new       |                         2 |            1 |        7 |          3c |   51 |           2 | MM3 Resistive         | MM3 Drift         |
+|        6 | new       |                         3 |            2 |       11 |          26 |   25 |           2 | MTC51                 | MTC52             |
+|        2 | old       |                         4 |            3 |       15 |          2c |   39 |           2 | MTC53                 | MTC55             |
+|        1 | old       |                         5 |            4 |       11 |          3e |   23 |           1 | 10                    | 3                 |
+|        3 | old       |                         6 |            5 |       15 |          24 |   24 |           1 | 1                     | 2                 |
+*** <2018-05-12 sab> second layout with two spare Micromegas
+| Label MM | MM design | MM ordering from upstream | Channel CAEN | ADC port | bus address | chip | GeSica Port | Cable lable resistive | Cable label Drift |
+|        4 | old       |                         1 |            0 |        3 |          38 |   37 |           2 | MM4 Resistive         | MM4 Drift         |
+|        8 | new       |                         2 |            1 |        7 |          2e |   33 |           2 | MM3 Resistive         | MM3 Drift         |
+|        7 | new       |                         3 |            2 |       11 |          3e |   54 |           2 | MTC51                 | MTC52             |
+|        2 | old       |                         4 |            3 |       15 |          2c |   39 |           2 | MTC53                 | MTC55             |
+|        1 | old       |                         5 |            4 |       11 |          3e |   23 |           1 | 10                    | 3                 |
+|        3 | old       |                         6 |            5 |       15 |          24 |   24 |           1 | 1                     | 2                 |
+*** <2018-05-12 sab> Moving two Micromegas downstream
+| Label MM | MM design | MM ordering from upstream | Channel CAEN | ADC port | bus address | chip | GeSica Port | Cable lable resistive | Cable label Drift |
+|        8 | new       |                         1 |            1 |       11 |          2e |   33 |           2 |         MM3 Resistive |         MM3 Drift |
+|        2 | old       |                         2 |            3 |       15 |          2c |   39 |           2 |         MM4 Resistive |         MM4 Drift |
+|        5 | new       |                         3 |            0 |        3 |          3c |   51 |           1 |                     4 |                 9 |
+|        6 | new       |                         4 |            4 |        7 |          26 |   25 |           1 |                     3 |                10 |
+|        1 | old       |                         5 |            5 |       11 |          24 |   23 |           1 |                     1 |                 2 |
+|        7 | new       |                         6 |            2 |       15 |          3e |   54 |           1 |                     5 |                 7 |
+*** <2018-06-13 mer> Visible Mode, moving two Micromegas upstream
+| Label MM | MM design | MM ordering from upstream | Channel CAEN | ADC port | bus address | chip | GeSica Port | Cable lable resistive | Cable label Drift |
+|        8 | new       |                         1 |            0 |        3 |          2e |   33 |           2 | MM3 Resistive         | MM3 Drift         |
+|        7 | new       |                         2 |            1 |        7 |          3e |   39 |           2 | MM4 Resistive         | MM4 Drift         |
+|        3 | old       |                         3 |            2 |       11 |          24 |   51 |           2 | mtc56                 | mtc52             |
+|        2 | old       |                         4 |            3 |       15 |          2c |   25 |           2 | mtc53                 | mtc55             |
+|        5 | new       |                         5 |            4 |       11 |          3c |   23 |           1 | 4                     | 9                 |
+|        6 | new       |                         6 |            5 |       15 |          26 |   54 |           1 | 3                     | 10                |
+** CAEN Mainframe
+- 128.141.41.240
+** Pixel computer
+- 128.141.148.144
+* Geometry
+** important values
+ + Magnet length = 2000 mm
+ + vacuum tube of MPBL length = 13700 mm
+ + flanges to tube base = 28 mm
+** first measured values
+*NOTA BENE* Direction of Z-axis is reversed in the two point of reference, upstream it opposite to the beam flow, downstream is parallel to the beam flow
+| detector |         Z[mm] | X[mm] | Y[mm] | point of reference             |
+|----------+---------------+-------+-------+--------------------------------|
+| MM1      |          1749 |    10 |  1272 | vacuum tube flange of MBPL1    |
+| S1       |     [936,997] |       |       | vacuum tube flange of MBPL1    |
+| Veto     |     [795,823] |       |       | vacuum tube flange of MBPL1    |
+| MM2      |           279 |   -17 |  1270 | vacuum tube flange of MBPL1    |
+| MBPL1    |  [-456,-2456] |       |       | vacuum tube flange of MBPL1    |
+| MPBL2    | [-3520,-5520] |       |       | vacuum tube flange of MBPL1    |
+| MM3      |           530 |   319 |       | vacuum tube flange of 20m tube |
+| MM4      |           724 |   329 |       | vacuum tube flange of 20m tube |
+| StrawX8  |     [832,847] |       |       | vacuum tube flange of 20m tube |
+| StrawX6  |   [2310,2325] |       |       | vacuum tube flange of 20m tube |
+| GEM2     |          2570 |   233 |       | vacuum tube flange of 20m tube |
+| GEM4     |          2739 |   242 |       | vacuum tube flange of 20m tube |
+| MM5      |          2985 |   381 |       | vacuum tube flange of 20m tube |
+| GEM3     |          3124 |   251 |       | vacuum tube flange of 20m tube |
+| MM6      |          3197 |   397 |       | vacuum tube flange of 20m tube |
+| GEM1     |          3313 |   259 |       | vacuum tube flange of 20m tube |
+| StrawX7  |   [3440,3455] |       |       | vacuum tube flange of 20m tube |
+| ECAL     |          4176 |       |       | vacuum tube flange of 20m tube |
+|----------+---------------+-------+-------+--------------------------------|
+** measured values in actual geometry
+   *geometry description* Z-along beam axis, Y from floor to roof, X antiparallel to deflection side
+  | detector   |    Z[mm] | X[mm] | Y[mm] |
+  |------------+----------+-------+-------|
+  | ECAL       |        0 |     0 |     0 |
+  | StrawX7    |     -736 |       |       |
+  | GEM1       |     -863 |  -259 |       |
+  | MM6        |     -979 |  -397 |       |
+  | GEM3       |    -1052 |  -251 |       |`
+  | MM5        |    -1191 |  -381 |       |
+  | GEM4       |    -1437 |  -242 |       |
+  | GEM2       |    -1606 |  -233 |       |
+  | StrawX6    |    -1866 |       |       |
+  | Straw8     |    -3344 |       |       |
+  | MM4        |    -3452 |  -329 |       |
+  | MM3        |    -3646 |  -319 |       |
+  | MPBL1Start |   -17466 |       |       |
+  | MPBL1End   |   -15466 |       |       |
+  | MPBL2Start |   -14402 |       |       |
+  | MPBL2End   |   -12492 |       |       |
+  | Tube begin |   -17922 |       |       |
+  | MM2        |   -18201 |    17 |       |
+  | Veto       |   -18731 |       |       |
+  | S1         | -18833.5 |       |       |
+  | MM1        |   -19671 |   -10 |       |
+  |------------+----------+-------+-------|
+
+  #+TBLFM: $2=-17922-1749
+
+* anaylsis
+* inventory
+** list of electronics gave by Dipanwita
+*** already in possesion
+    | Item No. | Serial No. | Class | Description                              | status      |
+    |----------+------------+-------+------------------------------------------+-------------|
+    |     0234 |         29 | VME   | CCT VP110 - 800Mhz PIII CPU, 512Mb, USB  | to be found |
+    |     0268 |          7 | VME   | CAEN V1718 - USB - VME BRIDGE            | to be found |
+    |     0282 |         54 | NIM   | CAEN N1145 - VISUAL SCALER/TIMER         | found       |
+    |     0482 |          3 | NIM   | CERN TRAY 1U - NIM FAN TRAY 1U           | found       |
+    |     0482 |          4 | NIM   | CERN TRAY 1U - NIM FAN TRAY 1U           | found       |
+    |     9331 |        112 | NIM   | WIENER UEP 22 M - POWER SUPPLY 300 WATTS | to be found |
+    |     9484 |          5 | VME   | CAEN V 260 N - 100MHZ 16CH SCALER        | to be found |
+    |----------+------------+-------+------------------------------------------+-------------|
+*** to buy
+    | Item No. | Serial No. | Class    | Description                    | status       |
+    |----------+------------+----------+--------------------------------+--------------|
+    |     0282 |         15 | N1145    | VISUAL SCALER/TIMER            | to be bought |
+    |     0136 |          5 | M166167  | CRATE 7 SLOTS (VME 64X TOWER)  | to be bought |
+    |     0240 |         31 | OFO0700  | LHC6UFANTRAY FM COOL.-CAN      | to be bought |
+    |     0239 |         38 | OBO6025J | LHC-6UVME64X-BIN LOCAL 21X6U   | to be bought |
+    |     0241 |         86 | OPO60710 | 6UCAN3.3V,5V100A,12V10A,48V12A | to be bought |
+    |----------+------------+----------+--------------------------------+--------------|
+* MM monitoring
+** MM pedestals                                                   :pedestals:
+*** <2018-05-12 sab>
+MM05 pedestals was weird,, very big on the right (16-14) and a bump in the center. 
+** gas bottle                                                           :gas:
+*** <2018-05-12 sab>
+*COMMENT:* tappo
+[[/home/deppy/polybox/PhD/org_files/run_May_2018/photos/gas/12_05_2018/inlet1.jpg]]   [[/home/deppy/polybox/PhD/org_files/run_May_2018/photos/gas/12_05_2018/inlet2.jpg]]
+** efficiency                                                :efficiencyscan:
+* pixel run
+** run 4290
+   no problem, all completed
+** run 4291
+   off by two spill
+** run 4292
+   off by five spill
+** run 4293
+   no offset, but trigger was off after spill ~15
+** run 4294
+   maybe off by one spill, trigger was down all run
+** run 4295
+   6 spills off
+** run 4296
+   -1 spill off maybe, take all other run
+** run 4298
+   completely off
+* note
+** <2018-05-01 mar>
+*** APB chips global address
+   APV chips ADC1
+   - 3e
+   - 2c
+   - 24
+   - 38
+*** GemMonitor
+    abnormal noise registered for one the chips. Namely the one connect to the ADC port  15, it is to be investigated
+** <2018-05-02 mer>
+*** first test
+   | MM | ADC port | bus GB | chip ID |
+   |    |        3 |     3c |      51 |
+   |    |        7 |     2e |      33 |
+   |    |       11 |     3e |      23 |
+   |    |       15 |     26 |      25 |
+   --> Impossible to syncronize at the same time
+*** second test
+   | MM  | ADC port | bus GB | chip ID |
+   | new |        3 |     3e |      54 |
+   | old |        7 |     38 |      37 |
+   | old |       11 |     24 |      45 |
+   | old |       15 |     2c |      39 |
+   ---> Initial problem because of voltage drop
+   ---> After adjusting the current all three are synchronized
+*** test three
+       | MM  | ADC port | bus GB | chip ID |
+       | new |        3 |     26 |      25 |
+       | old |        7 |     38 |      37 |
+       | old |       11 |     24 |      45 |
+       | old |       15 |     2c |      39 |
+       ---> After adjusting the current all three are synchronized
+*** test four
+       | MM  | ADC port | bus GB | chip ID |
+       | new |        3 |     26 |      25 |
+       | new |        7 |     3c |      51 |
+       | old |       11 |     24 |      45 |
+       | old |       15 |     2c |      39 |
+       ---> After adjusting the current all three are synchronized
+*** test five
+       | MM  | ADC port | bus GB | chip ID |
+       | new |        3 |     26 |      25 |
+       | new |        7 |     3c |      51 |
+       | new |       11 |     24 |      45 |
+       | old |       15 |     2c |      39 |
+       ---> After adjusting the current all three are synchronized
+*** test six
+       | MM  | ADC port | bus GB | chip ID |
+       | new |        3 | 26     |      25 |
+       | new |        7 | 3c     |      51 |
+       | new |       11 | 2e     |      33 |
+       | old |       15 | 2c     |      39 |     
+       ---> After adjusting the current all three are synchronized
+*** test seven
+       | MM  | ADC port | bus GB | chip ID |
+       | new |        3 | 26     |      25 |
+       | new |        7 | 3c     |      51 |
+       | new |       11 | 2e     |      33 |
+       | old |       15 | 3e     |      23 |
+       ---> Desynchronized! At fault seems to be the chip *3e Nr. 23*
+       ---> On a second try it worked... Maybe problem was malconnection of bus card
+*** test eight
+       | MM  | ADC port | bus GB | chip ID |
+       | new |        3 |     38 |      37 |
+       | new |        7 |     24 |      45 |
+       | new |       11 |     3e |      54 |
+       | old |       15 |     2c |      39 |
+       ----> chip 54 has abnormal noise in the left boundary
+       
+*** test nine
+    *USING SECOND TRANSITION CARD RECEIVED BY DIOGO*
+       | MM  | ADC port | bus GB | chip ID |
+       | new |        3 |     38 |      37 |
+       | new |        7 |     24 |      45 |
+       | new |       11 |     3e |      54 |
+       | old |       15 |     2c |      39 |
+             
+** <2018-05-06 dom>
+*** MM layout <2018-05-06 dom>
+| MM | chip | bus address |
+|----+------+-------------|
+|  1 |   23 |          3e |
+|  2 |   39 |          3e |
+|  3 |   45 |          24 |
+|  4 |   37 |          38 |
+|  5 |   51 |          3c |
+|  6 |   25 |          26 |
+|  7 |   54 |          2c |
+|  8 |   33 |          2e |
+|----+------+-------------|
+*** test 11
+| MM | ADC port | results                                               |
+|  4 |        3 | good                                                  |
+|  3 |        7 | to be checked, left side large                        |
+|  2 |       11 | to be checked, left side VERY large (value around 30) |
+|  7 |       15 | good                                                  |
+
+*** test 12
+| MM | ADC port | results |
+|  5 |        3 | good    |
+|  6 |        7 | good    |
+|  8 |       11 | good    |
+|  1 |       15 | good    |
+*** test 13
+- improved ground, changed Chip 39 with chip 38 in MM2
+| MM | ADC port | results                  |
+|  4 |        3 | good                     |
+|  3 |        7 | good                     |
+|  2 |       11 | good, some channel noisy |
+|  7 |       15 | bad, peak transfered     |
+** <2018-05-07 lun>
+*** test 14 
+- retested after 1 day of wait, *SAME RESULTS*
+| MM | ADC port | results                  |
+|  4 |        3 | good                     |
+|  3 |        7 | good                     |
+|  2 |       11 | good, some channel noisy |
+|  7 |       15 | bad, peak transfered     |
+*** test 14 
+- retested after 1 day of wait, *SAME RESULTS*
+| MM | ADC port | results                  |
+|  4 |        3 | good                     |
+|  3 |        7 | good                     |
+|  2 |       11 | good, some channel noisy |
+|  7 |       15 | bad, peak transfered     |
+*** test 15 
+- retested after after switching back to chip 39, *SAME RESULTS*
+| MM | ADC port | results                  |
+|  4 |        3 | good                     |
+|  3 |        7 | good                     |
+|  2 |       11 | good, some channel noisy |
+|  7 |       15 | bad, peak transfered     |
+*** test 16
+- retested after proper grounding of chip 54 on MM7, same results
+| MM | ADC port | results                  |
+|  4 |        3 | good                     |
+|  3 |        7 | good                     |
+|  2 |       11 | good, some channel noisy |
+|  7 |       15 | bad, peak transfered     |
+
+*** test 17
+- retested after changing chip 54 with 38, *NORMAL READING, PROBLEM WAS CHIP 54*
+| MM | ADC port | results                        |
+|  4 |        3 | good                           |
+|  3 |        7 | good , but large noise on left |
+|  2 |       11 | good, some channel noisy       |
+|  7 |       15 | good reading, peak cured       |
+*** test 18
+- retested after changing chip 54 with 38 and 45 with 24  *NORMAL READING, PROBLEM WAS CHIP 54 and 45*
+| MM | ADC port | results                        |
+|  4 |        3 | good                           |
+|  3 |        7 | good , but large noise on left |
+|  2 |       11 | good, some channel noisy       |
+|  7 |       15 | good reading, peak cured       |
+*** test 19
+- retesting of other Micromegas
+| MM | ADC port | results     |
+|  5 |        3 | bad Noise   |
+|  6 |        7 | good        |
+|  8 |       11 | good        |
+|  1 |       15 | a bit noisy |
+*** MM layout <2018-05-07 lun>
+| MM | chip | bus address |
+|----+------+-------------|
+|  1 |   23 |          3e |
+|  2 |   39 |          3e |
+|  3 |   24 |          24 |
+|  4 |   37 |          38 |
+|  5 |   51 |          3c |
+|  6 |   25 |          26 |
+|  7 |   48 |          2c |
+|  8 |   33 |          2e |
+|----+------+-------------|
+*** test 20
+- retesting of other Micromegas
+| MM | ADC port | results               |
+|  5 |        3 | bad Noise on the left |
+|  6 |        7 | good                  |
+|  8 |       11 | good                  |
+|  1 |       15 | good                  |
+
+*** test 21
+- retesting of other Micromegas after substituting chip 51 with chip 22 *noise reduced*
+- done in correspondence of Umberto testing, some sparks destroyed the measurements, MM5 still valid
+| MM | ADC port | results |
+|  5 |        3 | good    |
+|  6 |        7 | good    |
+|  8 |       11 | good    |
+|  1 |       15 | good    |
+** <2018-05-10 gio>
+   Tabella
+   | Label MM | MM ordering from upstream | Channel CAEN | Cable label Drift | Cable lable resistive | chip | bus address | GeSica Port |
+   |        4 |                         1 |            0 | MM4 Drift         | MM4 Resistive         |   37 |          38 |           0 |
+   |        5 |                         2 |            1 | MM3 Drift         | MM3 Resistive         |   51 |          3c |           0 |
+   |        6 |                         3 |            2 | MTC52             | MTC51                 |   25 |          26 |           0 |
+   |        2 |                         4 |            3 | MTC55             | MTC53                 |   39 |          3e |           0 |
+   |        1 |                         5 |            4 | 3                 | 10                    |   23 |          3e |           1 |
+   |        3 |                         6 |            5 | 2                 | 1                     |   24 |          24 |           1 |
+   |          |                           |              |                   |                       |      |             |             |
+   |          |                           |              |                   |                       |      |             |             |
+* Detector table                                                  :equipment:
+** p348 number source
+   the [[https://twiki.cern.ch/twiki/pub/P348/InternalNotes/note01.v02.pdf][document]] was the main source, simulation was used when this was not possible (SRD and WCAL are not included)
+   - NOTE: inconsistencies between picture and text for HCAL module ( 9 mm vs 7 mm gap)
+   - Note: gap in HCAL currently not simulated? *<=== confirmed, to be repeared <2019-07-10 Wed>*
+   - [[/home/deppy/polybox/PhD/detector/hadron_module.pdf][New document]] avaiable by vladimir to describe the hcal module properly, used to complete table v1
+*** Table v1 <2019-07-05 Fri>
+     | Detector Name | Measurements [XxYxZ][mm]   | Converter Layer [mm] | Counter Layer [mm] | number of layer |
+     |---------------+----------------------------+----------------------+--------------------+-----------------|
+     | WCAL          | 150 x 150 x 175 (25 + 150) |                    3 |                  2 |              35 |
+     | ECAL          | 229.2 x 229.2 x 471        |                  1.5 |                1.5 |             150 |
+     | ECAL(Pres)    | 229.2 x 229.2 x 50.24      |                  1.5 |                1.5 |              16 |
+     | HCAL          | 582 x 576 x 1632           |          25 + 7(gap) |                  4 |              47 |
+     | SRD           | 60 x 80 x  260(120+140)    |            0.1(0.18) |                1.1 |       100 + 100 |
+     | HCAL cell     | 194 x 192 x 36             |          25 + 7(gap) |                  4 |                 |
+     | ECAL cell     | 38.2 x 38.2 x 3            |                  1.5 |                1.5 |                 |
+     |---------------+----------------------------+----------------------+--------------------+-----------------|
+*** Table v2 <2019-07-10 Wed>
+    *NIL* = Nuclear Interaction Length
+    *BOX* = Measurements of the full box are shown, not only the calorimeter. full length of Converter/Counter
+     | Detector Name | Measurements [XxYxZ][mm]   | Converter Layer [mm] | Counter Layer [mm] |              number of layer |
+     |---------------+----------------------------+----------------------+--------------------+------------------------------|
+     | WCAL          | 150 x 150 x 175 (25 + 150) |                    3 |                  2 |                           35 |
+     | ECAL          | 229.2 x 229.2 x 471        |                  1.5 |                1.5 |                          150 |
+     | ECAL(Pres)    | 229.2 x 229.2 x 50.24      |                  1.5 |                1.5 |                           16 |
+     | HCAL          | 582 x 576 x 1623           |          25 + 9(gap) |                  4 | 48(steel) + 47(scintillator) |
+     | HCAL Box      | 600 x 600 x 1623           |         7.4 NIL 1242 |       0.24 NIL 188 |                              |
+     | SRD           | 60 x 80 x  260(120+140)    |            0.1(0.18) |                1.1 |                    100 + 100 |
+     | HCAL cell     | 194 x 192 x 36             |          25 + 9(gap) |                  4 |                              |
+     | ECAL cell     | 38.2 x 38.2 x 3            |                  1.5 |                1.5 |                              |
+     |---------------+----------------------------+----------------------+--------------------+------------------------------|

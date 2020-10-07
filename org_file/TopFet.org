@@ -1,0 +1,265 @@
+* Links
+   #+LINK: hamamatsu_web https://www.hamamatsu.com/eu/en/product/optical-sensors/mppc/mppc_single/mppc_for-precision-measurement/index.html  
+   #+LINK: hamamatsu_products /home/deppy/polybox/PhD/TopFet/SiPM_products/hamamatsu_mppc.pdf
+   #+LINK: googledocs https://docs.google.com/document/d/1UuyIrGbCdOmrfxtc-voEc91bsGi8moVq7KEl-MRoWeE/edit
+* Mail
+** advises for small signal detection <2019-04-17 Wed>
+   
+   Hi Johannes,
+
+   you need to acquire data in ToT mode.
+   QDC mode has not enough resolution to be able to distinguish such small
+   signals.
+   
+   You should also set all trigger_2_* settings to 0 (use only threshold
+   T1 for triggering), set fe_delay to OFF and and scan the vth_t1
+   threshold.
+   
+   Ricardo
+* equipment
+** WLS fibers
+   [[/home/deppy/polybox/PhD/TopFet/SiPM_products/WLS_fibers/WLS_fibers.pdf][documentation]]
+*** BCF-91A
+    Used currently for the counters
+    - *Emission color*: GREEN
+    - *Emission peak*: 494 nm
+    - *Decay time*: 12 ns
+    - *Photon per MeV* n/a
+    - *Characteristic / applications* : shift blue to green
+      [[/home/deppy/PhD/TopFet/SiPM_products/WLS_fibers/91A-opticalspectra.png][spectra]]
+*** BCF-10
+    See the documentation, more compatible with currently used SiPM
+** Optical grease
+   Some optical grease was ordered by Vladimir and typically used for the HCAL.
+   We could use it to improve the coupling with the SiPM.
+   - [[/home/deppy/polybox/PhD/TopFet/document/Polytec_EP_601_en.pdf][Polytec EP-601]]
+* SiPM working principle
+  - [[/home/deppy/polybox/PhD/TopFet/SiPM/Hamamatsu_SiPM_note.pdf][hamamatsu note]]
+  - [[/home/deppy/polybox/PhD/TopFet/SiPM/Hamamatsu_SiPM_pres.pdf][hamamatsu presentation]]
+  - [[https://hub.hamamatsu.com/us/en/technical-note/how-sipm-works/index.html][hamamatsu simple explanation]]
+* SiPM products
+  [[/home/deppy/polybox/PhD/TopFet/SiPM_products][directory]]
+** Ketek
+   [[https://www.ketek.net/sipm/sipm-products/][products]]
+*** WB SERIES
+   - [[https://www.ketek.net/sipm/sipm-products/wb-series/][webpage]]
+   - [[https://www.ketek.net/sipm/technology/device-parameters/][parameter explanation]]
+   - 
+   | Type      | Active Area [mm²] | Microcell Size [µm] | No. of Microcells | Package Dimensions [mm³] |
+   |-----------+-------------------+---------------------+-------------------+--------------------------|
+   | [[/home/deppy/polybox/PhD/TopFet/SiPM_products/Ketek/KETEK-PM1125-WB-Datasheet.pdf][PM1125-WB]] | 1.0 x 1.0         |                  25 |              1600 | 1.315 x 1.315 x 0.595    |
+   | [[/home/deppy/polybox/PhD/TopFet/SiPM_products/Ketek/KETEK-PM3315-WB-B0-Datasheet.pdf][PM3315-WB]] | 3.0 x 3.0         |                  15 |             38800 | 3.315 x 3.315 x 0.595    |
+   | [[/home/deppy/polybox/PhD/TopFet/SiPM_products/Ketek/KETEK-PM3325-WB-Datasheet.pdf][PM3325-WB]] | 3.0 x 3.0         |                  25 |             13920 | 3.315 x 3.315 x 0.595    |
+   |-----------+-------------------+---------------------+-------------------+--------------------------|
+
+** Hamamatsu
+   [[hamamatsu_web][products]]
+   [[hamamatsu_products][products.pdf]]
+*** SiPM for precision measurements
+| NAME          | eff. photosensitive area | pixel pitch | number of pixels | package            | spectral response reange | peak sensitivity | dark count | terminal C | Gain    |
+|---------------+--------------------------+-------------+------------------+--------------------+--------------------------+------------------+------------+------------+---------|
+| S13360-1325PE | 1.3 × 1.3 mm             | 25 μm       |             2668 | Surface mount type | 320 to 900 nm            | 450 nm           | 70 kcps    | 60 pF      | 7.0×105 |
+| S13360-1350PE | 1.3 × 1.3 mm             | 50 μm       |              667 | Surface mount type | 320 to 900 nm            | 450 nm           | 90 kcps    | 60 pF      | 1.7×106 |
+| S13360-1375PE | 1.3 × 1.3 mm             | 75 μm       |              285 | Surface mount type | 320 to 900 nm            | 450 nm           | 90 kcps    | 60 pF      | 4.0×106 |
+| S13360-2050VE | 2 × 2 mm                 | 50 μm       |             1584 | Surface mount type | 320 to 900 nm            | 450 nm           | 300 kcps   | 140 pF     | 1.7×106 |
+| S13360-3025PE | 3 × 3 mm                 | 25 μm       |            14400 | Surface mount type | 320 to 900 nm            | 450 nm           | 400 kcps   | 320 pF     | 7.0×105 |
+| S13360-3050PE | 3 × 3 mm                 | 50 μm       |             3600 | Surface mount type | 320 to 900 nm            | 450 nm           | 500 kcps   | 320 pF     | 1.7×106 |
+| S13360-3050VE | 3 × 3 mm                 | 50 μm       |             3584 | Surface mount type | 320 to 900 nm            | 450 nm           | 500 kcps   | 320 pF     | 1.7×106 |
+| S13360-3075PE | 3 × 3 mm                 | 75 μm       |             1600 | Surface mount type | 320 to 900 nm            | 450 nm           | 500 kcps   | 320 pF     | 4.0×106 |
+|---------------+--------------------------+-------------+------------------+--------------------+--------------------------+------------------+------------+------------+---------|
+*** advised from Hamamatsu
+**** mail
+     
+     Thanks for your email.
+     
+     The MPPC series S13360 is basically well suitable for your application, and surely the first choice to start your  tests with.
+     Besides 1.3mm and 3mm types, we also have 2mm types (in this case TSV instead of wirebond).  -> Art.No S13360-2050VE
+     
+     For your reference,  I attach below the overview catalog for MPPC series S13360 .
+**** questions
+     - What is time window in which you will get this few photonelectrons. And what is your signal frequency? *WLS decay, 12ns. very low (cosmic)*
+     - Are your tests related to ProtoDUNE (SP or DP) ? *Nope, NA64 related*
+     - About how many pcs will you roughly need in future for your test *to discuss*
+**** products advised
+     If there is no other request by you, I will propose 50um pixel types and SMD package
+     i.e. we will prepare a quote  for 1-5pcs each of following MPPCs
+     [[file:/home/deppy/polybox/PhD/TopFet/SiPM_products/hamamatsu_mppc.pdf::18][S13360-1350PE]]
+     [[file:/home/deppy/polybox/PhD/TopFet/SiPM_products/hamamatsu_mppc.pdf::13][S13360-3050PE]]
+     [[file:/home/deppy/polybox/PhD/TopFet/SiPM_products/hamamatsu_mppc.pdf::17][S13360-2050VE]]
+**** quote                                                            :quote:
+     [[/home/deppy/polybox/PhD/TopFet/SiPM_products/hamamatsu_quote.pdf][document]]
+|---------------+----------+------------------+------------------+------------------+----------------|
+| product       | quantity | Unit Price [JPY] | Net Amount [JPY] | Net Amount [CHF] | Ratio discount |
+|---------------+----------+------------------+------------------+------------------+----------------|
+| S13360-1350PE |        2 |             4260 |             9240 |        85.421096 |      2.1690141 |
+| S13360-1350PE |        6 |             4035 |            24210 |        223.81437 |              6 |
+| S13360-1350PE |       10 |             3510 |            35100 |        324.48923 |             10 |
+| S13360-3050PE |        2 |             8460 |            16920 |        156.42045 |              2 |
+| S13360-3050PE |        6 |             7395 |            44370 |        410.18767 |              6 |
+| S13360-3050PE |       10 |             6450 |            64500 |        596.28363 |             10 |
+| S13360-2050VE |        2 |             5100 |            10200 |        94.296016 |              2 |
+| S13360-2050VE |        6 |             4470 |            26820 |        247.94305 |              6 |
+| S13360-2050VE |       10 |             3885 |            38850 |        359.15688 |             10 |
+|---------------+----------+------------------+------------------+------------------+----------------|
+#+TBLFM: $5=$4/108.17
+#+TBLFM: $6=$4/$3
+**** custom table     
+|---------------+----------+------------------+------------------+------------------+----------------|
+| product       | quantity | Unit Price [JPY] | Net Amount [JPY] | Net Amount [CHF] | Ratio discount |
+|---------------+----------+------------------+------------------+------------------+----------------|
+| S13360-1350PE |        2 |             4260 |             8520 |        78.764907 |              2 |
+| S13360-1350PE |        6 |             4035 |            24210 |        223.81437 |              6 |
+| S13360-1350PE |       10 |             3510 |            35100 |        324.48923 |             10 |
+| S13360-3050PE |        2 |             8460 |            16920 |        156.42045 |              2 |
+| S13360-3050PE |        6 |             7395 |            44370 |        410.18767 |              6 |
+| S13360-3050PE |       10 |             6450 |            64500 |        596.28363 |             10 |
+| S13360-2050VE |        2 |             5100 |            10200 |        94.296016 |              2 |
+| S13360-2050VE |        6 |             4470 |            26820 |        247.94305 |              6 |
+| S13360-2050VE |       10 |             3885 |            38850 |        359.15688 |             10 |
+|---------------+----------+------------------+------------------+------------------+----------------|
+| SUM           |          |                  |                  |        2053.4344 |            0/0 |
+#+TBLFM: $5=$4/108.17
+#+TBLFM: $4=$2*$3
+#+TBLFM: $6=$4/$3
+#+TBLFM: @11$5=vsum(@3..@9)
+* Advise from petsys
+** Low Signal configuration
+   an email was sent suggesting some specification for low signal measurements
+*** email content
+    Hi Johannes,
+    
+    As Ricardo previously mentioned, for short signals (low energy) you should use the default "acquire_sipm_data.py" script in TOT mode
+    (there is an option flag when launching the script allowing to chose to acquire in QDC or TOT mode).
+    Also, you should edit the "config.ini" file and add the following lines in the [asic_parameters] section:
+    
+    channel.trigger_mode_2_t = 0
+    channel.trigger_mode_2_q = 0
+    channel.trigger_mode_2_e = 0
+    channel.trigger_mode_2_b = 0
+    channel.fe_delay = 0b10000
+
+
+    With these settings you are only using the threshold t1 to discriminate the ascending
+    and descending part of the pulse (and compute the corresponding TOT). E and t2 discriminators
+    are not used with such trigger mode settings. From our tests with attenuated laser pulses and these settings,
+    we never obtained the bad artefacts of high and negative TOT such you show in your plot.
+    
+    Best Regards,
+    Luis    
+*** parameters advised
+    *Use TOT mode in the skript acquire_sipm_data.py*
+
+    in config.ini section [asic_parameters]
+    
+    | channel.trigger_mode_2_t |       0 |
+    | channel.trigger_mode_2_q |       0 |
+    | channel.trigger_mode_2_e |       0 |
+    | channel.trigger_mode_2_b |       0 |
+    | channel.fe_delay         | 0b10000 |
+* Test with petsys
+** test performed                                                 :test:SiPm:
+   For a full review, look in [[googledocs]]
+*** <2019-05-08 Wed>
+    Done in TOT mode and used T2 to reduce rate to an acceptable level
+    *Important* peak seems to have appeared! To be investigated withotu source
+    |---------------+----------------------------------|
+    | time          |                         12 hours |
+    | mode          |                              TOT |
+    | vth_t1        |                               15 |
+    | vth_t2        |                               20 |
+    | vth_e         |                               -- |
+    | offset        |                             0.75 |
+    | Pre-breakdown |                               20 |
+    | Brekdown      |                               23 |
+    | OverVoltage   |                                9 |
+    | source        |                              yes |
+    | Folder        | /data/long_measurement_07052019/ |
+    |---------------+----------------------------------|
+*** <2019-05-09 Thu>
+    Done in TOT mode and used T2 to reduce rate to an acceptable level
+    Done to investigate the peak, preliminary file size seem much less!
+    |---------------+----------------------------------|
+    | time          |                         12 hours |
+    | mode          |                              TOT |
+    | vth_t1        |                               15 |
+    | vth_t2        |                               20 |
+    | vth_e         |                               -- |
+    | offset        |                             0.75 |
+    | Pre-breakdown |                               20 |
+    | Brekdown      |                               23 |
+    | OverVoltage   |                                9 |
+    | source        |                              no  |
+    | Folder        | /data/long_measurement_07052019/ |
+    |---------------+----------------------------------|
+** TODO [0/1]test to be performed
+   - [ ] perform test using petsys [[Advise from petsys][reccomandation]]
+** Channel list for ECAL module <2019-06-14 Fri>
+   - used for the test are marked
+   - drawing can be found [[/home/deppy/polybox/PhD/TopFet/Cad/PCB_PetsysAdapter_Layout/NA64-Direct-SiPM-Adapter.pdf][here]]
+   | SiPM | Channel |
+   |------+---------|
+   |    1 |      55 |
+   |    2 |      62 |
+   |    3 |      59 |
+   |    4 |      58 |
+   |------+---------|
+   |    4 |      60 |
+   |    6 |      44 |
+   |  *7* |    *17* |
+   |    8 |      13 |
+   |------+---------|
+   |    9 |      26 |
+   |   10 |       2 |
+   |   11 |       0 |
+   | *12* |    *22* |
+   |------+---------|
+* PMT for comparison
+  - [[/home/deppy/polybox/PhD/TopFet/comparison_PMT][directory]] 
+** circuit from benjamin <2019-10-29 Tue>
+  - [[/home/deppy/polybox/PhD/TopFet/comparison_PMT/circuit.png][circuit]]
+  - [[/home/deppy/polybox/PhD/TopFet/comparison_PMT/PMT_adapter_pins.jpg][pins]]
+* TopFet instructions
+** structure of idfx file
+   | header length = 64 byte | file length = typically file size | something | something | parid1 | parid2 |
+
+   - par id are useful for grouping and identifier of runs
+** timing calculations
+* Articles
+** Transverse and longitudinal segmented forward hadron calorimeters with SiPMs light readout for future fixed target heavy ion experiments
+   Article about a new model of HCAL with Sipm readout and longitudinal segmentation
+   - [[https://www.sciencedirect.com/science/article/pii/S0168900219311933?dgcid=raven_sd_search_email][link]]
+** Analysis methods for highly radiation-damaged SiPMs
+   - [[https://www.sciencedirect.com/science/article/pii/S0168900219311945?dgcid=raven_sd_search_email][link]]
+** Time resolution analysis of detectors based onplastic scintillators coupled to siliconphotomultipliers
+   Excellent article,
+   One thing that they test, is how much of a difference you get with and without optical grease!
+   They also compare different methods for calculation of the timing, using different pulse thresholds (10%, 20% etc) 
+   and also one method where the slope of the pulse is calculated in order to determine the timing.
+   I think this might be very interesting to you, with respect to the SiPM tests you are carrying out downstairs!
+   - [[https://arxiv.org/pdf/1912.05048.pdf][link]]
+*** comments
+    - Time coincidence of Be-Be
+      + SiPM Sensl Micro FC-60035-SMT used for the barrel detector
+      + Rise time and signal width don't improve after optical grease is applied, pulse width does
+      + Persistence plot on page 6
+      + Amplitude with and without optical grease in page 7, also after using selection criteria
+      + Time difference distribution on page 9, they quote similar values (about 1 ns) but
+        significantly improved after applying the optical glue
+      + Breakdown voltage at 24.5 Volt
+      + overvoltage set to 1.75 V
+      + Some persistency plot in page 14
+    - Time coincidence of BD counters
+      + It was used CFD and FT(Tot)
+      + All time resolution were assumed to be equal for the time calculation
+      + nice review plot at page 17
+      + value are around 100 ps
+** Development of High Precision Timing CounterBased on Plastic Scintillator with SiPM Readout
+   - [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6898046][link]]
+** A time resolution study with a plastic scintillator read out by a Geiger-mode Avalanche Photodiode
+   - [[https://www.sciencedirect.com/science/article/pii/S0168900211020456][link]]
+** Replacement of a Photomultiplier Tube with Silicon Photomultipliers for use inSafeguards Applications
+   - [[https://arxiv.org/pdf/1912.09576.pdf][link]]
+** Physics potential of timing layers in future collider detectors
+   - https://arxiv.org/abs/2005.05221
+** Characterization of Hamamatsu 14160 series of Silicon Photo-Multipliers
+   - https://arxiv.org/abs/2006.06258

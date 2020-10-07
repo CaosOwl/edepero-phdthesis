@@ -1,0 +1,79 @@
+#file to list the usefull runs to analsyse
+* beam time summer 2016
+  [[./LogBook2016.pdf::1][LogBook]]
+** run 1448 electron beam magnetic field on
+| magnetic field | date           | S_0   | S_1  | S_2  | V_0   | spill number | special note |
+|----------------+----------------+-------+------+------+-------+--------------+--------------|
+| 700 A          | 9th july,14.20 | 343 K  | 283K | 279K | 239 K | not  quoted  | no note      |
+|----------------+----------------+-------+------+------+-------+--------------+--------------|
+** run 1408 hadron beam magnetic field on
+| magnetic field | date           | S_0  | S_1  | S_2  | V_0    | spill number | special note             |
+|----------------+----------------+------+------+------+--------+--------------+--------------------------|
+| 700 A          | 8th july,14.20 | 53 K | 2.3K | 1.6K | 15.7 K | not  quoted  | test after internvention |
+|----------------+----------------+------+------+------+--------+--------------+--------------------------|
+** run 1416 hadron beam field on
+| magnetic field | date     |   S_0 V | S_1 | S_2 | V_0 | spill number | special note                          |
+| 700 A          | 8th july,15.15 | 50x10^3 | --- | --- | --- |           20 | 15.50 no beam,mains problem... expert |
+
+** calibration runs
+   [[./LogBook2016.pdf::12][BGO_calibration]]
+*** run 1154 calibration of BGO Nr.3,7 with pi-
+    no additional information , ~10 spill
+    - BGO 7 peak:: 1317 V
+    - BGO 3 peak:: 1335 V
+* beam time autumn 2016
+  [[./LogBook2016B-2.pdf::1][LogbookB]]
+  [[./list_runs_Oct_2016B.pdf::1][run list]]
+** run 2151 calibration run with hadron
+   not information about intensity is given just peak position in the ADC counts.
+   began at 21:50
+   | SRD Nr. | peak position[ADC counts] | High Voltage [Volt] |
+   |---------+---------------------------+---------------------|
+   | SRD0    |                      1080 |                1023 |
+   | SRD1    |                      1900 |                1023 |
+   | SRD2    |                      1740 |                1000 |
+   |---------+---------------------------+---------------------|
+   the calculation was readone by fitting the peak with a landau distribution instead of roughly taking the maximum. 
+   The results are the following:
+   | SRD Nr. | peak position[ADC counts] | High Voltage [Volt] |
+   |---------+---------------------------+---------------------|
+   | SRD0    |                      1017 |                1023 |
+   | SRD1    |                      1835 |                1023 |
+   | SRD2    |                      1692 |                1000 |
+   |---------+---------------------------+---------------------|
+** run 2181 hadron beam run 100 GeV
+| magnetic field | date               | S_0  | S_1 | S_2   | V_0   | spill number | special note                                      |
+|----------------+--------------------+------+-----+-------+-------+--------------+---------------------------------------------------|
+| 735 A          | 23th october,20.34 | 37 K | 23K | 13.3K | 1.1 K |           60 | 20.40-20.50 MM switched voltages to reduce sparks |
+|----------------+--------------------+------+-----+-------+-------+--------------+---------------------------------------------------|
+** ru 2179 run with electrons 100 GeV
+  [[./LogBook2016B-2.pdf::31][LogbookB]]
+| magnetic field | date               | S_0 | S_1 | S_2  | V_0 | spill number | special note                        |
+|----------------+--------------------+-----+-----+------+-----+--------------+-------------------------------------|
+| 735 A          | 23th october,20.34 | --- | --- | ---- | --- |           46 | changed position of srd see logbook |   
+|----------------+--------------------+-----+-----+------+-----+--------------+-------------------------------------|
+** run 2445 electro beam with 100 GeV
+  [[./LogBook2016B-2.pdf::57][LogbookB]]
+| magnetic field | date                | S_0    | S_1    | S_2    | V_0   | spill number | trigger reduction | special note |
+|----------------+---------------------+--------+--------+--------+-------+--------------+-------------------+--------------|
+| 800 A          | 09th november,21.41 | 4900 K | 3560 K | 3720 K | 147 K |          200 | 498,1             | no entry     |
+|----------------+---------------------+--------+--------+--------+-------+--------------+-------------------+--------------|
+** run 2204 hadron beam with 100 GeV
+  [[./LogBook2016B-2.pdf::34][LogbookB]]
+| magnetic field | date               | trigger: | spill number | trigger reduction | special note                                               |
+|----------------+--------------------+----------+--------------+-------------------+------------------------------------------------------------|
+| 800 A          | 24th october,19.30 | SV       |           56 |                 1 | beam spot appears to be missalligned compared to electrons |
+|                |                    |          |              |                   |                                                            |
+|----------------+--------------------+----------+--------------+-------------------+------------------------------------------------------------|
+** run 2410 electron beam with 100 GeV
+  [[./LogBook2016B-2.pdf::53][LogbookB]]
+| magnetic field | date               | trigger: | S_0    | spill number | trigger reduction | special note |
+|----------------+--------------------+----------+--------+--------------+-------------------+--------------|
+| 800 A          | 3th november,21.07 | SV       | 3200 K |          200 |                 1 | no entry     |
+|----------------+--------------------+----------+--------+--------------+-------------------+--------------|
+** run 2438 electron beam with 100 GeV
+   [[./LogBook2016B-2.pdf::56][LogbookB]]
+| magnetic field | date             | trigger: | S_0    | S_1    | S_2    | V_0   | spill number | trigger reduction | special note |
+|----------------+------------------+----------+--------+--------+--------+-------+--------------+-------------------+--------------|
+| 800 A          | th october,19.30 | SV       | 4600 K | 3840 K | 4170 K | 160 K |          200 |                 1 | no entry     |
+|----------------+------------------+----------+--------+--------+--------+-------+--------------+-------------------+--------------|

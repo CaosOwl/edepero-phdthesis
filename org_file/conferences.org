@@ -1,0 +1,828 @@
+* Invisible school
+  - [[https://indico.cern.ch/event/592370/][link]]
+* January Conference at UZH about Dark Matter                            :DM:
+*Workshop about Dark Matter at UZH*
+[[https://indico.cern.ch/event/773863/overview][link]]
+** <2019-01-09 mer>
+*** CERN DM review
+ Some analysis about dark matter performed using data of CMS and ATLAS. Background fo jets particularly relevant
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/CERNDM_review.pdf]]
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/CERNDM_review_pt2.pdf]]
+*** WIMP review
+ Review about direct detection experiment with focus on WIMP. Particularly well donw with pros and contro
+ of mny experiments
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/WIMP_review.pdf]]
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/WIMP_review_pt2.pdf]]
+*** Cosmology Review
+ Some review about *RELAXION* that could explain both the hierarchy problem and strong CP simmetry, in a way
+ an upgraded version of axions
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/relaxion.pdf]]
+ Some review about inflation with possible explanation conneced to various field
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/DM_inflation.pdf]]
+ Some review about cosmology constraint, a bit confused but with nice description of temperature dependence
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/Cosmology_review.pdf]]
+*** Local struture problem
+Interesting presentation about satellite problem, very good! Some nice concept about computing as well
+** <2019-01-10 gio>
+*** Collider review
+Collider review given by one of the SPC commitee member *Gaia Lanfranchi*
+[[/home/deppy/PhD/materials/usefull presentation/January_UZH_DM_conference/Collider_review.pdf]]
+*** reviews about hot Axion
+Nice review, describes PQ mecchanism and give some constraints and detection method based on CMB 
+analysis spectrum.
+*anomalous symmetry* = Global symmetry
+*a* described as classical field as the de-roglie wave length is typically huge due to th very small mass.
+[[/home/deppy/PhD/materials/usefull presentation/January_UZH_DM_conference/PQ_review.pdf]]
+*** Dark Matter in Composite model
+Flavored Dark Matter:
+ [[/home/deppy/polybox/PhD/materials/usefull presentation/January_UZH_DM_conference/flavour_DM.pdf]]
+*** double beta decay
+** <2019-01-11 ven>
+*** atomic clock
+[[/home/deppy/PhD/materials/usefull presentation/January_UZH_DM_conference/atomick_clock.pdf]]
+*** Axion Searches
+*** outlook
+[[/home/deppy/PhD/materials/usefull presentation/January_UZH_DM_conference/outlook.pdf]]
+* Machine Learning Workshop <2019-02-04 lun> - <2019-02-05 Tue>       :ML:NN:
+  [[https://indico.cern.ch/event/757837/timetable/#20190204]]
+** <2019-02-04 lun>
+   [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf][slides]]
+*** basic of neural network and training 
+**** Activations function of a network
+***** RELU
+      Very popular, simple and very simple derivate, and *unbounded from above*
+***** Soft Max
+      Used for the last layer to normalize the final outputs
+**** Information content of a single event
+     - Likely events should have low information content
+     - Less liklely events should have higher information content
+     - Independent events information should be additive
+**** Entrompy
+     Average amount of information produced by the measurement of a *random* variable.
+
+     S = p_i * log ( p_i )
+**** Kullback-Leibler
+     A measure for the difference of probability distributions
+     
+     D_{KL} = - /sum P(i) log \frac{Q(i)}{P(i)}
+     
+     - Minimizing cross entrompy: equivalent to maximising the likelihood
+**** Problems
+     - Anomaly detection
+     - Sistematic uncertainty
+     - Generation 
+*** Lecture 2 
+**** Performance Measures
+     + *ROC* : Receiver operation characteristic
+     + *AUC* : Background rejection at given signal efficiency
+**** Heavy resonance tagging
+     [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::47][page]]
+**** Covolutional Network
+     See matrix as a 2D matrix of numbers
+      [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::61][page]]
+      1. Use Kernel filter to simply the image and produce and output immage [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::62][page]]
+      2. The filter preserve the structure of immage
+      3. Use the output of one convolutional operation and input of the next convolutional operation
+      4. Filter shrink the immage exp. (3x3 with 2x2 applied will give a 2x2). To preserve the immage
+         size is to immagine the input to be embebbed in a larger matrix filled with zeros (called *padding*)
+      5. *Pooling* : Operation that reduce the immage size. To prepare input of *NN*  [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::62][page]]
+         - Max Pooling
+         - Average Pooling
+***** Adding color
+      Adding properties to the immage ==> adding another layer of information to the immage  [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::64][page]]
+***** Local Connection      
+        [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::65][page]] Each region get a different filter instead of the same
+        - Useful when known in advance that some region are special
+        - Greater number of weights
+***** State of the art application
+       [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::67][page]]
+       [[https://keras.io/applications][weightfile]]
+***** Transfer network
+      Use weight from already trained machine as starting point
+***** Calorimetry
+       [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::69][page]]
+***** Beyond Convolution
+****** Capsule network
+       [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::74][page]]
+       They are the improved version of one convolutional filter
+       - Learn the *instantion vector*
+       - Routing by agreement (co-firing)
+       - Feed some assumption on how the face should look like for example, (do the distance of each elements agrees?)
+**** Recurrent NN
+     [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::79][page]]
+     - Inspiried by natural language processing
+     - Work with a sequence of inputs
+     - Inputs ca change the state of the celll (_Long Short Term Memomery_)
+     - *Don't have to project all information in a 2D grid*
+       - We need to impose some order to the list
+     - Example: *GRU* : gated Recurrent Unit
+***** Problems
+      Hidden vector state mostly depend on last vector state used ---> Order of which the inputs are presented
+      might effect strongly the performance
+      *Solution:* : Use Some algotirhm (for example Jet algorithm), to decide ordering
+***** Beyond Recurrence
+      [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::97][page]]
+      - Encoder-Decoder structure.
+      - Encoder maps to latent space
+      - *Attention:* pass all the hidden state to the final step to the decoder.
+      - at each word:
+        - Determine which ones are relevant
+        - Context + hidde state give next word
+**** Hybrid architectures
+**** Point Clouds / Particle Cloud
+     [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::102][page]]
+***** Graph
+      Represent our data 
+      - list of vertices
+      - Adjency matrix
+      - One need to generalize convolution to graph      
+***** Edge convolution
+      How to genralize CNN to Graph?
+      - for each point define a local area and apply a Convolution filter equivalent to all coordinate
+        *Properties* : Symmetric, same for all nodes and centers
+      - *Dynamic graph CNN* : Recompute distance at each layer
+**** Deep sets
+     [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::107][page]]
+     Dealing with un-ordered inputs.
+     Use Neural network to squiize X_n innputs in a single N-vector and then feed it in another neural 
+     network to avoid arbitrary ordering.
+**** Physics
+      [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::112][page]]
+**** Performance
+     [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::120][page]]
+** <2019-02-05 mar>
+   [[/home/deppy/PhD/materials/usefull presentation/Machine Learning Course/DeepLearning_Zurich_ML4HEP.pdf::130][slides]]
+*** Adversarial training
+    *WARNING:* Adversarial training has nothing to do with adversarial example
+    
+    let's say we have a simulation that misrepresent one variable of the problem
+    *Solution* : Adding Constraint - Adversarial training
+    *Idea* : decouple one variable from the main classifier to do a background estimate for example
+    
+    - Add another term to the *loss function*
+    - _Adversary_ is another Neural network that use the output of the first neural network to _guess the missing parameter_
+    - Adversarial has the following assumption: If the output of the classifier is low is probably background, otherwise signal --> Guess the mass or the generic variable
+    - Iteratively train the two network to find an equilibrium
+    - *Technical* : Typically punish the adversary whenever it does not choose the right bin, no matter how far away. Otherwise adversarial might learn just the mean of the value you are 
+      searching for
+    - Typically the adversarial is just use to keep the classifier in check, not perfect to guess very well the mass
+
+     $L_{classification} - \lambda \cdot L_{adversary}$
+**** Caveats
+     - Two competing networks, *convergence* not trivial
+     - Difficult of interpreting loss function
+       - overall loss function could get smaller just because adversial is not doing a good job, not necessarly convergence
+**** Adversarial example
+     add some impercetible noise to a true immage to bias it a bit (for an immage, a human should not be able to tell the difference)
+     --> This can greatly bias the decision of the network
+     --> Achieved by adding noise using the derivate of another classification, _specifically crafted noise_
+*** Systematic uncertainty
+**** Data augmentation
+     - Test network against global rescailing
+     - Retrain network using shifted sample as well
+       - Network sees multiple copies of the event = *data augmentation*
+     - Trade off performance and stability
+     - _Example of uncetainities_
+       - resolution
+       - pile up
+       - lost particles
+       - ...
+**** Bayesian Networks
+     Train data not to fully covering the phase space, sampling over Gaussian distribution for weights
+**** Weak supervision
+***** Learing from fraction
+      - *LLP* : Learning from Label Proportions
+      - Modify loss function to learn fraction per mini-batch
+      - distringuish mixed samples is equivalent to signal / background classification!
+**** Unsupervised learning
+     Looking for example for a model which was not invented yet
+***** Autoencoder
+      *basic idea* : take an input immage and recover the input immage in the end. Which means you want to give an intermediate reppresentation (vector rep) of the immage.
+      Then feed the representation and recover the immage
+      
+
+      $ L = ( y - g ( f(x) ) )^{2} $
+      
+      - unsupervised learning
+      - dimensional reduction
+      - New physics can be identified as anomaly --> immage not correctly represent after the decoder
+      - Of course less powerful than supervised classfier, but does not need previous knowledge of the model
+      - An adversarial can be used to suppress tail, which are typically identified as new physics by this method
+***** Variatonal Autoencoder
+      - We want sample from latent space
+      - Split into mean and standard deviation
+      - Add penalty termn (Kullback-Leibler divergence)
+        so mean/std are close to unit Gaussian
+      - Possible to build a basis of a direction of a specific property and apply it to modify immage accordingly (for example put black hair on a blonde person)
+**** Spectrum of MC Reliance
+     - Fully supervised learning
+     - Fully supervision, Mixed signal. Simulation good, but limited by which model is in the mix
+     - Weak supervision, MC gets fraction of different classes right on average
+     - No supervision
+**** GAN
+     Produce simulation using NN     
+     - Optimal G and D minise Jensen-Shannon divergence between data and generator
+
+***** Wasserstein GAN
+      ...
+***** Problems
+      - stability and convergence
+      - Generator and discriminator matching
+        - Vanishing gradient
+        - (use small momentum in training)
+      - Mode collapse
+      - Hard to interpret loss
+        - not correlated to image quality
+      - similar issues with adversarial training
+**** Refined network
+     We have some simulation and some data. 
+     - MC goes to the refiner
+     - Data goes to the critic
+     - MC goes to the critic
+     - Train is on the critic
+*** Open the black box, understand NN decision
+    - Learn what NN learns!
+      - visualize decision process
+      - correlation and gradient
+      - Encode physics in the network
+      - External known variables
+      - Interpretation of capsules
+    - Stability under systematic uncertainties
+      - Bayesian neural network
+    - Information theoretic approaches
+**** Deep dream
+     *DEEP DREAM* ==> slighlty modify image to increase classification score, highlight the features the network learned.
+
+      *Core concept* Use the filter which was most powerful for the NN to modify the immage to understand what kind of region the NN was looking that
+**** Theoretic approaches
+     Compute correlation coefficient
+     - Mutual information in physics ==> related to ROC curve
+*** Overtraining
+    Start to learn any small feature of the dataset provided. If complex enough it will start to reduce performance for small variations
+*** Others issues
+    - Cross validation
+    - ...
+* Patras conference June 3-7th June
+  [[https://indico.desy.de/indico/event/22598/][indico page]]
+** <2019-06-03 Mon>
+   [[https://indico.desy.de/indico/event/22598/other-view?view=standard#2019-06-03][timetable]]
+** <2019-06-04 Tue>
+   [[https://indico.desy.de/indico/event/22598/other-view?view=standard#2019-06-03][timetable]]
+*** Gaia Lanfranchi overview of dump experiment
+    [[https://indico.desy.de/indico/event/22598/session/6/contribution/97/material/slides/0.pdf][slides]]
+*** Interesting presentation about supernova and dark photon 
+    - Measuring if additional channel to disperse the temperature might be measurable and constraint model
+    [[https://indico.desy.de/indico/event/22598/session/6/contribution/12/material/slides/0.pdf][slides]]
+*** Talk about new type of axion detection using metamaterial (plasma haloscope)
+    - tune plasma frequency using metamaterial
+*** Mad Max experiment 
+    [[https://www.dropbox.com/s/q51imc1o9tdhbus/Patras2019.pdf?dl=0][slides]]
+    - still in the status of spotting show stopper
+    - using 3D simulation to validate the model
+    - proof of principle setup at Max Planck institute
+*** Quax experiment
+    [[https://indico.desy.de/indico/event/22598/session/7/contribution/39/material/slides/0.pdf][slides]]
+    - special ferromagnetic haloscope for electron couplings 
+*** Fermi large area telescope (LAT)
+    slide not avaiable
+    - search for spectral illegularities
+    - log-likelihood ratio test, no ALP found
+** <2019-06-05 Wed>
+   [[https://indico.desy.de/indico/event/22598/other-view?view=standard#2019-06-03][timetable]]
+*** FASER experiment
+    no slide for now
+    - lots of rock of things, alligment challenging
+*** NA62 status report
+    [[https://indico.desy.de/indico/event/22598/session/12/contribution/51/material/slides/0.pdf][slides]]
+    - Kaon identification
+    - Kaon tracker
+    - Large thank where we expect the Kaons decay
+    - RICH to separate pion from the muon
+** <2019-06-06 Thu>
+*** Metallic magnetic calorimeter for dark matter searches
+    [[https://indico.desy.de/indico/event/22598/session/19/contribution/78/material/slides/0.pdf][slide]]
+    - short is MMC
+    - used for IAXO, axion spectroscopy
+    - Low rate experiment ==> must be extremely stable
+    - presented a resolution of 1.37 eV
+    - developed at 4.5 X 4.5 cm^2
+*** Single photon detection for quax
+    only ppt
+    - 0.1 mHz Dark counts
+* SPS Conference <2019-08-26 Mon> - <2019-08-30 Fri>
+  - [[https://indico.cern.ch/event/801048/overview][link]] to the conference
+  - [[https://indico.cern.ch/event/801048/page/16356-pre-conference-workshops][link]] to the ML workshop
+** <2019-08-26 Mon> Pre-workshop on machine learning for quantum physics :NN:ML:
+   Link to the slide not yet avaiable
+*** NN fundamentals
+    - AI is everywhere, but not useful everywhere
+    - Lot of jargon but very simple mathematics behind
+    - *software packages:* TensorFlow, Keras, Mathematica
+**** Articles
+     - review articles for using NN in crystallography [[
+     - Fine prints for learning quantum machine algorithm [[https://scottaaronson.com/papers/qml.pdf][link]]
+     - introduction of the method enhanced features spaces (link to be found when I have internet)
+     - Quantum Algorithm for Linear system of equation, first algorithm of such implemented in this machines
+**** terminology                                                :definitions:
+     - *feed-forward*: NN if no loops in flow/variable dependence
+     - *Deep* NN if "many" layers
+     - *input layer* does nothing
+     - *output layer* last layer, has y as output
+     - *Hidden layer* all layer between input and output
+     - *Fully connect layer = Dense* takes input from _all_ previous layer outputs to each of its neuron
+     - *test set* a little subset subtract from data that do not participate to the training but just for testing of the performance
+     - *validation set* additional set to verify optimization of hyperparameters
+     - *cross-validation* repeat training with small portion of data set
+     - *overfitting* learned how that exact data look, lose power to generalize
+     - *weight decay*, add term to the cast function, encourages using as few weights as possible
+     - *dropout layers* sets a subset of neurons in a layer inactive randomly during each evaluation, trades training performance for generalization
+     - *stride* determines by how much filtered regions overlap
+     - *depth* number of filters/features maps processed in parallel
+     - *pooling layer* applies an operation like max or taking the average to subsequent subset of the input vector
+     - *Principle component analysis (PCA)* Linear transformation that separates the data points
+     - *feature maps* map prolem to a different hyperplane, might be useful to separate entries linearly
+**** choose activation function
+     - *ReLu*, constant before K, linear after K
+     - *Sigmoid*, like the name suggest, S activation function
+     - *Softmax*, output sum to 1, good for probability distributions
+**** supervised learning
+     - pairs $(\vec{x}, \vec{y}) where y is labeled
+     - fit network parameters (weight and biases) such that
+       1. network output for data as close to the label as possible
+       2. network generalizes to previously not seen similar data
+     - *Cost function* obkective for learning is minimization of cost function (minimum should be reached when labels agree with network output for data)
+     - Needs to be smooth in W, b (not integer-valued)
+***** Cost function examples
+      - *Quadratic cost function*
+        1. slow learning for vastly wrong output (initial phase)
+      - *Kullback-Leibler divergence/catergorical cross-entropy*
+        1. Physics inspired function (entropy)
+***** Optimization methos
+      - *gradient descend*
+        1. learning rate, _hyper parameters_ are parameters that are relevent for the training (meta)
+      - Global choice of learning rate difficult, improve by including momentum. (learning faster when more away from goal)
+      - *stochasti gradient descend*
+        1. use only small randomly chosen subseti of data to compute the gradients approximately
+      - various other variation, for example *ADAM*, one of the most advanced technique
+***** Regularization method      
+      - more training data
+      - *weight decay*, add term to the cast function, encourages using as few weights as possible
+      - *dropout layers* sets a subset of neurons in a layer inactive randomly during each evaluation, trades training performance for generalization
+***** Convolutional networks
+      - Apply a number of filters to input data detect local features
+      - *stride* determines by how much filtered regions overlap
+      - *depth* number of filters/features maps processed in parallel
+      - *pooling layer* applies an operation like max or taking the average to subsequent subset of the input vector
+        typically used with stride s>1 to reduce the size of data
+**** unsupervised learning
+***** Dreaming
+      - Use fully trained network, fix all its parameters
+        - fix output to desired one
+        - change input (from arbitrary seed) until cost function is minimized
+***** vulnerability of NN
+***** recurrent NNS
+      NN so far only works with fixed size input/output
+      - recurrent NNs are useful for time series
+      - Input comes in, first instance produce an output and an hidden output that goes in the next tensor
+**** Simpler machine learning: PCA
+     from a data matrix X find eigenvalues of $X^T X $ 
+     - Linear transformation that best separates data points
+**** Learning by confusion
+     - data ordered in parameter space (ex. by temperature)
+     - select putative phase boundary, train supervised NN network
+     - networks best training performance corresponds to true phase boundary
+**** Application examples
+     - *Phase classification* find crystal structure from X-ray diffraction
+     - Use it to predict Tc for different superconducting materials
+       - interpolates well but cannot extrapolate in complex parameter space (it can't extrapolate to very different materials from the one it uses to train)
+     - Processing spectroscopic data
+     - NN as variational quantum states
+       - network represent one (compressed) many-body quantum state
+       - determine eigenstates of a given hamiltonian variationally
+       - *restrited boltzmann machine, RBM* sums with hidden spin
+     - for device design, build photonic element that splits 1300 nm...
+     - find example of network in the slides
+**** FAQ
+     - *How big is big data?* A good start is around 1000...
+
+** <2019-08-27 Tue>
+*** Data Analysis for the PSI Neutron Electric Dipole Moment Experiment 15:30
+    - [[https://indico.cern.ch/event/801048/contributions/3479571/][link]]
+*** Beyond colliders: exploring the dark sector with beam dumps 17:30
+    - [[https://indico.cern.ch/event/801048/contributions/3479582/][link]]
+*** Dark sectors searches at high-intensity colliders 18:00
+    - [[https://indico.cern.ch/event/801048/contributions/3479537/][link]]
+*** zfit: scalable pythonic fitting  18:15
+    - [[https://indico.cern.ch/event/801048/contributions/3479579/][link]]
+
+** <2019-08-28 Wed>
+   
+*** Awake presentation
+    [[][link]]
+    - excite an electro-plasma wave
+    - *Why protons*: laser would carry ~40J while proton is in the order of 18 kJ
+    - To effectively excite wavefield
+      $k_{pe} \sigma_z \approx \sqrt{2}$
+      $k_{pe} \sigma_r \approx 1$
+    - *wavelength* mm scale proton bunches do not exist (right now few cm), *solution*
+
+**** how to create a Plasma
+
+**** setup
+     - 10 m long *rubidium vapour source*
+     - *laser* system that produces a 120 fs, 450mJ laser pulse to ionize most external electron
+     - *proton* 
+     
+**** diagnostic
+     - two screen setup, double screen after the plasma field, some of this bunches release light when pass this screen
+     - streak camera has a resolution over a ps scale
+
+**** experimental results
+** Awake planary presentation
+   - [[https://indico.cern.ch/event/801048/contributions/3523128/attachments/1899280/3134470/AWAKE-SPGOePG-AnnualMtg-2019-08-29-Edda.pdf][link]]
+* PSI Conference Physics of fundamental symmetries and interactions <2019-10-20 Sun> - <2019-10-25 Fri>
+  The conference is held at PSI, no need for reservation, it is quite confortably reached from home.
+  Did new indico account to have registration connected with it.
+  - *Main link to the conference:* [[https://indico.psi.ch/event/6857/][link]]
+  - *Registration link* [[https://indico.psi.ch/event/6857/registrations/892/?token=5f6de3f8-3a01-4d2c-815d-eab24e498fdf][link]]
+** registration info
+   
+ Participant Fees include 5x onsite lunch voucher, conference dinner, BBQ poster session, coffee breaks, bus transfer Baden-PSI (if chosen).
+
+ Payments can be made either by bank-to-bank transfer or by credit card. 
+
+*** CREDIT CARDS:
+    A virtual terminal will be opened where you can process your payment transaction. The payment 
+    service is powered by Saferpay and runs with SSL-encryption. Supported credit cards: Visa, 
+    Eurocard/MasterCard, American Express.
+    
+    BANK TRANSFER: Be aware that all bank charges must be covered by the sender. Indicate on 
+    bank transfer the following information (mandatory):
+    
+  * Reason of payment: "PSI2019" 
+  * Full name of participant(s) for whom payment is to be made
+  * Name of organization/affiliation: 
+    
+  Raiffeisenbank Böttstein
+  5314 Kleindöttingen, Switzerland 
+  Account number 63912.55 
+  Bank code number 80652 
+  SWIFT code RAIFCH22 
+  IBAN No. CH93 8065 2000 0063 9125 5 
+  Account holder's name: Paul Scherrer Institut, 5232 Villigen PSI, Switzerland
+
+*** REGISTRATION FEE
+    Early registration (before July 31, 2019): CHF 320
+    Late registration (after July 31, 2019): CHF 370
+    
+    [Students: Before receiving their PhD]
+    Early registration student (before July 31, 2019): CHF 100
+    Late registration student (after July 31, 2019): CHF 200
+    
+    Early single day only (before July 31, 2019): CHF 200
+    Late single day only (after July 31, 2019): CHF 200
+    
+    [Accompanying Person]
+    Early registration  (before July 31, 2019): CHF 100
+    Late registration (after July 31, 2019): CHF 120 
+    
+    
+    [Cancellation policy]
+    Registrations cancelled more than 8 days before the event will be refunded in full sum of registration fees except handling fee of 20 CHF.
+    Cancellations received later will only partially be refunded depending on date.
+
+** Conference days
+*** <2019-10-21 Mon>
+**** Searching for New Particles and Forces with Polyatomic Molecules
+     + [[https://indico-psi-2019-20e5e2cf27bdf043267cf61bd3e982b3.s3.cern.ch/event/6857/contribution/18896/20924-20062-Hutzler-PSI-2019.pdf?response-content-disposition=inline%3B%20filename%3DHutzler-PSI-2019.pdf&response-content-type=application%2Fpdf&AWSAccessKeyId=JDQTAH353PARKIW7IXW3&Expires=1571649100&Signature=PBobiowMU4KQanWxgJxOQeoYJQw%3D][presentation]]
+     + [[https://indico.psi.ch/event/6857/contributions/18896/][page]]
+***** comments
+      - Molecules have extremely strong field
+      - amplifies signature of CPV electromagnetic moments      -
+      - current limit using *thorium monoxide* molecule set b the *ACME II* experiment
+      - _Significant further advances in the near future improving quantum control_
+      - Trap $10^6$ molecule and let them coherently interacting in ultracold temperature. 10 s coherent interaction ==> *Laser colling*
+      - Vibrational mode can be excited as well, which are not present in atom.
+      - as any other EDM experiment is done by spin precession
+        + both nothing is perfect... field are crocked and not perfectly aligned.
+        + Some molecule can be fully polarized in the lab
+        + internal co-magnetometer
+        + Non-CPV effect cancel, but requires exotic electronic structure
+        + *Polyatomic molecule* can be laser cooled, fully-polarized and have internal co-magnetometers
+        + *Molecule example:* YbOH
+**** PHYSICS BEYOND SM WITH KAONS FROM NA62
+     - [[https://indico.psi.ch/event/6857/contributions/19026/][page]]
+     - [[https://indico-psi-2019-20e5e2cf27bdf043267cf61bd3e982b3.s3.cern.ch/event/6857/contribution/19026/20952-20090-NA62_PSI_Lazzeroni.pdf?response-content-disposition=inline%3B%20filename%3DNA62_PSI_Lazzeroni.pdf&response-content-type=application%2Fpdf&AWSAccessKeyId=JDQTAH353PARKIW7IXW3&Expires=1571653094&Signature=DttTq1GwcDGSsn9748MNqLaNkcw%3D][presentation]]
+***** comments
+      - benefits from other measurement from experiment to reduce some unertainty due to hadronic calculations
+      - constraint on CKM unitary triangle
+      - previous measurement from E787/E949, equivalent to two good signal event
+      - One candidate event was found in 2016 data
+      - *SETUP*
+        - Cherenkov target
+        - several large angle veto to detect photons from decays
+        - another RICH downstreams
+        - 100 ps level timing correlation
+        - $10^{-4}$ suppression to most hadronic decays
+        - 2017 took data for 55% of the intensity to optimize S/N ratio
+      - What is measured is the square of missing mass $m^2_{miss} = (P_{K+} - P_{\pi+})^2$, selected between 15 and 35 GeV
+      - USing blind analysis, signal region masked until last moment
+      - *good summary of analysis in page 9-10*
+      - Most prominent background
+        + Kaons decays with pi0 instead of neutrino sing to study the tail of missing mass distribution
+        + Upstream background, pi0 photons hit collimator without seeing them.
+      - Two event found in the signal region after all analysis in 2017
+      - *Summary of results in page page 19-20*
+**** Gravity tests at short distances using ultracold neutrons: A review of the qBounce experiment :gravityneutrons:
+     - [[https://indico.psi.ch/event/6857/contributions/18903/][page]]
+***** comments
+      + *very honest about problem faced*
+      + possible to measure electric charge of neutrons.
+      + Track detector are needed with microm resolution
+      + produce $Li^+$ + $\alpha$ (back to back)
+      + Total detector efficiency is 62%, drop of resolution is due to possibility 
+        of the two particle to decay parallel to detector plane
+      + *gravity resonance spectroscopy*, just counting neutron
+      + needed to correct the dataset since zero point was drifting over time.
+      + Dark energy could be caused by a scalar field. but one need a screening mechanism
+        otherwise excluded by the need of existent of a long range interaction
+      + Camelion mechanism
+      + Different possibility: either micron-screened or Fermi-screened
+**** Status of lattice results on contributions of CP violating operators to nEDM
+    - [[https://indico.psi.ch/event/6857/contributions/18920/][page]]
+    - [[https://indico-psi-2019-20e5e2cf27bdf043267cf61bd3e982b3.s3.cern.ch/event/6857/contribution/18920/20970-20108-Gupta_2019_NEDM_Zurich.pdf?response-content-disposition=inline%3B%20filename%3DGupta_2019_NEDM_Zurich.pdf&response-content-type=application%2Fpdf&AWSAccessKeyId=JDQTAH353PARKIW7IXW3&Expires=1571662652&Signature=yPOp8cE2zFSTh2B2oxOu0YP%2FfLw%3D][presentation]]
+***** comments
+      + 
+**** Searching for the electric dipole moment of the neutron - a landscape overview
+     - [[https://indico.psi.ch/event/6857/contributions/18919/][page]]
+***** comments
+      + pretty sum up slide page ~3
+      + 
+**** Nuclear structure corrections in muonic atoms               :muonicatom:
+     - [[https://indico.psi.ch/event/6857/contributions/18893/][page]]
+     - [[https://indico-psi-2019-20e5e2cf27bdf043267cf61bd3e982b3.s3.cern.ch/event/6857/contribution/18893/20922-20060-bacca_PSI_2019.pdf?response-content-disposition=inline%3B%20filename%3Dbacca_PSI_2019.pdf&response-content-type=application%2Fpdf&AWSAccessKeyId=JDQTAH353PARKIW7IXW3&Expires=1571671319&Signature=jH%2BCuKtM1O0HwHPRvZYTsfvMBu8%3D][presentation]]
+***** comments
+      + muon precision probe for the nucleus
+      + triggered by proton radius, much more precise measurements taken by the muon
+      + electron experiment show larger radius
+      + order $5 \sigma$ deviation
+      + last measurement with hydrogen is compatible with muonic measurement
+      + electron experiment:
+        1. large momentum scattering, extrapolation to zero very dubious
+        2. Mainz tries to do it with very low momentum
+        3. MUSE is trying to combine both experiment to eliminate systematic
+      + Muonic hydrogen is not currently possible to study at a experimental level
+      + TPE study:
+        1. Nuclear correction is coming with correction $Z^4$
+        2. last term comes to second order perturbation theory, still a bit unknown
+        3. Perturbative potential: correction to bulk Coulumb ==> *two photon exchange*
+        4. non-relativistc term: leading order term is reqeight of dipole response function
+        5. second order term related to Zemach moment
+        6. next to nex leading order: monopole and quadrupole response function. (most error comes from here)
+      + *Nucler Theory*
+        * Solve the shcroendiger equation for few nucleons
+        * Hyer-spherical harmonics expansion and Lorenz integral
+        * Chiral effective field theory is the new method
+          + see slide 14
+          + fit to the experiment ultimately
+      + *Muonic atom*: see slide 15
+      + Higher order correction seems to solve puzzle (page 19)
+        * high order diagram ($\alpha^6$ have one diagram with vacuum polarization that solves the issue)
+*** <2019-10-22 Tue>
+**** The proton radius puzzle                           :review:protonradius:
+     - [[https://indico.psi.ch/event/6857/contributions/18904/][page]]
+     - [[https://indico-psi-2019-20e5e2cf27bdf043267cf61bd3e982b3.s3.cern.ch/event/6857/contribution/18904/20998-20136-talk_antognini_PSI_2019.pdf?response-content-disposition=inline%3B%20filename%3Dtalk_antognini_PSI_2019.pdf&response-content-type=application%2Fpdf&AWSAccessKeyId=JDQTAH353PARKIW7IXW3&Expires=1571735164&Signature=vAOE6zLlHy%2Bn67%2BBqa5okS9ZUAI%3D][presentation]]
+***** comments
+      + Different contribution
+        1. bound state ED
+        2. finite size effect, proportional to radius proton squared, 7 order of magnitude larger in muonic hydrogen
+        3. black beast
+      + low energy muon in PSI
+      + 1% of them is formed in the 2S state needed in the experiment
+      + excite transition
+      + 7 sigma discrepancy using muonic hydrogen
+      + Rarely criticized for two reason
+        1. very inensitive to typical systematic
+        2. very sensitive to radius
+      + Theoretical prediction
+        + some contribution can't be computed in bound state QED
+          * Can be computed in Chiral EFT
+          * or phenomenological using data and disperision relation
+          * the two of them agrees, phenomenological much more precise
+      + Two measurmnt for the hydrogen
+        * one can be done with 1S-2S, very sound
+        * the other are two order of magnitude less precise
+        * only global average to 4 sigma discrepnacy,
+        * individual measurement are just ~1sigma discrepancy
+      + *room for new physics exist, but very very small*
+      + e-p scattering
+        + data point exist only up to a minimal Q^2, one need extrapolation
+      + 2S-4P transition measured in H, very large resonance but very good relative error thanks to analysis method 
+**** Fundamental symmetries and exotics physics in atoms
+     - [[https://indico.psi.ch/event/6857/contributions/18911/][page]]
+     - [[https://indico-psi-2019-20e5e2cf27bdf043267cf61bd3e982b3.s3.cern.ch/event/6857/contribution/18911/21001-20139-Safronova.pdf?response-content-disposition=inline%3B%20filename%3DSafronova.pdf&response-content-type=application%2Fpdf&AWSAccessKeyId=JDQTAH353PARKIW7IXW3&Expires=1571747888&Signature=S3N3Hg69rM9PtNYYGl2C5pgNL6Y%3D][presentation]]
+***** comments
+      + 
+*** <2019-10-23 Wed>
+**** The Muon g-2 experiment at Fermilab: Overview and status update
+     - [[https://indico.psi.ch/event/6857/contributions/18908/][page]]
+***** comments
+      + 
+**** Explaining (g−2)e and (g−2)μ together naturally
+     - [[https://indico.psi.ch/event/6857/contributions/19034/][page]]
+     - [[https://indico.psi.ch/event/6857/contributions/19034/attachments/15335/21064/Clara_Hormigos_-_hormigos-feliu_PSI2019v1.pdf][presentation]]
+**** Pseudoscalar contribution to the muon g-2
+     - [[https://indico.psi.ch/event/6857/contributions/18986/][page]]
+     - [[https://indico.psi.ch/event/6857/contributions/18986/attachments/15337/21051/Hagelstein_PSI2019.pdf][presentation]]
+**** Flavour Anomalies: status and prospects
+     - [[https://indico.psi.ch/event/6857/contributions/18906/][page]]
+     - 
+**** Combined explanations of (g-2)_mu, (g-2)_e and implications for a large muon EDM
+     - [[https://indico.psi.ch/event/6857/contributions/18988/][page]]
+       - 
+*** <2019-10-24 Thu>
+**** Cyclotron Radiation Emission Spectroscopy for measuring neutrino mass and searching for chirality-flipping interactions
+     - [[https://indico.psi.ch/event/6857/contributions/18902/][page]]
+     - 
+***** comments
+      - understand tail properly, page 24
+      - track and event reconstruction performance
+      - complex morphology
+        - Doppler shift
+        - Interference effect
+        - Electron motion through magnetic field inhomogeneities
+      - Machine learning classification of main sidebands
+      - Efficiency vs frequency curve to properly understand the efficiency
+**** Some recent approaches to ultralight bosonic dark matter searches
+     - [[https://indico.psi.ch/event/6857/contributions/18894/][page]]
+***** comments
+      + spatial pattern = speckle
+      + most popular candidate:
+        1. AXION, solve the strong CP problem Interacts
+           1. axion field interact with photon, conversion in strong magnetic field
+           2. interaction with gluon, should produce an oscillating dipole moment (CASPEr-E experiment)
+           3. Fermions, gradient of the field, effective magnetic field. possible coupling to electons (*Si e' complimentato con QUAX!*)
+        2. DILATON
+           1. Can be found using atom clocks
+        3. RELAXION
+           1. solves *hierarchy* and *strong problem*
+           2. Axion like particle but mix with higgs
+           3. Minimal model provides viable axion-like dark matter (DM)
+        4. Dark matter is a nugget,
+           1. held togheter by axion
+           2. a lot of Antimatter inside
+           3. explains M AM asymmetry
+      + Stochastic nature of bosonic DM
+      + ALP can be searched with Dark-matter in *BASE*
+*** <2019-10-25 Fri>
+**** Present status and future prospect of Neutrino-4 experiment search for sterile neutrino
+     - [[https://indico.psi.ch/event/6857/contributions/18997/][page]]
+     - [[https://indico.psi.ch/event/6857/contributions/18997/attachments/15362/21109/PSI_Serebrov_Neutrino-4.pdf][presentation]]
+***** comments
+      + research reactor
+        * 100 MW thermal power
+        * Compact core
+        * higly enriched U235 fuel
+      + Detector is liquid scintillator with 50 sections
+      + Gamma background in passive shielding does not depend neither on the power of te reactor nor on distance from reactor (*see page 6*)
+      + *analysis*
+        * method of analysis should not rely on precise knowledge of the spectrum
+        * $\chi^2$ analysis is used
+        * see page 11 and 13
+      + effect predicted in gallium reactor confirmed
+**** muCool: A novel low-energy muon beam for future precision experiments
+     - [[https://indico.psi.ch/event/6857/contributions/19033/][page]]
+***** comments
+      + Currently used surface muon beam, *bad quality*
+      + take standard muon beam and improve the quality in the phase space by 10 order of magntiude but with low efficiency
+      + all stages use heliumgas as friction mechanism
+        1. first stage electric of mangetic field *transverse compression*
+        2. second stage *longitudinal compression*
+        3. third stae is *final compression and extraction*
+      + *first stage*
+        * page 6
+        * magnetici field bends and electric field is decellerated
+        * muon do a cycloid
+        * in gas there are collision with gas atoms with frequency $f_c$ so muon drift mostly in electric field direction
+        * temperature gradient create a different gas density ==> different collision frequency
+        * This means different muon in different position will have a different drift ==> *transverse compression*
+        * 10 mm ==> 1< mm
+        * *sapphire plate* to define temperature gradient
+        * transverse compression show with Geant4 simulation
+      + *second stage*
+        * usually happens in 2.8 $\mu s$
+        * Electric field used for the purpose
+        * Originally second stage would have been at room temperature
+        * now the two first stages merged at cryogenic temperature
+        * Added the electric and magnetic field already at stage 1 to do both stages simultaneously
+        * fit in the tiny hole in the tip of the target
+      + *third stage*
+* Depp Learning meets (Astrop)-Physics <2020-01-22 Wed>
+  - [[https://github.com/toelt-llc/deep-learning-meet-astrophysics][git repository]]
+** General Neural Network theory
+*** Possible input
+    - value of the pixel? they range from 0-255
+    - Same network can be seen as a computational graph
+*** Single Neuron
+    - transform the input tensor in a new one
+*** activation functions
+    - *RELU*, zero before a value and then identity
+    - *Sigmoid* Something similar to an S function
+    - *Shift*, similar to RELU but smooth
+    - *Softmax* form theneuron output such that the sums is one, form a probability
+*** Loss function (also called *optimizer*)
+    - *MSE*
+      \[
+      \frac{1}{n} \sum^n_{i=1} (y_i^t - y_i)^2
+      \]
+    - 
+*** Optimization problem formulation
+    - Neural network architecture is defined by its loss function
+*** Feed forward neutral network
+    - All neuron of one Layer sends its output to all the neuron of the layer after
+    - Non linear activation function are needed to do a non-linear regression
+    - Can be done in matrix version
+*** TIpps
+    - How to decide number of layer?
+      - Not a fundamental rule
+      - Start simple and increase
+      - Avoid overfitting
+*** Over fitting
+    - nice slide of presentation :)
+    - 
+*** Gradient descent
+    - local minimum instead of a global minimum
+    - Starting point?
+      - Random value, but how big? does it play a role?
+    - Learning grade ---> the step size
+    - Calculate the gradient
+    - Extremely cool jupyter notebook
+    - *variations*
+      1) _Batch_ update the weights after all observation have been evaluated 
+      2) _Mini-Batch_ update weights after n observation have been evaluated <==== balance between accuracy and time running
+      3) _Stochastic_ update the weights after each sincle observations have been evaluated <=== extremely accurate
+    - *Other optimizer*
+      - Momentum
+      - RMSProp
+      - Adam
+*** Regularization
+    - Technique to reduce overfitting
+*** Dropout
+    - some number of layer are dropout during trainings
+    - Very good way to fight overfitting
+*** Additional difficulties
+    - look at slides
+** Convolutional Neural Network
+*** Convolution between two matrices
+    - look at slides
+    - K is a kernel or filter
+    - You use K to compress the image into a smaller size
+    - Use the correct filter to highlight what you want
+    - Convlutional Neural network calculate filter instead of weights
+    - Crunch down from an immage to a number of Kernel relevant to the immage
+    - Typically is a combination of convolution and pooling
+    - Neurons typically go down as the most simple answer are extracted
+    - *Deep CNN are very prone to overfitting*
+    - Training and inference of networks with many parametersi computationally intensive
+*** Transfer learning
+    - extract the 128 number that identified the face (for example)
+*** Neural style transfer
+    - twocomponent of an image
+      - Content
+      - Style
+    - Paper have all relevant formula
+    - Assumption is that content can be found in the network intermediated layer output, while the style lies in 
+      the correlation of the different layers
+
+* dorfer sucks
+  yes
+* Geant4 advanced course <2020-03-24 Tue>-<2020-03-26 Thu>
+** info
+   - [[https://indico.cern.ch/event/866056/overview][site]]
+   - [[https://indico.cern.ch/event/866056/registrations/55101/X][registration]]
+* Patras Conference 2020 <2020-06-20 Sat> - <2020-06-26 Fri>
+  - [[https://agenda.infn.it/event/20431/overview][indico]]
+  - [[https://axion-wimp2020.desy.de/][main website]]
+  - 
+
+* Searching for long-lived particles at the LHC: Seventh workshop of the LHC LLP Community <2020-05-25 Mon> - <2020-05-27 Wed>
+  - [[https://indico.cern.ch/event/863077/timetable/][timetable]]
+  - 
+* 8th Edition of the Large Hadron Collider Physics Conference
+  1) [[https://indico.cern.ch/event/856696/timetable/?view=standard][timetable]]
+* PhD seminar 2020
+** links
+   - [[https://indico.phys.ethz.ch/event/20/overview][overview]]
+   - [[https://indico.phys.ethz.ch/event/20/contributions/][contribution list]]
+   - [[https://indico.phys.ethz.ch/event/20/registrations/4/?token=7fc282cb-d84b-4f0e-818b-13feb2b49cd5][registration]]
+** notes
+* Geant4 course 
+** <2020-09-28 Mon>
+*** Hadron physic list
+    - The best way to see uncertainity is to scale down and scale up the cross-section of the hadron by 10\%.
+    - Beam dump experiment are typically performed using FLUKA
+      + A publication was done for beam dump using different codes
+    - 
+** <2020-09-29 Tue>
+*** User classes
+

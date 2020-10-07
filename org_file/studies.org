@@ -1,0 +1,2080 @@
+* Study with Segmented ECAL                                  :ecal:segmented:
+** Design note
+*** v1
+  - simply dumped all value in .txt and compressed using bzip2
+  - for now HCAL and VETO still present + MCtruth. Rest is removed (from Visible mode 2018 geometry)
+  - for the reconstruction
+** Compression study
+   Different compression algorithm tested for the reconstruction (using root)
+    The original file size was : *2.3M*
+    | algorithm  | dimension[M] | compression factor |
+    |------------+--------------+--------------------|
+    | ZLIB (101) |          6.1 |         0.37704918 |
+    | LZMA (207) |          1.4 |          1.6428571 |
+    | LZMA (208) |          1.4 |          1.6428571 |
+    | LZ4  (404) |          3.3 |         0.69696970 |
+    |------------+--------------+--------------------|
+     #+TBLFM: $3=2.3/$2
+  One of the responsable of the Geant4 hadron team emailed the following suggestions:
+  - reccomended version of Geant4 is 10.5.p01, we were using 10.5 and the differences
+    should not be big.
+  - charge exchange is typically not used, and the one implemented is still too crude to be used
+    also is typically relevant only at low energies
+  - we are interested in the projectile and target difraction, typically switched off if the target 
+    has more than 10 Nucleons, but our active part could make a difference.
+  - Elastic scattering might also play a role, one could try to check different treatment.
+    - Try out *QGSP_FTFP_BERT* to use QGS for hadron with energy larger than 25 GeV
+    - Use *FTFP_BERT_TRV* to use alternative treatment
+      of hadron elastic scattering
+    - Rerun *FTFP_BERT* by modifying the file in geant4/source/processes/hadronic/models/parton_string/diffraction/src/
+      called G4FTFParameters.cc
+      - switch off completely (for all types of target nucleus) projectile diffraction and target diffraction
+      - switch on (for all types of target nucleus) projectile diffraction (while leaving off target diffraction)
+      - switch on target diffraction diffraction and off projectile diffraction
+      - switch on both projectile diffraction and target diffraction
+** the CMS experience in building SiPM HCAL
+   here is a nice presentation:
+   - [[https://indico.cern.ch/event/853149/contributions/3587886/attachments/1919351/3175953/Tlisov_SiPMs_HCAL.pdf][presentation]]
+   - [[https://www.sciencedirect.com/science/article/pii/S0168900209020841?via%3Dihub][main_article]]
+   - [[https://www.sciencedirect.com/science/article/pii/S0168900215000388?via%3Dihub][SiPM radiation damage]]
+   - [[https://linkinghub.elsevier.com/retrieve/pii/S0168900206022704][performance]]
+* Disagreement between data and MC for hadron <2019-06-24 Mon>
+  A disagreement was observed between data and MC for all hadron calibration run observed.
+  specifically the number of events where the hadron deposit all its energy in the ECAL/WCAL
+  is strongly overestimated in MC (almost two order of magnitude). 
+  
+  an example can be found [[/home/deppy/polybox/PhD/org_files/run_May_2018/plots/hadron_comparison/ecal_hadrons_comp.pdf][here]] using simulation and data from 2018 visible mode setup.
+** characteristic
+   - effect is stronger for pions, stronger for kaons. almost non existent for antiprotons (mass scaling? conservation of baryon number plays a role?)
+   - effect stronger with higher radiation length (larger for ECAL, less for WCAL, good agreement betwenn WCAL for antiprotons). Is it scaling with it?
+   - Charge exchance should not play a role (excluded in the simulation). This is effect of standard hadronization (overestimation of pi0?).
+** Description of Hadron-induced Showers in Calorimeters using the  GEANT4 Simulation Toolkit. 
+   [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6154433][link]]
+   - *2011*
+   - description of current agreement for hadronic shower in LHC
+   - both CMS and ATLAS agree that Friof string model best describe the data
+   - At high energy the FTFP_BERT predict the longest and most penetreting showers
+   - Found excess of deposit by FTFP_BERT, Fig. 9
+** articles of comparison Data / MC
+*** Validation of GEANT4 Monte Carlo models with ahighly granular scintillator-steel hadron calorimeter :calice:
+    [[https://iopscience.iop.org/article/10.1088/1748-0221/8/07/P07005/pdf][link]]
+    - *2013*
+**** SiW-WECAL
+    - Tungsten calorimeter highly segmented and read-out by SiPM
+    - SiW-ECAL divided in three stack each compased in 10 modules of alternating tungsten and silicon layer
+      - first layer 1.4 mm tungsten (0.4 X_0)
+      - second layer 2.8 mm tungsten (0.8 X_0)
+      - third layer 4.2 mm tungsten (1.2 X_0)
+    - the silicon layer are segmented into PIN diodes of 1x1 cm2 for a total number of 9700 read-out cells
+    - Overall thickness of the prototype is 24.6 X_0 or 0.9 nuclear interaction length
+**** AHCAL
+**** GEANT4 COMPARISON
+     - 9.4 patch 3 is used
+     - geometry of the calorimeter simulated using [[https://ilcsoft.desy.de/portal/software_packages/mokka/][MOKKA]]
+     - geometry of the setup
+     - *Digitization is performed* page 5.
+     - Requirement used for events selection discussed in Sec. 5
+     - Additionaly only events for which the hadronic shower start in the first 5 AHCAL layer are used for the analysis (should be good for us)
+     - between 40 and 100 GeV data are overestimated (like us) but disagreement is below 6%
+     - interaction length (probability of pi- to have perform inelastic scattering) fitted using AHCAL data
+     - Very good agreement for FTFP for interaction length of material
+     - overall MC overestimate the response
+*** Testing Hadronic Interaction Models using a Highly GranularSilicon-Tungsten Calorimeter :calice:
+    [[https://arxiv.org/pdf/1411.7215.pdf][link]]
+    pi- tested (energy 2-10 GeV) with the SiWCAL of CALICE at FNAL. 350k events are selected
+    for the comparison with MC
+**** Geant4 comparison
+     - largest discrepancy observed in the longitudinal and transverse distributions of reconstructed events
+     - event selection mostly ensure MIP or interaction of incoming pi- and reduce mu- contamination
+     - physics list used: QGSP_BERT, FTFP_BERT, FTFP_BERT_HP and QBBC
+     - *Fig.6*: At high energy all physic list overestimate the interaction fraction by about 7% <====== HINTS
+     - Shower energy increases with the energy of the incoming pi- and is on 
+       average 15% higer in data than in simulation <====== GOES IN THE OPPOSITE DIRECTION
+     - Bertini cascade model was observed to generate too wide showers
+     - Fritiof model seems to agree better with the data
+     - FTFP_BERT_HP should treat low energy neutron well, but gives systematically
+       smaller mean and standard deviation compared to FTFP_BERT
+     - *Fig. 10* all MC model seems to overestimate mean and standard deviation of hits. <=== HINTS
+***** Longitudinal shower distribution
+      One of the most relevant for my study, and where the biggest disagreement lies
+      - at 10 GeV distribution is best, at 6 GeV peak is overestimated by 4%
+      - *Fig.18* shows mean and standard deviation comparison between many physics list
+      - Larger mistmatch in 9.6 version of Geant4 compared to 9.3 of longitudinal shower profile
+        corrections should be implemented in the new version 10.1
+*** Containment and resolution of hadronic showers at theFCC
+    [[https://arxiv.org/pdf/1604.01415.pdf][link]]
+    Document to present hadronic shower containment for FCC, comparison using test-beam from 
+    ATLAS Tile hadrnic calorimeter.
+    _Geant4 version used is 10.1_ Bertini used below 5 GeV
+
+    - longitudinal contaiment is always better in simulation <==== HINTS
+    - disagreement are in the order up to 10%
+    - Energy of the test beam is around 180 GeV <==== VERY COMPATIBLE
+    - Data and simulation are parameterised with $\lambda = a \cdot \ln{E} + b$
+    - 
+*** The Geant4 Bertini Cascade
+    Article to describe Bertini Cascade [[https://reader.elsevier.com/reader/sd/pii/S0168900215011134?token=9A161C20D620FAE6A9924EEB5AE39281EFFF40658C9EF8DFEFCD2804AA8ADC790A0AC23E46383A6CF9699C1D96B7964F][link]]. decently recent (2015)
+    In Fig. 5 differential cross section is shown as function of angle for gammas on copper nucleus
+    as predicted by Bertini model.
+    - Weird peak visible at high energy, sort of similar to what observed not in agreement with the data <=== HINTS
+      *IDEA* are low energy particle emitted in deep inelastic scattering contribute to our peak?
+
+** email from Alberto 
+** Ks search in NA64 data
+** Articles
+*** NA61 data to improve production of strange particles in hadronic interactions :article:
+    [[/home/deppy/polybox/PhD/materials/Kshort/Abgrall2016_Article_MeasurementsOfPiPmΠKPmKK0SKS0V.pdf][link]]
+    Interesting for its selection criteria and many similarities with NA64 setup
+    - Selection criteria for K0s     [[/home/deppy/polybox/PhD/materials/Kshort/Abgrall2016_Article_MeasurementsOfPiPmΠKPmKK0SKS0V.pdf::12][page12]]
+    - A parameter space of {p,$\theta$} is shown in  [[/home/deppy/polybox/PhD/materials/Kshort/Abgrall2016_Article_MeasurementsOfPiPmΠKPmKK0SKS0V.pdf::13][page13]]
+    - Background for the $K^0_S$ is typically parameterized with an *exponential*, for $\Lamba$ a 3rd degree Cherenkov polinomia
+    - For fitting the invariant mass following function were tested:
+      1. Bifurcated Gaussian for the peak signal
+      2. 3rd, 4rd Degree *Chebyshev* polynomial
+    - Uncertainty was also calculated by varying a bit the cuts along the region and see the differences
+    - *Feed-down correction:* subtract hadron coming from secondary interactions  [[/home/deppy/polybox/PhD/materials/Kshort/Abgrall2016_Article_MeasurementsOfPiPmΠKPmKK0SKS0V.pdf::15][page15]]
+    - *Systematic uncertainty:*
+      1. _Hadron loss_: requires track match with the TOF hits
+      2. _Reconstruction efficiency_: Following criteria were varied to estimate the uncertainty:
+         + Minimum number of point measured in the track
+         + azimuthal angle
+         + impact parameter
+      3. _Forward acceptance_
+      4. _ToF-F reconstruction_: estimated using a sample of events with very strict selection criteria
+         and a conservative value of 50% was assigned.
+      5. _Secondary interaction and non-Hyperion feed down correction_
+      6. _Hyperion feed-down correcton_
+    - *the h- analysis method:* based on the fact that $\pi^-$ are largely dominating the sample. thus PID
+      can be skypped and a small correction of non $\pi^-$ can instead be estimated using simulation  [[/home/deppy/polybox/PhD/materials/Kshort/Abgrall2016_Article_MeasurementsOfPiPmΠKPmKK0SKS0V.pdf::20][page20]]
+*** Analysis of V events
+    [[/home/deppy/polybox/PhD/materials/Kshort/Analysis_Vevents.pdf][link]]
+    *Authors:* J. Podolanski & R. Armenteros (1954)
+    Useful variable for two body decay are discussed in this article
+    - Assumin momenta of decayed particle and their angle has been measured all kinematics can be reconstructed
+    - The following is true for the quantities:
+      \[
+
+      E_a E_t - p_a p_b cos \phi_{ab} = (m^2_a m^2_b + M^2 p^{*2})^2
+
+      \]
+    - Analysis is performed following the three variables
+      \[      
+      p^* = \frac{1}{2 M} [M^2-(m_1+m_2)^2]^{\frac{1}{2}}[M^2-(m_1-m_2)^2]^{\frac{1}{2}}      
+      \alpha^*=\frac{m^2_1-m^2_2}{M^2}
+      \epsilon^*=2p^*/M
+      \]
+      1. $\epsilon^*$ measures the _energy release_. if 0 no energy is released, if 1 the whole invariant mass of the 
+         primary is converted in kinetic energy.
+
+      2. $\alpha^*$ represent  the _asymmetry_ of the decay for 0  $m_2 = m_1$ to $\alpha^* = 1 - \epsilon^*$ for $m_2 = 0$
+
+      3. The energy scale is finally calculated when either M or $p^*$ are given
+*** Comparison of proton shower developments in the BGO calorimeter of the Dark Matter Particle Explorer between GEANT4 and FLUKA simulations
+    - https://arxiv.org/abs/2009.13036
+
+* Time testes
+** Simulation time                                               :simulation:
+   Using simulation of invisible mode with VHCAL, shooting 100 electron and 100 muons with 100 GeV:
+   - $e^-$ 480 seconds
+   - $\pi^-$ 210 seconds, factor 2 to electrons
+   - $\mu^-$ 8 seconds, factor 60 to electrons
+** compression of output file of simulation (.d)
+*** test 1
+    *description:* tried different compression method to compress a sample file
+    coming from visible mode 2018 full simulation of the setup.
+    file used is:[[/home/deppy/BackupDisk/Analysis2018/sample/compression_test/hadron_test.d][link]]
+    The original file size was : *12M*
+    | algorithm  | dimension[M] | compression factor |
+    |------------+--------------+--------------------|
+    | gzip -9    |           4. |                 3. |
+    | gzip -1    |          4.6 |          2.6086957 |
+    | tar -czf   |          4.0 |                 3. |
+    | tar -cvjSf |          3.3 |          3.6363636 |
+    | 7za a -t7z |          3.4 |          3.5294118 |
+    | xz -zk     |          3.4 |          3.5294118 |
+    | bzip2 -zk  |          3.3 |          3.6363636 |<=== *FASTEST AND BEST COMPRESSION!*
+    |------------+--------------+--------------------|
+     #+TBLFM: $3=12/$2
+* background studies
+** analysis of verbose of monch simulation
+   most of events wich leave energy in the signal box of SRD seems to be caused by inelastic scattering of pion before the ECAL, however by browsing event it seems this events
+   don't trigger very making them much less dangerous. Here is some phenomenology experienced:
+*** pion
+**** hit in the srd
+      - pi^- inelastic scattering producing pi^0 that decays into gammas that hit the SRD
+      - other gamma with more than 2 GeV energy that hits the SRD
+      - e+ with more than 3 GeV energy hitting the SRD, also created by high energetic gammas produced in a pi0 decays
+      - pi- with 365 MeV energy hitting the SRD
+      - pi+ with  more than 2 GeV energy from inelastic scattering hitting the SRD
+      - proton with 50 MeV hitting the SRD
+**** general phenomenology
+      - production of multiple neutron nuclei that hit SRD
+      - dueteron created in the inelastic scattering with 50 MeV energy starting to create a lot of hadron ionization
+      - kaon+ created with 1 GeV energy starting to ionize a lot
+      - pi- created with 1 GeV energy starting to ionize a lot
+      - alpha particle with 13 MeV energy that starts ionize
+      - triton created in the mylar windows of the MicroMega with 30 MeV energy
+      - alpha with ~200 MeV
+**** trigger events!
+***** 
+      - pi- reaching the ecal and scatters
+      - neutron with 13 MeV energy backscatters to SRD
+      - bunch of neutron are created in a inelastic scattering of a pi-, any of them scatter backward, one of them reach SRD, pi0 with 151 MeV travel in the right direction and decays,
+	proton with 100 energy travel in the right direction,
+	*description of the event*:: pi- reach ecal and inelastically scatters, pi- with 13 GeV alo scatters and create a great number of baryon, some neutron with MeV energy backscatter and reach the srd
+
+***** 
+      - pi- reaching the ecal and scatters
+      - neutrons of 200 MeV scatters and reach the SRD
+***** 
+      - pi- successfulyy hit ecal and scatters inelastically
+      - gamma with 2 MeV reach SRD produced by inelastic scattering of a neutron
+      - neutron with 70 MeV hit the SRD after being produced in the backscattering of a neutron produced by the primary with 13 GeV
+	*description of event*: pi- reaching the ecal and producing a neutron, which backscatters into another neutron that hits the SRD
+***** 
+       	- pi- sucessfulyy reach ECAL and inelastically scatters
+       	- gamma with 48.3 MeV reach SRD counter produced in the ECAL converter with 212 MeV in a bremstrahlung event
+       	- gamma with 16.4 MeV produced in ECAL converter
+       	*description of event*:: pi-hitting ecal and producing a 10 GeV pi- in the ecal, which inelastic scattering produce also various charged particle in the opposite direction, with energy of several
+       	hundred of MeV (inelastic scattering) that later emit bremstrahlung that manages to reach SRD.
+***** 
+      - 
+*** kaon
+**** hit in the srd
+     - pi+ of 600 MeV produced in world hitting the SRD produced in the decay of a eta_rpime particle with original energy of 4 GeV
+     - pi+ of 400 MeV produced in the decay of a rho0 particle
+     - antin_nu_e hit the SRD
+     - photon of 50 GeV hitting the SRD after being produced in the Magnetgap by a pi0 decay
+**** general phenomenology
+
+     - also kaon inelastic scattering, seems to be more probable
+     - proton of 1 MeV
+     - proton of 20 MeV hitting the tube
+     - kaon decayed inside the magnet box into a pi0 and anti_nu_e and electron with energy in GeV range
+**** trigger event!
+***** 
+	   - kaon decayed inside the magnet box into a pi0 and anti_nu_e and electron with energy in GeV range
+	   - trigger activated by a gamma passing through the scintillator
+	     - 
+***** 
+      - kaon sucessfully travel until ECAL and scatters
+      - very energetic electron (60 MeV) knock on in the air near the ecal and scatters against the SRD
+***** 
+      - kaon reach ecal and scatters
+      - gamma with 4.34 MeV backscatters produced by an electron of 183 MeV that also backscattered produce by a 935 MeV pi- produced in the shower       
+***** 
+      - kaon successfulyy reach ECAL and scatters
+      - neutron of 155 MeV scatters in the ecal
+***** 
+      - inelastic scattering of kaon just before ecal! (312 mm)
+      - gamma of 77.2 MeV backscatters from preshower into SRD from 147 MeV e+, all originted by the decay of a 154 MeV pi0
+***** sim 357 ev19829
+      - kaon succssfulyy reach ecal and inelstically scatters
+      - pi- backscatters with initial energy of 156 MeV (75 mm inside preshower) and exit with energy of 90 MeV reaching srd. all generated by a 26 GeV pi+ produced by the primary
+      - 
+***** sim 357 ev6918
+      - Decay in the magnetbox of kaon!
+      - gamma of 1 MeV hitting the srd created in the bremstrahlung of an electron, tracing back all was created from a pi0
+      - trigger activated by a pi- created in the decay of K of 89 GeV
+      - *event description* kaon decay into pi- and pi0, the first activate the trigger the second activate SRD
+***** sim 357 ev17788
+      - kaon reach ecal and scatters inelastically
+      - neutron backscatters (57 MeV in 638 mm into ecal) back to srd
+***** sim 357 ev816
+      - kaon reach ecal and scatters inelastically
+      - pi- of 75.8 backscatters from vetocell? back to srd. created in inelastic scattering of  600 MeV pi-
+*** anti proton       
+**** trigger events!
+***** sim305 ev 8902
+      - p- reaches ecal and scatters inelastically
+      - gamma of 8.32 MeV produced in the 55mm of the ecal backscatters against the SRD. all can be traced back to pi0 created in a inelastic scattering of a 5 GeV neutron
+***** sim305 ev 17904
+      - p- reaches ecal and scatters inelastically
+      - gamma of 15 MeV backscatters to SRD produced 25 mm in the ecal, all traced back to a $pi^0$ of 27 MeV produced in the original inelastic scattering
+***** sim439 ev12000
+      - inelastic scattering of pi- in HodoscopePV! 218mm from ecal!
+      - backscattering of e+ of 43.8 MeV backscatters to SRD produced 43mm in the ecal. all can be traced back from anti_proton
+	created in the original inelastic scattering but scatterd inside the ECAL.
+***** sim439 ev7338
+      - p- reaches ecal and scatters inelastically
+      - gamma with 81 MeV produced in 24 mm from ECAL backscatters against SRD, all began from a pi+ from an inelastic
+	scattering producing pi0[90 MeV] and then decay.
+       
+*** muon
+    only 3 events out of 10^{7} manage to trigger both SRD and trigger
+**** trigger event!
+***** sim 102 ev14342
+      - muon manage to pass all the setup, losing 105 MeV in total
+      - electron of 39 MeV hits SRD, the electron was produced in the membrane_1 two meter froom ecal
+	the electron manage to activate all crystal together
+      - 
+***** sim 112 ev4332
+      - muon get through all the setup
+      - electron of 24 MeV generated 2.14 meter from the ecal manages
+***** sim 422 ev2554
+      - muon travel through all the setup
+      - electron of 13 MeV generated 2.27 meter from ecal hit the srd
+***** sim 112 ev0
+      - muon travel through all the setup undetected
+	-    
+
+** analysis of new verbose mode using kaon- with 4mm included
+   a new simulation with 4mm and kaon and full setup with segmentation was performed at a level of 10^7 and the result and events that passed the following cut were saved (13 event found):
+   - trigger activated
+   - each srd between 1 MeV and 70 MeV
+   - less than 60 GeV energy deposit in ecal
+   - less than 5 GeV energy deposit in HCAL
+*** event saved scanned in verbose mode
+**** sim 116 ev3056
+     - kaon decays in WorldPV, approximately just before hitting the tube after passing 2 MicroMegas, decay product are: *pi0* with 15 GeV, neutrino with 48.6 GeV and electron with 36.7 GeV
+     - gamma with 0.067 MeV hits SRD, produced in synchrotron radiation of decaying electron
+     - gamma of 0.679 hits SRD in the same way
+     - gamma of 0.365 hits SRD produced in the same way
+     - other gamma of 7.12 MeV hits SRD produced in the same way
+     - etc.
+Kaon decays before magnet and produced electron gives synchrotron radiation signature in SRD. event is rejected by veto and micromega (maybe)
+**** sim228 ev14835
+     - inelastically scattering of kaon just at beginning of setup before reaching any MM
+     - gamma of 1 MeV hit SRD produced in the bremstrahlung of incoming electron
+     - gamma of 0.6 hitting SRD
+     - gamma of 0.5 hitting SRD
+     - e+ of 80 MeV hitting SRD
+     - etc.
+kaon scatters inelastically and the torrent of particle hit srd
+**** sim431 ev16004
+     kaon scatters inelastically between MM1 and MM2
+     - 
+very similar to previos one
+** shower profile
+   tried with new analysis on shower profile by taking the fraction of energy deposited. In the ecal cells neighboring
+   the central cell (3,3) of the ecal. While results in the simulation seems promising use the same profile on the data
+   (run 2363 for electrons and run 2204 for hadron were compared) gives some unpredictable result. For the simulation a cut
+   of 0.1 on the chi square was used while one of 1600 for the simulation were the difference were huge. Here some table of efficiency
+   and purity:
+   |                                         | electron |  pion | kaon |
+   |-----------------------------------------+----------+-------+------|
+   | simulation                              |     0.99 | 0.073 |      |
+   | simulation with resolution and pedestal |      0.9 | 0.011 |      |
+   | data                                    |          |       | ---  |
+   |-----------------------------------------+----------+-------+------|
+*** comparison of shower profile got from data and simulation
+    shower profile was taken from the data of run 2363 using the same strategy
+    as in the simulation. The following cut were applied before collecting the
+    profile in order to check a good sample of electrons:
+    - entrance angle of the particle less than 5 mrad
+    - only 1 cluster in both MM1 and MM4
+    - beam spot of 3 cm diameter center in center of central cell of ecal
+    - srd cut [1,70] for each srd crystal
+    - scintillator timing between [160,225] ns
+    - pedestal less than 6 ADC from the mean in each of the cell used (central
+      and neighbour cell)
+
+      this profile were used to put a cut of 30 chi square to reject improper
+      showe profile.
+**** table efficiency run 2363
+     this table illustrate the efficiency in different region for run 2363. The additional order of magnitude suppression
+     for the post spot in the hadron run is due a misalligment of the beam and does not have a phys
+     | cut       | ecal < 50 | 50 < ecal < 80 hcal < 5 | 90 < ecal < 110 | ecal > 110 | hadron run 2204 |
+     |-----------+-----------+-------------------------+-----------------+------------+-----------------|
+     | pre spot  |    0.0021 |                    0.03 |            0.65 |       0.07 | 0.002           |
+     | post spot |    0.0010 |                    0.01 |             0.5 |       0.04 | 0.00023         |
+     |-----------+-----------+-------------------------+-----------------+------------+-----------------|
+     
+     a second approach was to measure efficiency after all beam purity cut and srd cut were applied. This increase drammatically
+     the efficiency. The efficiency for a cut of 20 on the Chi-square was: *94.4* \%
+**** efficiency for hadrons
+     | cut       | simulation of pion | hadron run 2204 | hadron in run 2204 after beam spot |
+     |-----------+--------------------+-----------------+------------------------------------|
+     | pre spot  |              0.021 |           0.002 | ---------                          |
+     | post spot |                    |         0.00023 | 0.006                              |
+     |-----------+--------------------+-----------------+------------------------------------|
+*** chi square comparison simulation-data
+    similar approach was used but using the shower profile obtained by the simulation of 100 GeV electrons.
+    
+**** efficiency in simulation
+     a cut of 0.1 in the chi square was used since the shower profile was highly
+     idealized a TProfile using the "s" option was used. no resolution added.
+     | particle | total efficiency | efficiency E>10 |
+     |----------+------------------+-----------------|
+     | electron |            0.993 | 0.98            |
+     | pion     |            0.014 | ...             |
+     |----------+------------------+-----------------|
+     the same cut was also attempted for the dark photons. It was observed a big 
+     suppression for electron with less than 20 GeV energy:
+     | particle              | E > 20 |   E<20 |
+     |-----------------------+--------+--------|
+     | dark photon pre cut   |  12700 |      2 |
+     | dark photon after cut | 645800 | 641200 |
+     |-----------------------+--------+--------|
+
+*** dark photon profile
+    it was analysed the efficiency of such a cut was investigate. first of all I observed that between the total number of
+    Dark photon produce *780386* the one lying in the signal region E<50 GeV was only: *27300* lie in the signal region for an
+    efficiency of: 
+**** graph
+*** comparison at different geant4 cut <2017-05-10 Mit>
+    first guess simulation with 10^5 events at 0.001 , 0.01 and 0.1 *mm* cut was performed with wrong results. Second simulation at
+    higher statistics with 0.3 , 0.5 , 0.7 *mm* cut was performed and the result compared with the data. A significant displacement
+    of the peak in the central cell 3X3 was found between data and simulation. Next step would be to correct such disagreement manually
+    but this will of course destroy the agreement of the spectra since it normally depend of the fraction of the spectra.
+    - *The result of a gaussian peak of the cell 3x3 in data run 2363 in the simulation was:
+| NO. | NAME     |       VALUE |       ERROR |        SIZE |   DERIVATIVE |
+|   1 | Constant | 5.57113e+04 | 7.45929e+01 | 6.95675e+00 | -1.77585e-05 |
+|   2 | Mean     | 6.41551e+01 | 3.63613e-03 | 4.15556e-04 |  2.04011e-01 |
+|   3 | Sigma    | 3.32763e+00 | 2.81634e-03 | 1.46159e-05 | -1.05025e+01 |
+
+
+the very same fit on the spectra of the simulation described above was instead:
+| NO. | NAME     |       VALUE |       ERROR |         SIZE |   DERIVATIVE |
+|   1 | Constant | 6.80317e+04 | 8.35329e+01 | -6.50450e-01 | -2.69839e-06 |
+|   2 | Mean     | 7.63027e+01 | 3.44533e-03 | -1.61407e-05 | -6.82966e-03 |
+|   3 | Sigma    | 2.77075e+00 | 1.85780e-03 |  1.61121e-06 |  1.82952e+00 |
+
+It has to be noted that the same fit in the old simulation with 1 mm tollerance (geant4 standard) was slighlty different for yet
+unknow reason:
+| NO. | NAME     |       VALUE |       ERROR |        SIZE |   DERIVATIVE |
+|   1 | Constant | 5.00383e+04 | 7.30716e+01 | 2.25051e+00 | -2.27599e-06 |
+|   2 | Mean     | 7.49614e+01 | 5.65537e-03 | 1.92958e-04 | -5.52044e-03 |
+|   3 | Sigma    | 3.47636e+00 | 5.30152e-03 | 1.56421e-05 |   -2.74039e- |
+|     |          |             |             |             |              |
+*** investigating optimal choose for bin size in the TProfiles <2017-05-29 Mon>
+    the problem of the optimal length of a bin of a TProfile depends on the number of statistcs
+    that one wants per bin and the precision that ones want to investigate the distribution.
+    The main variable however would be how much precisely the extrapolation of the MM on
+    the Ecal. A small montecarlo code was developed to investigate this. the code can be
+    found here: [[/home/emilio/polybox/PhD/code/c++/montecarlo/extrapolate_line_err.cc][code]]
+    where:
+    - z1 :: position of the MicroMegas Nr.3
+    - z2 :: position of the MicroMegas Nr.4
+    - Ecal_pos :: position of the Ecal
+    - errX :: Resolution of the MicroMegas
+    - errZ :: error in the position of the detectors
+    - DeltaX :: difference in the hit position in the X axis
+		
+		different values where inputted for the unknown value errZ and DeltaX, ranging from *[1,30] mm* for DeltaX and
+		from *[1,5] mm* for errZ, in both cases the error still to be dominated by the pure error in the MicroMegas resolution:
+		giving always ~ 0.13 mm as error. for large DeltaX (~ 30 mm) the error of course scales much more with errZ. But it is still
+		around the same values as long as errZ is around ~1 mm. Nevertheless in order to have a more stringest statistics the binning
+		will be choosen to be a square of width 0.5 mm, that for sure won't exceed the error and will provide a meaningfull statistic.
+*** comparison using code in the official reconstruction <2017-06-19 Mon>
+    The chi-square computation was applied to calibration run 2363, hadron run 2204 and physical
+    run 2441 to test the effect. The same was done using both data-database and MC-database. The
+    benchmark cut used was of 2 chi using the data-database and 40 for the simulation database to take
+    the shift observed in the chi-square into account. A cut of two was observed when simulation database
+    was used on simulation was maximum comparability.
+**** all cell    
+    |     run | simulation database | data database |
+    |---------+---------------------+---------------|
+    |    2363 |               0.809 |          0.94 |
+    |    2204 |              0.0042 |        0.0012 |
+    |    2441 |                 --- |           --- |
+    | MC-elec |                     |               |
+    | MC-hadr |              0.0052 |               |
+    |---------+---------------------+---------------|
+**** central cells
+    |     run | simulation database | data database |
+    |---------+---------------------+---------------|
+    |    2363 |                0.86 | 0.93          |
+    |    2204 |              0.0012 | 0.0031        |
+    |    2441 |                 --- | ---           |
+    | MC-elec |                0.98 | ---           |
+    | MC-hadr |              0.0052 | ---           |
+    |---------+---------------------+---------------|
+    |         |                     |               |  
+** analysis<2017-08-04 Fre>
+*** new analysis code developed for na64<2017-08-04 Fre>      :analysis:2016:
+    a new code was developed to efficiently analyse NA64 data, two files [[/home/emilio/polybox/PhD/code/c++/p348-personal/analysis-daq/analysis.cc][analysis.cc]] 
+    and  [[/home/emilio/polybox/PhD/code/c++/p348-personal/analysis-daq/p348utilities.h][p348utilities.h]]. To define function usefull in the main code. Still some 
+    thing are to be done to perfect the code. To send efficiently jobs the skript 
+    [[/home/emilio/polybox/PhD/org_files/runtxt_autumn2016/batch.sh][batch.sh]]. A collection of .txt file with usefull run organize as the presentation
+    by Toropin [[https://indico.cern.ch/event/616409/contributions/2488057/attachments/1417949/2171593/report-24feb2017.pdf][link]]. The collection can be found in [[/home/emilio/polybox/PhD/org_files/runtxt_autumn2016][runtxt_autumn2016]].
+    Some improvement for the code can be done:
+**** possible improvements<2017-08-04 Fre>
+***** TODO make the shower profile database autmotically loaded from the right directory
+      asked Anton about it if he can do something<2017-08-04 Fre>
+***** TODO find additional cut<2017-08-04 Fre>
+***** TODO put the code on git<2017-08-04 Fre>
+**** results                                                       :analysis:
+     - Results of the analysis together with a description are stored in pcposeth5<2017-08-04 Fre>
+     - a backup will soon be stored on cernbox.
+     - 
+***** tables<2017-08-24 Don>
+****** calibration run 2182
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    |  2.6741e+06 |            26 |          291031 |         33367 |
+| SRDOK                    | 2.25413e+06 |            18 |          250563 |          3159 |
+| CHIOK                    | 2.22367e+06 |             0 |          279469 |           138 |
+| ECAL_ootOK               | 2.57304e+06 |            22 |          281916 |         26280 |
+| VETOOK                   | 1.28626e+06 |             0 |          137569 |             5 |
+| HCALtotOK                | 1.85663e+06 |             2 |          205124 |             0 |
+| HasHitOK                 | 2.29804e+06 |            17 |          249127 |         27923 |
+| NclustersOK              | 2.49802e+06 |            24 |          272394 |         31098 |
+| AngleOK                  | 2.46055e+06 |            22 |          267736 |         30931 |
+| MomOK                    | 1.74958e+06 |             0 |          191550 |         20044 |
+| BeamOK                   | 1.84488e+06 |             1 |          203962 |         16985 |
+| MMtotOK                  | 1.61597e+06 |             0 |          180931 |         14857 |
+| ECALRatioOK              | 2.48939e+06 |             0 |          289985 |          1692 |
+| ECALTimeRatioOK          | 2.26904e+06 |             1 |          234356 |         16200 |
+| ECALCentralOK            |  2.6269e+06 |             0 |          290372 |         22432 |
+| SHWOK                    | 2.66134e+06 |            24 |          289757 |         26921 |
+| ECALtotOK                |  2.1208e+06 |             0 |          233557 |           577 |
+| S1_timeOK                |  2.6741e+06 |            26 |          291031 |         33367 |
+| BurstOK                  |  2.6741e+06 |            26 |          291031 |         33367 |
+| Donskovcut               |      575586 |             0 |           61226 |             0 |
+| Donskovcut_MM            |      427051 |             0 |           45662 |             0 |
+| Donskovcut_noHCAL        |      812384 |             0 |           86231 |             0 |
+| Donskovcut_MM_noHCAL     |      602376 |             0 |           64165 |             0 |
+| Donskovcut_Chi           |      374665 |             0 |           44450 |             0 |
+| Donskovcut_MM_Chi        |      374665 |             0 |           44450 |             0 |
+| Donskovcut_MM_noHCAL_Chi |      716753 |             0 |           83481 |             0 |
+| SRDChiOK                 | 1.90364e+06 |             0 |          241174 |            65 |
+| SRDChiMMOK               | 1.16582e+06 |             0 |          153332 |            36 |
+| SRDChiMMVETOOK           |      583336 |             0 |           73567 |             0 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |      84.295 |       69.2308 |          86.095 |       9.46744 |
+| CHIOK                    |     83.1559 |             0 |         96.0272 |      0.413582 |
+| ECAL_ootOK               |     96.2207 |       84.6154 |          96.868 |       78.7605 |
+| VETOOK                   |     48.1008 |             0 |         47.2695 |     0.0149849 |
+| HCALtotOK                |     69.4301 |       7.69231 |         70.4818 |             0 |
+| HasHitOK                 |      85.937 |       65.3846 |         85.6015 |       83.6845 |
+| NclustersOK              |     93.4153 |       92.3077 |         93.5962 |       93.1999 |
+| AngleOK                  |     92.0142 |       84.6154 |         91.9957 |       92.6994 |
+| MomOK                    |     65.4266 |             0 |         65.8177 |       60.0713 |
+| BeamOK                   |     68.9904 |       3.84615 |         70.0826 |       50.9036 |
+| MMtotOK                  |     60.4305 |             0 |          62.169 |        44.526 |
+| ECALRatioOK              |     93.0927 |             0 |         99.6406 |       5.07088 |
+| ECALTimeRatioOK          |     84.8523 |       3.84615 |         80.5261 |        48.551 |
+| ECALCentralOK            |     98.2347 |             0 |         99.7736 |       67.2281 |
+| SHWOK                    |     99.5226 |       92.3077 |         99.5622 |       80.6815 |
+| ECALtotOK                |      79.309 |             0 |         80.2516 |       1.72925 |
+| S1_timeOK                |         100 |           100 |             100 |           100 |
+| BurstOK                  |         100 |           100 |             100 |           100 |
+| Donskovcut               |     21.5245 |             0 |         21.0376 |             0 |
+| Donskovcut_MM            |     15.9699 |             0 |         15.6897 |             0 |
+| Donskovcut_noHCAL        |     30.3797 |             0 |         29.6295 |             0 |
+| Donskovcut_MM_noHCAL     |     22.5263 |             0 |         22.0475 |             0 |
+| Donskovcut_Chi           |     14.0109 |             0 |         15.2733 |             0 |
+| Donskovcut_MM_Chi        |     14.0109 |             0 |         15.2733 |             0 |
+| Donskovcut_MM_noHCAL_Chi |     26.8035 |             0 |         28.6846 |             0 |
+| SRDChiOK                 |     71.1878 |             0 |         82.8688 |      0.194803 |
+| SRDChiMMOK               |     43.5967 |             0 |         52.6858 |      0.107891 |
+| SRDChiMMVETOOK           |     21.8143 |             0 |         25.2781 |             0 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** calibration run 2363
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 1.32386e+06 |            12 |     1.29348e+06 |         11307 |
+| SRDOK                    | 1.09548e+06 |            10 |     1.08711e+06 |          1178 |
+| CHIOK                    | 1.28847e+06 |             0 |     1.27696e+06 |           280 |
+| ECAL_ootOK               | 1.25663e+06 |            11 |     1.23167e+06 |          8966 |
+| VETOOK                   | 1.01432e+06 |             0 |     1.00716e+06 |             7 |
+| HCALtotOK                |      801046 |             0 |          795207 |             0 |
+| HasHitOK                 |  1.2355e+06 |            10 |     1.20661e+06 |         10428 |
+| NclustersOK              | 1.26316e+06 |            11 |     1.23893e+06 |         10759 |
+| AngleOK                  | 1.18217e+06 |            10 |     1.15928e+06 |         10179 |
+| MomOK                    |      936213 |             0 |          921460 |          7761 |
+| BeamOK                   | 1.00845e+06 |             1 |          988480 |          7690 |
+| MMtotOK                  |      892131 |             0 |          880281 |          6956 |
+| ECALRatioOK              | 1.31302e+06 |             0 |     1.29227e+06 |          2311 |
+| ECALTimeRatioOK          |  1.1399e+06 |             2 |     1.12468e+06 |          6207 |
+| ECALCentralOK            | 1.32252e+06 |             0 |     1.29336e+06 |         10208 |
+| SHWOK                    |  1.3172e+06 |            11 |     1.28946e+06 |          9157 |
+| ECALtotOK                |  1.1327e+06 |             0 |     1.12333e+06 |           763 |
+| S1_timeOK                | 1.32386e+06 |            12 |     1.29348e+06 |         11307 |
+| BurstOK                  | 1.32386e+06 |            12 |     1.29348e+06 |         11307 |
+| Donskovcut               |      459117 |             0 |          458759 |             0 |
+| Donskovcut_MM            |      350881 |             0 |          350682 |             0 |
+| Donskovcut_noHCAL        |      747430 |             0 |          746319 |             3 |
+| Donskovcut_MM_noHCAL     |      570326 |             0 |          569842 |             3 |
+| Donskovcut_Chi           |      350421 |             0 |          350267 |             0 |
+| Donskovcut_MM_Chi        |      350421 |             0 |          350267 |             0 |
+| Donskovcut_MM_noHCAL_Chi |      741816 |             0 |          741121 |             3 |
+| SRDChiOK                 | 1.08099e+06 |             0 |     1.07683e+06 |           147 |
+| SRDChiMMOK               |      761535 |             0 |          760220 |           100 |
+| SRDChiMMVETOOK           |      600918 |             0 |          600357 |             3 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |     82.7486 |       83.3333 |         84.0457 |       10.4183 |
+| CHIOK                    |     97.3271 |             0 |         98.7234 |       2.47634 |
+| ECAL_ootOK               |      94.922 |       91.6667 |         95.2217 |        79.296 |
+| VETOOK                   |     76.6182 |             0 |         77.8647 |     0.0619086 |
+| HCALtotOK                |     60.5084 |             0 |         61.4783 |             0 |
+| HasHitOK                 |     93.3253 |       83.3333 |         93.2846 |       92.2261 |
+| NclustersOK              |     95.4148 |       91.6667 |         95.7831 |       95.1534 |
+| AngleOK                  |     89.2975 |       83.3333 |         89.6252 |       90.0239 |
+| MomOK                    |     70.7185 |             0 |          71.239 |       68.6389 |
+| BeamOK                   |     76.1747 |       8.33333 |         76.4204 |        68.011 |
+| MMtotOK                  |     67.3887 |             0 |         68.0555 |       61.5194 |
+| ECALRatioOK              |     99.1809 |             0 |         99.9066 |       20.4387 |
+| ECALTimeRatioOK          |      86.104 |       16.6667 |           86.95 |       54.8952 |
+| ECALCentralOK            |      99.899 |             0 |         99.9909 |       90.2804 |
+| SHWOK                    |     99.4972 |       91.6667 |         99.6894 |       80.9852 |
+| ECALtotOK                |     85.5604 |             0 |         86.8457 |       6.74803 |
+| S1_timeOK                |         100 |           100 |             100 |           100 |
+| BurstOK                  |         100 |           100 |             100 |           100 |
+| Donskovcut               |     34.6802 |             0 |         35.4671 |             0 |
+| Donskovcut_MM            |     26.5044 |             0 |         27.1116 |             0 |
+| Donskovcut_noHCAL        |     56.4584 |             0 |         57.6987 |     0.0265322 |
+| Donskovcut_MM_noHCAL     |     43.0806 |             0 |         44.0551 |     0.0265322 |
+| Donskovcut_Chi           |     26.4697 |             0 |         27.0795 |             0 |
+| Donskovcut_MM_Chi        |     26.4697 |             0 |         27.0795 |             0 |
+| Donskovcut_MM_noHCAL_Chi |     56.0344 |             0 |         57.2968 |     0.0265322 |
+| SRDChiOK                 |     81.6547 |             0 |         83.2509 |       1.30008 |
+| SRDChiMMOK               |     57.5239 |             0 |         58.7734 |      0.884408 |
+| SRDChiMMVETOOK           |     45.3914 |             0 |         46.4142 |     0.0265322 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** calibration run 2410
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 3.31243e+06 |            40 |     3.10536e+06 |         26307 |
+| SRDOK                    | 2.52052e+06 |            21 |     2.41178e+06 |          2837 |
+| CHIOK                    | 3.21026e+06 |             0 |      3.0616e+06 |           641 |
+| ECAL_ootOK               | 3.04635e+06 |            38 |     2.86966e+06 |         21058 |
+| VETOOK                   | 2.29838e+06 |             2 |     2.19494e+06 |             6 |
+| HCALtotOK                | 2.13973e+06 |             7 |     2.04582e+06 |             0 |
+| HasHitOK                 | 2.97265e+06 |            30 |     2.78288e+06 |         23288 |
+| NclustersOK              | 3.08056e+06 |            36 |     2.90605e+06 |         24369 |
+| AngleOK                  | 2.88659e+06 |            35 |     2.72264e+06 |         22991 |
+| MomOK                    | 2.11286e+06 |             3 |     2.00386e+06 |         15844 |
+| BeamOK                   | 2.33299e+06 |             5 |     2.19705e+06 |         16466 |
+| MMtotOK                  | 1.98655e+06 |             2 |     1.89265e+06 |         14215 |
+| ECALRatioOK              |   3.287e+06 |             1 |       3.103e+06 |          5205 |
+| ECALTimeRatioOK          | 2.70903e+06 |             0 |     2.57452e+06 |         13347 |
+| ECALCentralOK            | 3.30872e+06 |             1 |     3.10506e+06 |         23235 |
+| SHWOK                    |  3.2895e+06 |            38 |     3.09008e+06 |         21464 |
+| ECALtotOK                | 2.69312e+06 |             0 |     2.57134e+06 |          1860 |
+| S1_timeOK                | 3.31243e+06 |            40 |     3.10536e+06 |         26307 |
+| BurstOK                  | 3.31243e+06 |            40 |     3.10536e+06 |         26307 |
+| Donskovcut               |      995507 |             0 |          959342 |             0 |
+| Donskovcut_MM            |      731696 |             0 |          705210 |             0 |
+| Donskovcut_noHCAL        | 1.51426e+06 |             0 |     1.45756e+06 |             2 |
+| Donskovcut_MM_noHCAL     | 1.11124e+06 |             0 |     1.07047e+06 |             1 |
+| Donskovcut_Chi           |      730746 |             0 |          704523 |             0 |
+| Donskovcut_MM_Chi        |      730746 |             0 |          704523 |             0 |
+| Donskovcut_MM_noHCAL_Chi | 1.50275e+06 |             0 |     1.44828e+06 |             2 |
+| SRDChiOK                 | 2.48275e+06 |             0 |       2.389e+06 |           282 |
+| SRDChiMMOK               | 1.59618e+06 |             0 |     1.54135e+06 |           175 |
+| SRDChiMMVETOOK           |  1.1633e+06 |             0 |     1.12153e+06 |             1 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficienies
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |     76.0929 |          52.5 |         77.6652 |       10.7842 |
+| CHIOK                    |     96.9156 |             0 |          98.591 |       2.43661 |
+| ECAL_ootOK               |     91.9671 |            95 |         92.4099 |       80.0471 |
+| VETOOK                   |     69.3864 |             5 |         70.6823 |     0.0228076 |
+| HCALtotOK                |     64.5968 |          17.5 |         65.8803 |             0 |
+| HasHitOK                 |     89.7423 |            75 |         89.6153 |        88.524 |
+| NclustersOK              |     93.0001 |            90 |         93.5817 |       92.6331 |
+| AngleOK                  |      87.144 |          87.5 |         87.6756 |        87.395 |
+| MomOK                    |     63.7859 |           7.5 |         64.5292 |       60.2273 |
+| BeamOK                   |     70.4313 |          12.5 |         70.7503 |       62.5917 |
+| MMtotOK                  |     59.9725 |             5 |          60.948 |        54.035 |
+| ECALRatioOK              |     99.2321 |           2.5 |         99.9242 |       19.7856 |
+| ECALTimeRatioOK          |     81.7838 |             0 |         82.9059 |       50.7355 |
+| ECALCentralOK            |     99.8879 |           2.5 |         99.9904 |       88.3225 |
+| SHWOK                    |     99.3078 |            95 |          99.508 |       81.5905 |
+| ECALtotOK                |     81.3033 |             0 |         82.8035 |       7.07036 |
+| S1_timeOK                |     99.9999 |           100 |             100 |           100 |
+| BurstOK                  |         100 |           100 |             100 |           100 |
+| Donskovcut               |     30.0537 |             0 |         30.8931 |             0 |
+| Donskovcut_MM            |     22.0894 |             0 |         22.7095 |             0 |
+| Donskovcut_noHCAL        |     45.7143 |             0 |         46.9369 |    0.00760254 |
+| Donskovcut_MM_noHCAL     |     33.5474 |             0 |         34.4718 |    0.00380127 |
+| Donskovcut_Chi           |     22.0607 |             0 |         22.6873 |             0 |
+| Donskovcut_MM_Chi        |     22.0607 |             0 |         22.6873 |             0 |
+| Donskovcut_MM_noHCAL_Chi |     45.3669 |             0 |         46.6382 |    0.00760254 |
+| SRDChiOK                 |     74.9525 |             0 |         76.9316 |       1.07196 |
+| SRDChiMMOK               |     48.1874 |             0 |         49.6352 |      0.665222 |
+| SRDChiMMVETOOK           |     35.1191 |             0 |         36.1161 |    0.00380127 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** hadron run 2204
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    |      535647 |          6886 |            3404 |        500698 |
+| SRDOK                    |        1085 |           320 |              65 |           675 |
+| CHIOK                    |        2625 |             8 |             361 |          1483 |
+| ECAL_ootOK               |      389738 |           180 |            3400 |        361458 |
+| VETOOK                   |        6638 |          5710 |             227 |           530 |
+| HCALtotOK                |        4624 |          3896 |             370 |            18 |
+| HasHitOK                 |      469551 |           120 |            3012 |        444150 |
+| NclustersOK              |      520589 |          5261 |            3326 |        488000 |
+| AngleOK                  |      514427 |          6797 |            3286 |        480731 |
+| MomOK                    |      412674 |            11 |            2659 |        390426 |
+| BeamOK                   |      179509 |             1 |            1261 |        169815 |
+| MMtotOK                  |      172189 |             0 |            1210 |        162929 |
+| ECALRatioOK              |       57085 |            12 |            1035 |         52081 |
+| ECALTimeRatioOK          |      320270 |            24 |            3024 |        295482 |
+| ECALCentralOK            |      264231 |            24 |            1929 |        249051 |
+| SHWOK                    |      397915 |           249 |            3401 |        369585 |
+| ECALtotOK                |       12563 |             1 |             928 |          8069 |
+| S1_timeOK                |      535053 |          6877 |            3403 |        500142 |
+| BurstOK                  |      535647 |          6886 |            3404 |        500698 |
+| Donskovcut               |          37 |             0 |              26 |             0 |
+| Donskovcut_MM            |          26 |             0 |              20 |             0 |
+| Donskovcut_noHCAL        |          51 |             0 |              35 |             0 |
+| Donskovcut_MM_noHCAL     |          37 |             0 |              29 |             0 |
+| Donskovcut_Chi           |          23 |             0 |              19 |             0 |
+| Donskovcut_MM_Chi        |          23 |             0 |              19 |             0 |
+| Donskovcut_MM_noHCAL_Chi |          46 |             0 |              32 |             0 |
+| SRDChiOK                 |          74 |             1 |              50 |             2 |
+| SRDChiMMOK               |          41 |             0 |              35 |             0 |
+| SRDChiMMVETOOK           |          37 |             0 |              31 |             0 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |    0.202559 |       4.64711 |         1.90952 |      0.134812 |
+| CHIOK                    |    0.490062 |      0.116178 |         10.6052 |      0.296187 |
+| ECAL_ootOK               |     72.7602 |         2.614 |         99.8825 |       72.1908 |
+| VETOOK                   |     1.23925 |       82.9219 |         6.66863 |      0.105852 |
+| HCALtotOK                |    0.863255 |       56.5786 |         10.8696 |    0.00359498 |
+| HasHitOK                 |     87.6605 |       1.74267 |         88.4841 |       88.7062 |
+| NclustersOK              |     97.1888 |       76.4014 |         97.7086 |       97.4639 |
+| AngleOK                  |     96.0384 |       98.7075 |         96.5335 |       96.0122 |
+| MomOK                    |     77.0422 |      0.159744 |          78.114 |       77.9763 |
+| BeamOK                   |     33.5126 |     0.0145222 |         37.0447 |       33.9157 |
+| MMtotOK                  |      32.146 |             0 |         35.5464 |       32.5404 |
+| ECALRatioOK              |     10.6572 |      0.174267 |         30.4054 |       10.4017 |
+| ECALTimeRatioOK          |     59.7912 |      0.348533 |         88.8367 |        59.014 |
+| ECALCentralOK            |     49.3293 |      0.348533 |         56.6686 |       49.7408 |
+| SHWOK                    |     74.2868 |       3.61603 |         99.9119 |        73.814 |
+| ECALtotOK                |     2.34539 |     0.0145222 |          27.262 |       1.61155 |
+| S1_timeOK                |     99.8891 |       99.8693 |         99.9706 |        99.889 |
+| BurstOK                  |         100 |           100 |             100 |           100 |
+| Donskovcut               |  0.00690753 |             0 |        0.763807 |             0 |
+| Donskovcut_MM            |  0.00485394 |             0 |        0.587544 |             0 |
+| Donskovcut_noHCAL        |   0.0095212 |             0 |          1.0282 |             0 |
+| Donskovcut_MM_noHCAL     |  0.00690753 |             0 |        0.851939 |             0 |
+| Donskovcut_Chi           |  0.00429387 |             0 |        0.558167 |             0 |
+| Donskovcut_MM_Chi        |  0.00429387 |             0 |        0.558167 |             0 |
+| Donskovcut_MM_noHCAL_Chi |  0.00858775 |             0 |        0.940071 |             0 |
+| SRDChiOK                 |   0.0138151 |     0.0145222 |         1.46886 |   0.000399442 |
+| SRDChiMMOK               |  0.00765429 |             0 |          1.0282 |             0 |
+| SRDChiMMVETOOK           |  0.00690753 |             0 |        0.910693 |             0 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** run 2288 to 2296
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    |  1.3536e+07 |         11369 |     2.03235e+06 |   1.12132e+07 |
+| SRDOK                    | 2.77148e+06 |          7953 |     1.74953e+06 |        863442 |
+| CHIOK                    | 2.20532e+06 |            22 |     1.97308e+06 |        119687 |
+| ECAL_ootOK               | 1.10575e+07 |          8854 |     1.96045e+06 |   8.84225e+06 |
+| VETOOK                   | 1.60195e+06 |           996 |     1.54086e+06 |          4144 |
+| HCALtotOK                | 1.38638e+06 |           559 |     1.31796e+06 |             5 |
+| HasHitOK                 | 1.23831e+07 |          7482 |     1.86223e+06 |   1.02817e+07 |
+| NclustersOK              | 1.26754e+07 |          9792 |     1.95436e+06 |   1.04898e+07 |
+| AngleOK                  | 1.19785e+07 |          9719 |     1.83919e+06 |   9.92111e+06 |
+| MomOK                    | 8.97657e+06 |           359 |     1.44948e+06 |   7.42759e+06 |
+| BeamOK                   | 9.13573e+06 |           186 |     1.53257e+06 |   7.45503e+06 |
+| MMtotOK                  | 7.91541e+06 |            32 |     1.38485e+06 |   6.45326e+06 |
+| ECALRatioOK              | 4.17213e+06 |            58 |     1.99025e+06 |    2.0126e+06 |
+| ECALTimeRatioOK          | 7.59458e+06 |           505 |     1.75519e+06 |   5.68063e+06 |
+| ECALCentralOK            | 1.23299e+07 |           165 |     1.99473e+06 |   1.01212e+07 |
+| SHWOK                    | 1.12934e+07 |          9505 |     2.01754e+06 |   9.00971e+06 |
+| ECALtotOK                |  2.2976e+06 |             4 |     1.74178e+06 |        450901 |
+| S1_timeOK                | 1.35359e+07 |         11369 |     2.03235e+06 |   1.12132e+07 |
+| BurstOK                  | 1.35358e+07 |         11369 |     2.03235e+06 |    1.1213e+07 |
+| Donskovcut               |      767803 |             0 |          753978 |             0 |
+| Donskovcut_MM            |      593250 |             0 |          583247 |             0 |
+| Donskovcut_noHCAL        | 1.17278e+06 |             0 |     1.14977e+06 |           261 |
+| Donskovcut_MM_noHCAL     |      904269 |             0 |          888238 |           195 |
+| Donskovcut_Chi           |      592651 |             0 |          582937 |             0 |
+| Donskovcut_MM_Chi        |      592651 |             0 |          582937 |             0 |
+| Donskovcut_MM_noHCAL_Chi | 1.16511e+06 |             0 |     1.14419e+06 |           174 |
+| SRDChiOK                 | 1.81983e+06 |             3 |     1.71071e+06 |         41932 |
+| SRDChiMMOK               | 1.27452e+06 |             0 |     1.22022e+06 |         27469 |
+| SRDChiMMVETOOK           |      970187 |             0 |          954165 |           145 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** run 2297 to 2361
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 2.34216e+07 |         24305 |          103138 |   2.28588e+07 |
+| SRDOK                    | 2.06406e+06 |         16355 |           57679 |    1.7637e+06 |
+| CHIOK                    |      385423 |            46 |           14208 |        250367 |
+| ECAL_ootOK               | 1.85334e+07 |         18336 |           90624 |    1.8043e+07 |
+| VETOOK                   |       59690 |          2873 |           14720 |          8639 |
+| HCALtotOK                |      115224 |          1078 |           42248 |            21 |
+| HasHitOK                 | 2.13587e+07 |         16578 |           43336 |   2.09573e+07 |
+| NclustersOK              | 2.18639e+07 |         21614 |           90674 |   2.14134e+07 |
+| AngleOK                  | 2.06938e+07 |         20716 |           91970 |   2.02605e+07 |
+| MomOK                    | 1.52888e+07 |          1839 |           13102 |   1.51518e+07 |
+| BeamOK                   | 1.53963e+07 |          1395 |           17223 |   1.51671e+07 |
+| MMtotOK                  | 1.32606e+07 |           943 |           10326 |   1.31587e+07 |
+| ECALRatioOK              | 4.32225e+06 |            85 |           21667 |   4.08813e+06 |
+| ECALTimeRatioOK          | 1.18577e+07 |          1085 |           29362 |   1.16052e+07 |
+| ECALCentralOK            | 2.09672e+07 |           335 |           29647 |   2.06389e+07 |
+| SHWOK                    | 1.88784e+07 |         19649 |           80607 |   1.83846e+07 |
+| ECALtotOK                |  1.0427e+06 |             6 |            5336 |        920925 |
+| S1_timeOK                | 2.34215e+07 |         24305 |          103136 |   2.28588e+07 |
+| BurstOK                  | 2.34206e+07 |         24305 |          103134 |   2.28579e+07 |
+| Donskovcut               |         135 |             0 |              68 |             1 |
+| Donskovcut_MM            |          94 |             0 |              51 |             1 |
+| Donskovcut_noHCAL        |        1035 |             0 |             175 |           664 |
+| Donskovcut_MM_noHCAL     |         735 |             0 |             127 |           511 |
+| Donskovcut_Chi           |          26 |             0 |              12 |             0 |
+| Donskovcut_MM_Chi        |          26 |             0 |              12 |             0 |
+| Donskovcut_MM_noHCAL_Chi |         555 |             0 |              31 |           431 |
+| SRDChiOK                 |      155313 |             7 |            1709 |         90442 |
+| SRDChiMMOK               |       69059 |             0 |             194 |         58902 |
+| SRDChiMMVETOOK           |         656 |             0 |              67 |           355 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |     8.81266 |       67.2907 |         55.9241 |       7.71562 |
+| CHIOK                    |     1.64559 |      0.189261 |         13.7757 |       1.09528 |
+| ECAL_ootOK               |     79.1295 |       75.4413 |         87.8667 |       78.9322 |
+| VETOOK                   |     0.25485 |       11.8206 |         14.2721 |     0.0377929 |
+| HCALtotOK                |    0.491956 |        4.4353 |         40.9626 |   9.18683e-05 |
+| HasHitOK                 |     91.1921 |       68.2082 |         42.0175 |       91.6815 |
+| NclustersOK              |     93.3495 |       88.9282 |         87.9152 |       93.6767 |
+| AngleOK                  |     88.3534 |       85.2335 |         89.1718 |       88.6334 |
+| MomOK                    |     65.2763 |       7.56634 |         12.7034 |       66.2841 |
+| BeamOK                   |     65.7354 |       5.73956 |          16.699 |       66.3512 |
+| MMtotOK                  |      56.617 |       3.87986 |         10.0118 |       57.5652 |
+| ECALRatioOK              |     18.4541 |      0.349722 |         21.0078 |       17.8843 |
+| ECALTimeRatioOK          |     50.6272 |        4.4641 |         28.4687 |       50.7689 |
+| ECALCentralOK            |     89.5209 |       1.37832 |          28.745 |       90.2887 |
+| SHWOK                    |     80.6025 |       80.8434 |         78.1545 |        80.427 |
+| ECALtotOK                |     4.45186 |     0.0246863 |         5.17365 |       4.02875 |
+| S1_timeOK                |     99.9995 |           100 |         99.9981 |       99.9999 |
+| BurstOK                  |     99.9959 |           100 |         99.9961 |       99.9959 |
+| Donskovcut               | 0.000576391 |             0 |       0.0659311 |   4.37468e-06 |
+| Donskovcut_MM            | 0.000401339 |             0 |       0.0494483 |   4.37468e-06 |
+| Donskovcut_noHCAL        |    0.004419 |             0 |        0.169676 |    0.00290479 |
+| Donskovcut_MM_noHCAL     |  0.00313813 |             0 |        0.123136 |    0.00223546 |
+| Donskovcut_Chi           | 0.000111009 |             0 |       0.0116349 |             0 |
+| Donskovcut_MM_Chi        | 0.000111009 |             0 |       0.0116349 |             0 |
+| Donskovcut_MM_noHCAL_Chi |  0.00236961 |             0 |       0.0300568 |    0.00188549 |
+| SRDChiOK                 |    0.663119 |     0.0288007 |           1.657 |      0.395655 |
+| SRDChiMMOK               |    0.294852 |             0 |        0.188098 |      0.257678 |
+| SRDChiMMVETOOK           |  0.00280083 |             0 |       0.0649615 |    0.00155301 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** run 2318 to 2334
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 2.55547e+07 |         27009 |     1.39205e+06 |   2.35868e+07 |
+| SRDOK                    |  3.3428e+06 |         18250 |     1.16241e+06 |   1.85381e+06 |
+| CHIOK                    | 1.75867e+06 |            96 |     1.29109e+06 |        271523 |
+| ECAL_ootOK               | 2.04912e+07 |         20447 |     1.33056e+06 |   1.86595e+07 |
+| VETOOK                   | 1.11056e+06 |          3251 |     1.00937e+06 |          8889 |
+| HCALtotOK                |      989298 |          1125 |          866508 |            31 |
+| HasHitOK                 | 2.34618e+07 |         16974 |     1.24655e+06 |   2.17587e+07 |
+| NclustersOK              | 2.38896e+07 |         22402 |     1.32722e+06 |   2.21059e+07 |
+| AngleOK                  | 2.25962e+07 |         23454 |     1.25125e+06 |   2.09094e+07 |
+| MomOK                    |  1.6799e+07 |           889 |          942354 |   1.56785e+07 |
+| BeamOK                   | 1.70064e+07 |           432 |     1.00362e+06 |   1.57194e+07 |
+| MMtotOK                  |  1.4668e+07 |            69 |          897508 |   1.36316e+07 |
+| ECALRatioOK              | 5.84852e+06 |            93 |      1.3128e+06 |   4.22421e+06 |
+| ECALTimeRatioOK          | 1.34851e+07 |          1152 |     1.16078e+06 |   1.20286e+07 |
+| ECALCentralOK            |   2.301e+07 |           364 |     1.32156e+06 |   2.12902e+07 |
+| SHWOK                    | 2.09026e+07 |         22004 |     1.36288e+06 |   1.90147e+07 |
+| ECALtotOK                | 2.29534e+06 |             4 |      1.1374e+06 |        972805 |
+| S1_timeOK                | 2.55546e+07 |         27008 |     1.39205e+06 |   2.35868e+07 |
+| BurstOK                  | 2.55515e+07 |         27008 |     1.39204e+06 |   2.35837e+07 |
+| Donskovcut               |      500522 |             0 |          478518 |             0 |
+| Donskovcut_MM            |      383621 |             0 |          366875 |             0 |
+| Donskovcut_noHCAL        |      780755 |             0 |          744754 |           726 |
+| Donskovcut_MM_noHCAL     |      598042 |             0 |          570999 |           545 |
+| Donskovcut_Chi           |      383073 |             0 |          366489 |             0 |
+| Donskovcut_MM_Chi        |      383073 |             0 |          366489 |             0 |
+| Donskovcut_MM_noHCAL_Chi |      774738 |             0 |          740214 |           454 |
+| SRDChiOK                 | 1.32098e+06 |            13 |     1.09806e+06 |        103507 |
+| SRDChiMMOK               |      890064 |             0 |          776658 |         67734 |
+| SRDChiMMVETOOK           |      634507 |             0 |          606816 |           371 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiecies
+| type of cut              | all entries | signal region | electron region | hadron region |
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |      13.081 |       67.5701 |         83.5035 |        7.8595 |
+| CHIOK                    |     6.88197 |      0.355437 |         92.7475 |       1.15116 |
+| ECAL_ootOK               |     80.1854 |       75.7044 |         95.5828 |       79.1099 |
+| VETOOK                   |      4.3458 |       12.0367 |         72.5098 |     0.0376863 |
+| HCALtotOK                |     3.87129 |       4.16528 |         62.2469 |   0.000131429 |
+| HasHitOK                 |       91.81 |       62.8457 |         89.5477 |       92.2492 |
+| NclustersOK              |     93.4839 |       82.9427 |          95.343 |       93.7214 |
+| AngleOK                  |     88.4226 |       86.8377 |         89.8855 |       88.6488 |
+| MomOK                    |     65.7375 |        3.2915 |         67.6954 |       66.4713 |
+| BeamOK                   |      66.549 |       1.59947 |         72.0968 |       66.6447 |
+| MMtotOK                  |     57.3985 |       0.25547 |         64.4738 |       57.7933 |
+| ECALRatioOK              |     22.8863 |       0.34433 |         94.3072 |       17.9092 |
+| ECALTimeRatioOK          |     52.7696 |       4.26524 |         83.3865 |       50.9973 |
+| ECALCentralOK            |     90.0421 |        1.3477 |         94.9363 |        90.263 |
+| SHWOK                    |     81.7954 |       81.4691 |         97.9042 |       80.6159 |
+| ECALtotOK                |     8.98204 |     0.0148099 |         81.7066 |       4.12436 |
+| S1_timeOK                |     99.9995 |       99.9963 |         99.9996 |       99.9999 |
+| BurstOK                  |     99.9875 |       99.9963 |         99.9994 |       99.9868 |
+| Donskovcut               |     1.95863 |             0 |          34.375 |             0 |
+| Donskovcut_MM            |     1.50117 |             0 |          26.355 |             0 |
+| Donskovcut_noHCAL        |     3.05523 |             0 |         53.5005 |    0.00307799 |
+| Donskovcut_MM_noHCAL     |     2.34024 |             0 |         41.0185 |    0.00231061 |
+| Donskovcut_Chi           |     1.49903 |             0 |         26.3273 |             0 |
+| Donskovcut_MM_Chi        |     1.49903 |             0 |         26.3273 |             0 |
+| Donskovcut_MM_noHCAL_Chi |     3.03168 |             0 |         53.1743 |     0.0019248 |
+| SRDChiOK                 |     5.16921 |     0.0481321 |         78.8806 |      0.438834 |
+| SRDChiMMOK               |     3.48297 |             0 |         55.7924 |      0.287169 |
+| SRDChiMMVETOOK           |     2.48293 |             0 |         43.5915 |    0.00157291 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** run 2356 to 2361
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 9.03626e+06 |         12917 |           93706 |   8.66083e+06 |
+| SRDOK                    |      952452 |          9370 |           20370 |        814282 |
+| CHIOK                    |      254997 |             5 |           51612 |        104567 |
+| ECAL_ootOK               | 7.27566e+06 |         11167 |           80713 |   6.97873e+06 |
+| VETOOK                   |      107310 |           325 |           48487 |          3052 |
+| HCALtotOK                |      111187 |           371 |           49317 |            15 |
+| HasHitOK                 | 8.31807e+06 |          9288 |           78778 |   7.99404e+06 |
+| NclustersOK              |  8.1831e+06 |         11625 |           64005 |   7.91913e+06 |
+| AngleOK                  |  7.7302e+06 |         10887 |           65105 |   7.47459e+06 |
+| MomOK                    | 5.47577e+06 |           515 |           15723 |   5.39311e+06 |
+| BeamOK                   | 5.69922e+06 |           223 |           25948 |   5.54518e+06 |
+| MMtotOK                  | 4.67333e+06 |            50 |            7229 |   4.62415e+06 |
+| ECALRatioOK              | 1.59643e+06 |            27 |           70627 |   1.37591e+06 |
+| ECALTimeRatioOK          | 4.10298e+06 |           435 |            7749 |   3.99884e+06 |
+| ECALCentralOK            | 7.87919e+06 |            83 |           74119 |   7.60023e+06 |
+| SHWOK                    | 7.33843e+06 |         11784 |           26202 |   7.08704e+06 |
+| ECALtotOK                |      359202 |             0 |            2116 |        313560 |
+| S1_timeOK                | 9.03619e+06 |         12917 |           93703 |   8.66082e+06 |
+| BurstOK                  | 9.03626e+06 |         12917 |           93706 |   8.66083e+06 |
+| Donskovcut               |         128 |             0 |              59 |             1 |
+| Donskovcut_MM            |          79 |             0 |              40 |             1 |
+| Donskovcut_noHCAL        |         579 |             0 |             123 |           271 |
+| Donskovcut_MM_noHCAL     |         401 |             0 |              89 |           211 |
+| Donskovcut_Chi           |          34 |             0 |              14 |             0 |
+| Donskovcut_MM_Chi        |          34 |             0 |              14 |             0 |
+| Donskovcut_MM_noHCAL_Chi |         322 |             0 |              48 |           180 |
+| SRDChiOK                 |       72818 |             0 |            4496 |         40874 |
+| SRDChiMMOK               |       30156 |             0 |             381 |         26158 |
+| SRDChiMMVETOOK           |         701 |             0 |             201 |           150 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |     10.5403 |       72.5401 |         21.7382 |        9.4019 |
+| CHIOK                    |     2.82193 |     0.0387087 |         55.0787 |       1.20736 |
+| ECAL_ootOK               |     80.5163 |        86.452 |         86.1343 |       80.5781 |
+| VETOOK                   |     1.18755 |       2.51606 |         51.7438 |     0.0352391 |
+| HCALtotOK                |     1.23045 |       2.87218 |         52.6295 |   0.000173194 |
+| HasHitOK                 |     92.0522 |       71.9052 |         84.0693 |       92.3012 |
+| NclustersOK              |     90.5585 |       89.9977 |         68.3041 |       91.4362 |
+| AngleOK                  |     85.5464 |       84.2843 |         69.4779 |       86.3034 |
+| MomOK                    |     60.5977 |       3.98699 |         16.7791 |       62.2702 |
+| BeamOK                   |     63.0706 |       1.72641 |         27.6909 |        64.026 |
+| MMtotOK                  |     51.7175 |      0.387087 |         7.71455 |       53.3916 |
+| ECALRatioOK              |     17.6669 |      0.209027 |         75.3708 |       15.8866 |
+| ECALTimeRatioOK          |     45.4057 |       3.36766 |         8.26948 |       46.1715 |
+| ECALCentralOK            |     87.1953 |      0.642564 |         79.0974 |       87.7541 |
+| SHWOK                    |     81.2109 |       91.2286 |         27.9619 |       81.8286 |
+| ECALtotOK                |     3.97512 |             0 |         2.25813 |       3.62044 |
+| S1_timeOK                |     99.9992 |           100 |         99.9968 |       99.9999 |
+| BurstOK                  |         100 |           100 |             100 |           100 |
+| Donskovcut               |  0.00141652 |             0 |       0.0629629 |   1.15462e-05 |
+| Donskovcut_MM            | 0.000874255 |             0 |       0.0426867 |   1.15462e-05 |
+| Donskovcut_noHCAL        |  0.00640752 |             0 |        0.131262 |    0.00312903 |
+| Donskovcut_MM_noHCAL     |  0.00443768 |             0 |       0.0949779 |    0.00243626 |
+| Donskovcut_Chi           | 0.000376262 |             0 |       0.0149403 |             0 |
+| Donskovcut_MM_Chi        | 0.000376262 |             0 |       0.0149403 |             0 |
+| Donskovcut_MM_noHCAL_Chi |  0.00356342 |             0 |        0.051224 |    0.00207832 |
+| SRDChiOK                 |    0.805842 |             0 |         4.79799 |      0.471941 |
+| SRDChiMMOK               |    0.333722 |             0 |        0.406591 |      0.302027 |
+| SRDChiMMVETOOK           |  0.00775763 |             0 |        0.214501 |    0.00173194 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** run 2366 to 2375
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 3.53431e+06 |          3637 |           68929 |   3.24126e+06 |
+| SRDOK                    |      974401 |          2597 |           43437 |        804927 |
+| CHIOK                    |      197867 |             0 |            4000 |        177844 |
+| ECAL_ootOK               | 3.39241e+06 |          3369 |           59950 |   3.13566e+06 |
+| VETOOK                   |       17994 |            31 |            5408 |          3053 |
+| HCALtotOK                |       70498 |            37 |           22570 |            10 |
+| HasHitOK                 |  3.1611e+06 |          2880 |           32050 |   2.99044e+06 |
+| NclustersOK              | 3.25761e+06 |          3298 |           63786 |    2.9956e+06 |
+| AngleOK                  | 3.07905e+06 |          3045 |           63735 |   2.82132e+06 |
+| MomOK                    | 2.00518e+06 |           155 |           15963 |   1.92552e+06 |
+| BeamOK                   | 2.17543e+06 |            77 |           18272 |   2.07577e+06 |
+| MMtotOK                  | 1.78837e+06 |             7 |           14492 |   1.71912e+06 |
+| ECALRatioOK              |      598909 |             8 |           15885 |        517768 |
+| ECALTimeRatioOK          | 2.31507e+06 |           156 |           26343 |   2.18862e+06 |
+| ECALCentralOK            | 2.88072e+06 |            45 |           22143 |   2.74758e+06 |
+| SHWOK                    | 3.49962e+06 |          3480 |           63722 |   3.22377e+06 |
+| ECALtotOK                |      447983 |             3 |           13195 |        395888 |
+| S1_timeOK                | 3.53429e+06 |          3637 |           68929 |   3.24126e+06 |
+| BurstOK                  | 3.53386e+06 |          3637 |           68922 |   3.24085e+06 |
+| Donskovcut               |        1638 |             0 |             967 |             2 |
+| Donskovcut_MM            |        1156 |             0 |             698 |             1 |
+| Donskovcut_noHCAL        |        4391 |             0 |            1756 |          1138 |
+| Donskovcut_MM_noHCAL     |        3131 |             0 |            1262 |           824 |
+| Donskovcut_Chi           |         772 |             0 |             516 |             0 |
+| Donskovcut_MM_Chi        |         772 |             0 |             516 |             0 |
+| Donskovcut_MM_noHCAL_Chi |        2707 |             0 |            1209 |           732 |
+| SRDChiOK                 |      134863 |             0 |            3090 |        124197 |
+| SRDChiMMOK               |       85078 |             0 |            1919 |         80293 |
+| SRDChiMMVETOOK           |        2078 |             0 |             918 |           576 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |     27.5697 |        71.405 |          63.017 |       24.8337 |
+| CHIOK                    |     5.59846 |             0 |         5.80307 |       5.48687 |
+| ECAL_ootOK               |     95.9849 |       92.6313 |         86.9736 |       96.7417 |
+| VETOOK                   |    0.509123 |      0.852351 |         7.84575 |     0.0941916 |
+| HCALtotOK                |     1.99467 |       1.01732 |         32.7438 |   0.000308522 |
+| HasHitOK                 |     89.4402 |       79.1861 |         46.4971 |       92.2616 |
+| NclustersOK              |      92.171 |       90.6791 |         92.5387 |       92.4207 |
+| AngleOK                  |     87.1187 |       83.7228 |         92.4647 |       87.0437 |
+| MomOK                    |     56.7346 |       4.26175 |         23.1586 |       59.4065 |
+| BeamOK                   |     61.5518 |       2.11713 |         26.5084 |       64.0419 |
+| MMtotOK                  |     50.6002 |      0.192466 |         21.0245 |       53.0385 |
+| ECALRatioOK              |     16.9456 |      0.219962 |         23.0455 |       15.9743 |
+| ECALTimeRatioOK          |     65.5027 |       4.28925 |         38.2176 |       67.5235 |
+| ECALCentralOK            |     81.5073 |       1.23728 |         32.1244 |       84.7688 |
+| SHWOK                    |     99.0183 |       95.6833 |         92.4459 |       99.4602 |
+| ECALtotOK                |     12.6752 |     0.0824856 |         19.1429 |        12.214 |
+| S1_timeOK                |     99.9993 |           100 |             100 |       99.9999 |
+| BurstOK                  |     99.9871 |           100 |         99.9898 |       99.9871 |
+| Donskovcut               |   0.0463456 |             0 |         1.40289 |   6.17043e-05 |
+| Donskovcut_MM            |   0.0327079 |             0 |         1.01264 |   3.08522e-05 |
+| Donskovcut_noHCAL        |    0.124239 |             0 |         2.54755 |     0.0351097 |
+| Donskovcut_MM_noHCAL     |   0.0885886 |             0 |         1.83087 |     0.0254222 |
+| Donskovcut_Chi           |    0.021843 |             0 |        0.748596 |             0 |
+| Donskovcut_MM_Chi        |    0.021843 |             0 |        0.748596 |             0 |
+| Donskovcut_MM_noHCAL_Chi |   0.0765919 |             0 |         1.75398 |     0.0225838 |
+| SRDChiOK                 |     3.81582 |             0 |         4.48287 |       3.83174 |
+| SRDChiMMOK               |      2.4072 |             0 |         2.78402 |       2.47721 |
+| SRDChiMMVETOOK           |    0.058795 |             0 |         1.33181 |     0.0177708 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** run 2392 to 2401
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 5.04462e+06 |          5422 |           93989 |   4.59678e+06 |
+| SRDOK                    | 1.40978e+06 |          3894 |           60070 |   1.14694e+06 |
+| CHIOK                    |      299692 |             4 |           10980 |        261237 |
+| ECAL_ootOK               | 4.84348e+06 |          5039 |           82154 |   4.45039e+06 |
+| VETOOK                   |       32902 |            23 |           10789 |          4430 |
+| HCALtotOK                |      109850 |            42 |           31196 |            13 |
+| HasHitOK                 | 4.49822e+06 |          4375 |           48949 |   4.23125e+06 |
+| NclustersOK              | 4.64555e+06 |          4911 |           86780 |   4.24503e+06 |
+| AngleOK                  | 4.40561e+06 |          4553 |           86420 |    4.0119e+06 |
+| MomOK                    | 2.87224e+06 |           258 |           26683 |   2.74328e+06 |
+| BeamOK                   | 3.12642e+06 |           116 |           30700 |   2.96408e+06 |
+| MMtotOK                  | 2.56883e+06 |            24 |           24507 |   2.45548e+06 |
+| ECALRatioOK              |      895099 |             9 |           29818 |        754066 |
+| ECALTimeRatioOK          | 3.30994e+06 |           209 |           40364 |   3.11112e+06 |
+| ECALCentralOK            | 4.11564e+06 |            33 |           37625 |   3.90098e+06 |
+| SHWOK                    | 4.99413e+06 |          5235 |           87314 |   4.57228e+06 |
+| ECALtotOK                |      672954 |             4 |           24824 |        580239 |
+| S1_timeOK                | 5.04461e+06 |          5422 |           93989 |   4.59677e+06 |
+| BurstOK                  | 5.04462e+06 |          5422 |           93989 |   4.59678e+06 |
+| Donskovcut               |        5003 |             0 |            3070 |             3 |
+| Donskovcut_MM            |        3628 |             0 |            2265 |             0 |
+| Donskovcut_noHCAL        |       10540 |             1 |            5020 |          1647 |
+| Donskovcut_MM_noHCAL     |        7652 |             0 |            3699 |          1217 |
+| Donskovcut_Chi           |        2810 |             0 |            1898 |             0 |
+| Donskovcut_MM_Chi        |        2810 |             0 |            1898 |             0 |
+| Donskovcut_MM_noHCAL_Chi |        7521 |             0 |            4091 |          1076 |
+| SRDChiOK                 |      206655 |             1 |            8410 |        183755 |
+| SRDChiMMOK               |      130969 |             0 |            5468 |        119119 |
+| SRDChiMMVETOOK           |        5810 |             0 |            3149 |           839 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |     27.9461 |       71.8185 |         63.9117 |        24.951 |
+| CHIOK                    |     5.94082 |     0.0737735 |         11.6822 |       5.68305 |
+| ECAL_ootOK               |     96.0126 |       92.9362 |         87.4081 |       96.8154 |
+| VETOOK                   |    0.652219 |      0.424198 |          11.479 |     0.0963719 |
+| HCALtotOK                |     2.17757 |      0.774622 |         33.1911 |   0.000282807 |
+| HasHitOK                 |     89.1687 |       80.6898 |         52.0795 |       92.0483 |
+| NclustersOK              |     92.0891 |       90.5754 |           92.33 |        92.348 |
+| AngleOK                  |     87.3328 |       83.9727 |         91.9469 |       87.2765 |
+| MomOK                    |     56.9366 |       4.75839 |         28.3895 |       59.6783 |
+| BeamOK                   |     61.9752 |       2.13943 |         32.6634 |       64.4818 |
+| MMtotOK                  |     50.9222 |      0.442641 |         26.0743 |       53.4175 |
+| ECALRatioOK              |     17.7436 |       0.16599 |          31.725 |       16.4042 |
+| ECALTimeRatioOK          |     65.6133 |       3.85467 |         42.9455 |       67.6805 |
+| ECALCentralOK            |     81.5847 |      0.608632 |         40.0313 |       84.8635 |
+| SHWOK                    |     98.9991 |       96.5511 |         92.8981 |       99.4671 |
+| ECALtotOK                |       13.34 |     0.0737735 |         26.4116 |       12.6227 |
+| S1_timeOK                |     99.9996 |           100 |             100 |           100 |
+| BurstOK                  |         100 |           100 |             100 |           100 |
+| Donskovcut               |   0.0991749 |             0 |         3.26634 |   6.52631e-05 |
+| Donskovcut_MM            |   0.0719181 |             0 |         2.40986 |             0 |
+| Donskovcut_noHCAL        |    0.208935 |     0.0184434 |         5.34105 |     0.0358295 |
+| Donskovcut_MM_noHCAL     |    0.151686 |             0 |         3.93557 |     0.0264751 |
+| Donskovcut_Chi           |   0.0557029 |             0 |         2.01939 |             0 |
+| Donskovcut_MM_Chi        |   0.0557029 |             0 |         2.01939 |             0 |
+| Donskovcut_MM_noHCAL_Chi |    0.149089 |             0 |         4.35264 |     0.0234077 |
+| SRDChiOK                 |     4.09654 |     0.0184434 |         8.94786 |       3.99748 |
+| SRDChiMMOK               |     2.59621 |             0 |          5.8177 |       2.59136 |
+| SRDChiMMVETOOK           |    0.115172 |             0 |         3.35039 |     0.0182519 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+****** run 2411 to 2457
+******* total events
+| type of cut              | all entries | signal region | electron region | hadron region |
+|--------------------------+-------------+---------------+-----------------+---------------|
+| nocut                    | 1.74432e+07 |         37573 |     1.71934e+06 |   1.42892e+07 |
+| SRDOK                    | 5.09986e+06 |         17150 |     1.19674e+06 |   3.14324e+06 |
+| CHIOK                    | 2.68974e+06 |            10 |     1.47299e+06 |        720623 |
+| ECAL_ootOK               | 1.64001e+07 |         23703 |     1.53392e+06 |   1.36239e+07 |
+| VETOOK                   | 1.10091e+06 |         11749 |          802973 |          9532 |
+| HCALtotOK                | 1.44129e+06 |           162 |     1.01791e+06 |            58 |
+| HasHitOK                 | 1.47214e+07 |         30318 |     1.36159e+06 |   1.23262e+07 |
+| NclustersOK              | 1.52834e+07 |         32949 |     1.55022e+06 |   1.25292e+07 |
+| AngleOK                  | 1.43968e+07 |         30873 |     1.46616e+06 |   1.17751e+07 |
+| MomOK                    | 8.25401e+06 |          7000 |          877103 |   6.89868e+06 |
+| BeamOK                   | 9.27696e+06 |          7334 |          989377 |   7.65951e+06 |
+| MMtotOK                  | 7.05962e+06 |          5302 |          811337 |    5.8413e+06 |
+| ECALRatioOK              | 4.37521e+06 |            22 |     1.53836e+06 |   2.06635e+06 |
+| ECALTimeRatioOK          | 1.05353e+07 |           594 |     1.23661e+06 |   8.60062e+06 |
+| ECALCentralOK            | 1.44997e+07 |           234 |      1.5663e+06 |   1.19422e+07 |
+| SHWOK                    | 1.72501e+07 |         24247 |     1.69646e+06 |   1.41729e+07 |
+| ECALtotOK                | 3.11945e+06 |             6 |     1.19911e+06 |   1.43636e+06 |
+| S1_timeOK                | 1.74431e+07 |         37573 |     1.71934e+06 |   1.42892e+07 |
+| BurstOK                  | 1.74432e+07 |         37573 |     1.71934e+06 |   1.42892e+07 |
+| Donskovcut               |      392027 |             0 |          294960 |             3 |
+| Donskovcut_MM            |      272606 |             0 |          203790 |             2 |
+| Donskovcut_noHCAL        |      621605 |             0 |          466000 |          2436 |
+| Donskovcut_MM_noHCAL     |      430599 |             0 |          321237 |          1673 |
+| Donskovcut_Chi           |      271399 |             0 |          203271 |             1 |
+| Donskovcut_MM_Chi        |      271399 |             0 |          203271 |             1 |
+| Donskovcut_MM_noHCAL_Chi |      613030 |             0 |          461678 |          1691 |
+| SRDChiOK                 | 1.81839e+06 |             1 |     1.06727e+06 |        435551 |
+| SRDChiMMOK               |      994316 |             1 |          597118 |        230979 |
+| SRDChiMMVETOOK           |      447916 |             1 |          336532 |          1266 |
+|--------------------------+-------------+---------------+-----------------+---------------|
+******* efficiencies
+| type of cut              | all entries | signal region | electron region | hadron region |
+| nocut                    |         100 |           100 |             100 |           100 |
+| SRDOK                    |     29.2368 |       45.6445 |         69.6046 |       21.9973 |
+| CHIOK                    |       15.42 |     0.0266149 |         85.6719 |       5.04313 |
+| ECAL_ootOK               |       94.02 |       63.0852 |         89.2156 |       95.3438 |
+| VETOOK                   |     6.31136 |       31.2698 |         46.7025 |     0.0667077 |
+| HCALtotOK                |     8.26274 |      0.431161 |         59.2035 |   0.000405901 |
+| HasHitOK                 |     84.3961 |       80.6909 |         79.1929 |        86.262 |
+| NclustersOK              |     87.6181 |       87.6933 |         90.1638 |       87.6831 |
+| AngleOK                  |     82.5353 |        82.168 |         85.2744 |       82.4053 |
+| MomOK                    |     47.3192 |       18.6304 |          51.014 |        48.279 |
+| BeamOK                   |     53.1837 |       19.5193 |         57.5441 |       53.6035 |
+| MMtotOK                  |     40.4719 |       14.1112 |         47.1889 |       40.8791 |
+| ECALRatioOK              |     25.0825 |     0.0585527 |         89.4741 |       14.4609 |
+| ECALTimeRatioOK          |     60.3977 |       1.58092 |         71.9234 |       60.1896 |
+| ECALCentralOK            |     83.1248 |      0.622788 |         91.0987 |       83.5748 |
+| SHWOK                    |     98.8924 |        64.533 |         98.6694 |       99.1861 |
+| ECALtotOK                |     17.8834 |     0.0159689 |         69.7424 |       10.0521 |
+| S1_timeOK                |     99.9994 |           100 |             100 |       99.9999 |
+| BurstOK                  |         100 |           100 |             100 |           100 |
+| Donskovcut               |     2.24744 |             0 |         17.1554 |   2.09949e-05 |
+| Donskovcut_MM            |     1.56282 |             0 |         11.8528 |   1.39966e-05 |
+| Donskovcut_noHCAL        |     3.56359 |             0 |         27.1035 |     0.0170478 |
+| Donskovcut_MM_noHCAL     |     2.46857 |             0 |         18.6838 |     0.0117081 |
+| Donskovcut_Chi           |      1.5559 |             0 |         11.8226 |   6.99829e-06 |
+| Donskovcut_MM_Chi        |      1.5559 |             0 |         11.8226 |   6.99829e-06 |
+| Donskovcut_MM_noHCAL_Chi |     3.51443 |             0 |         26.8521 |     0.0118341 |
+| SRDChiOK                 |     10.4246 |    0.00266149 |         62.0746 |       3.04811 |
+| SRDChiMMOK               |     5.70029 |    0.00266149 |         34.7295 |       1.61646 |
+| SRDChiMMVETOOK           |     2.56785 |    0.00266149 |         19.5733 |    0.00885984 |
+|--------------------------+-------------+---------------+-----------------+---------------|<2017-08-24 Don>
+** gdml geometries                                                     :gdml:
+a description can be found [[/home/emilio/polybox/PhD/data/gdml geometries/README.org][here]]
+** inventory                                                      :inventory:
+Here is listed the inventory after each beam run
+*** run 2017<2017-08-05 Sam>                                           :2017:
+**** cable box
+     Box with a total of 16 SHV cables of length between 2 and 3 m is in my office at prevessin in second floor of 892.
+     Over the box additional tools for gas and cooper braids are provided, together with some extra gas pipes. 3 fiber optic cables, 1 10 m long and 2 30 m long are also
+     stored in the room.
+**** ADC and transition card
+     a total of 3 ADC and 5 transition card are located in my office at prevessin in the shelf just below my place.
+**** APV chips
+     outside of the APV chips already included in MM to avoid dust in the conectors additional ~8 chips are located in the shelf on the left in my office.
+**** time filter and preamp
+     located in the shelf in my office just below my place
+**** MicroMegas
+     located in the cage of H4 in building *887* total of 8 modules (4 with old design and 4 with new design) with 1 APV chips per each and correspondent BUs card
+**** long cables and gas pipes
+     Currently located in the cage of H8 beam line. Keep in contact with *Vladimir Poliankov* as te location might change in the future. A total of 16 long SHV cables are stored there
+     together with several gas pipes of red color.
+** Pixel                                                              :pixel:
+*** TODO [1/5]Tasks 
+    - [ ] Build Mechanics, ongoing
+    - [ ] Buid Pixels, will probably be done on <2018-03-27 mar> by Malte
+    - [ ] Install EUDET to computer downstairs
+    - [X] Check disponibility of desktop with *Thierry Vivant*: desktop are avaiable
+    - [ ] Check feasibility of the mechanics
+    - [ ] 
+*** eudaq framework
+Manual can be found here [[/home/deppy/polybox/PhD/detector/Pixel/EUDAQUserManual.pdf][manual]]
+** CAEN mainframe   
+* WCAL dimension <2019-07-12 Fri>
+  *short description* Goal of the study is to understand the advantages of smaller WCAL in terms of signal yield.
+  *====>* $\epsilon = 10^{-3}$ for complete beryllium anomaly exclusion.
+** TODO [0/1] Goals
+   - [ ] Is it true that signal yield will depend linearly to WCAL dimension provided same background?
+   - [ ] Large cross section bias still produce relatively similar signal simulation?
+   - [ ] Does large uncertainties in the energy of the WCAL lead to worse signal yield?
+   - [ ] Is energy of first WCAL needed at all? (*Dimuons*)
+   - [ ] ...
+*** TODO [4/5] simulation
+    - [X] Implement basic simulation
+    - [ ] Dimension of Counter / Converter layer automatic? *<=== problematic, for now manual*
+    - [X] Automatic calibration procedure? *<=== implemented at analysis level*
+    - [X] how much events are simulated per second ?
+    - [X] how many signal needed for a good statistics? 10000?ls *<=== proven to be enough*
+** Information
+*** Simulation statistics                                        :simulation:
+    1) *Simulation / second*: 0.25 ---> 1 events every 4 second
+    2) *Dark photon event / Total*: circa 1/3 for a sigma norm of 0.000015
+    3) *original counter*: 0.2 cm 35 layers
+    4) *original converter*: 0.3 cm 35 layers
+*** radiation length calculator
+    quick skript to calculate and print radiation length
+    *to be moved outside scratch*
+    [[/home/deppy/workdir/scratch/wcal-length/estimate.py][X_calculator]]
+** simulations
+*** <2019-07-12 Fri> smaller counter depth
+    - *EVENTS 30000*
+    - Counterdepth down to 1 mm, all the rest is the same, WCAL decresed by 24(35?) mm this way
+    - *WARNING*: _no new calibration was performed before this simulation, a correction will be needed offline_
+*** First simulation batch, four simulation <2019-07-15 Mon>
+    - All simulation have 30000 events, 1/3 shoudl be signal *TO BE CONFIRMED*
+    - They mostly change as number of counter depth na dnumber of layer
+    | Simulation name               | Nlayers | Counter Depth [mm] | Converter Depth [mm] |
+    |-------------------------------+---------+--------------------+----------------------|
+    | NA64_2018_VIS_COU2_CON3_LAY30 |      30 |                  2 |                    3 |
+    | NA64_2018_VIS_COU1_CON3_LAY30 |      30 |                  1 |                    3 |
+    | NA64_2018_VIS_COU2_CON3_LAY35 |      35 |                  2 |                    3 |
+    | NA64_2018_VIS_COU1_CON3_LAY35 |      35 |                  1 |                    3 |
+    |-------------------------------+---------+--------------------+----------------------|
+    *WARNING: 30 LAYER SIMULATION ARE IN FACT 35, FIXED IN THE NEXT ITERATION*
+*** second simulation batch <2019-07-17 Wed>
+    - Fixed Nlayer, it was reassigned later in the class
+    | Simulation name                 | Nlayers | Counter Depth [mm] | Converter Depth [mm] |
+    |---------------------------------+---------+--------------------+----------------------|
+    | NA64_2018_VIS_COU2_CON3_LAY30   |      30 |                  2 |                    3 |
+    | NA64_2018_VIS_COU1_CON3_LAY30   |      30 |                  1 |                    3 |
+    | NA64_2018_VIS_COU015_CON3_LAY30 |      30 |                1.5 |                    3 |
+    | NA64_2018_VIS_COU015_CON3_LAY35 |      35 |                1.5 |                    3 |
+    |---------------------------------+---------+--------------------+----------------------|
+*** third simulation batch <2019-08-07 Wed>
+    For Sergei request (see log [[new simulation requested by Sergei]]). Used a more
+    manageable bias (1/6 of the entries are signal *TO BE CONFIRMED*). so double of the
+    even were simulated i.e. 60000.
+    In case of the double calorimeter solution, no correction for the calibration was used.
+    An offline calibration will be needed for this.
+*** fourth simulation batch <2019-08-09 Fri>
+    Sergei proposed another design based on a first active calorimeter part (21X0) and 
+    a catcher of 10-15X0 length to strongly reduce the energy detected. Will probably require
+    a strong recalibration, also remember that a new veto of 5 mm will be probably used in the new
+    search. For now same counter can be used, to be substitute later.
+    This means 25 layer of normal calorimeter and 12-18 layer of pure tungsten
+    for a resulting 16.1-17.6 cm
+    <2019-08-14 Wed> Simulation results are weird and a bit counter intuitive, a second simulation
+    was used to reduce the radiation length to exactly the one used in 2018. Result can be found
+    in the [[results]]
+** results
+*** results submitted for the first batch of simulation <2019-07-17 Wed>
+**** assuming smearing linearly proportional counte depth
+| Nlayers | Counter size [mm] | expected DM for 1E10 | EOTS to cover anomaly | Day to Cover the Anomaly |
+|      34 |                 2 |             0.104687 |           2.19702e+11 |                  26.7929 |
+|      34 |               1.5 |             0.140092 |           1.64178e+11 |                  20.0217 |
+|      34 |                 1 |             0.135969 |           1.69156e+11 |                  20.6288 |
+|      29 |                 2 |              0.14886 |           1.54508e+11 |                  18.8424 |
+|      29 |               1.5 |             0.175858 |           1.30787e+11 |                  15.9497 |
+|      29 |                 1 |              0.18758 |           1.22614e+11 |                  14.9529 |
+**** assuming same smearing as measured in 2018 (2mm)
+| Nlayers | Counter size [mm] | expected DM for 1E10 | EOTS to cover anomaly | Day to Cover the Anomaly |
+|      34 |                 2 |             0.104687 |           2.19702e+11 |                  26.7929 |
+|      34 |               1.5 |             0.140092 |           1.64178e+11 |                  20.0217 |
+|      34 |                 1 |             0.135969 |           1.69156e+11 |                  20.6288 |
+|      29 |                 2 |              0.14886 |           1.54508e+11 |                  18.8424 |
+|      29 |               1.5 |             0.175858 |           1.30787e+11 |                  15.9497 |
+|      29 |                 1 |              0.18758 |           1.22614e+11 |                  14.9529 |      
+*** result of fourth batch simulation summarized all together
+  | WCAL structure [mm](layers) | WCAL length  [mm] | epsilon | EOTS to cover anomaly | Day to Cover the Anomaly |
+  |-----------------------------+-------------------+---------+-----------------------+--------------------------|
+  | ECAL1:3+1(29)ECAL2:--       |               119 |   0.001 |           7.56627e+10 |                  9.22716 |
+  | ECAL1:3+1(29)ECAL2:--       |               119 |   0.001 |           7.89969e+10 |                  9.63376 |
+  | ECAL1:3+1(34)ECAL2:--       |               139 |   0.001 |           9.08976e+10 |                  11.0851 |
+  | ECAL1:3+1(34)ECAL2:--       |               139 |   0.001 |           9.48697e+10 |                  11.5695 |
+  | ECAL1:3+2(29)ECAL2:--       |             133.5 |   0.001 |           1.16376e+11 |                  14.1921 |
+  | ECAL1:3+2(29)ECAL2:--       |             133.5 |   0.001 |           1.16903e+11 |                  14.2564 |
+  | ECAL1:3+2(34)ECAL2:--       |               156 |   0.001 |           1.40855e+11 |                  17.1774 |
+  | ECAL1:3+2(34)ECAL2:--       |               156 |   0.001 |           1.41953e+11 |                  17.3113 |
+  | ECAL1:3+2(29)ECAL2:--       |               148 |   0.001 |           1.54508e+11 |                  18.8424 |
+  | ECAL1:3+2(34)ECAL2:--       |               173 |   0.001 |           2.19702e+11 |                  26.7929 |
+  | ECAL1:3+2(25)ECAL2:3+0(12)  |            162.01 |   0.001 |           5.70981e+11 |                  69.6319 |
+  | ECAL1:3+2(25)ECAL2:3+0(17)  |            177.02 |   0.001 |           1.66141e+13 |                  2026.11 |
+  | ECAL1:6+2(20)ECAL2:--       |               166 |  0.0015 |           3.28472e+13 |                  4005.75 |
+  | ECAL1:6+2(20)ECAL2:--       |               166 |  0.0015 |            3.7721e+13 |                  4600.13 |
+  | ECAL1:6+2(20)ECAL2:--       |               166 |  0.0015 |            3.7721e+13 |                  4600.13 |
+  | ECAL1:6+2(20)ECAL2:--       |               166 |  0.0015 |           3.77636e+13 |                  4605.32 |
+  | ECAL1:3+2(15)ECAL2:6+2(10)  |               156 |  0.0015 |           2.24109e+14 |                  27330.4 |
+  | ECAL1:3+2(15)ECAL2:6+2(10)  |               156 |  0.0015 |           3.24399e+14 |                  39560.8 |
+  | ECAL1:3+2(25)ECAL2:3+0(17)  |            177.02 |  0.0015 |           4.26535e+14 |                  52016.5 |
+  | ECAL1:3+2(25)ECAL2:3+0(17)  |            177.02 |  0.0015 |           4.48503e+14 |                  54695.5 |
+  | ECAL1:3+2(25)ECAL2:3+0(17)  |            177.02 |  0.0015 |           8.16075e+14 |                  99521.3 |
+  | ECAL1:3+2(25)ECAL2:3+0(17)  |            177.02 |  0.0015 |           8.31864e+14 |                   101447 |
+  |-----------------------------+-------------------+---------+-----------------------+--------------------------|
+*** Final results of different simulation                             :final:
+    In these results the most promising results are summarized and the yield of 
+    dark photon for different cut is reported. Day needed to cover the anomaly were calculated
+    using the mean value of EOTS collected in 2018. Most relevant entry of the tables are
+    the one with *SignalQuality2* since they are the one of most of our analysis.
+**** Analysis 2018 for 1e+10 EOTS using cut up to NOCUTS
+   | WCAL structure [mm](layers) | WCAL length  [mm] | epsilon | expected DM for 1E10 | EOTS to cover anomaly | Day to Cover the Anomaly |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+   | ECAL1:6+2(17)ECAL2:--       |               142 |  0.0012 |            0.16(0.1) |      1.4e+11(9.1e+10) |               17.4(11.1) |
+   | ECAL1:6+2(17)ECAL2:--       |               142 |   0.001 |           0.63(0.12) |      3.7e+10(7.2e+09) |              4.48(0.875) |
+   | ECAL1:3+2(34)ECAL2:--       |               173 |   0.001 |          0.27(0.063) |        8.6e+10(2e+10) |               10.4(2.45) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |          0.47(0.052) |      4.9e+10(5.3e+09) |              5.92(0.648) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |          0.48(0.074) |      4.8e+10(7.3e+09) |               5.8(0.884) |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+**** Analysis 2018 for 1e+10 EOTS using cut up to HCAL
+   | WCAL structure [mm](layers) | WCAL length  [mm] | epsilon | expected DM for 1E10 | EOTS to cover anomaly | Day to Cover the Anomaly |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+   | ECAL1:6+2(17)ECAL2:--       |               142 |  0.0012 |          0.13(0.091) |      1.8e+11(1.3e+11) |               21.8(15.5) |
+   | ECAL1:6+2(17)ECAL2:--       |               142 |   0.001 |           0.52(0.11) |      4.4e+10(9.4e+09) |               5.38(1.15) |
+   | ECAL1:3+2(34)ECAL2:--       |               173 |   0.001 |          0.21(0.056) |      1.1e+11(2.9e+10) |               13.3(3.52) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |          0.39(0.047) |        6e+10(7.2e+09) |               7.26(0.88) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |          0.39(0.066) |        5.9e+10(1e+10) |               7.17(1.21) |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+**** Analysis 2018 for 1e+10 EOTS using cut up to ECALProfile
+   | WCAL structure [mm](layers) | WCAL length  [mm] | epsilon | expected DM for 1E10 | EOTS to cover anomaly | Day to Cover the Anomaly |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+   | ECAL1:6+2(17)ECAL2:--       |               142 |  0.0012 |           0.1(0.082) |      2.2e+11(1.7e+11) |               26.9(21.3) |
+   | ECAL1:6+2(17)ECAL2:--       |               142 |   0.001 |            0.42(0.1) |      5.5e+10(1.3e+10) |               6.66(1.59) |
+   | ECAL1:3+2(34)ECAL2:--       |               173 |   0.001 |          0.17(0.051) |      1.3e+11(3.9e+10) |               16.2(4.74) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |           0.3(0.041) |        7.6e+10(1e+10) |               9.31(1.28) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |           0.3(0.058) |      7.7e+10(1.5e+10) |               9.43(1.83) |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+**** Analysis 2018 for 1e+10 EOTS using cut up to SignalQuality2
+   | WCAL structure [mm](layers) | WCAL length  [mm] | epsilon | expected DM for 1E10 | EOTS to cover anomaly | Day to Cover the Anomaly |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+   | ECAL1:6+2(17)ECAL2:--       |               142 |  0.0012 |         0.063(0.064) |      3.7e+11(3.7e+11) |               44.7(45.5) |
+   | ECAL1:6+2(17)ECAL2:--       |               142 |   0.001 |          0.26(0.078) |      8.9e+10(2.7e+10) |               10.9(3.31) |
+   | ECAL1:3+2(34)ECAL2:--       |               173 |   0.001 |           0.11(0.04) |      2.2e+11(8.1e+10) |                26.5(9.9) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |          0.15(0.029) |      1.5e+11(2.9e+10) |               18.5(3.59) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |           0.14(0.04) |      1.6e+11(4.5e+10) |               19.6(5.49) |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+**** Analysis 2018 for 1e+10 EOTS using cut up to SignalQuality4
+   | WCAL structure [mm](layers) | WCAL length  [mm] | epsilon | expected DM for 1E10 | EOTS to cover anomaly | Day to Cover the Anomaly |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+   | ECAL1:6+2(17)ECAL2:--       |               142 |  0.0012 |         0.063(0.064) |      3.7e+11(3.7e+11) |               44.7(45.5) |
+   | ECAL1:6+2(17)ECAL2:--       |               142 |   0.001 |          0.26(0.078) |      8.9e+10(2.7e+10) |               10.9(3.32) |
+   | ECAL1:3+2(34)ECAL2:--       |               173 |   0.001 |           0.1(0.039) |      2.2e+11(8.2e+10) |               26.8(10.1) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |          0.15(0.029) |        1.5e+11(3e+10) |                18.6(3.6) |
+   | ECAL1:3+2(25)ECAL2:3+0(9)   |               153 |   0.001 |           0.14(0.04) |      1.6e+11(4.5e+10) |               19.7(5.52) |
+   |-----------------------------+-------------------+---------+----------------------+-----------------------+--------------------------|
+
+** log
+*** <2019-07-15 Mon>
+    all condor job did not progress, make another try using espresso queue to reconsturct some invisible mode
+    simulation. after that I should contact CERN support.
+    *IMPORTANT <===* first simulation was ended, new simulation are underway <2019-07-15 Mon>
+*** <2019-07-16 Tue>
+    *WARNING<===* Some problem were found using smaller counter depth, moving it to 1 mm shift the energy deposit on the WCAL
+    an additional offline calibration correction need to be applied to fix this. A Gaussian fit is used for the purpose. Exact
+    position of the peak was found at 84.86 GeV for 30 layers and 84.76 GeV for 35 Layer. Which lead to a correction of 
+    *150. / 84.81 = 1.7687*
+*** <2019-07-17 Wed>
+    Same problem in calibration was encountered for 1.5 mm counter layer.
+    Calibration constant was this time: 150. / 117.8
+    *TODO:* make it automatic in the analysis!
+*** new simulation requested by Sergei <2019-08-07 Wed>
+    After the first studies was sent I received a mail from Sergei. In short the request is to cover 
+    espilon to 0.0015 or even 0.002 for safety. The following scenario are credible:
+    *IMPORTANT:* energy resolution should remain around 10%.
+    *REQUEST:* build ZX position of the dark photon for the energy of 150 GeV
+    1. 6 mm of converter and make 20 layer of 6 mm W + 2 mm Sc, check the resolution!
+    2. keep the current structure (3mm + 2 mm Sc) for the first 15 X0 and make the rest 20-25 X0 as a e-m tail catcher
+       with structure (6 mm W + 2 mm Sc), energy resolution mostly defined in the first 15 X0. (Second part
+       would be around 10 layer to comply with Sergei request, for a total of 25 layer)
+*** simulation went wrong <2019-08-15 Thu>
+    Second batch is weirder, double peak structure can be seen. Talk with Mikhail
+    about it. Second simulation with different sigmanorm was sent to see if the problem was that.
+* Muon trigger for 2021 muon mod4e                         :muonmode:trigger:
+  - Main objective is to design shield to reduce background from  neutrals
+    and reduce effectively the trigger down to a manageable amount
+  - org buffer can be found [[./Muon_Mode/organization.org][here]]
+* Long-lived A study
+** first simulation at epsilon = 5e-5
+   Total Event: 2921
+| Cut Name           | Expected signal / EOTS | Expected signal / EOTS total | For 90% Exclusion |
+| NOCUTS             |            1.00004e-09 |                  1.00004e-09 |        2.2999e+09 |
+| WCATCHER           |            1.00004e-09 |                  1.00004e-09 |        2.2999e+09 |
+| VETO               |            7.55274e-10 |                  7.55274e-10 |       3.04525e+09 |
+| HCAL               |            9.99737e-10 |                  7.55274e-10 |       3.04525e+09 |
+| ECALmax            |            9.96636e-10 |                  7.52479e-10 |       3.05656e+09 |
+| Momentum           |             9.7953e-10 |                  7.37218e-10 |       3.11984e+09 |
+| Pres               |            8.21475e-10 |                  5.96683e-10 |       3.85465e+09 |
+| ShowerProfile      |            8.24484e-10 |                  5.42994e-10 |       4.23577e+09 |
+| Event.SignalRegion |            6.64605e-10 |                  3.38212e-10 |       6.80047e+09 |
+** second simulation at epsilon 1e-5
+   Total Event: 1455
+  | Cut Name           | Expected signal / EOTS | Expected signal / EOTS total | For 90% Exclusion |
+  | NOCUTS             |             1.0004e-09 |                   1.0004e-09 |       2.29909e+09 |
+  | WCATCHER           |             1.0004e-09 |                   1.0004e-09 |       2.29909e+09 |
+  | VETO               |            5.67726e-10 |                  5.67726e-10 |       4.05125e+09 |
+  | HCAL               |            1.00014e-09 |                    5.676e-10 |       4.05215e+09 |
+  | ECALmax            |            1.00025e-09 |                    5.676e-10 |       4.05215e+09 |
+  | Momentum           |            9.84157e-10 |                  5.57918e-10 |       4.12247e+09 |
+  | Pres               |            9.42412e-10 |                  5.24279e-10 |       4.38697e+09 |
+  | ShowerProfile      |            9.66468e-10 |                  5.12293e-10 |       4.48962e+09 |
+  | Event.SignalRegion |             6.0758e-11 |                   3.7987e-11 |       6.05471e+10 |
+** TODO [/] tasks
+   - [ ] Check Normalization
+   - [ ] Add more flexible cod efor normalization
+* Study for using magnetic field and shower profile for 2021 visible mode <2019-11-22 Fri>
+** Work on simulation
+   - Added an MCtruth detector (Trigger:Chamber2) to save MCTruth information of the two decay product
+   - Added information of the hit point of the two decay product in the ECAL
+   - Moved Version 8--->9
+   - Enlarge GEM? Need larger acceptance from the cross checks
+   - *Made threshold to 100 GeV*, focus simulation only on high energy Dark Matter
+   - *increase boost factor* now roughly 1 DM event every 3, this works due to the higher treshold
+*** TODO [100%]Simulation ongoing
+    - [X] 0.5 Tm
+    - [X] 1 Tm
+    - [X] 0.25 Tm
+    - [X] 0.1 Tm
+*** Complete reconstruction of simulation <2020-02-25 Tue>
+    - based on example48 a new example48-user was created
+    - fixed all overlap
+    - 
+**** TODO some weird warning message implies the particle is stuck
+     This is the warnign message:
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+ G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Track stuck or not moving.
+          Track stuck, not moving for 10 steps
+          in volume -WorldPV- at point (-116,-49.93366099072854,15682.69588412737) (local point (-116,-49.93366099072854,15682.69588412737))
+          direction: (-0.115055389595636,-0.4134305962779151,0.9032371778144896) (local direction: (-0.115055389595636,-0.4134305962779151,0.9032371778144896)).
+          Potential geometry or navigation problem !
+          Trying pushing it of 1e-07 mm ...Potential overlap in geometry!
+ This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+*** TODO Decide where to put Magnet exactly
+**** momentum reconstruction
+**** Test different level of vacuum in Geant4
+***** How is MS took into account?
+      - apparently only density is relevant for this kind of interaction, since it used to calculate mean free path
+      - How to calculate density? Geant leave you make gas that are not STP
+        - Currently extrapolate from universe density (1e-25 g/cm3 mean_universe_density and 1e-19 pascal) to the expected pressure inside the tube (1e-1 pascal). [[https://www.omnicalculator.com/physics/air-density][this page]] seems to confirm this value a bit, but 1e-9 density is given instead
+** TODO [0/3] Work on reconstruction
+   - [ ] Read new information *Version 9*
+   - [ ] Correct extrapolation to vertex? New genfit map?
+   - [ ] Correct weird event where reconstruction is failing
+   - [ ] 
+** Pixel sensor possibilities
+*** Monolithic pixel sensor
+    - [[https://reader.elsevier.com/reader/sd/pii/0168900287908874?token=CFB85122A0A58F34310182CFD4C7630A4E1B1D28D3DFB79DB4D08414D95B3ED84B1CBF8415FA7FB277CD68015537E608][Kalman filter review]]
+**** review
+     - [[/home/deppy/polybox/PhD/materials/tracking/Pixel_Sensor_review.pdf][review]]
+***** comments
+      - 
+**** presentation
+     - [[/home/deppy/polybox/PhD/materials/tracking/Pixel_Sensor_presentation.pdf][presentation]]
+***** comments
+      - explain monolitich  [[/home/deppy/polybox/PhD/materials/tracking/Pixel_Sensor_presentation.pdf::4][here]]
+      - review of radiation length  [[/home/deppy/polybox/PhD/materials/tracking/Pixel_Sensor_presentation.pdf::9][here]]
+      - radiation tollerance [[/home/deppy/polybox/PhD/materials/tracking/Pixel_Sensor_presentation.pdf::15][here]]
+      - Belle detector [[/home/deppy/polybox/PhD/materials/tracking/Pixel_Sensor_presentation.pdf::23][here]]
+**** Particle tracking using CMOS monolithic active pixel sensor
+     - [[https://www.sciencedirect.com/science/article/pii/S0168900201003680][link]]
+     - MIMOSA prototype
+     - Tested at CERN PS accellerator
+     - 
+     - 99.5% efficiency quoted within 50 micrometer
+     - It was an EDUDET type telescope
+     - Preliminary estimate 7 micrometer spatial resolution
+**** CMS tracking procedure
+     - [[/home/deppy/polybox/PhD/materials/tracking/CMS_tracking.pdf][article]]
+     - 
+***** comments
+      - Only limited number of hits is accepted, based on chi2 and
+        number of hti missing
+      - Guassian Sum Filter used to take into account non-linear
+        noise (GSF)
+      - Most efficient for low energy electron, not so much
+        for high energy
+      - The Determinist Annealing Filter (DAF), hits might degraded by the high
+        occupancy, so soft hit assignement is used instead
+**** ALICE tracking procedure
+     - [[https://cds.cern.ch/record/865611/files/p399.pdf][link]]
+***** comments
+     - Maximum Information Approach (MIA) applied
+       New information is extracted in reconstruction for later use
+**** Babar procedure
+     - [[https://pdfs.semanticscholar.org/d9dd/a85d107845f7d37d17ca786aeb7535dedffd.pdf][link]]
+**** article                                                          :pixel:
+** Proposal for visible mode setup1
+*** Sergey proposal for the setup
+**** setup proposed by Sergey
+     - [[https://indico.cern.ch/event/867441/contributions/3655435/attachments/1953556/3245866/sng-setup-vis-2021.pdf][slides]]
+       - page 3 has the setup
+       - page 2 some assumption and formula used
+     - *SETUP*
+       - 10 m after the WCAL in vacuum vessel
+       - 2 MM or GEM (use gem for now)
+       - magnet (can be up to 1.72 Tesla meter)
+         - Dipanwita said magnet as powerful as MBPL can be used, but only 1 m wide
+       - other 3-5 m, 3 GEM or Micromegas tracker, after that ECAL
+       - HCAL rearreanged, double HCAL put at large range after the ECAL
+**** Setup suggested by Vladimir <2019-12-06 Fri>
+     - [[https://indico.cern.ch/event/869101/contributions/3664102/attachments/1957984/3253087/New_zone_visible.pdf][new zone visible]]
+**** TODO [/] tasks
+     - [ ] Code the simulation
+     - [ ] Test the simulation
+     - [ ] Test if larger Veto is useful?
+     - [ ] 
+**** New studies of GEM separation
+     - https://indico.cern.ch/event/869101/contributions/3664105/attachments/1957756/3252666/NA64_GEM_tracking_reconstruction_accuracy.pdf *by Volkov*
+     - https://indico.cern.ch/event/869101/contributions/3666490/attachments/1958513/3254183/twoTrack_GEM_eff.pdf *by Hoesgen*
+**** Simulations
+***** simulation 1
+      Sergey setup as proposed, the GEM order are still the same as 2018, 1.72 Tesla magnetic field over 1 m.
+***** simulation 2
+      - *name*: Sergey_setup_vacuum.d
+      as before, all vacuum instead of air, decresed distance to WCAL
+***** simulation 3 <2019-12-10 Tue>
+      - *name*: Sergey_setup_newgem_tubeflushed`.d
+      - GEM design were rearranged, less radiation length design put upstream, newer thicker design downstream
+      - tube attached to WCAL, removed first vacuum window
+***** simulation 4
+**** New proposal after Mikhail studies <2019-12-17 Tue>              :setup:
+     It was proposed an idea to the setup based on the scenario of having 21 meter free
+      - [[https://indico.cern.ch/event/870740/contributions/3672783/attachments/1962626/3262628/Simulation74.pdf][presentation]]
+**** TODO Implement one of the possible setup for visible mode as proposed by vladimir
+     - [[/home/deppy/polybox/PhD/materials/na64/new-visible-mode-2021/possible-visible-setup.pdf][setups]]
+*** Setup proposal
+**** Setup proposal just before meeting for 2021 visible mode setup <2020-02-21 Fri>
+     - https://indico.cern.ch/event/891235/contributions/3758922/attachments/1991701/3321107/2021_runs.pdf
+     - maximum distance is 13.4 meter
+     - Discussion if to use 2 or 3 HCAL modules
+***** TODO understand separation of the magnet
+**** New setup proposal following meeting with beam departement <2020-02-28 Fri>
+    - https://indico.cern.ch/event/893126/contributions/3767386/attachments/1995414/3328910/setup_2021_vis_invis.pdf
+    - Main feature:
+      + now 18 meter vacuum tube
+      + 2.3 meter avaiable between tube and MBPL
+      + 3.4 meter avaiable from end of MBPL to ECAL
+      + 
+***** TODO [3/3] task
+      - [X] Check exact position of MBPL
+      - [X] Check Magnetic field needs
+      - [X] Momentum resolution of trackers
+      - [ ] Check precise loss for leaking of HCAL and Veto
+      - [ ] Check proper distance in the fourth tracker for closer length to ECAL
+      - [ ] Check multiple scattering impact of adding a fourth detector
+***** Presentation of the results
+      - [[/home/deppy/polybox/PhD/presentation/NA64_Collaboration_meeting/NA6406032020/NA6405032020.pdf][presentation]]
+      - [[/home/deppy/polybox/PhD/presentation/IMPORTANT_PRESENTATION/EATM_March/na64e-visible-mode-2021.pdf][presentation for EATM]]
+      - magnet at 3.4 distance from ECAL is sufficient and extremely flexible
+      - 1 m distance of trackers reduce back-scattering and do not spoil momentum resolution
+      - 90% invariant mass efficiency
+      - HCAL and VETO leaking needs to be studied
+      - Di-muon acceptance still acceptable
+      - realistic vacuum included and does not spoil invariant mass resolution
+** diary
+   - all organization was moved in the org file of the git repository [[/home/deppy/workdir/mm-clustering/README.org][link]]
+*** new discussion with sergey <2019-12-16 Mon>
+    After short discussion it was decided to assume that the position of the vertex is already
+    known. This is a good approximation if we assume the decay length to be very short.
+    Also following modification to the setup:
+    - 21 m total length can be chosen
+    - make larger number of particle that can be registered
+    - Use larger magnet strength? Maybe 1.72 Tesla
+*** email from Procureur <2020-02-03 Mon>
+****  content                                                          :mail:
+     
+Dear Emilio,
+
+I'll try to answer your questions below :) But of course we can also organize a Vidyo meeting, e.g. on Wedneday if it's fine with you.
+
+1) concerning the cluster size, there are many ways to reduce it, depending on your setup & required performance. By the way, do you use 1D or 2D readout, with or without resistive films? This indeed has a large impact on the cluster size
+- reduction of the drift gap. If you have a comfortable S/N ratio you can afford to reduce it down to a few mm. 
+- choice of a gas mixture with good quenching properties (absorb UV photons and limit secondary avalanches) and low transverse diffusion. For the former, isobutane is indeed a good choice, and it can reach high gains. For the latter, CF4 and CO2 are preferable. Probably the best choice in this case is a mixture of isobutane and CF4. We tried but never used Ar-CO2 with our large detectors (D=17), as the maximal gain was not high enough for such multiplexing
+- use of high resistivity if you use resistive films. But if you use them with 2D readout, the cluster size can be anyway quite high, particularly with resistive strips
+- if you have tracks with large incident angles (probably not your case), what is above has to be balanced: indeed with low transverse diffusion gas and large track angles, one can end up with discontinuous clusters, which in the case of multiplexed detectors is a headache :)
+
+2) concerning the multiplexing pattern: in one group of strips (e.g. 61 for GBar), there are no 2 strips connected to a single channel, by construction. However between 2 groups of strips this will happen, i.e. you will find 2 distant strips connected to the same channel. The minimal distance (let's call it d) between 2 strips connected to the same channel is an important feature of the multiplexing pattern. Indeed, if one has clusters larger than d, then there is some ambiguity in the charge sharing to assign to each physical strip. If one builds the multiplexing pattern by incrementing the modulo 1 by 1, usually d is small (4-5). But by reordering the group (that is, by changing the modulo sequence), you can increase d significantly. In the 61/17 configuration, the order we chose allowed to have d=15. As it is probably said somewhere in the paper, we think that d can be increased up to (n-1/4) for maximal multiplexing, where n is the number of channels. I think it is safer for better separation of close clusters to maximize d in your pattern. I should say we did it empirically, so I don't know if there is a mathematical construction that will give the best ordering...
+
+3) concerning the reconstruction, I think what Balint developed is very smart, the only concern I had (apart from the speed) was the ability to reconstruct discontinuous clusters (e.g. in the case of large track angles or dead strips). What I'm using is a convolution between the strip charge pattern and a moving Gaussian. This works well for our purpose (large angle and practically no double tracks), but probably not in your case. CNN and deep learning in general are certainly the best options, but I'm not an expert at all :) I was thinking some years ago to train a standard NN, but the number of inputs (61) and variable number of outputs (number of tracks and their positions) makes it not adapted to this type of networks.
+
+Cheers,
+Sébastien
+
+De : Emilio Depero [emilio.depero@cern.ch]
+Envoyé : jeudi 30 janvier 2020 11:40
+À : PROCUREUR Sébastien
+Cc : Paolo Crivelli; Janka Gianluca
+Objet : Micromegas double hit reconstruction
+
+Dear Sebastien,
+
+My name is Emilio Depero. I am a Ph.D. student working for the NA64 experiment where we employed a Multiplexed Micromegas detector. I think you are already familiar with my predecessor Dipanwita Banerjee and my colleague Gianluca Janka. We are busy with a new project involving Multiplexed detector and we'd like your opinion and your help for a couple of things.
+
+The main goal of this project is to understand how efficiently (and with how much precision) two very close clusters can be separated in a gas detector of this kind and how much we can hope to improve this value. The reason for this is that this feature will be extremely important in the upcoming beam time of NA64. If we can do anything to improve this knowledge it will be invaluable.
+
+Right now we have the following questions:
+
+1) One of the main features that will let us distinguish between two close clusters will be is the width of the cluster itself. We want to reduce it as much as we can and make it more "stable" in a way, the more similar the cluster looks the easier will be the recognize two clusters even when they are overlapping. We are planning to do some testing in our lab with different gasses to see which one turns out to be optimal. 
+Probably as a quencher, isobutane might be a good fit, do you have any idea about what other things we could do to achieve this goal? So far we always used (Ar/Co2).
+
+2) Building the multiplexing map properly might also be very relevant to tackle this problem. Currently, We have some problems understanding how exactly the maps are built. We read the original paper where there is an optimal formula to follow in the case of prime number channels. But We also see that neither the NA64 map (64 channels, 5 multiplexing factor and APV readout) or the GBAR (6 channels, 17 multiplexing factor and APV readout)  map are constructed using this formula. We figured that the reason is that in case of large signal the repetition of the cluster starts to be too high very soon. Typically we see that the formula is still used but the s is not incremented by 1 but some corrected factor. How is the factor chosen typically? Do you have any suggestions to build a map that has as aim the distinction of two very close clusters?
+
+3) If you have any suggestions in general about the modeling of the clusters and what kind of algorithm we could use of course we would be glad to hear it. Thankfully we also have real data that we can use coming from the NA64 experiment but we will also need to generalize them for different channels and different gasses. Regarding the algorithm, we are trying the one already developed for the GBAR some time ago where you were also involved plus something else based on neural networks. Please let us know if you have any suggestions!
+
+I realize the mail is quite heavy and maybe the answers to each question are a bit lengthy. I would be glad to organize a meeting on Skype/ Vidyo to discuss this if you are available.
+Best regards
+Emilio
+**** Questions
+***** TODO [/] Cluster size and gas
+      - [ ] He asked if we use a 1D or 2D readout for MM, we need to answer him
+      - [ ] Asked if we use resistive or not resistive film
+      - If we have a good S/N we can afford reducing the drift gap to a few cm
+      - We need a gas with good quenching property and low transverse diffusion
+      - Probably the best is a mixture of Isobutane and CF4
+      - Use high resistivity if we resistive films, but cluster can be anyway high
+***** TODO [0/0] multiplexing pattern
+      - Minimal distance d between neighbouring strip is quite important feature
+        - depends from the width of the cluster and should be decided appropriately
+        - can be in theory increased to p - 1/4
+        - It should be safer for a better separation between cluster to maximized d.
+        - It was done empirically, so no hard mathematical structure behind
+***** TODO [/] Cluster modeling
+      - He is using a a convoilution between strip charge pattern and a moving gaussian
+      - He also thinks strips are a good solution
+** Notes
+*** New notes for the visible mode analysis prepared by Sergey
+    - [[/home/deppy/polybox/PhD/articoli/X-boson_paper/note-20-01_v1.pdf][original]]
+    - [[/home/deppy/polybox/PhD/articoli/X-boson_paper/note-20-01_v1_commented.pdf][commented]]
+**** comments
+     - general high signal efficiency quoted
+     - Aim seems to be *10%* mass resolution
+     - This amounts to 1 mm separation* Micromegas two-hit separation studies
+**** Request by Sergey in meeting <2020-03-13 Fri>
+     - Asked to think about a way to test invariant mass resolution as expected
+     - His proposal is a dump with different length, the photon can convert at the end 
+       of the dump
+** Run to study
+   [[/home/deppy/polybox/PhD/org_files/run_May_2018/runs/runlist.pdf][run list]]
+   |  Run | Trigger           | S_1,10^3 | Run Type                                    | note                       |
+   |------+-------------------+----------+---------------------------------------------+----------------------------|
+   | 4038 | S1-4-V0           | 6600     | 100 GeV Calibration Electron Invisible 2018 |                            |
+   | 3925 | Trig = S1-4-V+Psh | ----     | 100 GeV Calibration Hadron Invisible 2018   |                            |
+   | 4267 | S1-2-V0-Wcat+S4   | ----     | 150 GeV Calibration Hadron Visible 2018     | Changeof latency for MSADC |
+   | 4238 | S1-2-V0-Wcat      | 3500     | 150 GeV calibration Electron Visible 2018   |                            |
+   |      |                   |          |                                             |                            |
+** reconstruction
+** articles
+*** Multiplexing mapping
+    - article about perfect multiplexing mapping [[/home/deppy/polybox/PhD/detector/MM/Multiplexing.pdf][local article]]
+    - Most important formula is the one for the mapping
+      \[
+      strip = 1 + [(i \times channel) mod channels]
+      \]
+    - Where:
+      - *i* is ranging from 0 to p-1
+      - *strip* is the strip number
+      - *channel* is channel to which the strip is mapped     
+*** Minimization procedure
+    - [[/home/deppy/polybox/PhD/detector/MM/Hit_Reconstruction_MM.pdf][local article]]
+    - Important Lambda for Minimization
+** Multiplex map
+*** Current NA64 multiplex map
+|---------+----+-----+-----+-----+-----|
+| Channel | s1 |  s2 |  s3 |  s4 | s5  |
+|---------+----+-----+-----+-----+-----|
+|       0 |  0 |  64 | 128 | 192 | 256 |
+|       1 |  1 | 119 | 133 | 219 | 297 |
+|       2 |  2 | 110 | 138 | 246 | 274 |
+|       3 |  3 | 101 | 143 | 209 | 315 |
+|       4 |  4 |  92 | 148 | 236 | 292 |
+|       5 |  5 |  83 | 153 | 199 | 269 |
+|       6 |  6 |  74 | 158 | 226 | 310 |
+|       7 |  7 |  65 | 163 | 253 | 287 |
+|       8 |  8 | 120 | 168 | 216 | 264 |
+|       9 |  9 | 111 | 173 | 243 | 305 |
+|      10 | 10 | 102 | 178 | 206 | 282 |
+|      11 | 11 |  93 | 183 | 233 | 259 |
+|      12 | 12 |  84 | 188 | 196 | 300 |
+|      13 | 13 |  75 | 129 | 223 | 277 |
+|      14 | 14 |  66 | 134 | 250 | 318 |
+|      15 | 15 | 121 | 139 | 213 | 295 |
+|      16 | 16 | 112 | 144 | 240 | 272 |
+|      17 | 17 | 103 | 149 | 203 | 313 |
+|      18 | 18 |  94 | 154 | 230 | 290 |
+|      19 | 19 |  85 | 159 | 193 | 267 |
+|      20 | 20 |  76 | 164 | 220 | 308 |
+|      21 | 21 |  67 | 169 | 247 | 285 |
+|      22 | 22 | 122 | 174 | 210 | 262 |
+|      23 | 23 | 113 | 179 | 237 | 303 |
+|      24 | 24 | 104 | 184 | 200 | 280 |
+|      25 | 25 |  95 | 189 | 227 | 257 |
+|      26 | 26 |  86 | 130 | 254 | 298 |
+|      27 | 27 |  77 | 135 | 217 | 275 |
+|      28 | 28 |  68 | 140 | 244 | 316 |
+|      29 | 29 | 123 | 145 | 207 | 293 |
+|      30 | 30 | 114 | 150 | 234 | 270 |
+|      31 | 31 | 105 | 155 | 197 | 311 |
+|      32 | 32 |  96 | 160 | 224 | 288 |
+|      33 | 33 |  87 | 165 | 251 | 265 |
+|      34 | 34 |  78 | 170 | 214 | 306 |
+|      35 | 35 |  69 | 175 | 241 | 283 |
+|      36 | 36 | 124 | 180 | 204 | 260 |
+|      37 | 37 | 115 | 185 | 231 | 301 |
+|      38 | 38 | 106 | 190 | 194 | 278 |
+|      39 | 39 |  97 | 131 | 221 | 319 |
+|      40 | 40 |  88 | 136 | 248 | 296 |
+|      41 | 41 |  79 | 141 | 211 | 273 |
+|      42 | 42 |  70 | 146 | 238 | 314 |
+|      43 | 43 | 125 | 151 | 201 | 291 |
+|      44 | 44 | 116 | 156 | 228 | 268 |
+|      45 | 45 | 107 | 161 | 255 | 309 |
+|      46 | 46 |  98 | 166 | 218 | 286 |
+|      47 | 47 |  89 | 171 | 245 | 263 |
+|      48 | 48 |  80 | 176 | 208 | 304 |
+|      49 | 49 |  71 | 181 | 235 | 281 |
+|      50 | 50 | 126 | 186 | 198 | 258 |
+|      51 | 51 | 117 | 191 | 225 | 299 |
+|      52 | 52 | 108 | 132 | 252 | 276 |
+|      53 | 53 |  99 | 137 | 215 | 317 |
+|      54 | 54 |  90 | 142 | 242 | 294 |
+|      55 | 55 |  81 | 147 | 205 | 271 |
+|      56 | 56 |  72 | 152 | 232 | 312 |
+|      57 | 57 | 127 | 157 | 195 | 289 |
+|      58 | 58 | 118 | 162 | 222 | 266 |
+|      59 | 59 | 109 | 167 | 249 | 307 |
+|      60 | 60 | 100 | 172 | 212 | 284 |
+|      61 | 61 |  91 | 177 | 239 | 261 |
+|      62 | 62 |  82 | 182 | 202 | 302 |
+|      63 | 63 |  73 | 187 | 229 | 279 |
+** Review simulation Mikhail
+   - Why ECAL1Back thickness is quoted at 8 mm Alluminum but only 2 in the simulation of Mikhail?
+** Multiple scattering
+   work was already added to the last version of the paper. Here I accumulate some interesting papers
+*** papers
+**** Results on Multiple Coulomb Scattering from 12 and 20 GeV electrons on Carbon targets
+     - https://arxiv.org/abs/1905.11677v2
+     - [[/home/deppy/PhD/materials/Start materials/physics/MultipleScattering/MuonE_mm.pdf][paper]]
+***** comments
+      - Rotational misalligment appears as correlation in the plot hitpoint vs residual
+* Micromegas large design for 2021
+** Goal
+  Objective is to outline the main characteristic of the new MM detector design. Mainly:
+  - *length and height*
+    + tentative are 250x80 mm. Henri confirmed that the area would be sufficient. same for visible mode.
+    + It is to be understood how much more costly they would be.
+  - *size of the pitch*
+    + larger size means larger capacitance, but less channels
+      + might decrease S/N
+      + Add time for complete discharge, problems in muon mode?
+  - *multiplexing*
+    + can be used to compensate and reduce channel number
+    + also increase capacitance
+** Resources
+   - [[/home/deppy/polybox/PhD/materials/Start materials/Micromegas/MicroMegas features.pdf][here]]: A technical description of the circuit, with some useful equations
+   - [[/home/deppy/polybox/PhD/materials/Start materials/Micromegas/From_APV_to_VMM_frontends.pdf][here]]: A comparison between VMM chip (future choice of RD51) to APV (old choice employed by NA64)
+     + [[/home/deppy/polybox/PhD/materials/Start materials/Micromegas/From_APV_to_VMM_frontends.pdf::15][Pros and Cos of APV]]
+   - [[/home/deppy/polybox/PhD/materials/Start materials/Micromegas/Calculations-SN-Gianluca.xlsx][here]] some calculations of Gianluca based on direct extrapolation
+   - 
+   - [[/home/deppy/polybox/PhD/materials/Start materials/Micromegas/Procureur-MM-presentation.pdf][here]] a presentation of Procureur with extrapolations for the 50x50 MM
+     - [[/home/deppy/polybox/PhD/materials/Start materials/Micromegas/Procureur-MM-presentation.pdf::10][relevant table with extrapolations]]
+   - [[/home/deppy/workdir/mm-clustering/skripts/CalculateSN.py][Small skript]] to compute S/N and other properties in python
+** skripts
+** Micromegas todo list
+*** Micromegas parameters
+**** Large Micromegas
+    - *Number to produce* 3-4
+    - *Dimension*: 245x80 $mm^2$
+    - *Strip size*: 256 $\mu m$
+    - *length of flat cable*: 1.2 m
+    - *multiplexing* 5
+      + Multiplexing map to be discussed
+    - *reduce material budget*
+      + minimize the PCB thickness
+      + Remove the copper/FR4 cover and substitute it with Mylar/Kapton
+**** Small Micromegas
+    - *Number to produce* at least 2, maybe 4 for the muon mode pilot run
+    - *Dimension*: 80x80 $mm^2$
+    - *Strip size*: 256 $\mu m$
+    - *multiplexing* 5
+      + Multiplexing map used is the one received by Procureur
+    - *reduce material budget*
+      + minimize the PCB thickness, or completely remove it using only Kapton substrate
+      + Remove the copper/FR4 cover and substitute it with Mylar/Kapton
+*** TODO tasks
+    - [ ] Multiplex map for the large Micromegas, ask Procureur and produce a first estimate.
+    - [ ] Discuss the reduction of material budget with CERN workshop
+    - [X] Understand the number of ADCs needed and ask *Igor Konorov* to produce them
+      + We think 5 ADC are enough for all runs, two spares would be good
+      + We currently have 1 ADC in good conditions (4 channels working) and 1 ADC that has only two channels working
+    - [X] Number of GeSiCa card needed
+      + probably two will be needed (one can support 4 ADC)
+    - [X] Number of APV needed
+      + following our estimate, we will need between 10-14 APV chips to work with all MM modules (depends on the number of MM used for the momentum reconstruction upstream)
+*** Questions
+    - How many Micromegas to be produce already?
+    - In total we estimate 264 channels for a single Large Micromegas of 250 $mm$ transversal length. Two APV can read 256 channels. Possiblities:
+      + Add one more APV chip (but most of the channel not used)
+      + Reduce the length to 245 $mm$ would accomodate all the channels
+      + other possibility would be to increase the strip size to 260 $\mu m$
+    - ADCs? We will need new ADC from *Igor Konorov*
+      + *Visible mode*
+        + 4 Micromegas upstream for momentum reconstruction (2 ADC)
+        + 2 Micromegas downstream decay volume (1 ADC)
+        + 2 large Micromegas after MBPL (2 ADC, maybe 1 if long cable are produced, but given the reduced S/N this might be a risk)
+        + *TOTAL ADC*  5 ADC
+        + *TOTAL APV*  10-14 (depending how many MM are used for upstream momentum reconstruction)
+      + *Muon mode Pilot run*
+        + 4 Micromegas near the BMS station (2 ADC)
+        + 2 Micromegas between ECAL and VHCAL (1 ADC)
+        + 1 after VHCAL (probably 1 more ADC just for that)
+        + 2 Large Micromegas between MBPL and S4 (1 ADC)
+        + *TOTAL* 5 ADC
+      + *Muon mode Physics run*
+        + Produce 4 additional Micromegas for MS1
+** Discussion with Igor Konorov <2020-08-03 Mon>
+*** Conclusions
+    - ADC have a flat price of ~1500Fr. for the base + ~500 for any ADC produced
+      + *We are planning to go with 6 ADC, for an estimated price of 5000 Fr.*
+      + Price could be reduced by producing the ADC together with the Bonn group
+    - New design for APV are now used, one important point is that the connector will be changed. New Micromegas should be produced with the new connector already installed.
+    - For the old Micromegas we will use the old APV (total of 8 are needed, currently ~10 in our possesion) *TO BE CHECKED AT CERN*
+    - For the new Micromegas, 6 APV are needed *We plan to buy 8 more from Bernhard Ketzer*
+**** Time scale
+***** Time scale
+      - ADC:
+	+ Septmeber out for production
+	+ November production finished
+	+ December debugging from Igor is finished
+	+ Start of 2021 ADC should be ready to be tested by us
+      - APV:
+	+ To be discussed with *Bernhard Ketzer* Igor will sent a mail asking for 8 APV
+** Short description for Vladimir Poliankov
+*** mail
+   Dear Emilio,
+   Please, send me a short description of MM detector, which we will use in 2021 run. The description need for NA64 safety file. I need only amount of station, transverse size, HV and current, gas type and flow, maximum 100 words.
+   Thanks in advance,
+   Vladimir.
+*** Micromegas 2021 short description
+    A maximum of 13 Micromegas station will be used in 2021. This includes 8 small 80x80 mm Micromegas station for tracking and vertex reconstruction and 3 large 240x80 mm Micromegas station to increase acceptance after the magnetic field.
+**** Small micromegas station
+     - *number of modules*: 8-10 (depending on mode)
+     - *size* 80x80 mm
+     - *HV on drift*: 300-360 Volt (depending on drift gap between different modules)
+     - *HV on amplification*: 540-570 Volt (depending on single modules)
+     - *current*: <1 nA off spill, <10 nA on spill
+     - *Gas Type*: 90% Ar  10% CO2 mixture
+     - *Gas flow* 3-5 l/hour
+**** Large micromegas station
+     - *number of modules*: 2-3 (depending on mode)
+     - *size* 240x80 mm
+     - *HV on drift*: 300-360 Volt (depending on drift gap between different modules)
+     - *HV on amplification*: 540-570 Volt (depending on single modules)
+     - *current*: <1 nA off spill, <10 nA on spill
+     - *Gas Type*: 90% Ar  10% CO2 mixture
+     - *Gas flow* 3-5 l/hour
+** Henri produced a presentation about multiplexing mapped
+   - A presentation was done by Henri to explain the computation of some multiplex mapping [[/home/deppy/PhD/detector/MM/2021_detectors/MultiplexingMap_hs_pres.pdf]]
+** Final layout for Micromegas
+*** Small modules
+    - *Number to produce*: 2
+    - *Dimension*:80x80 $mm^2$
+    - *Number of strips* 320x320
+    - *Multiplexing factor* 5 for both planes
+    - *drift gap* 6 mm
+*** Large modules
+    - *Number to produce*: 4
+    - *Dimension*: 245x80 $mm^2$
+    - *Number of strips*: 960x320
+    - *strips size:* 250 $\mu m$
+    - *multiplex factor* 5 for both planes
+    - *drift gap*: 6 mm
+* Articles
+** On new visible mode analysis and new visible mode setup 2021     :article:
+   #+ARTICLE
+   *GOALS*
+   - Write an article about the visible mode analysis doing multiple cuts
+   - Write about the new setup that will be required for the visible mode analysis of 2021 with invariant mass reconstruction
+   - Publish it in soem journal
+*** resources
+    - [[/home/deppy/workdir/na64-papers/NA64-PAPER-20-01][paper directory]]
+    - [[/home/deppy/workdir/na64-papers/NA64-NOTE-19-03/TrackingNote.pdf][dimuonnote]]
+    - [[/home/deppy/workdir/na64-papers/NA64-NOTE-19-09/NA64-NOTE-19-09.pdf][wcal studies note]]
+    - [[/home/deppy/workdir/na64-papers/NA64-NOTE-19-09/NA64-NOTE-19-09.tex][wcal studies note (tex)]]
+    - [[/home/deppy/workdir/na64-papers/NA64-NOTE-20-02/NA64Note-20-02.pdf][new visible mode 2021]]
+    - [[/home/deppy/workdir/na64-papers/NA64-PAPER-19-02/NA64-PAPER-19-02.pdf][new visible mode paper]]
+    - [[/home/deppy/workdir/na64-papers/NA64-PAPER-19-02/NA64-PAPER-19-02.tex][new visible mode paper (tex)]]
+    - [[/home/deppy/workdir/na64-papers/NA64-NOTE-20-01/NA64-NOTE-20-01.pdf][Sergey track separation note]]
+    - [[/home/deppy/workdir/na64-papers/NA64-PAPER-19-02/NA64-PAPER-19-02-pc.pdf][2018 visible paper (paolo version)]]
+    - [[https://indico.cern.ch/event/897660/contributions/3785626/attachments/2003064/3344690/sng-addendum.pdf][Draft for visible mode 2021]]
+*** Comments
+**** Laura comments to the first version <2020-03-23 Mon>
+     -  [[/home/deppy/workdir/na64-papers/NA64-PAPER-20-01/NA64-PAPER-20-01_laura.pdf][comments]]
+***** observations
+      - Some comments do not have anything in it
+      - Where to move the abstract?
+      - be consistent with NA64 Data
+      - Remove part where I say that the efficiency is reduced
+      - 
+***** remarks
+      + The Data recorded
+        * She use the phrase both algorithms, but algorithms are not mentione yet
+**** comments for presentation <2020-03-24 Tue>
+     + How to cite ROOT?
+     + How to cite MBPL? Should I even put it there? [[https://sba.web.cern.ch/sba/Documentations/Informations&Training/Beam_Equipments/Bending_magnets/][main page]]
+     + How to cite Minuit?
+     + How to cite GEMs?
+**** comments of Henry to first version <2020-03-25 Wed>
+     - [[~/workdir/na64-papers/NA64-PAPER-20-01/NA64-PAPER-20-01_hc.pdf][henry comments]]
+**** Second round of comments                                         :laura:
+     - [[~/workdir/na64-papers/NA64-PAPER-20-01/NA64-PAPER-20-01-5-laura.pdf]]
+***** observations
+**** Request to restruct the paper                                    :paolo:
+     - [[~/workdir/na64-papers/NA64-PAPER-20-01/NA64-PAPER-20-01_pc.pdf]]
+     - Paolo request some deep rewriting take into account people who dont't know about NA64
+***** observation
+      - See how to properly cite atomki
+**** Comment of Henry after paper                                     :henry:
+     - [[~/workdir/na64-papers/NA64-PAPER-20-01/NA64-PAPER-20-01-vh.pdf]]
+***** Observation
+**** Comments of Paolo on the improved paper                          :paolo:
+     - [[~/workdir/na64-papers/NA64-PAPER-20-01/NA64-PAPER-20-01_pcv2.pdf]]
+**** small comments from Laura
+     - [[~/workdir/na64-papers/NA64-PAPER-20-01/NA64-PAPER-20-01_laura_v2.pdf]]
+**** Discussion with Pol <2020-05-13 Wed>
+**** comments from Mikhail received <2020-06-02 Tue>                :mikhail:
+     - Page 3: I would put it approximately like this:
+       The bending magnet and the spectrometer serve to clean the incoming electron beam. The magnet allows a very efficient electron ID using the SRD
+         
+     - End of section 2:  trackers in the decay volume -> trackers after the decay volume
+
+     - End of section 2, after "2018 setup": Events where the X17 is produced at moderate energy could have an angle large enough to be resolved. This lower
+                                       energy...
+                   (remove "was found" because we did not find X)
+**** comments from Sergei                                            :sergei:
+    A few clashes were noticed
+    - other solutions of the X17 anomaly including scalar and axial-vector cases were proposed
+      + Those solutions are described after, they are disconnected from the reference being given after
+    - The X17 productions is followed by its prompt decay
+      - Prompt means immediate? Then this sentence is incorrect
+    - The setup used for this searches is in ...
+      - If we remove this sentence the fig. is never referenced, is this okay?
+    - Calorimetric vs calorimeter analysis
+**** Comments from Sergei                                            :sergei:
+     <2020-08-03 Mon>
+     - 
+***** To cross check with Pol
+      - There are no descriptions of MM and GEM chambers used in the discussions of Sec. III
+	- Really needed?
+      - Add a short description of the hardware trigger used to collect events.
+	- Maybe only a reference?
+      - deposited larger than 1.5 MIP.  ===> .deposited by the decay e+e- pairs larger than 1.5 MIP.
+	- Is it needed? Also to me is not 100% correct
+      - Sec. V.C, Fig. 12  and Conclusion. - It would be good to specify the beam intensity, the number of good spills, etc. used in the calculation of the required running time at H4 to get ~ 7 x10^11 EOT.
+	- Maybe this is too technical (and I don't very interesting) for the reader. The main message is that we use the same rate observed in 2018, which means the estimate is based on realistic conditions that can be achieved.
+*** Article about discouraging protophobic Beryllium anomaly
+    - new article cam out saying that such boson is an impossible explanation: https://arxiv.org/pdf/2008.11288.pdf
+    - It was requested to underline that we are not model sensitive and other alternative are being explored.
+***** previous snippet
+It was put forward  \cite{feng1,feng2}, that this anomaly can be interpreted as the emission of a protophobic gauge boson $\dm$ decaying into $\pair$ pairs. To be consistent with the existing constraints, the $\dm$ boson should have a non-universal coupling to quarks and a coupling strength with electrons in the range of $2\times 10^{-4} \lesssim \epsilon \lesssim 1.4\times 10^{-3}$ which translates to a lifetime of the order of $10^{-14}\lesssim \tau_X \lesssim 10^{-12}$~s. Remarkably, this model also explains within experimental uncertainty the new result obtained with the $^4$He nucleus, providing both kinematical and dynamical evidence to support this interpretation \cite{feng3}. This model will be used as benchmark for the NA64 current results and to cast the sensitivity of the new setup described in this article. However, other solutions of the $\dm$ anomaly were proposed, see for example \cite{Nam:2019osu, Seto:2016pks}.
+
+Interestingly, such a new boson with a relatively large coupling to charged leptons could also resolve the tension between measured and predicted values of the $(g - 2)_{\mu}$. In addition to vector and axial-vector explanation of the $\dm$ anomaly, one can consider scenarios involving hidden pseudo-scalar boson \cite{Ellwanger:2016wfe}. Corresponding pseudo-scalar couplings to electrons satisfy existing experimental constraints \cite{Andreas:2010ms,Adler:2004hp}. An analysis to probe such pseudo-scalar states at NA64 \cite{Kirpichnikov:2020tcf} would require a proper Monte-Carlo simulation of the spectra and flux of light pseudo-scalar boson produced in the target by electrons.
+Another interesting result comes from the new measurement of $\alpha$ performed by Parker et al. \cite{Parker191} which combined with the $(g-2)_e$ measurements results in a 2.4$\sigma$ deviation from the QED predictions \cite{PhysRevLett.100.120801}. Should this tension be confirmed by the planned improvement of Parker's et al. measurements, the two constraints coming from the NA64 results and $(g - 2)_e$ would exclude the vector and axial vector couplings explanation of $\dm$. On the other hand, models with nonzero V$\pm$A coupling constant with the electron would explain both electron and muon $(g - 2)$ anomalies \cite{Krasnikov:2019dgh}. In these models, the $\dm$ could have a coupling of $6.8\cdot 10^{-4} \lesssim \epsilon \lesssim 9.6 \cdot 10^{-4}$ which leaves an interesting region of the parameter space to be explored.
+These models motivated the study of the phenomenological aspects of such a light vector boson weakly coupled to quarks and leptons (see, e.g., Refs.~\cite{fayet1, fayet2, fayet3, fayet4,jk, cheng, Zhang:2017zap, ia, liang, bart}) 
+and new experimental searches (see, e.g., Refs.~\cite{mb, nardi}).
+** Snippet for Micromegas in status report <2020-01-08 Mon>
+   Small snippet of text to show Micromegas status report.
+   - 
+** SPSC report 2020 <2020-06-01 Mon>
+*** first version
+    - [[/home/deppy/polybox/PhD/materials/na64/SPSC_report_2020/2019 in review.pdf][first version sent by Sergei]] <2020-06-01 Mon>
+    - [[/home/deppy/polybox/PhD/materials/na64/SPSC_report_2020/2019_review_commented.pdf][first vesion commented]] <2020-06-01 Mon> 
+**** comments
+      - 
+*** Second version
+    After all commentes a second version was submitted.
+    - [[/home/deppy/polybox/PhD/materials/na64/SPSC_report_2020/report-after-comments.pdf][second version]]
+* Reconstruction of energy in ECAL
+  In this studies I summarize the energy reconstruction of the ECAL,
+  the main source if the [[/home/deppy/PhD/materials/Start materials/COMPASS/Compass_hadron_setup.pdf][COMPASS article]]
+** energy calibration
+   - Energy calibration derived from an analysis from $\pi^0 \rightarrow \gamma \gamma$
+   - During final data analysis, additional corrections applied tro the specific data set, namaely diffractive dissociation or Primankoff scattering
+   - selected invariant mass within 50 MeV of nominal pi0 mass
+   - For each of two showers, a two- dimensional histogram E γ vs (M γγ − M π 0 ) is filled, which is associated with the shower’s central module.
+     - The central module is defined as the module which contains the highest fraction of the deposited
+     - The values stored in the two-dimensional histograms are used as a starting point for the calibration procedure.
+     - Some correction factor are applied (see paper)
+   - Usefull photon efficiency can be seen  [[/home/deppy/PhD/materials/Start materials/COMPASS/Compass_hadron_setup.pdf::80][here]]
+** Clusters and showers
+   - shower assumed to originate from a single particles
+   - cluster are shower that overlap
+   - Fitting function are based on an empirical cumulative function, as defined in [[https://www.sciencedirect.com/science/article/pii/0168900295007172]]
+   - If the energy deposited by a shower is projected onto a transverse axis with the shower center at
+   0, the fraction of the total shower energy accumulated between −∞ and a position x on this axis can be
+   described by:
+   \[
+   F(x) = \frac{1}{2} + \frac{1}{\pi}\sum a_i \cdot \arctan{\frac{x}{b_i}}
+   \]
+   - different set of parameters are used for different ECAL modules
+** Clustering and shower reconstruction
+   - Signals from adijacent modules combined to form a cluster
+   - Starting from the first   module not yet used in the cluster, each of the (vertical, horizontal, and diagonal) neighbours is checked  for a measured energy above a threshold of 100 MeV for ECAL1, and of 200 MeV for ECAL2
+   - a fit of the shower profiles to the cluster data is performed
+     + The fit is first done with a single shower. Further showers are added one by one with a new fit being performed after each added shower.
+     + When adding more showers, the module searched is the one with the largest relative discrepancy between its measured energy and the energy predicted to be deposited by all showers √ fitted to the data so far.
+     + The centre of the new shower candidate must be located at a distance larger than 2/2 times the module width from the centre of the nearest shower.
+     + A difference in energies is also required: the central module of the new shower must contain at least 20% of the energy deposited by all other showers in this module.
+   - As several showers might be fitted into the same cluster, the total energy of all showers in the module is given by:
+     \[
+     E^{pred}_j = \sum e_i \cdot G_j(x_i,y_i)
+     \]
+   - In addition to the energy, the time information is also used.
+     - The time t i of a shower is defined as the mean value of the times of all modules contributing to the shower, weighted with the energy deposited in each module.
+   - Minuit fitter used to optimize the shower parameters to maximize likelihood
+   - Error on E and t calculated from an energy dependent parameterization determined from data beforehand
+     - with this procedure intime shower and pileup events are distinguished
+   - 
+* Magnetic field impact on invariant mass                              :2021:
+  how much does uncertainty of the magnetic field impact the reconsturction of the invariant mass?
+** Which ballpark we are talking to?
+   - If we use this [[./magnetic field/MBPL2S_02 Summary.pdf][document]]
+     - The request accuracy seems to be 1%  [[./magnetic field/MBPL2S_02 Summary.pdf::3][link]]
+     - From this slide  [[./magnetic field/MBPL2S_02 Summary.pdf::9][slide]] it looks like the precision should be up to 0.1%
+
+** How is the error to be defined?
+   - simple smearing due to error propagation? The error is in good approximantion linear.
+   - Systematic shift in the magnetic field? If the field is stable but not properly measured the impact could be just a shift
+   - Magnetic mapping? if there is a magnetic map, it could be hard to properly defined error (different map with shift?)
+** Impact, how to define it?
+   - Width of the invariant mass
+   - efficiency of the 10% cut?
+   - Increase error

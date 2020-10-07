@@ -1,0 +1,127 @@
+* twiki
+** download simulation package
+   type:
+   
+   git clone https://gitlab.cern.ch/P348/na64-tools.git
+   
+   in the terminal to download the git repostory, a folder named *na64-tools* should appear in the path where you executed the command.
+** set the enviroment
+   Since root is installed in the cluster the variable ROOTSYS is not standard and simulation library won't be able to find it normally. So first a new link to the root libraries must be created.
+   First create a folder to store the root libraries (in the example called myroot), then type in the command line:
+   
+   ln -s /apps/monch/root/5.34/gcc/4.7.3/bin/ <workdir>/myroot/bin
+   
+   ln -s /apps/monch/root/5.34/gcc/4.7.3/include/root/ <workdir>/myroot/include
+   
+   ln -s /apps/monch/root/5.34/gcc/4.7.3/lib/root/ <workdir>/myroot/lib
+
+   if this passage is done correctly now inside myroot will be found 3 folder:bin,include and lib.
+   Now to set the enviroment for the simulation type in ther terminal:
+
+   module load gcc
+   
+   module load root/5.34
+   
+   export ROOTSYS=<myroot-absolute-path>
+   
+   where <myroot-absolute-path> is the absolute path of the folder myroot.
+   
+   *WARNING:* creating a .sh skript with this command and source it sometimes didn't set the enviroment right. To be sure of the result you might want to type the command directly in the terminal.
+   
+
+   
+** compilation of the library
+   from the path you downloaded the repostory type:
+   
+   cd na64-tools/geant4/simulation/
+
+   edit the skript *runconfigure* in the following way:
+
+   ./configure --with-geant4=/apps/monch/geant/4.10.1.2 --with-gsl=/apps/monch/gsl-1.9/ --with-root
+
+   this way the enviroment variable will be set to point to the correct geant4 and gsl distribution, the last command is to include root in the library. After that type the following command to install the library:
+   
+   ./runconfigure
+   
+   make
+   
+   make install
+   
+** compilation of one example
+   
+   in the path <workdir>/na64-tools/geant4/simulation/examples/ you will find different examples to run. Their description together with the instruction to compile the simulation
+   in lxplus can be found in the file README in the path <workdir>/na64-tools/geant4/simulation/
+   
+   to compile an example simply cd in the folder of the example, configure the file runconfigure like done previously *but* with ../configure instead of ./configure. then type in the terminal:
+   
+   ./runconfigure
+   
+   make
+
+   to customize an example it is sufficient to copy the desidered .cc and .hh files in the example folder and then type the previous command after the file are modified.
+   
+   *WARNING:* since there are some problem with the preprocessor command *#pragma once* in the monch cluster, for every header included in your example folder this command must be substituted with
+   the standard include guard: 
+   
+   #ifndef <FILENAME_h>
+   
+   #define <FILENAME_h> 1
+   
+   ///////////////
+   /////CODE//////
+   //////////////
+   
+   #endif
+
+   this change has to be done both fot the file in the example folder and the one in the path <workdir>/na64-tools/geant4/simulation/include/
+   
+   *NOTE:* if new files are adde in the example folder at any time the skript runconfigure must be used again, if only source code of the file already included in the folder
+   are changed recompile the example is enough.
+
+** run the example
+   to run the simulation type first:
+
+   source /apps/monch/geant/4.10.00p02/bin/geant4.sh
+
+   in the terminal. Notice that the geant4 version sourced here is different than the one used to compile, this do not matters since the source is done only to use the CERN DATA needed by the simulation,
+   not present in the other distribution. Compile the library using the most updated version 4.10.1 is better since some feature are not present in 4.10.00p02 (not used by Mikael but used
+   in my example). To run the simulation customize to your wishes the file cardg.g4mac and then type:
+
+   ./mkgeant4 cardg.g4mac
+
+   in the terminal (in my example a third argument to define the name of the output .root file must be given)
+** run job on the monch cluster
+   To send job in the monch cluster one must use a bash.sh skript for the command, examples of these files can be found in https://:@gitlab.cern.ch:8443/bradics/ETHsimu.git:
+   type:
+   git clone https://:@gitlab.cern.ch:8443/bradics/ETHsimu.git
+   
+   create a folder (here called work) and save inside it multirun_srd.sh and batch.sh. To run the simulation modify the variable *RUNPATH* in multirun_srd.sh to point to the folder of your simulation
+   and the variable *simName* to choose the name of the folder where to save the simulation (*WARNING:* never use the same name two times or you will overwrite the previous result). Finally
+   with the variable nCores you can decide the number of simulation to run in parallel. After everything is finished just type:
+   
+   ./multirun_srd.sh
+
+   in the terminal. The result of each parallel simulation will be stored in a different subfolder of the main folder work/simName.
+
+   *WARNING:* since the Monch cluster send jobs in bunches if the initial seed depends on the time many simulation will have the same output. To prevent this one can use a fine resolution clock
+   (like the one in the <chrono> library) or /dev/urandom as initial seed. Both these method produce however number too large and they have to be renormalized before be fed to the simulation.
+   An example of this can be seen in the file mkgeant4.cc contained in https://:@gitlab.cern.ch:8443/bradics/ETHsimu.git
+   
+   
+   
+** instrution for MicroMega simulation
+   To run the Micromega simulation, the files NA64DetectorConstruction.cc, NA64DetectorConstruction.hh and NA64MaterialConstruction.cc must be placed in the src/Core and include/ path respectively and
+   the library must be recompiled i.e. in path na64-tools/geant/simulation/ type:
+
+   make clean
+   
+   ./clean
+   
+   ./runconfigure_roothisto (with same modifications as explained in the previous section)
+   
+   make
+   
+   make install
+
+   The other files, namely NA64MMConstruction.cc, NA64MMConstruction.hh, NA64SD.cc and NA64SD.hh can be placed in a example folder as usual and can be run following the steps explained in the previous sections.
+   
