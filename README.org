@@ -91,6 +91,30 @@
    A list of org file I produced in my thesis can be found  [[./org_file/][here]] , with the most important being [[./org_file/diary.org][the diary]]
 ** NA64 Run
    A list of run in both pdf with some org is found [[./org_file/runs/][here]]
+* Master thesis and Semester works
+  During my work I had the pleasure to supervise some excellent students
+** Solange Emmenegger
+  - [[https://polybox.ethz.ch/index.php/apps/files/?dir=/Thesis/StudentsWork/Solange&fileid=1053461340][Study and Suppression of Hadronic Background in NA64]]
+** Umberto Molinatti
+   - Feasibility studies for short length calorimeter in the visible mode with large magnetic field for filtering
+** Xingyu Zhao
+   - [[https://polybox.ethz.ch/index.php/apps/files/?dir=/Thesis/2019/SemesterWork-Xingyu&fileid=1412273355#pdfviewer][Analysis of Timing Calibration at NA64 ExperimentSemester Project Report]]
+   - Contributed to the timing calibration in NA64
+** Benjamin Banto
+   - Very good work with SiPM for the new calorimeter design
+** Yaron Korn
+   - Analysis of SiPM together with Benjamin
+** Philipp Blumer
+   - [[https://polybox.ethz.ch/index.php/apps/files/?dir=/Thesis/2019/SemesterWork-Philipp&fileid=2043937684#pdfviewer][Characterization of new Micromegas design for theNA64 experiment]]
+   - Contributed to the new design of MM detector
+** Peter Degen
+   - Very good work for the analysis of straw and their implementation in the simulation
+   - [[https://polybox.ethz.ch/index.php/apps/files/?dir=/Thesis/2020/PeterDegen&fileid=1888209524#pdfviewer][Straw Trackers for NA64 Background Studies]]
+** Cesare Cazzaniga
+   - Truly invaluable work for the semi-visible mode analysis, it is a pity I won't be able to see him finish his work
+   - [[https://polybox.ethz.ch/index.php/apps/files/?dir=/Thesis/2020/CesareCazzaniga&fileid=1918923463#pdfviewer][Exploring semi-visible dark photondecay at NA64 experiment]]
+** Patrick Odagiu
+   - as above, I could only supervise him for a short time, but he was very promising
 * External softwares
 ** Geant4
    For particle simulation
