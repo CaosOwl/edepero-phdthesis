@@ -14,43 +14,39 @@
   in the folder *thesis/* can be compiled using any program of choice.
 * Structure
 ** Declaration of Authorship
-** TODO Abstract
-** TODO Acknowledgements
-** TODO Preface
+** Abstract
+   - [[./thesis/chapters/abstract.tex]]
+** Acknowledgements
+   - [[./thesis/chapters/acknowledgements.tex]]
+** Preface
    - [[./thesis/chapters/preface.tex]]
-** TODO Chapter 1, Introduction I
+** Chapter 1, Introduction
    - [[./thesis/chapters/chapter1/chapter1.tex]]
-** TODO Chapter 2, The NA64 experiment
+** Chapter 2, The NA64 experiment
    - [[./thesis/chapters/chapter2/chapter2.tex]]
-** TODO Chapter 3, Data Analysis
+** Chapter 3, Data Analysis
    - [[./thesis/chapters/chapter3/chapter3.tex]]
-** TODO Chapter 4, Results
+** Chapter 4, Results
    - [[./thesis/chapters/chapter4/chapter4.tex]]
-** TODO Chapter 5, Future prospects
+** Chapter 5, Future prospects
    - [[./thesis/chapters/chapter5/chapter5.tex]]
-** TODO Chapter 6, Conclusion
+** Chapter 6, Conclusion
    - [[./thesis/chapters/chapter6/chapter6.tex]]
 ** Appendices
-*** TODO AppendixA, Dark matter formulas and calculations
+*** AppendixA, Dark matter formulas and calculations
    - [[./thesis/chapters/appendices/appendixA.tex]]
-*** TODO AppendixB, Physics tool
+*** AppendixB, Physics tool
    - [[./thesis/chapters/appendices/appendixB.tex]]
-*** TODO AppendixC, Geant4 simulation
+*** AppendixC, Geant4 simulation
    - [[./thesis/chapters/appendices/appendixC.tex]]
-*** TODO AppendixD, Particle tracking
+*** AppendixD, Algorithms and particle tracking
    - [[./thesis/chapters/appendices/appendixD.tex]]
-*** TODO AppendixE, Statistics
+*** AppendixE, Statistics
    - [[./thesis/chapters/appendices/appendixE.tex]]
-*** TODO AppendixF, Tables
+*** AppendixF, Tables
    - [[./thesis/appendices/appendixF.tex]]
 * Bibliography
   - [[./thesis/utility/bibliography.bib]]
-** TODO Style
-  What style should be used? 
-*** TODO Choose Style
-*** Programs
-    - JabRef https://www.jabref.org/
-      + found some problems with Fedora29, update?
 * Code repository
 ** Simulation
    All relevant code for the simulation can be found in https://gitlab.cern.ch/P348/na64-tools
@@ -164,9 +160,8 @@
     Does this under your question ?
     
     Cheers, Nikos 
-** TODO Comments of Laura chapter 3 pt.1 <2020-09-21 Mon>
-   
-* TODO [72%]Diary
+** DONE Comments of Laura chapter 3 pt.1 <2020-09-21 Mon>   
+* TODO [100%]Diary
 ** DONE [100%] <2020-01-15 Wed>
    - [[Discussion with Paolo]]
    - [X] Realized not all of the section have labeling yet.
@@ -179,67 +174,62 @@
    - Thesis should be given early September 
 ** DONE [1/1] <2020-06-15 Mon>
    - [X] figure NA64Setup to be added
-** TODO <2020-06-30 Tue>
-*** TODO Find out how to cite patent properly for shashlik
+** DONE <2020-06-30 Tue>
+*** DONE Find out how to cite patent properly for shashlik
     Poljakov, V.A., et al., Calorimetre module. Patent RU, no. 2338016 C1, 2008.
-*** TODO Find how to properly cite the thesis of the master student
+*** DONE Find how to properly cite the thesis of the master student
     Is it possible to offer a reliable link to access this information?
 *** DONE Produce an image of the Micromegas design
 ** DONE <2020-07-08 Wed>
-*** DONE [/] Find pictures for BGO and Shashlik Type SRD
-    - [ ] BGO
-    - [ ] SRD
+*** DONE [2/2] Find pictures for BGO and Shashlik Type SRD
+    - [X] BGO
+    - [X] SRD
 ** DONE [1/1] <2020-07-16 Thu>
    - [X] Produce plot of signal shape of APV
      - not really needed
-** TODO <2020-08-07 Fri>
-*** TODO Check background
-    - [ ] estimate of mu-->enunu decay, currentyl I estimated 1e-5 for decay prob and 1e-7 for beam composition and SRD, more?
-    - [ ] Estimate for momentum reconstruction, 1e-12 cited in Dipa thesis is not too clear, and also not sufficient at out current levels.
+** DONE <2020-08-07 Fri>
+*** DONE Check background
+    - [X] estimate of mu-->enunu decay, currentyl I estimated 1e-5 for decay prob and 1e-7 for beam composition and SRD, more?
+    - [X] Estimate for momentum reconstruction, 1e-12 cited in Dipa thesis is not too clear, and also not sufficient at out current levels.
 ** <2020-08-14 Fri>
    - Added invisible mode cut list [[./inv-cuts.org][here]]
 ** DONE [#C] <2020-08-17 Mon>
    - starting with the exclusion plot, are new one needed?
    - Permission obtained from *Peter Degen* to use part of his thesis [[https://ethzgrouprubbia.slack.com/archives/CPCQXU5SP/p1597676249001700]]
-** TODO <2020-09-04 Fri>
+** DONE <2020-09-04 Fri>
    - Ask Henri permission to use plot showing the efficiency of the new Micromegas multiplex map.
-* TODO Additional tasks
-** TODO [0/12] Substitution to a common standard
+* DONE Additional tasks
+** DONE [12/12] Substitution to a common standard
    Python skript?
-   - [ ] Tab. --> Table
-   - [ ] chapter
-   - [ ] Fig.
-   - [ ] S_i , for scintillators in the setup
+   - [X] Tab. --> Table
+   - [X] chapter
+   - [X] Fig.
+   - [X] S_i , for scintillators in the setup
      - Si
-   - [ ] Dark Matter
-   - [ ] dark photon
-   - [ ] punch-through
+   - [X] Dark Matter
+   - [X] Dark Photon
+   - [X] punch-through
      - punchthrough
-   - [ ] non-uniformity
-   - [ ] sideband
+   - [X] non-uniformity
+   - [X] sideband
      - side band
      - side-band
-   - [ ] electro-nuclear
-   - [ ] beamline
-   - [ ] well-defined
+   - [X] electro-nuclear
+   - [X] beamline
+   - [X] well-defined
      - well defined
-** common error
-   python skript?
-   - [ ] periphery
-     - perifery 
-   - [ ] bremsstrahlung
-     - bremstrahlung
-** TODO Standard for tables
+** DONE Standard for tables
    - currently <2020-08-18 Tue> no vertical line, double line if table shows a result, to generalize
-** TODO Check picture resolution
+   - Sopme diversity was mantained after all <2020-10-07 Wed>
+** DONE Check picture resolution
    - check that every picture has the correct resolution
-*** TODO [0/1] list of picture to change:
-    - [ ] 1.1, improve resolution
-    - [ ] 1.3, improve resolution
-** TODO References
-   - [ ] Fix reference order
-* TODO [#A] [0/1]Issue to solve
-  - [ ] Currently the abstract command fails for unknow reason. But the text is visualized as intended.
+*** DONE [2/2] list of picture to change:
+    - [X] 1.1, improve resolution
+    - [X] 1.3, improve resolution
+** DONE References
+   - [X] Fix reference order
+* DONE [#A] [1/1]Issue to solve
+  - [X] Currently the abstract command fails for unknow reason. But the text is visualized as intended.
     The Makefile is structured to ignore any error and produce the output anyway. <2020-01-14 Tue>
 * Presentation for X17
   A small presentation to review the X17 anomaly.

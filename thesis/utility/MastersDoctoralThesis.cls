@@ -331,7 +331,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\end{longtable}
 	\addtocounter{table}{-1}% Don't count this table as one of the document tables
 	\ifbool{nolistspace}{\endgroup}{}
-}
+      }
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE DESIGN
@@ -402,7 +402,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 }
 {
 	\vfill\null
-}
+}      
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS PAGE DESIGN
