@@ -33,4 +33,4 @@ clean:
 	rm -f $(PDF)
 	latexmk -CA -cd $(TARGET)
 
-
+full: clean all view
