@@ -3,27 +3,24 @@
 % variables
 \newcommand{\appdird}{appendices/plots/appendixD}
 
-\chapter{Algorithms and particle tracking} % Main appendix title
+\chapter{Algorithms and particle tracking}
 
-\label{AppendixD} % For referencing this appendix elsewhere, use \ref{AppendixC}
-
-%\section{Micromegas}
-%\label{appD:sec:mm}
+\label{AppendixD}
 
 
 \section{Momentum reconstruction}
 \label{appD:sec:mom-reco}
 
-Momentum reconstruction is performed in two different ways in NA64. The first one consist in a simple solution based on the expected curvature of the charged particles when it enters the magnetic field. As the momentum of the primary particle is generally very high compared to its mass, this can be safely ignored. The particle can be assumed to travel in a line outside the magnets, whereas inside it the trajectory corresponds to a circle tangent to the particle entrance line. The radius of the circle is easy in the relativistic limit:
+Momentum reconstruction is performed in two different ways in NA64. The first one consists in the analytical solution of the expected curvature of the charged particle when it enters the magnetic field. As the momentum of the primary particle is generally very high compared to its mass, this can be safely ignored. The particle travels in a straight line outside the magnets, whereas inside it the trajectory corresponds to a circle tangent to the particle entrance line. The radius of the circle is in the relativistic limit:
 
 \begin{equation}
   \label{eq:gyro-radius}
   r_c = 3.3 \times \frac{p}{\left|q\right|B}
 \end{equation}
 
-where $\left|q\right|$=1 in most of the interesting cases. In the NA64 setup, the magnetic field is homogeneous (with deviations from the average field at $\lesssim 1\%$) and with a total length of 4 \si{\meter}. To reconstruct the momentum, a minimum of three points is required, two are needed the measure the entrance point of the particle in the magnetic field (or the exact exit point) and third one is used to measure the exact deflection. By assuming an exact knowledge of $B$, the momentum can be reconstructed analytically. In NA64, the first two Micromegas upstream are used to measure the exact entrance point, and the 4 one downstream are used to measure the deflection 4 times. This gives a total of 4 different momentum estimate, that are used to both calculate the best momentum as the weighted average between estimates, and the goodness of the track via a $\chi^2$-test.
+where $\left|q\right|$=1 in most of the cases of interest. In the NA64 setup, the magnetic field is homogeneous (with deviations from the average field at $\lesssim 1\%$) and with a total length of 4 \si{\meter}. To reconstruct the momentum, a minimum of three points is required, two are needed to measure the entrance point of the particle in the magnetic field (or the exact exit point) and the third one is used to measure the exact deflection. By assuming an exact knowledge of $B$, the momentum can be reconstructed analytically. In NA64, the first two Micromegas upstream are used to measure the exact entrance point of the electron, while the 4 downstream are used to measure the deflection after its passage in the magnets. This gives a total of 4 different momentum estimates, that are used to both calculate the best momentum as the weighted average between estimates, and the goodness of the track via a $\chi^2$-test.
 
-The approach above has the advantage of being straightforward and fast to compute, but does not take into account multiple scattering experienced by the particle between Micromegas. A more sophisticate method was used for the visible mode analysis, based on the Kalman-filter implemented in the Genfit software library \cite{genfit}. A small review of the method is given in Sec.\ref{appD:sec:kalman-filter}. On top of including multiple scattering in the final estimate, the momentum is in this case fitted globally using the information from all detectors. The design of Genfit makes it also easy to include a precise account of the material budget using a Geometry Description Markup Language (GDML) that can easily being extracted by the Geant4 simulation \cite{gdml}.
+The approach above has the advantage of being straightforward and fast to compute, but does not take into account multiple scattering experienced by the particle between Micromegas. A more sophisticated method was used for the visible mode analysis, based on the Kalman-filter implemented in the Genfit software library \cite{genfit}. A review of the method is given in Sec.\ref{appD:sec:kalman-filter}. For the final estimate, the momentum is in this case fitted globally using the information from all detectors. The design of Genfit makes it also easy to include a precise account of the material budget using a Geometry Description Markup Language (GDML) that can be extracted by the Geant4 simulation \cite{gdml}.
 
 \subsection{Three point momentum extrapolation}
 \label{appD:sec:mom-reco-simple}
@@ -37,7 +34,7 @@ In a first step, the 3-dimensional line defined by the hits upstream the magnet,
     \caption{Two dimensional geometrical representation of a particle trajectory (blue) deflection in a uniform magnetic field.}
     \label{fig:momentumgeo}
 \end{figure}
-In the small angle approximation ($\sin\theta=\theta+\mathcal{O}(\theta^2)$ and $\tan\theta=\theta+\mathcal{O}(\theta^2)$), following quantities are defined:
+In the small angle approximation ($\sin\theta=\theta+\mathcal{O}(\theta^2)$ and $\tan\theta=\theta+\mathcal{O}(\theta^2)$), the following quantities are defined:
 \begin{equation}
   \label{eq:mom-simple}
         \sin\frac{\theta}{2}\simeq\frac{x}{2r_c},\hspace{5mm}
@@ -49,33 +46,33 @@ Finally the radius is projected on the beam axis and the momentum is obtained fr
 
 A more sophisticated method to reconstruct track and vertices is the Kalman filter, which is widely used for track fitting and vertex reconstruction in high-energy physics \cite{HOPPNER2010518}.
 
-The extended Kalman filter, that was used in NA64 for precise reconstruction of track and vertices, used for example in the novel analysis of the visible mode data using trackers, consists in a recursive algorithm to find the optimum estimate $\vec{x}_{reco}$ of the unknown true state vector $\vec{x}_{true}$. In NA64, this is implemented using the Genfit library \cite{genfit}, which seamlessly introduces the Kalman filter using objects defined in the ROOT framework \cite{root}. This greatly simplifies their manipulation in the reconstruction code. One of the main differences from the approach described in the previous section is that different error sources can be included easily in the algorithm using a noise matrix that carries the information over all possible sources of error. This is particularly important for multiple scattering since this error depends on the amount of material between the two detectors where the particle is being propagated and is not straight forward to compute analytically.
+The extended Kalman filter, used for the reconstruction of track and vertices, consists in a recursive algorithm to find the optimum estimate $\vec{x}_{reco}$ of the unknown true state vector $\vec{x}_{true}$. In NA64, this is implemented using the Genfit library \cite{genfit}, which seamlessly introduces the Kalman filter using objects defined in the ROOT framework \cite{root}. This greatly simplifies their manipulation in the reconstruction code. One of the main differences from the approach described in the previous section is that all error sources can be included easily in the algorithm using a noise matrix that carries the information over all possible uncertainties. This is particularly important for multiple scattering since this error depends on the amount of material between the two detectors where the particle is being propagated and is not straight forward to compute analytically, as it depends on the exact particle direction and its kinetic energy.
 
-An initial state is required as seed for the algorithm, as the Kalman filter propagated an initial state $\vec{x}_0$ through steps $\vec{x}_k \rightarrow \vec{x}_{k+1}$ that converge asymptotically to the optimal estimate $\vec{x}_{reco}$. In NA64, the track initial state is on the hit point recorded by the first GEM, with a momentum in the direction of the hit recorded by the second GEM detector. To compute multiple scattering corrections, the momentum can as well be relevant, as in its Gaussian approximation the RMS width is given by \cite{review-particle-physics}:
+An initial state is required as seed for the algorithm, as the Kalman filter propagates an initial state $\vec{x}_0$ through steps $\vec{x}_k \rightarrow \vec{x}_{k+1}$ that converge asymptotically to the optimal estimate $\vec{x}_{reco}$. In NA64, the track initial state is located on the first GEM hit recorded, with a momentum in the direction of the second GEM detector hit. To compute multiple scattering corrections, the momentum can as well be relevant, as in its Gaussian approximation the Root Mean Square width is given by \cite{review-particle-physics}:
 
 \begin{equation}
   \label{eq:mm-scattering}
   \theta_{plane}^{rms} = \frac{13.6 \mev}{\beta c p} z \sqrt{\frac{x}{X_0}} \left[ 1 + 0.038 \ln{\frac{x z^2}{X_0 \beta^2}} \right]
 \end{equation}
 
-Where $p$, $\beta c$ and $z$ are the momentum, velocity, and charge number of the incident particle, and $x/X_0$ is the thickness of the scattering medium in radiation length. Inside the decay volume of the visible mode, a magnetic spectrometer is not present, which means the momentum of each track is not known. To initial the vector magnitude, the energy measured by the ECAL downstream is used and assumed to be equally shared between the track candidates detect in the decay volume.
+Where $p$, $\beta c$ and $z$ are the momentum, velocity, and charge number of the incident particle, and $x/X_0$ is the thickness of the scattering medium in radiation lengths. Inside the decay volume of the visible mode, a magnetic spectrometer is not present, which means the momentum of each track is not known. To initialize the vector magnitude, the energy measured by the ECAL downstream is assumed to be equally shared between the track candidates detected in the decay volume.
 
-Before a recursion step, we define the vector $\vec{x}_k$ and the covariance matrix $C_k$ of the particle in the step $k$, which contain the information of all previous steps. Next, we define a \textit{prediction}, where both state vector and covariance matrix are extrapolated to a predicted state vector $\vec{x}_{k+1}^{pred}$ and $C_{k+1}^{pred}$. The covariance matrix $C_{k+1}$ is calculated by the sum of the track covariance matrix, which is in turn computed using Gaussian error propagation by the transformation of the Jacobian matrix of the propagation, and a noise matrix that takes into account the multiple scattering experienced in-between the two states. The predicted new state vector is then compared to the value measured by the tracking chamber, and corrected using this information. If we define as $\vec{x}_{k+1}^{mes}$ as the hit measured by the tracking chamber where the track is being extrapolated, this means:
+Before computing a step, we define the vector $\vec{x}_k$ and the covariance matrix $C_k$ of the particle in the step $k$, which contains the information of all previous iterations. Next, we define a \textit{prediction}, where both state vector and covariance matrix are extrapolated to a state vector $\vec{x}_{k+1}^{pred}$ and $C_{k+1}^{pred}$. The covariance matrix $C_{k+1}$ is calculated by the sum of the track covariance matrix, which is in turn computed using Gaussian error propagation by the transformation of the Jacobian matrix of the propagation, and a noise matrix that takes into account the multiple scattering experienced in-between the two states. The predicted new state vector is then compared to the value measured by the tracking chamber, and corrected using this information. If we define as $\vec{x}_{k+1}^{mes}$ as the hit measured by the tracking chamber where the track is being extrapolated, this means:
 
 \begin{equation}
   \label{eq:kf-updates}
   \begin{aligned}  
     &\underline{\vec{x}_{k+1} = \vec{x}_{k+1}^{pred} + K_{k+1} \cdot \vec{r}_{k+1}} \\
-    & \\
     &C_{k+1} = ( I - K_{k+1} \cdot H_{k+1} )C^{pred}_{k+1} \\
-    &\vec{x}^{res}_{k+1} = \vec{x}_{k+1}^{mes} - H_{k+1} \cdot \vec{x}_{k+1}^{pred} \\
+    & \\
+    &\vec{r}_{k+1} = \vec{x}_{k+1}^{mes} - H_{k+1} \cdot \vec{x}_{k+1}^{pred} \\
     &K_{k+1} = C^{pred}_{k+1} H^T_{k+1}(H_{k+1}C_{k+1}^{pred}H^T_{k+1} + V_{k+1})^{-1}    
   \end{aligned}
 \end{equation}
 
-Where the matrix $K_{k+1}$ is called Kalman gain, and $V_{k+1}$ is the covariance matrix of the measurement $\vec{x}_{k+1}^{mes}$. The projection matrix $H_{k+1}$ is a linear transformation from the coordinate system of the state vector $\vec{x}_{k+1}$ to the coordinate system of the measured state. As the elements of $C_k$ reduces at the inclusion of every additional step, the correction of the estimate becomes less relevant the more information was already processed by the algorithm. After each hit of the track was used in a Kalman step, the fit is repeated in the opposite direction, starting with $k = N_{hits}$ and performing again the process in reverse. This is done to correct for possible biases of the initial estimate $\vec{x}_0$ used as input of the algorithm. In this second round, the first fit result is used as starting value, and the covariance matrix is multiplied by a large factor ($\sim 1000$), to avoid redundancy of the information from the first fit performed.
+Where the matrix $K_{k+1}$ is called Kalman gain, is the covariance matrix of the measurement $\vec{x}_{k+1}^{mes}$. The projection matrix $H_{k+1}$ is a linear transformation from the coordinate system of the state vector $\vec{x}_{k+1}$ to the coordinate system of the measured state. As the elements of $C_k$ shrink after every step, the correction of the estimate becomes less relevant the more information was already processed by the algorithm. After each hit of the track was used in a Kalman step, the fit is repeated in the opposite direction, starting with $k = N_{hits}$ and performing again the process in reverse. This is done to correct for possible biases of the initial estimate $\vec{x}_0$ used as input of the algorithm. In this second round, the first fit result is used as starting value, and the covariance matrix is multiplied by a large factor ($\sim 1000$), to avoid redundancy of the information from the first fit performed.
 
-The Genfit library takes care of the track reconstruction using the algorithm described above, and at the same time provides a framework that takes care of the precise track representation used for the fit and the hit reconstruction that is used as input to evolve the state vector $\vec{x}_k$. Changing representation is also performed automatically for the covariance matrix and the reference plane when needed.
+The Genfit library reconstructs tracks using the algorithm described above and at the same time provides a framework that takes care of the exact track representation used for the fit and the hit reconstruction. Changing representation is also performed automatically for the covariance matrix and the reference plane when needed.
 
 
 \begin{figure}[bth!]
@@ -187,36 +184,42 @@ To reconstruct vertices, a simple approach based on the back-propagation of the 
 
 \section{Pulse reconstruction}
 
-This section gives a brief overview of the pulse reconstruction procedure used in NA64 which uses the raw data received by the DAQ to reconstruct the energy of a specific detector. This same procedure is applied to all detectors used in NA64.
+This section gives a brief overview of the pulse reconstruction procedure used in NA64 which translates the raw data received by the DAQ in the energy measured by a specific detector. The same procedure is applied to all detectors.
 
-The input of this algorithm comes from the 25 16-bit samples saved by the Event Builder PC (see Fig.\ref{fig:daq}). Each sample consists of a number between 0 and 4095 separated by \SI{12.5}{\nano\second}. The additional input of the algorithm is calculated beforehand using calibration runs: a calibration constant $K$ used to convert the raw sample into an estimate of the energy deposit, the expected arrival time $t_E$. This last value is obtained using a Gaussian fit of $t_{S_0} - t_{\rm{cell}}$ for each active cell in the setup, i.e. the reconstructed time is compared to the time recorded by the scintillator $S_0$ placed in front of the beam inlet. The sigma of the fit is also stored as the uncertainty of this value in a separate array.
+The input of this algorithm comes from the 25 16-bit samples separated by \SI{12.5}{\nano\second} each and saved by the Event Builder PC (see Fig.\ref{fig:daq}). Each sample consists of a number between 0 and 4095. The additional input of the algorithm is calculated beforehand using calibration runs: a calibration constant $K$ used to convert the raw sample into an estimate of the energy deposit and the expected arrival time $t_E$. This last value is obtained using a Gaussian fit of $t_{S_0} - t_{\rm{cell}}$ for each active cell in the setup, i.e. the reconstructed time is compared to the time recorded by the scintillator $S_0$ placed in front of the beam inlet. The sigma of the fit is also stored as the uncertainty of this value in a separate array.
 
 Using this input the energy is reconstructed in an event in the following way:
 
 \begin{enumerate}
-\item The pedestal of the event is calculated. The first 8 samples are used for this purpose, as no interaction is expected in this time window. As the DAQ receives data from two different multiplexers\footnote{This is done to increase the rate of sampling from \SI{20}{\mega\hertz} to \SI{40}{\mega\hertz}.}, two different pedestals are defined separately for the even and odd samples. In each of these cases, it is computed as the mean ADC count between all the samples in the range defined. If the difference between the largest and the smallest sample is larger than 20 ADC count, the event is flagged as pileup, and the pedestal is set to the minimum value recorded.
-\item The pedestal is subtracted to every sample of the cell, if a sample becomes negative because of this subtraction, its value is set to zero instead.
-\item A peak search algorithm is run to find all peaks between sample 10 and the last sample recorded. A peak is defined simply as a sample with a value larger than the one of its neighboring samples. All peaks are saved in a separate vector.
+\item The pedestal of the event is calculated. The first 8 samples are used for this purpose, as no interaction is expected in this time window. As the DAQ receives data from two different multiplexers\footnote{This is done to increase the rate of sampling from \SI{20}{\mega\hertz} to \SI{40}{\mega\hertz}.}, two different pedestals are defined separately for the even and odd samples. In each of these cases, it is computed as the mean ADC count between the samples in the range defined. If the difference between the largest and the smallest sample is larger than 20 ADC counts, the event is flagged as pileup, and the pedestal is set to the minimum value recorded.
+\item The pedestal is subtracted to every sample of the cell. If a sample becomes negative because of this, its value is set to zero instead.
+\item A peak search algorithm is run to find all peaks between sample 10 and the last one recorded. A peak is defined by a sample with a value larger than the one of its neighboring samples. All peaks are saved in a separate vector.
 \item A time is extracted for each peak. The calculation is performed using the rising edge of the signal to calculate the $t_0$ of the event. The code used for the purpose is shown below.
-\item A specific peak is selected as a candidate for the primary particle. Different methods were implemented for and tested this purpose. The standard in the NA64 searches is to select the peak whose $t_0$ is best compatible with the one expected for the primary as measured in the calibration run. The energy is set to zero if the best peak is more than $4\sigma_t$ away from this value, where $\sigma_t$ is the uncertainty of the expected time of arrival.
-\item The energy of the peak selected is extracted by multiplying the calibration constant to the ADC value of the peak maximum.
+\item A specific peak is selected as a candidate for the primary particle. Different methods were implemented and tested for this purpose. The NA64 standard is to select the peak whose $t_0$ is most compatible with the expected arrival time $t_E$. The energy is set to zero if the best peak is more than $4\sigma_t$ away from this value, where $\sigma_t$ is the uncertainty of the expected arrival time.
+\item The energy of the peak selected is extracted by multiplying the calibration constant to the ADC value of the maximum peak.
 \end{enumerate}
 
-In Fig.\ref{fig:pulse-example}
+We provide two examples of this algorithm in Fig.\ref{fig:pulse-example} and Fig.\ref{fig:pulse-example-pileup}. In the first picture, we show the pulse of a common event with a single particle in the trigger. In the second, one primary activates the trigger with a second particle injected in the setup $\sim$\SI{100}{\nano\second} after.
 
 \begin{figure}[bth!]
   \centering
-  \includegraphics[width=0.45\textwidth]{\appdird/raw-ecal33.pdf}
-  \includegraphics[width=0.45\textwidth]{\appdird/wave-ecal33.pdf}
-  \includegraphics[width=0.45\textwidth]{\appdird/raw-pil-ecal33.pdf}
-  \includegraphics[width=0.45\textwidth]{\appdird/wave-pil-ecal33.pdf}    
-  \caption[example of pulse reconstruction in NA64]{Example of reconstruction of the pulse for the central cell of the ECAL. On the left column, the pulse is shown before any treatment is applied to the waveform. On the right, the waveform is shown after the pedestal is subtracted and the best peak is selected. The expected time of arrival is drawn with a red line, with three square covering an area with 1-2-3 $\sigma_t$ uncertainty respectively. On the top, the event has a single primary particle hitting the ECAL. On the bottom, we show the waveform of an event where a second particle hit the target after approximately \SI{100}{\nano\second}.}
+  \includegraphics[width=\textwidth]{\appdird/raw-ecal33.pdf}
+  \includegraphics[width=\textwidth]{\appdird/wave-ecal33.pdf}
+  \caption[example of pulse reconstruction in NA64]{Example of reconstruction of the pulse for the central cell of the ECAL for a single primary in the trigger. On the top, the pulse is shown before any treatment is applied to the waveform. On bottom, the waveform is shown after the pedestal is subtracted and the best peak is selected. The expected time of arrival is drawn with a red line, with three squares covering an area with 1-2-3 $\sigma_t$ uncertainty respectively.}
   \label{fig:pulse-example}
 \end{figure}
 
-
+\begin{figure}[bth!]
+  \centering
+  \includegraphics[width=\textwidth]{\appdird/raw-pil-ecal33.pdf}
+  \includegraphics[width=\textwidth]{\appdird/wave-pil-ecal33.pdf}    
+  \caption[example of pulse reconstruction in NA64]{Example of reconstruction of the pulse for the central cell of the ECAL for two primaries in the trigger. On the top, the pulse is shown before any treatment is applied to the waveform. On bottom, the waveform is shown after the pedestal is subtracted and the best peak is selected. The expected time of arrival is drawn with a red line, with three squares covering an area with 1-2-3 $\sigma_t$ uncertainty respectively.}
+  \label{fig:pulse-example-pileup}
+\end{figure}
+\clearpage
+\newpage
+\FloatBarrier
 \begin{lstlisting}
-
   double t0_RisingEdge(const int i_max) const
   {      
       // search for rising edge
@@ -251,15 +254,11 @@ In Fig.\ref{fig:pulse-example}
           const double t0_hh = t0_rise + A_half/(wi1 - wi);
           return t0_hh;
         }
-        
         return t0_rise;
       }
-      
       return 0.;
   }
-
 \end{lstlisting}
-
 
 %%% Local Variables:
 %%% mode: latex

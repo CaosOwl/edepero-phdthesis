@@ -3,8 +3,8 @@
 % variables
 \newcommand{\pdirthree}{chapters/plots/chapter3}
 
-\chapter{Data analysis} % Main chapter title
-\label{chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\chapter{Data analysis}
+\label{chapter3}
 
 % ----------------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ The figure of merit is to maximize the sensitivity of the experiment. In other w
 \end{equation}
 where $s$ and $b$ represent the expected number of events for signal and background in the signal region, and $\mu$ is a control parameter that describes if the signal is present. If it is properly modeled, the parameter $\mu$ can be either 0 (no signal present) or 1 (signal is there), but we can also choose to allow a continuous spectrum of $\mu$, which means that the signal can have a larger (or smaller) rate. The experiment will claim a signal if the number of events exceeds significantly the expected background $b$, such that $\mu = 0$ is no longer compatible with the data. The most common standard for a discovery in the HEP\footnote{High Energy Physics.} community is the 5$\sigma$ criteria. This means that the number of events is larger than the one predicted by the $\mu = 0$ hypothesis by 5 standard deviations\footnote{This is to be intended as the correspondent p-value in a Gaussian distribution. The actual distribution defining the number of events expected is typically computed using numerical methods.}. The probability of an experiment returning such outcome when no signal exists is 2.87$\times$10$^{-7}$.
 
-If no signal is observed, a second problem arises, how do we interpret this result? In principle, since the initial no-signal hypothesis (frequently called $H_0$) is sufficient to explain the data, the hypothesis implying the existence of new physics is not needed (frequently called $H_1$). However, there might be a minimal difference between the two. The fact that $H_0$ is enough to describe the data does not imply that $H_1$ is wrong, just that our experiment is not sensitive enough to distinguish between them. After accumulating a sufficient number of EOTs, the difference between the two hypotheses will be significant, and one of the two can be rejected as insufficient to describe the data.
+If no signal is observed, a second problem arises, how do we interpret this result? In principle, since the initial no-signal hypothesis (frequently called $H_0$) is sufficient to explain the data, the hypothesis implying the existence of new physics is not needed (frequently called $H_1$). However, there might be a minimal difference between the two. The fact that $H_0$ is enough to describe the data does not imply that $H_1$ is wrong, just that our experiment is not sensitive enough to distinguish between them. After accumulating a sufficient number of EOT, the difference between the two hypotheses will be significant, and one of the two can be rejected as insufficient to describe the data.
 The exact standard to reject an hypothesis differs between searches. In the case of the dark photon $\DM$, the significance is set to 90\% \cite{battaglieri2017cosmic}. We define $CL_{s+b}$ the "confidence level" as the probability to observe a number of events larger than the one observed in the experiment given $\mu = 1$:
 
 \begin{equation}
@@ -36,7 +36,7 @@ The exact standard to reject an hypothesis differs between searches. In the case
 
 If we assume that no background is expected in the signal region, we can take $n_{obs} = 0$ and $CL_{s+b} = 0.1$ solving the equation for $s$. If no events are observed in the signal box, the equation tells us that every hypothesis predicting at least 2.3 can be rejected. The background, however, is often not exactly zero, which means in the more general case one has to numerically solve the equation above for $s$.
 
-A precise knowledge of the experimental conditions is needed to define the expected signal $s$ and the expected background $b$ for a given hypothesis of dark matter $\dmhypo$. We need a tool that can reproduce the interactions of each particle in the setup and calculate the response of the detectors. While Eq.\ref{eq:dm-rate} is a good starting point it cannot be used to reach the level of precision needed in NA64. To compute these effects, we use a Monte Carlo simulation based on the Geant4 software \cite{AGOSTINELLI2003250,1610988} developed at CERN. This tools produces very precise results, but it has some shortcomings. The simulation is a computationally expensive task: a single event requires $\simeq$1 second to be simulated by a single CPU\footnote{The exact time depends on what particle is exactly simulated. For example, the simulation is $\simeq$60 faster for muons.}. Thus, even with the help of large clusters\footnote{The computing infrastructure of lxplus provided by CERN was extensively used by the NA64 collaboration to run these tasks.}, more than $10^8$ EOT are challenging to simulate. This is still a long way from the $\sim 10^{11}$ EOT accumulated at the present date. 
+A precise knowledge of the experimental conditions is needed to define the expected signal $s$ and the expected background $b$ for a given hypothesis of Dark Matter $\dmhypo$. We need a tool that can reproduce the interactions of each particle in the setup and calculate the response of the detectors. While Eq.\ref{eq:dm-rate} is a good starting point it cannot be used to reach the level of precision needed in NA64. To compute these effects, we use a Monte Carlo simulation based on the Geant4 software \cite{AGOSTINELLI2003250,1610988} developed at CERN. This tools produces very precise results, but it has some shortcomings. The simulation is a computationally expensive task: a single event requires $\simeq$1 second to be simulated by a single CPU\footnote{The exact time depends on what particle is exactly simulated. For example, the simulation is $\simeq$60 faster for muons.}. Thus, even with the help of large clusters\footnote{The computing infrastructure of lxplus provided by CERN was extensively used by the NA64 collaboration to run these tasks.}, more than $10^8$ EOT are challenging to simulate. This is still a long way from the $\sim 10^{11}$ EOT accumulated at the present date. 
 To solve this, specific background sources, like events with dimuon production $\emu$, electro-nuclear interactions, and the decay of the $K^0_S$, are accounted for using dedicated simulation with biased cross-section/branching ratio (see Appendix.\ref{appC:sec:physics-list}). This allows us to study the background at a level compatible with the EOT accumulated in the data.
 
 Because of the different physics involving them, it is instructive to study the background as function of the primary particle. We define three categories:
@@ -114,7 +114,7 @@ The differential cross-section and energy spectrum of $\DM$ were initially calcu
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=\textwidth]{\pdirthree/DM-cs.pdf}
-  \caption[IWW vs tree-level energy spectra]{Comparison of the energy spectrum of the emitted $\DM$ for a dark photon mass of 100 \mev and 10 \mev. The spectra are calculated using the IWW approximation (dotted line) and an exact tree-level calculation (continuous line) \cite{DMsimulation}.}
+  \caption[IWW vs tree-level energy spectra]{Comparison of the energy spectrum of the emitted $\DM$ for a Dark Photon mass of 100 \mev and 10 \mev. The spectra are calculated using the IWW approximation (dotted line) and an exact tree-level calculation (continuous line) \cite{DMsimulation}.}
   \label{fig:dm-iww-tl}
 \end{figure}
 
@@ -176,7 +176,6 @@ The $\emu$ interaction consists of the rare production of a $\mu^+\mu^-$ inside 
 \item In first approximation, it can be computed inside the QED framework\footnote{This is not technically the case for $\DM$, but given that it generated by an equivalent U'(1) symmetry, the precision will be the same.}, hence with high precision.
 \item The process penetrates very efficiently both the target and the HCAL modules. Each $\mu^{\pm}$ loses an energy $<$\SI{250}{\mega\electronvolt} after its passage through the target, and $\sim$1.3 $\gev$ for each HCAL module encountered. 
 \item The energy spectrum of the emitted $\mu^+\mu^-$ left in the target covers the same region of the signal ($0 < E_{ECAL}^{\gamma \to \mu^+ \mu^-} < \SI{90}{\giga\electronvolt}$) \cite{dimuon-mc}.
-%Hence, a comparison between MC and data for dimuons is an excellent test for the reliability of the MC.
 \end{enumerate}
 
 Additionally, because of the double MIP signature that the $\emu$ interaction leaves inside the VETO and the HCALs, this interaction can be easily distinguished from a signal event.
@@ -205,7 +204,6 @@ Inside the MC, the signal yield is corrected using $RR_i$ in each bin of the $E_
 
 \begin{figure}[tbh!]
   \centering
-  %\includegraphics[width=\textwidth]{\pdirthree/dimuon-hcal-comp.png}
   \includegraphics[width=0.45\textwidth,height=0.43\textwidth]{\pdirthree/dimuon-ecal-comp.pdf}
   \includegraphics[width=0.45\textwidth,height=0.4\textwidth]{\pdirthree/dimuon-RR-comp.pdf}
   \caption[Dimuon spectra in ECAL for data and MC.]{Left: Distribution of energy deposited in the ECAL target by the scattered electron from the reaction $\emu$ selected from data (red dot) and MC generated event (green line). Data and MC are normalized to the same number of events. The un-normalized MC distribution is also shown with the corresponding error on the top histogram (blue line). Right: Ratio $RR$ between MC and data efficiency of dimuon production as function of the ECAL energy deposited. The two color curves shows examples of empirical distribution of the values \cite{na64-prd}.}
@@ -279,8 +277,6 @@ The SRD geometrical acceptance is about one third,  thus one can estimate that t
 \end{figure}
 
 The SRD detector was tested during the physic run in July 2016. The two BGO rows are parallel to the primary beam direction as shown in Fig.\ref{fig:newgeo}. The dipole magnets installed in series produce a total integrated magnetic field of 7 \si{\tesla\meter} \cite{Banerjee:2016tad} resulting in a nominal displacement for the incoming electrons at the SRD/ECAL positions of 31/34 cm from the undeflected beam axis. The SRD was placed between the undeflected and the deflected beam axis at a distance of approximately 9 cm from both (Fig.\ref{fig:newgeo}). This separation minimises the possibility for Bremsstrahlung photons and neutral particles produced by interactions of the beam particle with materials upstream and for particles in the beam halo to hit the SRD. In fact, such interactions result in the saturation of the SRD with a significant loss of efficiency due to the long decay time of the BGOs.
-
-%The expected Landau distribution of energy deposits was fit to the data to find the mean peak position to extract the calibration constant. 
 
 The two crystals facing the beam (labeled 3 and 7 in Fig. \ref{fig:newgeo}) detect most of the energy emitted by synchrotron radiation. We will refer to those as SRD BGO. The remaining six crystals are used to detect events with high energy deposition in the SRD. In particular the last two crystals of each row (labeled 0 and 4 in Fig. \ref{fig:newgeo}) detect some energy only in the case of very energetic Bremsstrahlung events and thus can be used as a veto (see Fig.\ref{fig:newgeo}). The six crystals after the SRD BGOs act also as a shield from backscattering particles coming from the ECAL suppressing pions by an additional order of magnitude. Finally in this geometry it is possible to use the coincidence of the two SRD BGO crystals to improve the tagging of synchrotron photons by rejecting knock-on electrons produced by incoming pions. In fact synchrotron radiation has an homogeneous spectrum in the whole arc described by the primary and deflected beam and thus a signal is detected in both SRD BGOs. On the contrary, electrons generated by a $\pi^-$ undergoing ionization will mostly leave energy only in a single crystal as illustrated in Fig. \ref{fig:newgeo}. 
 With the requirement of detecting in both SRD BGOs an energy deposition above a 1 MeV the suppression factor is improved up to a level of $10^{-5}$.
@@ -556,9 +552,6 @@ The cuts used are chosen based on their significance in the MC simulation, defin
 In this context, the signal is not necessarily an event with $\DMM$ production, but the particle that the cut is supposed to select.
 In the case of SRD for example, the cut is required to select electrons and reject any other kind of particle. So $s$ will be the number of electrons selected by the cut and $b$ will be the number of non-electron ($\pi^-$, $\mu^-$ selected). Since only $e^{-}$ can trigger the reaction $\ea$, this requirement also maximizes the sensitivity of the experiment. The cuts are then optimized using the calibration run and control sample to take into account the effect caused by pileup and electronics as explained in Sec.\ref{ch3:sec:analysis-approach}.
 
-%\subsection{Invisible mode}
-%\label{ch3:sec:selection-criteria-invis}
-
 The selection criteria needs to select 100 $\gev$ electrons and reject any events interacting before the target.
 To achieve this the following requirements are applied:
 
@@ -577,13 +570,12 @@ Finally, the signal region is defined by events with significant missing energy 
 
 The efficiency of the cuts listed above was studied using the MC simulation and the electron calibration runs.
 In Fig.\ref{fig:inv-cut-ehcal} the effect of these cuts in the $\ehcalplane$ plane is shown.
-The amount of hadrons is seen to greatly reduced after the SRD cut is applied, and consequentially the dimuon region becomes more visible. The VETO cut then removes most of the punchthrough particles, including dimuons. Finally, after the tracking selection, a large portion of the low energy deposit event and strong scattering upstream disappear\footnote{This is mostly visible in the requirement of "GoodTrack", visible between plot 5 and 6}.
+The amount of hadrons is seen to greatly reduced after the SRD cut is applied, and consequentially the dimuon region becomes more visible. The VETO cut then removes most of the punch-through particles, including dimuons. Finally, after the tracking selection, a large portion of the low energy deposit event and strong scattering upstream disappear\footnote{This is mostly visible in the requirement of "GoodTrack", visible between plot 5 and 6}.
 
 
 \begin{figure}[bth!]
   \centering
    \includegraphics[width=\textwidth]{\pdirthree/ec-hc-plots-veto-nobad-runs.png}
-  %\includegraphics[width=\textwidth]{\pdirthree/ec-hc-plots-veto-nobad-runs.pdf}
   \caption[Effect of the cuts in invisible mode]{Selection criteria effects in the $\ehcalplane$ on the 2018 invisible mode data sample \cite{invis-cut-plot,NA64:2019imj}.}
   \label{fig:inv-cut-ehcal}
 \end{figure}
@@ -596,7 +588,7 @@ In this section, what constitutes background in invisible mode setup will be det
 \label{ch3:sec:bkg:inv:hadr}
 
 
-In the case of invisible mode, background can arise from a $\pi^-$ that travels through the HCAL undetected after leaving minimal energy in the ECAL. The probability of this happening with a total interaction length of 21 $\lambda_{int}$ is $p\lesssim 10^{-9}$. This number does not account for the high-efficiency VETO after the ECAL, SRD rejection, and the fact that the HCAL can detect a MIP interaction even in the absence of a strong interaction. Each of these factors pushes the background well below $<10^{-13}$ as pointed out in the NA64 first proposal \cite{Andreas:2013lya}.
+In the case of invisible mode, background can arise from a $\pi^-$ that travels through the HCAL undetected after leaving minimal energy in the ECAL. The probability of this happening with a total interaction length of 21 $\lambda_{int}$ is $p\lesssim 10^{-9}$ (estimated punch-through probabilities are provided in Table \ref{tab:hadron-punch-prob} for different hadron species). This number does not account for the high-efficiency VETO after the ECAL, SRD rejection, and the fact that the HCAL can detect a MIP interaction even in the absence of a strong interaction. Each of these factors pushes the background well below $<10^{-13}$ as pointed out in the NA64 first proposal \cite{Andreas:2013lya}.
 
 A more significant background is caused by the inelastic scattering inside the ECAL in a process:
 
@@ -633,9 +625,7 @@ There are however additional factors of rejection for this background that can b
 \subsubsection{Muonic background}
 \label{ch3:sec:bkg:inv:muon}
 
-This type of background is also largely suppressed by both beam composition and SRD selection criteria, to a level of
-%\footnote{Here the suppression from the beam composition is larger ($10^{-3}$) \cite{h4-beamline} and SRD selection criteria are more stringent ($10^{-4}$) due to the absence of back-scattering.}
-$\lesssim 10^{-7}$. As in the case of $\pi^-$, a complete punch-through of the setup without being detected is negligible. Indeed the muon needs to travel through both the VETO and the three HCAL modules without leaving any detectable energy deposit. These probabilities are $p^{VETO} \simeq 10^{-3}$ for the VETO and $p^{HCAL} \simeq 10^{-4}$ for the HCAL case resulting in a background $< 10^{-14}$
+This type of background is also largely suppressed by both beam composition and SRD selection criteria, to a level of $\lesssim 10^{-7}$. As in the case of $\pi^-$, a complete punch-through of the setup without being detected is negligible. Indeed the muon needs to travel through both the VETO and the three HCAL modules without leaving any detectable energy deposit. These probabilities are $p^{VETO} \simeq 10^{-3}$ for the VETO and $p^{HCAL} \simeq 10^{-4}$ for the HCAL case resulting in a background $< 10^{-14}$
 In the case of muons, nuclear interaction is less likely. Thus, there is no possibility that a large fraction of energy escapes transversely. 
 What remains is the decay $\mu^- \rightarrow e\nu\nu$, with neutrinos in the final state. The decay time of $\mu^-$ adds a suppression of $\lesssim 10^{-5}$. Similar to the previous case, SRD selection, tracking, and shower profile accounts for an additional $p\sim 0.1$ factor. This background level is of $P_{\mu} \lesssim 10^{-13}$.
 
@@ -644,7 +634,7 @@ What remains is the decay $\mu^- \rightarrow e\nu\nu$, with neutrinos in the fin
 
 Since the beam is primarily made of electrons, and SRD is tuned to select them, no upstream suppression factor can be achieved in this case. Simple punch-through of an electron through the whole setup is not possible, since the path is blocked by 3 HCAL modules. Other similar events, with energy losses due to non-uniformity and cracks in the ECAL/HCAL were as well studied and found unrealistic \cite{Andreas:2013lya}. Low energy electrons are potentially background: if a primary electron with $E_0 < E_{th}$ arrives at the ECAL it will leave an energy deposit compatible with the signal. Such a background was also found extremely unlikely. The amount of electron $N(E_e<E_{th})$ in the beam with energy lower than the energy threshold for the signal amounts conservatively to $<10^{-2}$. Such particles are normally deflected by the two MBPL magnets outside the acceptance of the ECAL\footnote{For $E_0$=50 $\gev$ the difference in deviation is about 0.4 \si{\meter}}. Particles with large entrance angle in the magnet are still capable of hitting the ECAL, but the tracking system makes sure that their energy is reconstructed with a resolution of $\delta p/p \approx 1\%$ \cite{Banerjee:2017mdu}. A dedicated simulation of $10^{10}$ electrons with energy compatible with the signal region was performed. No signal-like event was found after requiring a reconstructed momentum of 100 $\gev$ with a tolerance of 3$\sigma$. Extrapolation to the signal region of the spectrum put this background level at $\lesssim 10^{-13}$.
 
-An important source of background to be considered is the dimuon production inside the target. As mentioned, these events are very useful to check for systematics and validate the MC. However, fluctuations in the energy deposited in the HCAL might leak in the signal region. The background was estimated by exponential extrapolation of the control sample inside the signal region ($E_{HCAL} < 1 \gev$) considering the side-band depicted in Fig.\ref{fig:ehcal-bkg-bands}. The VETO cut was not applied to the control sample for this extrapolation, and was accounted separately as a factor $\sim 10^{-6}$ (probability of two MIPs to leave no energy).
+An important source of background to be considered is the dimuon production inside the target. As mentioned, these events are very useful to check for systematics and validate the MC. However, fluctuations in the energy deposited in the HCAL might leak in the signal region. The background was estimated by exponential extrapolation of the control sample inside the signal region ($E_{HCAL} < 1 \gev$) considering the sideband depicted in Fig.\ref{fig:ehcal-bkg-bands}. The VETO cut was not applied to the control sample for this extrapolation, and was accounted separately as a factor $\sim 10^{-6}$ (probability of two MIPs to leave no energy).
 
 \begin{figure}[bth!]
   \centering
@@ -821,13 +811,10 @@ To cross-check that the contamination is correctly removed, an independent metho
   \label{fig:dimuon:profile}
 \end{figure}
 
-%\subsection{Vertex and angle reconstruction}
-%\label{ch3:sec:dimuons-reco}
-
 \subsubsection{Signal yield correction}
 \label{ch3:sec:dimuons-sig-corr}
 
-To show that there are no significant differences in the tracking procedure in simulation and data the energy deposited in the WCAL was used as a figure of merit. After the vertex reconstruction selection both distributions should still agree. %If the tracking procedure affects differently data and MC, one would expect the agreement between the two distributions to diverge after cuts based on vertex reconstruction.
+To show that there are no significant differences in the tracking procedure in simulation and data the energy deposited in the WCAL was used as a figure of merit. After the vertex reconstruction selection both distributions should still agree.
 Following the procedure described above, vertex candidates are selected for the comparison. As the interaction $\emu$ will be produced inside the WCAL, only those vertices compatible with this assumption are selected for the comparison. In practice, a vertex is accepted if its position lies within 3$\sigma$ of the expected WCAL position, where $\sigma$ was fitted using a Gaussian from the distribution of $\mu^- \mu^+$ pairs selected from the simulation. After the selection criteria, the energy deposited in the WCAL is compared between simulation and data for each event left (see Fig.\ref{fig:dimuon_en}). The energy deposit for data and simulation is in excellent agreement, proving that the tracking cuts do not bias the original sample. Small disagreements in the order of 5\%-7\% are used to correct the signal yield using the procedure described in Sec.\ref{ch3:sec:dimuons}.
 
 \begin{figure}[tbh!]
@@ -903,7 +890,7 @@ Background coming from $\mu^-$ primaries is very suppressed in the visible mode.
 \subsubsection{Electronic background}
 \label{ch3:sec:bkg:vis:elec}
 
-The main contribution of the background from $e^-$ primary is the punch-through of high-energetic $\gamma$ that converts on the last tile of the WCAL producing an $\ee$ pair. Since it depends on the longitudinal fluctuation of the em-shower, it is hard to predict using MC-simulations alone. To estimate such contribution for $\sim10^{11}$ EOTs a data-driven method is used instead. A sample of 3$\cdot 10^9$ EOT was considered, roughly corresponding to $\sim$10\% of the data collected in 2018. Events in the signal region with $E_{ECAL} < 105$ GeV were selected with the requirement of at least two hits in each GEM module. Only one event with such property was found. An additional suppression of $10^{-3}$ is introduced by the tracking selection criteria (or the W2 cut for the calorimetry analysis). This put the background to a level $<10^{-13}$. The analysis of the full 2018 data is compatible with this estimate: a total of three events were found with 2 two hits in the GEM modules. For none of these events it was possible to reconstruct a physical vertex, suggesting that these particles experienced large multiple-scattering inside the WCAL before reaching the GEMs.
+The main contribution of the background from $e^-$ primary is the punch-through of high-energetic $\gamma$ that converts on the last tile of the WCAL producing an $\ee$ pair. Since it depends on the longitudinal fluctuation of the em-shower, it is hard to predict using MC-simulations alone. To estimate such contribution for $\sim10^{11}$ EOT a data-driven method is used instead. A sample of 3$\cdot 10^9$ EOT was considered, roughly corresponding to $\sim$10\% of the data collected in 2018. Events in the signal region with $E_{ECAL} < 105$ GeV were selected with the requirement of at least two hits in each GEM module. Only one event with such property was found. An additional suppression of $10^{-3}$ is introduced by the tracking selection criteria (or the W2 cut for the calorimetry analysis). This put the background to a level $<10^{-13}$. The analysis of the full 2018 data is compatible with this estimate: a total of three events were found with 2 two hits in the GEM modules. For none of these events it was possible to reconstruct a physical vertex, suggesting that these particles experienced large multiple-scattering inside the WCAL before reaching the GEMs.
 
 
 \begin{table}[bth!]
