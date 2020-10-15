@@ -10,7 +10,7 @@
 \thesistitle{Searching for Light Dark Matter and a new X17 boson with the NA64 experiment at the CERN SPS} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \supervisor{Prof. Paolo \textsc{Crivelli}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{Prof. Gunther Dissertori and Dr. Sergei Gninenko} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
-\degree{Doctor of Physics} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\degree{Doctor of Science of ETH Zurich} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \author{Emilio \textsc{Depero}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
 \addresses{deperoe@phys.ethz.ch} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
 
@@ -42,44 +42,36 @@
 \begin{center}
 
 \vspace*{.06\textheight}
-{\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
-\textsc{\Large Doctoral Thesis}\\[0.5cm] % Thesis type
+{\scshape\LARGE DISS. ETH. NO. 27194}\vspace{1.5cm} % University name
+\\[0.5cm] % Thesis type
 
 \HRule \\[0.4cm] % Horizontal line
 {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
 \HRule \\[1.5cm] % Horizontal line
- 
-\begin{minipage}[t]{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Author:}\\
-\href{}{\authorname}\\[0.3cm] % Author name - remove the \href bracket to remove the link
-born on 09.05.1992\\[0.2cm]
-Citizen of Italy\\[0.1cm]
-\end{flushleft}
-\end{minipage}
-\begin{minipage}[t]{0.4\textwidth}
-\begin{flushright} \large
-\emph{Supervisor:} \\
-\href{}{\supname} % Supervisor name - remove the \href bracket to remove the link  
-\end{flushright}
-\end{minipage}\\[2cm]
- 
+
 %\vfill
 
-\large \textit{A thesis submitted in fulfillment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
-\textit{in the}\\[0.4cm]
-\groupname\\\deptname\\[1cm] % Research group name and department name
- 
-%\vfill
-
-\large \textit{Accepted on the reccomendation of}\\[0.3cm] % University requirement text
-Prof. Paolo Crivelli\\[0.1cm]
-Prof. Sergei Gninenko\\[0.1cm]
-Prof. Gunther Dissertori\\[0.1cm]
+\large \textit{A thesis submitted to attain the degree of \\ \textbf{\degreename}}\\[0.3cm] % University requirement text
+\textit{(Dr. sc. ETH Zurich)}\\[0.4cm]
 
 \vfill
 
-{\large \today}\\[4cm] % Date
+\large \textit{presented by}\\[0.3cm]
+\href{}{\authorname}\\[0.2cm] % Author name - remove the \href bracket to remove the link
+MSc in Physik ETH, Zurich\\[1cm]
+born on 09.05.1992\\[0.2cm]
+citizen of Italy\\[1cm]
+ 
+\vfill
+
+\large \textit{Accepted on the reccomendation of}\\[0.3cm] % University requirement text
+Prof. Paolo Crivelli, examiner\\[0.1cm]
+Prof. Sergei Gninenko, co-examiner\\[0.1cm]
+Prof. Gunther Dissertori, co-examiner\\[0.1cm]
+
+\vfill
+
+{\large 2020}\\[4cm] % Date
 %\includegraphics{Logo} % University/department logo - uncomment to place it
  
 \vfill
@@ -121,16 +113,7 @@ Prof. Gunther Dissertori\\[0.1cm]
 \noindent\enquote{\itshape Fall in love with some activity, and do it! Nobody ever figures out what life is all about, and it doesn't matter. Explore the world. Nearly everything is really interesting if you go into it deeply enough. Work as hard and as much as you want to on the things you like to do the best. Don't think about what you want to be, but what you want to do. Keep up some kind of a minimum with other things so that society doesn't stop you from doing anything at all.}\bigbreak
 
 \hfill Richard P.Feynman
-
-%----------------------------------------------------------------------------------------
-%	ABSTRACT PAGE
-% ----------------------------------------------------------------------------------------
-
-\begin{abstract}
-  \addchaptertocentry{\abstractname} % Add the abstract to the table of contents  
-  \input{chapters/abstract.tex}
-\end{abstract}
-
+\iffalse
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE IN ITALIANO
 % ----------------------------------------------------------------------------------------
@@ -140,6 +123,15 @@ Prof. Gunther Dissertori\\[0.1cm]
   \input{chapters/abstract_ita.tex}
 \end{abstract}
 
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+% ----------------------------------------------------------------------------------------
+
+\begin{abstract}
+  \addchaptertocentry{\abstractname} % Add the abstract to the table of contents  
+  \input{chapters/abstract.tex}
+\end{abstract}
+\fi
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
