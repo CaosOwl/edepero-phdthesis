@@ -144,12 +144,12 @@
      * Useful, free and has a desktop version for all OS
      * extremely intuitive
 * Thesis corrections
-** Gunther
+** DONE Gunther
    - specific pdf
-** Sergei
+** DONE Sergei
    - page 34. it is said MMs have a pitch of 250 μm, with a width of 200 μm while page 98 says Micromegas have a strip size of 256 μm,
    - appendix F - Tables F1-F3 has the captions at the bottom, F5-F6 at the top, and there is no Table F4 at all, just the caption.
    - The tracking system is a group of detectors that allows the momentum reconstruction and track propagation in the NA64 setup. Four types of detectors are used to reconstruct hits position: Micromegas (MM), Gas Electron Multiplier (GEM), and Straw chambers (St).
    - Four types ==>  Three types? 
-** Pol
-   - Maybe nothing
+** DONE Pol
+   - nothing
